@@ -183,3 +183,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 NuGet.Selkie.Geometry/*.nupkg.bak
+NuGet.Selkie.Geometry/lib/
