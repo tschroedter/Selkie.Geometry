@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AAD9DD4E-6244-40B1-BA16-5C05D8CCF649}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Selkie.Geometry</RootNamespace>
+    <AssemblyName>Selkie.Geometry</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TargetFrameworkProfile />
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calculators\CirclePairTangentLinesCalculator.cs" />
+    <Compile Include="Calculators\CirclesIntersectionPointsCalculator.cs" />
+    <Compile Include="Calculators\CoordinatePairCalculator.cs" />
+    <Compile Include="Calculators\ICirclePairTangentLinesCalculator.cs" />
+    <Compile Include="Calculators\ICirclesIntersectionPointsCalculator.cs" />
+    <Compile Include="Calculators\ICoordinatePairCalculator.cs" />
+    <Compile Include="Calculators\IInnerTangentLinesIntersectionPointCalculator.cs" />
+    <Compile Include="Calculators\IInnerTangentsCalculator.cs" />
+    <Compile Include="Calculators\InnerTangentLinesIntersectionPointCalculator.cs" />
+    <Compile Include="Calculators\InnerTangentsCalculator.cs" />
+    <Compile Include="Installers.cs" />
+    <Compile Include="Calculators\IOuterTangentLinesIntersectionPointCalculator.cs" />
+    <Compile Include="Calculators\IOuterTangentsCalculator.cs" />
+    <Compile Include="Calculators\LineDirectionCalculator.cs" />
+    <Compile Include="Calculators\OuterTangentLinesIntersectionPointCalculator.cs" />
+    <Compile Include="Calculators\OuterTangentsCalculator.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Primitives\Angle.cs" />
+    <Compile Include="Primitives\Distance.cs" />
+    <Compile Include="Shapes\ArcSegment.cs" />
+    <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\Calculators\CircleCentrePointToPointCalculator.cs" />
+    <Compile Include="Shapes\Calculators\CircleCentreToPointCalculator.cs" />
+    <Compile Include="Shapes\CirclePair.cs" />
+    <Compile Include="Shapes\IArcSegment.cs" />
+    <Compile Include="Shapes\ICircle.cs" />
+    <Compile Include="Shapes\Calculators\ICircleCentrePointToPointCalculator.cs" />
+    <Compile Include="Shapes\Calculators\ICircleCentreToPointCalculator.cs" />
+    <Compile Include="Shapes\ICirclePair.cs" />
+    <Compile Include="Shapes\ILine.cs" />
+    <Compile Include="Shapes\IPolyline.cs" />
+    <Compile Include="Shapes\IPolylineSegment.cs" />
+    <Compile Include="Shapes\Line.cs" />
+    <Compile Include="Shapes\Point.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shapes\Polyline.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.Logging, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.LoggingFacility.3.3.0\lib\net45\Castle.Facilities.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.NLogIntegration, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core-NLog.3.3.3\lib\net45\Castle.Services.Logging.NLogIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=7.1.0.0, Culture=neutral, PublicKeyToken=db26512813023263, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JetBrains.Annotations.Redist.7.1\lib\net40\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Selkie.Common, Version=0.6.112.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Selkie.Common.0.6.112.0\lib\net45\Selkie.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Selkie.Windsor, Version=0.6.196.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Selkie.Windsor.0.6.196.0\lib\net45\Selkie.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetDir)Selkie.Geometry.dll $(SolutionDir)NuGet.Selkie.Geometry\lib\net45 /Y /E</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
