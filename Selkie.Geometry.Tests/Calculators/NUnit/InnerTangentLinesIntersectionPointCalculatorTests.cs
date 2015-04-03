@@ -11,28 +11,36 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusOfOneIsBiggerAndNumberOfTangentsIsFourTests
         {
+            private InnerTangentLinesIntersectionPointCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [SetUp]
             public void Setup()
             {
-                m_One = new Circle(new Point(3.0, -5.0), 4.0);
-                m_Two = new Circle(new Point(-2.0, 2.0), 1.0);
-                m_Pair = new CirclePair(m_One, m_Two);
+                m_One = new Circle(new Point(3.0,
+                                             -5.0),
+                                   4.0);
+                m_Two = new Circle(new Point(-2.0,
+                                             2.0),
+                                   1.0);
+                m_Pair = new CirclePair(m_One,
+                                        m_Two);
 
                 m_Calculator = new InnerTangentLinesIntersectionPointCalculator(m_Pair);
             }
 
-            private CirclePair m_Pair;
-            private Circle m_One;
-            private Circle m_Two;
-            private InnerTangentLinesIntersectionPointCalculator m_Calculator;
-
             [Test]
             public void InnerTangentLinesIntersectionPointTest()
             {
-                var expected = new Point(-1.0, 0.6);
+                Point expected = new Point(-1.0,
+                                           0.6);
                 Point actual = m_Calculator.IntersectionPoint;
 
-                Assert.AreEqual(actual, expected, "IntersectionPoint");
+                Assert.AreEqual(actual,
+                                expected,
+                                "IntersectionPoint");
             }
 
             [Test]
@@ -46,8 +54,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             {
                 InnerTangentLinesIntersectionPointCalculator calculator = InnerTangentLinesIntersectionPointCalculator.Unknown;
 
-                Assert.True(calculator.IsUnknown, "IsUnknown");
-                Assert.AreEqual(Point.Unknown, calculator.IntersectionPoint, "IntersectionPoint");
+                Assert.True(calculator.IsUnknown,
+                            "IsUnknown");
+                Assert.AreEqual(Point.Unknown,
+                                calculator.IntersectionPoint,
+                                "IntersectionPoint");
             }
         }
     }

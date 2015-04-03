@@ -13,54 +13,69 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class CircleTests
     {
+        private Point m_CentrePoint;
+        private Circle m_One;
+        private double m_RadiusOne;
+        private Circle m_Two;
+
         [SetUp]
         public void Setup()
         {
-            m_CentrePoint = new Point(3.0, 4.0);
+            m_CentrePoint = new Point(3.0,
+                                      4.0);
             m_RadiusOne = 2.0;
-            m_One = new Circle(m_CentrePoint, m_RadiusOne);
-            m_Two = new Circle(5.0, 6.0, 1.0);
+            m_One = new Circle(m_CentrePoint,
+                               m_RadiusOne);
+            m_Two = new Circle(5.0,
+                               6.0,
+                               1.0);
         }
-
-        private Circle m_One;
-        private Circle m_Two;
-        private Point m_CentrePoint;
-        private double m_RadiusOne;
 
         private void AssertGetAngleRelativeToXAxis(double degrees,
                                                    double expectedDegrees)
         {
             // ReSharper disable MaximumChainedReferences
-            double radians = Angle.FromDegrees(degrees).Radians;
-            double expectedRadians = Angle.FromDegrees(expectedDegrees).Radians;
+            double radians = Angle.FromDegrees(degrees)
+                                  .Radians;
+            double expectedRadians = Angle.FromDegrees(expectedDegrees)
+                                          .Radians;
             // ReSharper restore MaximumChainedReferences
 
-            double x = m_CentrePoint.X + (m_RadiusOne*Math.Cos(radians));
-            double y = m_CentrePoint.Y + (m_RadiusOne*Math.Sin(radians));
+            double x = m_CentrePoint.X + ( m_RadiusOne * Math.Cos(radians) );
+            double y = m_CentrePoint.Y + ( m_RadiusOne * Math.Sin(radians) );
 
-            var point = new Point(x, y);
+            Point point = new Point(x,
+                                    y);
 
             Angle actual = m_One.GetAngleRelativeToXAxis(point);
 
-            NUnitHelper.AssertIsEquivalent(expectedRadians, actual.Radians, 0.01, "Radians");
+            NUnitHelper.AssertIsEquivalent(expectedRadians,
+                                           actual.Radians,
+                                           0.01,
+                                           "Radians");
         }
 
         [Test]
         public void AngleBetweenPointsClockwiseTest()
         {
-            var point1 = new Point(5.0, 4.0);
-            var point2 = new Point(3.0, 6.0);
+            Point point1 = new Point(5.0,
+                                     4.0);
+            Point point2 = new Point(3.0,
+                                     6.0);
 
             Angle expected = Angle.For270Degrees;
-            Angle actual = m_One.AngleBetweenPointsClockwise(point1, point2);
+            Angle actual = m_One.AngleBetweenPointsClockwise(point1,
+                                                             point2);
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected,
+                            actual);
         }
 
         [Test]
         public void CentrePointTest()
         {
-            Assert.AreEqual(m_CentrePoint, m_One.CentrePoint);
+            Assert.AreEqual(m_CentrePoint,
+                            m_One.CentrePoint);
         }
 
         [Test]
@@ -68,17 +83,26 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         {
             const double radius = 2.0;
 
-            var circle = new Circle(m_CentrePoint, radius);
+            Circle circle = new Circle(m_CentrePoint,
+                                       radius);
 
-            Assert.AreEqual(m_CentrePoint, circle.CentrePoint, "CentrePoint");
-            Assert.AreEqual(radius, circle.Radius, "Radius");
+            Assert.AreEqual(m_CentrePoint,
+                            circle.CentrePoint,
+                            "CentrePoint");
+            Assert.AreEqual(radius,
+                            circle.Radius,
+                            "Radius");
         }
 
         [Test]
         public void DetermineIsUTurnRequiredReturnsFalseForTouchingCirclesTest()
         {
-            var one = new Circle(0.0, 0.0, 100);
-            var two = new Circle(100.0, 0.0, 100);
+            Circle one = new Circle(0.0,
+                                    0.0,
+                                    100);
+            Circle two = new Circle(100.0,
+                                    0.0,
+                                    100);
 
             bool actual = one.Intersects(two);
 
@@ -88,8 +112,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void DetermineIsUTurnRequiredReturnsFalseTest()
         {
-            var one = new Circle(0.0, 0.0, 100);
-            var two = new Circle(200.0, 0.0, 100);
+            Circle one = new Circle(0.0,
+                                    0.0,
+                                    100);
+            Circle two = new Circle(200.0,
+                                    0.0,
+                                    100);
 
             bool actual = one.Intersects(two);
 
@@ -99,8 +127,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void DetermineIsUTurnRequiredReturnsTrueTest()
         {
-            var one = new Circle(0.0, 0.0, 100);
-            var two = new Circle(50.0, 0.0, 100);
+            Circle one = new Circle(0.0,
+                                    0.0,
+                                    100);
+            Circle two = new Circle(50.0,
+                                    0.0,
+                                    100);
 
             bool actual = one.Intersects(two);
 
@@ -113,13 +145,18 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             const double expected = 2.83;
             double actual = m_One.Distance(m_Two);
 
-            NUnitHelper.AssertIsEquivalent(expected, actual, 0.01, "Distance");
+            NUnitHelper.AssertIsEquivalent(expected,
+                                           actual,
+                                           0.01,
+                                           "Distance");
         }
 
         [Test]
         public void EqualsOperatorReturnTrueForSameTest()
         {
-            var other = new Circle(new Point(3.0, 4.0), 2.0);
+            Circle other = new Circle(new Point(3.0,
+                                                4.0),
+                                      2.0);
 
             Assert.True(m_One == other);
         }
@@ -127,7 +164,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnFalseForDifferentCentrePointTest()
         {
-            var other = new Circle(new Point(5.0, 6.0), 2.0);
+            Circle other = new Circle(new Point(5.0,
+                                                6.0),
+                                      2.0);
 
             Assert.False(m_One.Equals(other));
         }
@@ -135,7 +174,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnFalseForDifferentRadiusTest()
         {
-            var other = new Circle(new Point(3.0, 4.0), 5.0);
+            Circle other = new Circle(new Point(3.0,
+                                                4.0),
+                                      5.0);
 
             Assert.False(m_One.Equals(other));
         }
@@ -161,7 +202,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnTrueForSameValuesTest()
         {
-            var other = new Circle(new Point(3.0, 4.0), 2.0);
+            Circle other = new Circle(new Point(3.0,
+                                                4.0),
+                                      2.0);
 
             Assert.True(m_One.Equals(other));
         }
@@ -169,55 +212,64 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void GetAngleRelativeToXAxisFor135DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(135.0, 135.0);
+            AssertGetAngleRelativeToXAxis(135.0,
+                                          135.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor180DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(180.0, 180.0);
+            AssertGetAngleRelativeToXAxis(180.0,
+                                          180.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor225DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(225.0, 225.0);
+            AssertGetAngleRelativeToXAxis(225.0,
+                                          225.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor270DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(270.0, 270.0);
+            AssertGetAngleRelativeToXAxis(270.0,
+                                          270.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor315DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(315.0, 315.0);
+            AssertGetAngleRelativeToXAxis(315.0,
+                                          315.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor360DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(360.0, 0.0);
+            AssertGetAngleRelativeToXAxis(360.0,
+                                          0.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor45DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(45.0, 45.0);
+            AssertGetAngleRelativeToXAxis(45.0,
+                                          45.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisFor90DegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(90.0, 90.0);
+            AssertGetAngleRelativeToXAxis(90.0,
+                                          90.0);
         }
 
         [Test]
         public void GetAngleRelativeToXAxisForZeroDegreesTest()
         {
-            AssertGetAngleRelativeToXAxis(0.0, 0.0);
+            AssertGetAngleRelativeToXAxis(0.0,
+                                          0.0);
         }
 
         [Test]
@@ -230,7 +282,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsPointOnCircleReturnsFalseForPointInsideTest()
         {
-            var point = new Point(3.0, 5.0);
+            Point point = new Point(3.0,
+                                    5.0);
 
             Assert.False(m_One.IsPointOnCircle(point));
         }
@@ -238,7 +291,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsPointOnCircleReturnsFalseForPointOutsideTest()
         {
-            var point = new Point(3.0, 7.0);
+            Point point = new Point(3.0,
+                                    7.0);
 
             Assert.False(m_One.IsPointOnCircle(point));
         }
@@ -246,7 +300,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsPointOnCircleReturnsTrueForMinusEpsilonTest()
         {
-            var point = new Point(3.0, 6.0 - SelkieConstants.EpsilonDistance);
+            Point point = new Point(3.0,
+                                    6.0 - SelkieConstants.EpsilonDistance);
 
             Assert.True(m_One.IsPointOnCircle(point));
         }
@@ -254,7 +309,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsPointOnCircleReturnsTrueForPlusEpsilonTest()
         {
-            var point = new Point(3.0, 6.0 + SelkieConstants.EpsilonDistance);
+            Point point = new Point(3.0,
+                                    6.0 + SelkieConstants.EpsilonDistance);
 
             Assert.True(m_One.IsPointOnCircle(point));
         }
@@ -262,7 +318,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsPointOnCircleReturnsTrueForPlusHalfEpsilonTest()
         {
-            var point = new Point(3.0, 6.0 + SelkieConstants.EpsilonDistance/2.0);
+            Point point = new Point(3.0,
+                                    6.0 + SelkieConstants.EpsilonDistance / 2.0);
 
             Assert.True(m_One.IsPointOnCircle(point));
         }
@@ -270,7 +327,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsPointOnCircleReturnsTrueForPointOnCircleTest()
         {
-            var point = new Point(3.0, 6.0);
+            Point point = new Point(3.0,
+                                    6.0);
 
             Assert.True(m_One.IsPointOnCircle(point));
         }
@@ -290,52 +348,67 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void PointOnCircle180DegreesTest()
         {
-            var expected = new Point(1.0, 4.0);
+            Point expected = new Point(1.0,
+                                       4.0);
             Point actual = m_One.PointOnCircle(Angle.For180Degrees);
 
-            Assert.AreEqual(expected, actual, "CalculatePointOnCircle");
+            Assert.AreEqual(expected,
+                            actual,
+                            "CalculatePointOnCircle");
         }
 
         [Test]
         public void PointOnCircle270DegreesTest()
         {
-            var expected = new Point(3.0, 2.0);
+            Point expected = new Point(3.0,
+                                       2.0);
             Point actual = m_One.PointOnCircle(Angle.For270Degrees);
 
-            Assert.AreEqual(expected, actual, "CalculatePointOnCircle");
+            Assert.AreEqual(expected,
+                            actual,
+                            "CalculatePointOnCircle");
         }
 
         [Test]
         public void PointOnCircle360DegreesTest()
         {
-            var expected = new Point(5.0, 4.0);
+            Point expected = new Point(5.0,
+                                       4.0);
             Point actual = m_One.PointOnCircle(Angle.For360Degrees);
 
-            Assert.AreEqual(expected, actual, "CalculatePointOnCircle");
+            Assert.AreEqual(expected,
+                            actual,
+                            "CalculatePointOnCircle");
         }
 
         [Test]
         public void PointOnCircle90DegreesTest()
         {
-            var expected = new Point(3.0, 6.0);
+            Point expected = new Point(3.0,
+                                       6.0);
             Point actual = m_One.PointOnCircle(Angle.For90Degrees);
 
-            Assert.AreEqual(expected, actual, "CalculatePointOnCircle");
+            Assert.AreEqual(expected,
+                            actual,
+                            "CalculatePointOnCircle");
         }
 
         [Test]
         public void RadiansRelativeToXAxisCounterClockwiseTest()
         {
             Angle expected = Angle.ForZeroDegrees;
-            Angle actual = m_One.RadiansRelativeToXAxisCounterClockwise(new Point(5.0, 4.0));
+            Angle actual = m_One.RadiansRelativeToXAxisCounterClockwise(new Point(5.0,
+                                                                                  4.0));
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected,
+                            actual);
         }
 
         [Test]
         public void RadiusTest()
         {
-            Assert.AreEqual(2.0, m_One.Radius);
+            Assert.AreEqual(2.0,
+                            m_One.Radius);
         }
 
         [Test]
@@ -343,20 +416,24 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         {
             ICircle actual = Circle.Unknown;
 
-            Assert.True(actual.IsUnknown, "IsUnknown");
-            Assert.True(actual.CentrePoint.IsUnknown, "CentrePoint.IsUnknown");
+            Assert.True(actual.IsUnknown,
+                        "IsUnknown");
+            Assert.True(actual.CentrePoint.IsUnknown,
+                        "CentrePoint.IsUnknown");
         }
 
         [Test]
         public void XTest()
         {
-            Assert.AreEqual(3.0, m_One.X);
+            Assert.AreEqual(3.0,
+                            m_One.X);
         }
 
         [Test]
         public void YTest()
         {
-            Assert.AreEqual(4.0, m_One.Y);
+            Assert.AreEqual(4.0,
+                            m_One.Y);
         }
     }
 }

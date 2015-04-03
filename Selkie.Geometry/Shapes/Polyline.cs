@@ -6,75 +6,28 @@ namespace Selkie.Geometry.Shapes
 {
     public class Polyline : IPolyline
     {
-        private readonly List<IPolylineSegment> m_Segments = new List<IPolylineSegment>();
+        private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
         private Point m_EndPoint = Point.Unknown;
-        private double m_Length;
         private Point m_StartPoint = Point.Unknown;
 
         public Polyline()
         {
         }
 
-        private Polyline([NotNull] IEnumerable<IPolylineSegment> segments)
+        private Polyline([NotNull] IEnumerable <IPolylineSegment> segments)
         {
-            foreach (IPolylineSegment segment in segments)
+            foreach ( IPolylineSegment segment in segments )
             {
                 AddSegment(segment);
             }
         }
 
-        #region IPolyline Members
-
-        public void AddSegment(IPolylineSegment segment)
-        {
-            m_Segments.Add(segment);
-            m_Length += segment.Length;
-
-            m_StartPoint = DetermineStartPoint(m_Segments);
-            m_EndPoint = DetermineEndPoint(m_Segments);
-        }
-
-        public Point StartPoint
-        {
-            get { return m_StartPoint; }
-        }
-
-        public Point EndPoint
-        {
-            get { return m_EndPoint; }
-        }
-
-        public IEnumerable<IPolylineSegment> Segments
-        {
-            get { return m_Segments; }
-        }
-
-        public double Length
-        {
-            get { return m_Length; }
-        }
-
-        public IPolyline Reverse()
-        {
-            IEnumerable<IPolylineSegment> reversedSegments = m_Segments.Select(segment => segment.Reverse());
-
-            List<IPolylineSegment> segments = reversedSegments.ToList();
-
-            segments.Reverse();
-
-            var reverse = new Polyline(segments);
-
-            return reverse;
-        }
-
-        #endregion
-
         [NotNull]
-        internal Point DetermineEndPoint([NotNull] IEnumerable<IPolylineSegment> segments)
+        internal Point DetermineEndPoint([NotNull] IEnumerable <IPolylineSegment> segments)
         {
             IPolylineSegment last = segments.LastOrDefault();
 
-            if (last == null)
+            if ( last == null )
             {
                 return Point.Unknown;
             }
@@ -83,16 +36,68 @@ namespace Selkie.Geometry.Shapes
         }
 
         [NotNull]
-        internal Point DetermineStartPoint([NotNull] IEnumerable<IPolylineSegment> segments)
+        internal Point DetermineStartPoint([NotNull] IEnumerable <IPolylineSegment> segments)
         {
             IPolylineSegment first = segments.FirstOrDefault();
 
-            if (first == null)
+            if ( first == null )
             {
                 return Point.Unknown;
             }
 
             return first.StartPoint;
         }
+
+        #region IPolyline Members
+
+        public void AddSegment(IPolylineSegment segment)
+        {
+            m_Segments.Add(segment);
+            Length += segment.Length;
+
+            m_StartPoint = DetermineStartPoint(m_Segments);
+            m_EndPoint = DetermineEndPoint(m_Segments);
+        }
+
+        public Point StartPoint
+        {
+            get
+            {
+                return m_StartPoint;
+            }
+        }
+
+        public Point EndPoint
+        {
+            get
+            {
+                return m_EndPoint;
+            }
+        }
+
+        public IEnumerable <IPolylineSegment> Segments
+        {
+            get
+            {
+                return m_Segments;
+            }
+        }
+
+        public double Length { get; private set; }
+
+        public IPolyline Reverse()
+        {
+            IEnumerable <IPolylineSegment> reversedSegments = m_Segments.Select(segment => segment.Reverse());
+
+            List <IPolylineSegment> segments = reversedSegments.ToList();
+
+            segments.Reverse();
+
+            Polyline reverse = new Polyline(segments);
+
+            return reverse;
+        }
+
+        #endregion
     }
 }

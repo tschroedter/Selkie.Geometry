@@ -6,10 +6,9 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public class Point : IEquatable<Point>
+    public class Point : IEquatable <Point>
     {
         public static readonly Point Unknown = new Point();
-
         private readonly bool m_IsUnknown;
         private readonly double m_X;
         private readonly double m_Y;
@@ -31,17 +30,26 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsUnknown
         {
-            get { return m_IsUnknown; }
+            get
+            {
+                return m_IsUnknown;
+            }
         }
 
         public double X
         {
-            get { return m_X; }
+            get
+            {
+                return m_X;
+            }
         }
 
         public double Y
         {
-            get { return m_Y; }
+            get
+            {
+                return m_Y;
+            }
         }
 
         #region IEquatable<Point> Members
@@ -49,17 +57,18 @@ namespace Selkie.Geometry.Shapes
         // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(Point other)
         {
-            if (ReferenceEquals(null, other))
+            if ( ReferenceEquals(null,
+                                 other) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, other))
+            if ( ReferenceEquals(this,
+                                 other) )
             {
                 return true;
             }
 
-            return Math.Abs(m_X - other.X) < SelkieConstants.EpsilonPointXy
-                   && Math.Abs(m_Y - other.Y) < SelkieConstants.EpsilonPointXy;
+            return Math.Abs(m_X - other.X) < SelkieConstants.EpsilonPointXy && Math.Abs(m_Y - other.Y) < SelkieConstants.EpsilonPointXy;
         }
 
         #endregion
@@ -70,7 +79,8 @@ namespace Selkie.Geometry.Shapes
             double x = m_X - other.X;
             double y = m_Y - other.Y;
 
-            return new Point(x, y);
+            return new Point(x,
+                             y);
         }
 
         [NotNull]
@@ -85,13 +95,13 @@ namespace Selkie.Geometry.Shapes
             double b1 = relativeTwo.X;
             double b2 = relativeTwo.Y;
 
-            double d1 = Math.Sqrt(a1*a1 + a2*a2);
-            double d2 = Math.Sqrt(b1*b1 + b2*b2);
+            double d1 = Math.Sqrt(a1 * a1 + a2 * a2);
+            double d2 = Math.Sqrt(b1 * b1 + b2 * b2);
 
-            double scalarProduct = a1*b1 + a2*b2;
-            double distances = d1*d2;
+            double scalarProduct = a1 * b1 + a2 * b2;
+            double distances = d1 * d2;
 
-            double radians = Math.Acos(scalarProduct/distances);
+            double radians = Math.Acos(scalarProduct / distances);
 
             return Angle.FromRadians(radians);
         }
@@ -104,18 +114,19 @@ namespace Selkie.Geometry.Shapes
             double y = m_Y;
             double r = distance;
 
-            double newX = x + r*Math.Sin(radians);
-            double newY = y + r*Math.Cos(radians);
+            double newX = x + r * Math.Sin(radians);
+            double newY = y + r * Math.Cos(radians);
 
-            var point = new Point(newX, newY);
+            Point point = new Point(newX,
+                                    newY);
 
             return point;
         }
 
         public double DistanceTo([NotNull] Point other)
         {
-            double x = (other.X - m_X)*(other.X - m_X);
-            double y = (other.Y - m_Y)*(other.Y - m_Y);
+            double x = ( other.X - m_X ) * ( other.X - m_X );
+            double y = ( other.Y - m_Y ) * ( other.Y - m_Y );
             double distance = Math.Sqrt(x + y);
 
             return distance;
@@ -123,21 +134,24 @@ namespace Selkie.Geometry.Shapes
 
         public override string ToString()
         {
-            return "[{0},{1}]".Inject(m_X, m_Y);
+            return "[{0},{1}]".Inject(m_X,
+                                      m_Y);
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if ( ReferenceEquals(null,
+                                 obj) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, obj))
+            if ( ReferenceEquals(this,
+                                 obj) )
             {
                 return true;
             }
-            if (obj.GetType() != typeof (Point))
+            if ( obj.GetType() != typeof ( Point ) )
             {
                 return false;
             }
@@ -149,8 +163,8 @@ namespace Selkie.Geometry.Shapes
             unchecked
             {
                 int result = m_X.GetHashCode();
-                result = (result*397) ^ m_Y.GetHashCode();
-                result = (result*397) ^ m_IsUnknown.GetHashCode();
+                result = ( result * 397 ) ^ m_Y.GetHashCode();
+                result = ( result * 397 ) ^ m_IsUnknown.GetHashCode();
                 return result;
             }
         }
@@ -158,13 +172,15 @@ namespace Selkie.Geometry.Shapes
         public static bool operator ==(Point left,
                                        Point right)
         {
-            return Equals(left, right);
+            return Equals(left,
+                          right);
         }
 
         public static bool operator !=(Point left,
                                        Point right)
         {
-            return !Equals(left, right);
+            return !Equals(left,
+                           right);
         }
     }
 }

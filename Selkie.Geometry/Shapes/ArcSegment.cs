@@ -11,11 +11,9 @@ namespace Selkie.Geometry.Shapes
     public class ArcSegment : IArcSegment
     {
         public static readonly IArcSegment Unknown = new ArcSegment();
-
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly Angle m_AngleClockwise;
         private readonly Angle m_AngleCounterClockwise;
-
         private readonly ICircle m_Circle;
         private readonly Point m_EndPoint;
         private readonly bool m_IsUnknown;
@@ -40,7 +38,9 @@ namespace Selkie.Geometry.Shapes
                           Constants.TurnDirection arcTurnDirection = Constants.TurnDirection.Unknown)
 
         {
-            ValidateStartAndEndPoint(circle, startPoint, endPoint);
+            ValidateStartAndEndPoint(circle,
+                                     startPoint,
+                                     endPoint);
 
             m_Circle = circle;
             m_StartPoint = startPoint;
@@ -53,88 +53,30 @@ namespace Selkie.Geometry.Shapes
             m_AngleClockwise = calculator.AngleClockwise;
             m_AngleCounterClockwise = calculator.RadiansCounterClockwise;
 
-            m_LengthClockwise = CalculateLength(m_AngleClockwise, m_Circle.Radius);
-            m_LengthCounterClockwise = CalculateLength(m_AngleCounterClockwise, m_Circle.Radius);
+            m_LengthClockwise = CalculateLength(m_AngleClockwise,
+                                                m_Circle.Radius);
+            m_LengthCounterClockwise = CalculateLength(m_AngleCounterClockwise,
+                                                       m_Circle.Radius);
 
             m_Length = arcTurnDirection == Constants.TurnDirection.Clockwise
-                ? m_LengthClockwise
-                : m_LengthCounterClockwise;
+                           ? m_LengthClockwise
+                           : m_LengthCounterClockwise;
         }
 
         public bool IsUnknown
         {
-            get { return m_IsUnknown; }
+            get
+            {
+                return m_IsUnknown;
+            }
         }
-
-        #region IArcSegment Members
-
-        public Constants.TurnDirection TurnDirection
-        {
-            get { return m_TurnDirection; }
-        }
-
-        public Point CentrePoint
-        {
-            get { return m_Circle.CentrePoint; }
-        }
-
-        public double Radius
-        {
-            get { return m_Circle.Radius; }
-        }
-
-        public Point StartPoint
-        {
-            get { return m_StartPoint; }
-        }
-
-        public Point EndPoint
-        {
-            get { return m_EndPoint; }
-        }
-
-        public Angle AngleClockwise
-        {
-            get { return m_AngleClockwise; }
-        }
-
-        public Angle AngleCounterClockwise
-        {
-            get { return m_AngleCounterClockwise; }
-        }
-
-        public double Length
-        {
-            get { return m_Length; }
-        }
-
-        public double LengthClockwise
-        {
-            get { return m_LengthClockwise; }
-        }
-
-        public double LengthCounterClockwise
-        {
-            get { return m_LengthCounterClockwise; }
-        }
-
-        public IPolylineSegment Reverse()
-        {
-            var reverse = new ArcSegment(m_Circle,
-                                         m_EndPoint,
-                                         m_StartPoint,
-                                         m_TurnDirection);
-
-            return reverse;
-        }
-
-        #endregion
 
         internal void ValidateStartAndEndPoint([NotNull] ICircle circle,
                                                [NotNull] Point startPoint,
                                                [NotNull] Point endPoint)
         {
-            if (!ValidatePoint(circle, startPoint))
+            if ( !ValidatePoint(circle,
+                                startPoint) )
             {
                 string message = "StartPoint {0} is not on circle [{1}] with radius {2}!".Inject(startPoint,
                                                                                                  circle.CentrePoint,
@@ -143,7 +85,8 @@ namespace Selkie.Geometry.Shapes
 
                 throw new ArgumentException(message);
             }
-            if (!ValidatePoint(circle, endPoint))
+            if ( !ValidatePoint(circle,
+                                endPoint) )
             {
                 string message = "EndPoint {0} is not on circle [{1}] with radius {2}!".Inject(endPoint,
                                                                                                circle.CentrePoint,
@@ -164,9 +107,103 @@ namespace Selkie.Geometry.Shapes
         internal double CalculateLength([NotNull] Angle angle,
                                         double radius)
         {
-            double length = (angle.Degrees*Math.PI*radius)/180.0;
+            double length = ( angle.Degrees * Math.PI * radius ) / 180.0;
 
             return length;
         }
+
+        #region IArcSegment Members
+
+        public Constants.TurnDirection TurnDirection
+        {
+            get
+            {
+                return m_TurnDirection;
+            }
+        }
+
+        public Point CentrePoint
+        {
+            get
+            {
+                return m_Circle.CentrePoint;
+            }
+        }
+
+        public double Radius
+        {
+            get
+            {
+                return m_Circle.Radius;
+            }
+        }
+
+        public Point StartPoint
+        {
+            get
+            {
+                return m_StartPoint;
+            }
+        }
+
+        public Point EndPoint
+        {
+            get
+            {
+                return m_EndPoint;
+            }
+        }
+
+        public Angle AngleClockwise
+        {
+            get
+            {
+                return m_AngleClockwise;
+            }
+        }
+
+        public Angle AngleCounterClockwise
+        {
+            get
+            {
+                return m_AngleCounterClockwise;
+            }
+        }
+
+        public double Length
+        {
+            get
+            {
+                return m_Length;
+            }
+        }
+
+        public double LengthClockwise
+        {
+            get
+            {
+                return m_LengthClockwise;
+            }
+        }
+
+        public double LengthCounterClockwise
+        {
+            get
+            {
+                return m_LengthCounterClockwise;
+            }
+        }
+
+        public IPolylineSegment Reverse()
+        {
+            ArcSegment reverse = new ArcSegment(m_Circle,
+                                                m_EndPoint,
+                                                m_StartPoint,
+                                                m_TurnDirection);
+
+            return reverse;
+        }
+
+        #endregion
     }
 }

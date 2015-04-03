@@ -5,7 +5,9 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface ILine : IPolylineSegment, IEquatable<ILine>, IComparable<ILine>
+    public interface ILine : IPolylineSegment,
+                             IEquatable <ILine>,
+                             IComparable <ILine>
     {
         double X1 { get; }
         double Y1 { get; }
@@ -16,9 +18,9 @@ namespace Selkie.Geometry.Shapes
         [NotNull]
         Angle AngleToXAxis { get; }
 
-        SelkieConstants.LineDirection RunDirection { get; }
+        Constants.LineDirection RunDirection { get; }
         int Id { get; }
-        SelkieConstants.TurnDirection TurnDirection([NotNull] Point point);
+        Constants.TurnDirection TurnDirection([NotNull] Point point);
         bool IsOnLine([NotNull] Point point);
     }
 }

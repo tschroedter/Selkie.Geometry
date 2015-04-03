@@ -7,7 +7,7 @@ namespace Selkie.Geometry.Calculators
 {
     public class LineDirectionCalculator : ILineDirectionCalculator
     {
-        private readonly SelkieConstants.TurnDirection m_Direction;
+        private readonly Constants.TurnDirection m_Direction;
         private readonly ILine m_Line;
         private readonly Point m_Point;
 
@@ -16,29 +16,39 @@ namespace Selkie.Geometry.Calculators
         {
             m_Line = line;
             m_Point = point;
-            m_Direction = Calculate(line, point);
+            m_Direction = Calculate(line,
+                                    point);
         }
 
         [NotNull]
         public ILine Line
         {
-            get { return m_Line; }
+            get
+            {
+                return m_Line;
+            }
         }
 
         [NotNull]
         public Point Point
         {
-            get { return m_Point; }
+            get
+            {
+                return m_Point;
+            }
         }
 
-        public SelkieConstants.TurnDirection Direction
+        public Constants.TurnDirection Direction
         {
-            get { return m_Direction; }
+            get
+            {
+                return m_Direction;
+            }
         }
 
         // ReSharper disable once MethodTooLong
-        internal SelkieConstants.TurnDirection Calculate([NotNull] ILine line,
-                                                         [NotNull] Point point)
+        internal Constants.TurnDirection Calculate([NotNull] ILine line,
+                                                   [NotNull] Point point)
         {
             double ax = line.StartPoint.X;
             double ay = line.StartPoint.Y;
@@ -47,18 +57,23 @@ namespace Selkie.Geometry.Calculators
             double cx = point.X;
             double cy = point.Y;
 
-            Side side = FindSide(ax, ay, bx, by, cx, cy);
+            Side side = FindSide(ax,
+                                 ay,
+                                 bx,
+                                 by,
+                                 cx,
+                                 cy);
 
-            switch (side)
+            switch ( side )
             {
-                case Side.Right:
-                    return SelkieConstants.TurnDirection.Clockwise;
+                case Side.Right :
+                    return Constants.TurnDirection.Clockwise;
 
-                case Side.Left:
-                    return SelkieConstants.TurnDirection.Counterclockwise;
+                case Side.Left :
+                    return Constants.TurnDirection.Counterclockwise;
 
-                default:
-                    return SelkieConstants.TurnDirection.Unknown;
+                default :
+                    return Constants.TurnDirection.Unknown;
             }
         }
 
@@ -77,27 +92,37 @@ namespace Selkie.Geometry.Calculators
                                double cx,
                                double cy)
         {
-            if (Math.Abs(bx - ax) < SelkieConstants.EpsilonDistance)
+            if ( Math.Abs(bx - ax) < SelkieConstants.EpsilonDistance )
             {
-                return FindSideForVerticalLine(ay, bx, @by, cx);
+                return FindSideForVerticalLine(ay,
+                                               bx,
+                                               @by,
+                                               cx);
             }
 
-            if (Math.Abs(by - ay) < SelkieConstants.EpsilonDistance)
+            if ( Math.Abs(by - ay) < SelkieConstants.EpsilonDistance )
             {
-                return FindSideForHorizontalLine(ax, bx, @by, cy);
+                return FindSideForHorizontalLine(ax,
+                                                 bx,
+                                                 @by,
+                                                 cy);
             }
 
-            double slope = (by - ay)/(bx - ax);
-            double yIntercept = ay - ax*slope;
-            double cSolution = (slope*cx) + yIntercept;
+            double slope = ( by - ay ) / ( bx - ax );
+            double yIntercept = ay - ax * slope;
+            double cSolution = ( slope * cx ) + yIntercept;
 
-            if (cy > cSolution)
+            if ( cy > cSolution )
             {
-                return bx > ax ? Side.Left : Side.Right;
+                return bx > ax
+                           ? Side.Left
+                           : Side.Right;
             }
-            if (cy < cSolution)
+            if ( cy < cSolution )
             {
-                return bx > ax ? Side.Right : Side.Left;
+                return bx > ax
+                           ? Side.Right
+                           : Side.Left;
             }
             return Side.Unknown;
         }
@@ -108,13 +133,17 @@ namespace Selkie.Geometry.Calculators
                                                double @by,
                                                double cy)
         {
-            if (cy < @by)
+            if ( cy < @by )
             {
-                return bx > ax ? Side.Right : Side.Left;
+                return bx > ax
+                           ? Side.Right
+                           : Side.Left;
             }
-            if (cy > @by)
+            if ( cy > @by )
             {
-                return bx > ax ? Side.Left : Side.Right;
+                return bx > ax
+                           ? Side.Left
+                           : Side.Right;
             }
             return Side.Unknown;
         }
@@ -126,13 +155,17 @@ namespace Selkie.Geometry.Calculators
                                              double cx)
 
         {
-            if (cx < bx)
+            if ( cx < bx )
             {
-                return @by > ay ? Side.Left : Side.Right;
+                return @by > ay
+                           ? Side.Left
+                           : Side.Right;
             }
-            if (cx > bx)
+            if ( cx > bx )
             {
-                return @by > ay ? Side.Right : Side.Left;
+                return @by > ay
+                           ? Side.Right
+                           : Side.Left;
             }
             return Side.Unknown;
         }

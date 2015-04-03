@@ -13,10 +13,9 @@ namespace Selkie.Geometry.Calculators
         private readonly bool m_HasTangentPoints;
         private readonly Point m_IntersectionPoint;
 
-
         public InnerTangentsCalculator([NotNull] ICirclePair circlePair)
         {
-            if (circlePair.NumberOfTangents < 3)
+            if ( circlePair.NumberOfTangents < 3 )
             {
                 m_IntersectionPoint = Point.Unknown;
                 m_CircleZeroTangentPointOne = Point.Unknown;
@@ -26,7 +25,7 @@ namespace Selkie.Geometry.Calculators
 
                 m_HasTangentPoints = false;
             }
-            else if (circlePair.NumberOfTangents == 3)
+            else if ( circlePair.NumberOfTangents == 3 )
             {
                 m_IntersectionPoint = CalculateInnerTangentLinesIntersectionPoint(circlePair);
 
@@ -42,8 +41,8 @@ namespace Selkie.Geometry.Calculators
             {
                 m_IntersectionPoint = CalculateInnerTangentLinesIntersectionPoint(circlePair);
 
-                Tuple<Point, Point> pairZero = CalculateTangentPointsForCircleOne(circlePair.Zero);
-                Tuple<Point, Point> pairOne = CalculateTangentPointsForCircleOne(circlePair.One);
+                Tuple <Point, Point> pairZero = CalculateTangentPointsForCircleOne(circlePair.Zero);
+                Tuple <Point, Point> pairOne = CalculateTangentPointsForCircleOne(circlePair.One);
 
                 m_CircleZeroTangentPointOne = pairZero.Item1;
                 m_CircleZeroTangentPointTwo = pairZero.Item2;
@@ -51,69 +50,86 @@ namespace Selkie.Geometry.Calculators
                 m_CircleOneTangentPointOne = pairOne.Item1;
                 m_CircleOneTangentPointTwo = pairOne.Item2;
 
-
                 m_HasTangentPoints = true;
             }
+        }
+
+        [NotNull]
+        private Point CalculateInnerTangentLinesIntersectionPoint([NotNull] ICirclePair circlePair)
+        {
+            InnerTangentLinesIntersectionPointCalculator calculator = new InnerTangentLinesIntersectionPointCalculator(circlePair);
+
+            return calculator.IntersectionPoint;
+        }
+
+        [NotNull]
+        private Tuple <Point, Point> CalculateTangentPointsForCircleOne([NotNull] ICircle circle)
+        {
+            Tuple <double, double> xt1And2 = CircleOneCalculateXt1And2(circle);
+            Tuple <double, double> yt1And2 = CircleOneCalculateYt1And2(circle);
+
+            CoordinatePairCalculator calculator = new CoordinatePairCalculator(circle,
+                                                                               xt1And2,
+                                                                               yt1And2);
+
+            return calculator.Points;
         }
 
         #region IInnerTangentsCalculator Members
 
         public bool HasTangentPoints
         {
-            get { return m_HasTangentPoints; }
+            get
+            {
+                return m_HasTangentPoints;
+            }
         }
 
         public Point CircleZeroTangentPointOne
         {
-            get { return m_CircleZeroTangentPointOne; }
+            get
+            {
+                return m_CircleZeroTangentPointOne;
+            }
         }
 
         public Point CircleZeroTangentPointTwo
         {
-            get { return m_CircleZeroTangentPointTwo; }
+            get
+            {
+                return m_CircleZeroTangentPointTwo;
+            }
         }
 
         public Point CircleOneTangentPointOne
         {
-            get { return m_CircleOneTangentPointOne; }
+            get
+            {
+                return m_CircleOneTangentPointOne;
+            }
         }
 
         public Point CircleOneTangentPointTwo
         {
-            get { return m_CircleOneTangentPointTwo; }
+            get
+            {
+                return m_CircleOneTangentPointTwo;
+            }
         }
 
         public Point IntersectionPoint
         {
-            get { return m_IntersectionPoint; }
+            get
+            {
+                return m_IntersectionPoint;
+            }
         }
 
         #endregion
 
         [NotNull]
-        private Point CalculateInnerTangentLinesIntersectionPoint([NotNull] ICirclePair circlePair)
-        {
-            var calculator = new InnerTangentLinesIntersectionPointCalculator(circlePair);
-
-            return calculator.IntersectionPoint;
-        }
-
-        [NotNull]
-        private Tuple<Point, Point> CalculateTangentPointsForCircleOne([NotNull] ICircle circle)
-        {
-            Tuple<double, double> xt1And2 = CircleOneCalculateXt1And2(circle);
-            Tuple<double, double> yt1And2 = CircleOneCalculateYt1And2(circle);
-
-            var calculator = new CoordinatePairCalculator(circle,
-                                                          xt1And2,
-                                                          yt1And2);
-
-            return calculator.Points;
-        }
-
-        [NotNull]
         // ReSharper disable once MethodTooLong
-        private Tuple<double, double> CircleOneCalculateXt1And2([NotNull] ICircle circle)
+        private Tuple <double, double> CircleOneCalculateXt1And2([NotNull] ICircle circle)
         {
             // r1^2 * (xp-c) +- r1 * (yb-d) * sqrt((xp-c)^2+(yb-d)^2-r1^2) + a
             double r = circle.Radius;
@@ -122,30 +138,34 @@ namespace Selkie.Geometry.Calculators
             double xp = m_IntersectionPoint.X;
             double yp = m_IntersectionPoint.Y;
 
-            double rSquare = Math.Pow(r, 2);
+            double rSquare = Math.Pow(r,
+                                      2);
             double xpMinusC = xp - c;
             double ypMinusD = yp - d;
 
-            double xpMinusCSquare = Math.Pow(xpMinusC, 2);
-            double ypMinusDSquare = Math.Pow(ypMinusD, 2);
+            double xpMinusCSquare = Math.Pow(xpMinusC,
+                                             2);
+            double ypMinusDSquare = Math.Pow(ypMinusD,
+                                             2);
 
-            double rSquareMultiplyXpMinusA = rSquare*xpMinusC;
-            double rMultipleYbMinusB = r*ypMinusD;
+            double rSquareMultiplyXpMinusA = rSquare * xpMinusC;
+            double rMultipleYbMinusB = r * ypMinusD;
             double squareRootXt = Math.Sqrt(xpMinusCSquare + ypMinusDSquare - rSquare);
 
             double commonBottom = xpMinusCSquare + ypMinusDSquare;
-            double topOne = rSquareMultiplyXpMinusA + (rMultipleYbMinusB*squareRootXt);
-            double topTwo = rSquareMultiplyXpMinusA - (rMultipleYbMinusB*squareRootXt);
+            double topOne = rSquareMultiplyXpMinusA + ( rMultipleYbMinusB * squareRootXt );
+            double topTwo = rSquareMultiplyXpMinusA - ( rMultipleYbMinusB * squareRootXt );
 
-            double resultOne = topOne/commonBottom + c;
-            double resultTwo = topTwo/commonBottom + c;
+            double resultOne = topOne / commonBottom + c;
+            double resultTwo = topTwo / commonBottom + c;
 
-            return new Tuple<double, double>(resultOne, resultTwo);
+            return new Tuple <double, double>(resultOne,
+                                              resultTwo);
         }
 
         [NotNull]
         // ReSharper disable once MethodTooLong
-        private Tuple<double, double> CircleOneCalculateYt1And2([NotNull] ICircle circle)
+        private Tuple <double, double> CircleOneCalculateYt1And2([NotNull] ICircle circle)
         {
             // r1^2 * (yp-d) +- r1 * (xp-c) * sqrt((xp-c)^2+(yb-d)^2-r1^2) + b
             double r = circle.Radius;
@@ -154,25 +174,29 @@ namespace Selkie.Geometry.Calculators
             double xp = m_IntersectionPoint.X;
             double yp = m_IntersectionPoint.Y;
 
-            double rSquare = Math.Pow(r, 2);
+            double rSquare = Math.Pow(r,
+                                      2);
             double xpMinusC = xp - c;
             double ypMinusD = yp - d;
 
-            double xpMinusCSquare = Math.Pow(xpMinusC, 2);
-            double ypMinusDSquare = Math.Pow(ypMinusD, 2);
+            double xpMinusCSquare = Math.Pow(xpMinusC,
+                                             2);
+            double ypMinusDSquare = Math.Pow(ypMinusD,
+                                             2);
 
-            double rSquareMultiplyYpMinusB = rSquare*ypMinusD;
-            double rMultipleXpMinusA = r*xpMinusC;
+            double rSquareMultiplyYpMinusB = rSquare * ypMinusD;
+            double rMultipleXpMinusA = r * xpMinusC;
             double squareRootXt = Math.Sqrt(xpMinusCSquare + ypMinusDSquare - rSquare);
 
             double commonBottom = xpMinusCSquare + ypMinusDSquare;
-            double topOne = rSquareMultiplyYpMinusB + (rMultipleXpMinusA*squareRootXt);
-            double topTwo = rSquareMultiplyYpMinusB - (rMultipleXpMinusA*squareRootXt);
+            double topOne = rSquareMultiplyYpMinusB + ( rMultipleXpMinusA * squareRootXt );
+            double topTwo = rSquareMultiplyYpMinusB - ( rMultipleXpMinusA * squareRootXt );
 
-            double resultOne = topOne/commonBottom + d;
-            double resultTwo = topTwo/commonBottom + d;
+            double resultOne = topOne / commonBottom + d;
+            double resultTwo = topTwo / commonBottom + d;
 
-            return new Tuple<double, double>(resultOne, resultTwo);
+            return new Tuple <double, double>(resultOne,
+                                              resultTwo);
         }
     }
 }

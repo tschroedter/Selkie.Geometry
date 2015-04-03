@@ -19,9 +19,9 @@ namespace Selkie.Geometry.Shapes.Calculators
             m_StartPoint = startPoint;
             m_EndPoint = endPoint;
 
-            if (m_CentrePoint == Point.Unknown ||
-                m_StartPoint == Point.Unknown ||
-                m_EndPoint == Point.Unknown)
+            if ( m_CentrePoint == Point.Unknown ||
+                 m_StartPoint == Point.Unknown ||
+                 m_EndPoint == Point.Unknown )
             {
                 return;
             }
@@ -32,42 +32,15 @@ namespace Selkie.Geometry.Shapes.Calculators
             m_AngleClockwise = Angle.Inverse(m_RadiansCounterClockwise);
         }
 
-        #region ICircleCentrePointToPointCalculator Members
-
-        public Point CentrePoint
-        {
-            get { return m_CentrePoint; }
-        }
-
-        public Point StartPoint
-        {
-            get { return m_StartPoint; }
-        }
-
-        public Point EndPoint
-        {
-            get { return m_EndPoint; }
-        }
-
-        public Angle AngleClockwise
-        {
-            get { return m_AngleClockwise; }
-        }
-
-        public Angle RadiansCounterClockwise
-        {
-            get { return m_RadiansCounterClockwise; }
-        }
-
-        #endregion
-
         [NotNull]
         internal Angle RadiansBetweenPointsCounterClockwise([NotNull] Point centrePoint,
                                                             [NotNull] Point startPoint,
                                                             [NotNull] Point endPoint)
         {
-            ICircleCentreToPointCalculator calculatorOne = new CircleCentreToPointCalculator(centrePoint, startPoint);
-            ICircleCentreToPointCalculator calculatorTwo = new CircleCentreToPointCalculator(centrePoint, endPoint);
+            ICircleCentreToPointCalculator calculatorOne = new CircleCentreToPointCalculator(centrePoint,
+                                                                                             startPoint);
+            ICircleCentreToPointCalculator calculatorTwo = new CircleCentreToPointCalculator(centrePoint,
+                                                                                             endPoint);
 
             Angle radiansOne = calculatorOne.AngleRelativeToYAxisCounterclockwise;
             Angle radiansTwo = calculatorTwo.AngleRelativeToYAxisCounterclockwise;
@@ -76,5 +49,49 @@ namespace Selkie.Geometry.Shapes.Calculators
 
             return angle;
         }
+
+        #region ICircleCentrePointToPointCalculator Members
+
+        public Point CentrePoint
+        {
+            get
+            {
+                return m_CentrePoint;
+            }
+        }
+
+        public Point StartPoint
+        {
+            get
+            {
+                return m_StartPoint;
+            }
+        }
+
+        public Point EndPoint
+        {
+            get
+            {
+                return m_EndPoint;
+            }
+        }
+
+        public Angle AngleClockwise
+        {
+            get
+            {
+                return m_AngleClockwise;
+            }
+        }
+
+        public Angle RadiansCounterClockwise
+        {
+            get
+            {
+                return m_RadiansCounterClockwise;
+            }
+        }
+
+        #endregion
     }
 }

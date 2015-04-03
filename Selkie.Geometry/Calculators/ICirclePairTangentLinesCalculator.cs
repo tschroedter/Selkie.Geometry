@@ -7,13 +7,13 @@ namespace Selkie.Geometry.Calculators
     public interface ICirclePairTangentLinesCalculator
     {
         [NotNull]
-        IEnumerable<ILine> OuterTangents { get; }
+        IEnumerable <ILine> OuterTangents { get; }
 
         [NotNull]
-        IEnumerable<ILine> InnerTangents { get; }
+        IEnumerable <ILine> InnerTangents { get; }
 
         [NotNull]
-        IEnumerable<ILine> Tangents { get; }
+        IEnumerable <ILine> Tangents { get; }
 
         [NotNull]
         ICirclePair CirclePair { get; set; }

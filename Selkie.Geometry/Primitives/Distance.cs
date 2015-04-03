@@ -4,11 +4,10 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Primitives
 {
-    public class Distance : IEquatable<Distance>
+    public class Distance : IEquatable <Distance>
     {
         public static readonly Distance Unknown = new Distance();
         public static readonly Distance Zero = new Distance(0.0);
-
         private readonly bool m_IsUnknown;
         private readonly double m_Length;
 
@@ -24,12 +23,18 @@ namespace Selkie.Geometry.Primitives
 
         public bool IsUnknown
         {
-            get { return m_IsUnknown; }
+            get
+            {
+                return m_IsUnknown;
+            }
         }
 
         public double Length
         {
-            get { return m_Length; }
+            get
+            {
+                return m_Length;
+            }
         }
 
         #region IEquatable<Distance> Members
@@ -37,11 +42,13 @@ namespace Selkie.Geometry.Primitives
         // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(Distance other)
         {
-            if (ReferenceEquals(null, other))
+            if ( ReferenceEquals(null,
+                                 other) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, other))
+            if ( ReferenceEquals(this,
+                                 other) )
             {
                 return true;
             }
@@ -93,27 +100,31 @@ namespace Selkie.Geometry.Primitives
         public static bool operator ==(Distance left,
                                        Distance right)
         {
-            return Equals(left, right);
+            return Equals(left,
+                          right);
         }
 
         public static bool operator !=(Distance left,
                                        Distance right)
         {
-            return !Equals(left, right);
+            return !Equals(left,
+                           right);
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if ( ReferenceEquals(null,
+                                 obj) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, obj))
+            if ( ReferenceEquals(this,
+                                 obj) )
             {
                 return true;
             }
-            if (obj.GetType() != typeof (Distance))
+            if ( obj.GetType() != typeof ( Distance ) )
             {
                 return false;
             }

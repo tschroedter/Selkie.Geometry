@@ -7,11 +7,11 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public class Line : ILine, IEquatable<Line>
+    public class Line : ILine,
+                        IEquatable <Line>
     {
         public const int UnknownId = int.MinValue;
         public static readonly Line Unknown = new Line();
-
         private readonly Angle m_AngleToXAxis;
         private readonly Point m_EndPoint;
         private readonly int m_Id;
@@ -22,8 +22,10 @@ namespace Selkie.Geometry.Shapes
 
         private Line()
             : this(UnknownId,
-                   new Point(double.MaxValue, double.MaxValue),
-                   new Point(double.MaxValue, double.MaxValue),
+                   new Point(double.MaxValue,
+                             double.MaxValue),
+                   new Point(double.MaxValue,
+                             double.MaxValue),
                    Constants.LineDirection.Unknown,
                    true)
         {
@@ -37,7 +39,13 @@ namespace Selkie.Geometry.Shapes
                     double y2,
                     bool isUnknown = false,
                     Constants.LineDirection runDirection = Constants.LineDirection.Forward)
-            : this(id, new Point(x1, y1), new Point(x2, y2), runDirection, isUnknown)
+            : this(id,
+                   new Point(x1,
+                             y1),
+                   new Point(x2,
+                             y2),
+                   runDirection,
+                   isUnknown)
         {
         }
 
@@ -46,20 +54,34 @@ namespace Selkie.Geometry.Shapes
                     double y1,
                     double x2,
                     double y2)
-            : this(UnknownId, new Point(x1, y1), new Point(x2, y2), Constants.LineDirection.Forward, false)
+            : this(UnknownId,
+                   new Point(x1,
+                             y1),
+                   new Point(x2,
+                             y2),
+                   Constants.LineDirection.Forward,
+                   false)
         {
         }
 
         public Line(int id,
                     [NotNull] Point startPoint,
                     [NotNull] Point endPoint)
-            : this(id, startPoint, endPoint, Constants.LineDirection.Forward, false)
+            : this(id,
+                   startPoint,
+                   endPoint,
+                   Constants.LineDirection.Forward,
+                   false)
         {
         }
 
         public Line([NotNull] Point startPoint,
                     [NotNull] Point endPoint)
-            : this(UnknownId, startPoint, endPoint, Constants.LineDirection.Forward, false)
+            : this(UnknownId,
+                   startPoint,
+                   endPoint,
+                   Constants.LineDirection.Forward,
+                   false)
         {
         }
 
@@ -68,7 +90,11 @@ namespace Selkie.Geometry.Shapes
                     [NotNull] Point startPoint,
                     [NotNull] Point endPoint,
                     Constants.LineDirection lineDirection)
-            : this(id, startPoint, endPoint, lineDirection, false)
+            : this(id,
+                   startPoint,
+                   endPoint,
+                   lineDirection,
+                   false)
         {
         }
 
@@ -76,7 +102,11 @@ namespace Selkie.Geometry.Shapes
         public Line([NotNull] Point startPoint,
                     [NotNull] Point endPoint,
                     Constants.LineDirection lineDirection)
-            : this(UnknownId, startPoint, endPoint, lineDirection, false)
+            : this(UnknownId,
+                   startPoint,
+                   endPoint,
+                   lineDirection,
+                   false)
         {
         }
 
@@ -85,7 +115,11 @@ namespace Selkie.Geometry.Shapes
                     [NotNull] Point endPoint,
                     Constants.LineDirection lineDirection,
                     bool isUnknown)
-            : this(UnknownId, startPoint, endPoint, lineDirection, isUnknown)
+            : this(UnknownId,
+                   startPoint,
+                   endPoint,
+                   lineDirection,
+                   isUnknown)
         {
         }
 
@@ -102,7 +136,9 @@ namespace Selkie.Geometry.Shapes
             m_IsUnknown = isUnknown;
             m_LineDirection = lineDirection;
             m_Length = CalculateLength();
-            m_AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint, endPoint, lineDirection);
+            m_AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint,
+                                                                    endPoint,
+                                                                    lineDirection);
         }
 
         #region IEquatable<Line> Members
@@ -110,16 +146,20 @@ namespace Selkie.Geometry.Shapes
         // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(Line other)
         {
-            if (ReferenceEquals(null, other))
+            if ( ReferenceEquals(null,
+                                 other) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, other))
+            if ( ReferenceEquals(this,
+                                 other) )
             {
                 return true;
             }
-            return Equals(other.m_EndPoint, m_EndPoint) && Equals(other.m_StartPoint, m_StartPoint) &&
-                   Equals(other.m_LineDirection, m_LineDirection) && other.m_IsUnknown.Equals(m_IsUnknown);
+            return Equals(other.m_EndPoint,
+                          m_EndPoint) && Equals(other.m_StartPoint,
+                                                m_StartPoint) && Equals(other.m_LineDirection,
+                                                                        m_LineDirection) && other.m_IsUnknown.Equals(m_IsUnknown);
         }
 
         #endregion
@@ -128,71 +168,107 @@ namespace Selkie.Geometry.Shapes
 
         public int Id
         {
-            get { return m_Id; }
+            get
+            {
+                return m_Id;
+            }
         }
 
         public Constants.LineDirection RunDirection
         {
-            get { return m_LineDirection; }
+            get
+            {
+                return m_LineDirection;
+            }
         }
 
         public Angle AngleToXAxis
         {
-            get { return m_AngleToXAxis; }
+            get
+            {
+                return m_AngleToXAxis;
+            }
         }
 
         public Point StartPoint
         {
-            get { return m_StartPoint; }
+            get
+            {
+                return m_StartPoint;
+            }
         }
 
         public Point EndPoint
         {
-            get { return m_EndPoint; }
+            get
+            {
+                return m_EndPoint;
+            }
         }
 
         public double Length
         {
-            get { return m_Length; }
+            get
+            {
+                return m_Length;
+            }
         }
 
         public IPolylineSegment Reverse()
         {
-            var reverse = new Line(m_Id, m_EndPoint, m_StartPoint);
+            Line reverse = new Line(m_Id,
+                                    m_EndPoint,
+                                    m_StartPoint);
 
             return reverse;
         }
 
         public double X1
         {
-            get { return StartPoint.X; }
+            get
+            {
+                return StartPoint.X;
+            }
         }
 
         public double Y1
         {
-            get { return StartPoint.Y; }
+            get
+            {
+                return StartPoint.Y;
+            }
         }
 
         public double X2
         {
-            get { return EndPoint.X; }
+            get
+            {
+                return EndPoint.X;
+            }
         }
 
         public double Y2
         {
-            get { return EndPoint.Y; }
+            get
+            {
+                return EndPoint.Y;
+            }
         }
 
         public Constants.TurnDirection TurnDirection(Point point)
         {
-            var calculator = new LineDirectionCalculator(this, point);
+            LineDirectionCalculator calculator = new LineDirectionCalculator(this,
+                                                                             point);
 
             return calculator.Direction;
         }
 
         public bool IsUnknown
         {
-            get { return m_IsUnknown; }
+            get
+            {
+                return m_IsUnknown;
+            }
         }
 
         public bool Equals([NotNull] ILine other)
@@ -209,8 +285,8 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsOnLine(Point point)
         {
-            if (m_StartPoint == point ||
-                m_EndPoint == point)
+            if ( m_StartPoint == point ||
+                 m_EndPoint == point )
             {
                 return true;
             }
@@ -221,7 +297,7 @@ namespace Selkie.Geometry.Shapes
             double deltaYEnd1AndEnd2 = m_EndPoint.Y - m_StartPoint.Y;
             double deltaXEnd1AndEnd2 = m_EndPoint.X - m_StartPoint.X;
 
-            return Math.Abs(deltaYCheckAndEnd/deltaXCheckAndEnd - deltaYEnd1AndEnd2/deltaXEnd1AndEnd2) < SelkieConstants.EpsilonDistance;
+            return Math.Abs(deltaYCheckAndEnd / deltaXCheckAndEnd - deltaYEnd1AndEnd2 / deltaXEnd1AndEnd2) < SelkieConstants.EpsilonDistance;
         }
 
         private double CalculateLength()
@@ -232,7 +308,9 @@ namespace Selkie.Geometry.Shapes
             double x2 = EndPoint.X;
             double y2 = EndPoint.Y;
 
-            double distance = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+            double distance = Math.Sqrt(Math.Pow(x2 - x1,
+                                                 2) + Math.Pow(y2 - y1,
+                                                               2));
 
             return distance;
         }
@@ -245,18 +323,22 @@ namespace Selkie.Geometry.Shapes
             double deltaX = two.X - one.X;
             double deltaY = two.Y - one.Y;
 
-            double radians = IsDeltaXOrDeltaYLessThanEpsilon(deltaX, deltaY)
-                ? DetermineRadiansDependingOnDeltaX(one, two, deltaX)
-                : CalculateRadians(deltaY, deltaX);
+            double radians = IsDeltaXOrDeltaYLessThanEpsilon(deltaX,
+                                                             deltaY)
+                                 ? DetermineRadiansDependingOnDeltaX(one,
+                                                                     two,
+                                                                     deltaX)
+                                 : CalculateRadians(deltaY,
+                                                    deltaX);
 
             // todo check/fix linedirection causes more trouble than worth,
             // todo use always forward and don't use reverse here
-            if (lineDirection == Constants.LineDirection.Reverse)
+            if ( lineDirection == Constants.LineDirection.Reverse )
             {
                 radians += Angle.RadiansFor180Degrees;
             }
 
-            if (Math.Abs(Angle.RadiansFor360Degrees - radians) < SelkieConstants.EpsilonRadians)
+            if ( Math.Abs(Angle.RadiansFor360Degrees - radians) < SelkieConstants.EpsilonRadians )
             {
                 radians = Angle.RadiansForZeroDegrees;
             }
@@ -267,16 +349,16 @@ namespace Selkie.Geometry.Shapes
         private static bool IsDeltaXOrDeltaYLessThanEpsilon(double deltaX,
                                                             double deltaY)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonRadians ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonRadians;
+            return Math.Abs(deltaX) < SelkieConstants.EpsilonRadians || Math.Abs(deltaY) < SelkieConstants.EpsilonRadians;
         }
 
         private static double CalculateRadians(double deltaY,
                                                double deltaX)
         {
-            double radians = Math.Atan2(deltaY, deltaX);
+            double radians = Math.Atan2(deltaY,
+                                        deltaX);
 
-            if (radians < 0.0)
+            if ( radians < 0.0 )
             {
                 radians = Angle.NormalizeRadians(radians);
             }
@@ -288,17 +370,17 @@ namespace Selkie.Geometry.Shapes
                                                                 double deltaX)
         {
             double radians;
-            if (Math.Abs(deltaX) < SelkieConstants.EpsilonRadians)
+            if ( Math.Abs(deltaX) < SelkieConstants.EpsilonRadians )
             {
                 radians = one.Y < two.Y
-                    ? Angle.RadiansFor90Degrees
-                    : Angle.RadiansFor270Degrees;
+                              ? Angle.RadiansFor90Degrees
+                              : Angle.RadiansFor270Degrees;
             }
             else
             {
                 radians = one.X < two.X
-                    ? Angle.RadiansForZeroDegrees
-                    : Angle.RadiansFor180Degrees;
+                              ? Angle.RadiansForZeroDegrees
+                              : Angle.RadiansFor180Degrees;
             }
             return radians;
         }
@@ -314,15 +396,17 @@ namespace Selkie.Geometry.Shapes
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if ( ReferenceEquals(null,
+                                 obj) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, obj))
+            if ( ReferenceEquals(this,
+                                 obj) )
             {
                 return true;
             }
-            if (obj.GetType() != typeof (Line))
+            if ( obj.GetType() != typeof ( Line ) )
             {
                 return false;
             }
@@ -333,10 +417,14 @@ namespace Selkie.Geometry.Shapes
         {
             unchecked
             {
-                int result = (m_EndPoint != null ? m_EndPoint.GetHashCode() : 0);
-                result = (result*397) ^ (m_StartPoint != null ? m_StartPoint.GetHashCode() : 0);
-                result = (result*397) ^ m_LineDirection.GetHashCode();
-                result = (result*397) ^ m_IsUnknown.GetHashCode();
+                int result = ( m_EndPoint != null
+                                   ? m_EndPoint.GetHashCode()
+                                   : 0 );
+                result = ( result * 397 ) ^ ( m_StartPoint != null
+                                                  ? m_StartPoint.GetHashCode()
+                                                  : 0 );
+                result = ( result * 397 ) ^ m_LineDirection.GetHashCode();
+                result = ( result * 397 ) ^ m_IsUnknown.GetHashCode();
                 return result;
             }
         }
@@ -344,13 +432,15 @@ namespace Selkie.Geometry.Shapes
         public static bool operator ==(Line left,
                                        Line right)
         {
-            return Equals(left, right);
+            return Equals(left,
+                          right);
         }
 
         public static bool operator !=(Line left,
                                        Line right)
         {
-            return !Equals(left, right);
+            return !Equals(left,
+                           right);
         }
     }
 }

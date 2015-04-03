@@ -20,7 +20,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
 
             Angle actual = Angle.RelativeToYAxisClockwise(angle);
 
-            Assert.AreEqual(expectedRadians, actual);
+            Assert.AreEqual(expectedRadians,
+                            actual);
         }
 
         private void AssertRelativeToXAxisCountertclockwise(double degrees,
@@ -31,7 +32,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
 
             Angle actual = Angle.RelativeToXAxisCountertclockwise(angle);
 
-            Assert.AreEqual(expectedRadians, actual);
+            Assert.AreEqual(expectedRadians,
+                            actual);
         }
 
         private void AssertRadiansInverseForDegrees(double originalDgrees,
@@ -40,7 +42,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(expectedDegrees);
             Angle actual = Angle.Inverse(Angle.FromDegrees(originalDgrees));
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected,
+                            actual);
         }
 
         [Test]
@@ -48,7 +51,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.ConvertDegreesToRadians(45.0 + 360.0);
 
-            NUnitHelper.AssertDegrees(Angle.RadiansFor45Degrees, actual);
+            NUnitHelper.AssertDegrees(Angle.RadiansFor45Degrees,
+                                      actual);
         }
 
         [Test]
@@ -56,7 +60,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.ConvertDegreesToRadians(45.0);
 
-            NUnitHelper.AssertDegrees(Angle.RadiansFor45Degrees, actual);
+            NUnitHelper.AssertDegrees(Angle.RadiansFor45Degrees,
+                                      actual);
         }
 
         [Test]
@@ -65,16 +70,18 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             const double expected = Angle.RadiansFor360Degrees;
             double actual = Angle.ConvertDegreesToRadians(0.0 - Angle.EpsilonDegrees);
 
-            NUnitHelper.AssertDegrees(expected, actual);
+            NUnitHelper.AssertDegrees(expected,
+                                      actual);
         }
 
         [Test]
         public void ConvertDegreesToRadiansForZeroMinusHalfEpsilonTest()
         {
-            const double degrees = 0.0 - (Angle.EpsilonDegrees/2.0);
+            const double degrees = 0.0 - ( Angle.EpsilonDegrees / 2.0 );
             double actual = Angle.ConvertDegreesToRadians(degrees);
 
-            NUnitHelper.AssertDegrees(0.0, actual);
+            NUnitHelper.AssertDegrees(0.0,
+                                      actual);
         }
 
         [Test]
@@ -83,16 +90,18 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             const double expected = 0.0 + Angle.EpsilonDegrees;
             double actual = Angle.ConvertDegreesToRadians(expected);
 
-            NUnitHelper.AssertDegrees(expected, actual);
+            NUnitHelper.AssertDegrees(expected,
+                                      actual);
         }
 
         [Test]
         public void ConvertDegreesToRadiansForZeroPlusHalfEpsilonTest()
         {
-            const double degrees = 0.0 + (Angle.EpsilonDegrees/2.0);
+            const double degrees = 0.0 + ( Angle.EpsilonDegrees / 2.0 );
             double actual = Angle.ConvertDegreesToRadians(degrees);
 
-            NUnitHelper.AssertDegrees(0.0, actual);
+            NUnitHelper.AssertDegrees(0.0,
+                                      actual);
         }
 
         [Test]
@@ -100,7 +109,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.ConvertDegreesToRadians(0.0);
 
-            NUnitHelper.AssertDegrees(Angle.RadiansForZeroDegrees, actual);
+            NUnitHelper.AssertDegrees(Angle.RadiansForZeroDegrees,
+                                      actual);
         }
 
         [Test]
@@ -108,7 +118,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.ConvertRadiansToDegrees(Angle.RadiansFor45Degrees + Angle.RadiansFor360Degrees);
 
-            NUnitHelper.AssertDegrees(45.0, actual);
+            NUnitHelper.AssertDegrees(45.0,
+                                      actual);
         }
 
         [Test]
@@ -116,7 +127,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.ConvertRadiansToDegrees(Angle.RadiansFor45Degrees);
 
-            NUnitHelper.AssertDegrees(45.0, actual);
+            NUnitHelper.AssertDegrees(45.0,
+                                      actual);
         }
 
         [Test]
@@ -124,7 +136,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.ConvertRadiansToDegrees(Angle.RadiansForZeroDegrees);
 
-            NUnitHelper.AssertDegrees(0.0, actual);
+            NUnitHelper.AssertDegrees(0.0,
+                                      actual);
         }
 
         [Test]
@@ -132,19 +145,22 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle actual = Angle.For45Degrees;
 
-            NUnitHelper.AssertRadians(45.0, actual.Degrees);
+            NUnitHelper.AssertRadians(45.0,
+                                      actual.Degrees);
         }
 
         [Test]
         public void EpsilonDegreesTest()
         {
-            NUnitHelper.AssertRadians(SelkieConstants.EpsilonDegrees, Angle.EpsilonDegrees);
+            NUnitHelper.AssertRadians(SelkieConstants.EpsilonDegrees,
+                                      Angle.EpsilonDegrees);
         }
 
         [Test]
         public void EpsilonRadiansTest()
         {
-            NUnitHelper.AssertRadians(SelkieConstants.EpsilonRadians, Angle.EpsilonRadians);
+            NUnitHelper.AssertRadians(SelkieConstants.EpsilonRadians,
+                                      Angle.EpsilonRadians);
         }
 
         [Test]
@@ -202,7 +218,7 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         public void EqualsReturnsTrueForSameValuePlusHalfEpsilonTest()
         {
             Angle angle1 = Angle.For45Degrees;
-            Angle angle2 = Angle.For45Degrees + Angle.FromRadians(Angle.EpsilonRadians/2.0);
+            Angle angle2 = Angle.For45Degrees + Angle.FromRadians(Angle.EpsilonRadians / 2.0);
 
             Assert.True(angle1.Equals(angle2));
         }
@@ -219,9 +235,10 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void For135DegreesTest()
         {
-            const double expected = Math.PI/2.0 + Math.PI/4.0;
+            const double expected = Math.PI / 2.0 + Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.For135Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For135Degrees.Radians);
         }
 
         [Test]
@@ -229,31 +246,35 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             const double expected = Math.PI;
 
-            NUnitHelper.AssertRadians(expected, Angle.For180Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For180Degrees.Radians);
         }
 
         [Test]
         public void For225DegreesTest()
         {
-            const double expected = Math.PI + Math.PI/4.0;
+            const double expected = Math.PI + Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.For225Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For225Degrees.Radians);
         }
 
         [Test]
         public void For270DegreesTest()
         {
-            const double expected = 2.0*Math.PI*0.75;
+            const double expected = 2.0 * Math.PI * 0.75;
 
-            NUnitHelper.AssertRadians(expected, Angle.For270Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For270Degrees.Radians);
         }
 
         [Test]
         public void For315DegreesTest()
         {
-            const double expected = 2.0*Math.PI*0.75 + Math.PI/4.0;
+            const double expected = 2.0 * Math.PI * 0.75 + Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.For315Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For315Degrees.Radians);
         }
 
         [Test]
@@ -261,23 +282,26 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             const double expected = Angle.RadiansFor360Degrees;
 
-            NUnitHelper.AssertRadians(expected, Angle.For360Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For360Degrees.Radians);
         }
 
         [Test]
         public void For45DegreesTest()
         {
-            const double expected = Math.PI/4.0;
+            const double expected = Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.For45Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For45Degrees.Radians);
         }
 
         [Test]
         public void For90DegreesTest()
         {
-            const double expected = Math.PI/2.0;
+            const double expected = Math.PI / 2.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.For90Degrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.For90Degrees.Radians);
         }
 
         [Test]
@@ -285,16 +309,19 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             const double expected = 0.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.ForZeroDegrees.Radians);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.ForZeroDegrees.Radians);
         }
 
         [Test]
         public void FromDegreesForDegreesGreaterThan360Test()
         {
-            Angle actual = Angle.FromDegrees(180.0*3.0);
+            Angle actual = Angle.FromDegrees(180.0 * 3.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees, actual.Radians);
-            NUnitHelper.AssertDegrees(180.0, actual.Degrees);
+            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+                                      actual.Radians);
+            NUnitHelper.AssertDegrees(180.0,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -302,8 +329,10 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle actual = Angle.FromDegrees(-180.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees, actual.Radians);
-            NUnitHelper.AssertDegrees(180.0, actual.Degrees);
+            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+                                      actual.Radians);
+            NUnitHelper.AssertDegrees(180.0,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -311,17 +340,21 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle actual = Angle.FromDegrees(180.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees, actual.Radians);
-            NUnitHelper.AssertDegrees(180.0, actual.Degrees);
+            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+                                      actual.Radians);
+            NUnitHelper.AssertDegrees(180.0,
+                                      actual.Degrees);
         }
 
         [Test]
         public void FromRadiansForRadiansGreaterThan2PiTest()
         {
-            Angle actual = Angle.FromRadians(Angle.RadiansFor180Degrees*3.0);
+            Angle actual = Angle.FromRadians(Angle.RadiansFor180Degrees * 3.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees, actual.Radians);
-            NUnitHelper.AssertDegrees(180.0, actual.Degrees);
+            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+                                      actual.Radians);
+            NUnitHelper.AssertDegrees(180.0,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -329,8 +362,10 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle actual = Angle.FromRadians(-Angle.RadiansFor180Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees, actual.Radians);
-            NUnitHelper.AssertDegrees(180.0, actual.Degrees);
+            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+                                      actual.Radians);
+            NUnitHelper.AssertDegrees(180.0,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -338,8 +373,10 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle actual = Angle.FromRadians(Angle.RadiansFor180Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees, actual.Radians);
-            NUnitHelper.AssertDegrees(180.0, actual.Degrees);
+            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+                                      actual.Radians);
+            NUnitHelper.AssertDegrees(180.0,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -350,7 +387,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             int expected = Angle.RadiansFor45Degrees.GetHashCode();
             int actual = angle1.GetHashCode();
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected,
+                            actual);
         }
 
         [Test]
@@ -470,7 +508,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(0.0);
             Angle actual = one - two;
 
-            NUnitHelper.AssertDegrees(expected.Degrees, actual.Degrees);
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -482,7 +521,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(270.0);
             Angle actual = one - two;
 
-            NUnitHelper.AssertDegrees(expected.Degrees, actual.Degrees);
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -494,7 +534,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(90.0);
             Angle actual = one - two;
 
-            NUnitHelper.AssertDegrees(expected.Degrees, actual.Degrees);
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -502,7 +543,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.NormalizeRadians(Angle.RadiansFor45Degrees + Angle.RadiansFor360Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor45Degrees, actual);
+            NUnitHelper.AssertRadians(Angle.RadiansFor45Degrees,
+                                      actual);
         }
 
         [Test]
@@ -510,7 +552,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.NormalizeRadians(-Angle.RadiansFor45Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor315Degrees, actual);
+            NUnitHelper.AssertRadians(Angle.RadiansFor315Degrees,
+                                      actual);
         }
 
         [Test]
@@ -519,16 +562,18 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             const double expected = Angle.RadiansFor360Degrees - Angle.EpsilonDegrees;
             double actual = Angle.NormalizeRadians(Angle.RadiansForZeroDegrees - Angle.EpsilonDegrees);
 
-            NUnitHelper.AssertDegrees(expected, actual);
+            NUnitHelper.AssertDegrees(expected,
+                                      actual);
         }
 
         [Test]
         public void NormalizeRadiansForZeroMinusHalfEpsilonTest()
         {
-            const double expected = Angle.RadiansFor360Degrees - (Angle.EpsilonRadians/2.0);
-            double actual = Angle.NormalizeRadians(0.0 - (Angle.EpsilonRadians/2.0));
+            const double expected = Angle.RadiansFor360Degrees - ( Angle.EpsilonRadians / 2.0 );
+            double actual = Angle.NormalizeRadians(0.0 - ( Angle.EpsilonRadians / 2.0 ));
 
-            NUnitHelper.AssertRadians(expected, actual);
+            NUnitHelper.AssertRadians(expected,
+                                      actual);
         }
 
         [Test]
@@ -537,16 +582,18 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             const double expected = 0.0 + Angle.EpsilonRadians;
             double actual = Angle.NormalizeRadians(expected);
 
-            NUnitHelper.AssertRadians(expected, actual);
+            NUnitHelper.AssertRadians(expected,
+                                      actual);
         }
 
         [Test]
         public void NormalizeRadiansForZeroPlusHalfEpsilonTest()
         {
-            const double degrees = 0.0 + (Angle.EpsilonRadians/2.0);
+            const double degrees = 0.0 + ( Angle.EpsilonRadians / 2.0 );
             double actual = Angle.NormalizeRadians(degrees);
 
-            NUnitHelper.AssertRadians(0.0, actual);
+            NUnitHelper.AssertRadians(0.0,
+                                      actual);
         }
 
         [Test]
@@ -554,7 +601,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             double actual = Angle.NormalizeRadians(Angle.RadiansForZeroDegrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansForZeroDegrees, actual);
+            NUnitHelper.AssertRadians(Angle.RadiansForZeroDegrees,
+                                      actual);
         }
 
         [Test]
@@ -584,7 +632,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(1.0);
             Angle actual = one + two;
 
-            NUnitHelper.AssertDegrees(expected.Degrees, actual.Degrees);
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -596,7 +645,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(360.0);
             Angle actual = one + two;
 
-            NUnitHelper.AssertDegrees(expected.Degrees, actual.Degrees);
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -608,15 +658,17 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             Angle expected = Angle.FromDegrees(270.0);
             Angle actual = one + two;
 
-            NUnitHelper.AssertDegrees(expected.Degrees, actual.Degrees);
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
         public void RadiansFor135DegreesTest()
         {
-            const double expected = Math.PI/2.0 + Math.PI/4.0;
+            const double expected = Math.PI / 2.0 + Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor135Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor135Degrees);
         }
 
         [Test]
@@ -624,55 +676,62 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             const double expected = Math.PI;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor180Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor180Degrees);
         }
 
         [Test]
         public void RadiansFor225DegreesTest()
         {
-            const double expected = Math.PI + Math.PI/4.0;
+            const double expected = Math.PI + Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor225Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor225Degrees);
         }
 
         [Test]
         public void RadiansFor270DegreesTest()
         {
-            const double expected = 2.0*Math.PI*0.75;
+            const double expected = 2.0 * Math.PI * 0.75;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor270Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor270Degrees);
         }
 
         [Test]
         public void RadiansFor315DegreesTest()
         {
-            const double expected = 2.0*Math.PI*0.75 + Math.PI/4.0;
+            const double expected = 2.0 * Math.PI * 0.75 + Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor315Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor315Degrees);
         }
 
         [Test]
         public void RadiansFor360DegreesTest()
         {
-            const double expected = 2.0*Math.PI;
+            const double expected = 2.0 * Math.PI;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor360Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor360Degrees);
         }
 
         [Test]
         public void RadiansFor45DegreesTest()
         {
-            const double expected = Math.PI/4.0;
+            const double expected = Math.PI / 4.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor45Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor45Degrees);
         }
 
         [Test]
         public void RadiansFor90DegreesTest()
         {
-            const double expected = Math.PI/2.0;
+            const double expected = Math.PI / 2.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansFor90Degrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansFor90Degrees);
         }
 
         [Test]
@@ -680,183 +739,213 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             const double expected = 0.0;
 
-            NUnitHelper.AssertRadians(expected, Angle.RadiansForZeroDegrees);
+            NUnitHelper.AssertRadians(expected,
+                                      Angle.RadiansForZeroDegrees);
         }
 
         [Test]
         public void RadiansInverseFor135Test()
         {
-            AssertRadiansInverseForDegrees(135.0, 225.0);
+            AssertRadiansInverseForDegrees(135.0,
+                                           225.0);
         }
 
         [Test]
         public void RadiansInverseFor180Test()
         {
-            AssertRadiansInverseForDegrees(180.0, 180.0);
+            AssertRadiansInverseForDegrees(180.0,
+                                           180.0);
         }
 
         [Test]
         public void RadiansInverseFor225Test()
         {
-            AssertRadiansInverseForDegrees(225.0, 135.0);
+            AssertRadiansInverseForDegrees(225.0,
+                                           135.0);
         }
 
         [Test]
         public void RadiansInverseFor270Test()
         {
-            AssertRadiansInverseForDegrees(270.0, 90.0);
+            AssertRadiansInverseForDegrees(270.0,
+                                           90.0);
         }
 
         [Test]
         public void RadiansInverseFor315Test()
         {
-            AssertRadiansInverseForDegrees(315.0, 45);
+            AssertRadiansInverseForDegrees(315.0,
+                                           45);
         }
 
         [Test]
         public void RadiansInverseFor360Test()
         {
-            AssertRadiansInverseForDegrees(360.0, 0.0);
+            AssertRadiansInverseForDegrees(360.0,
+                                           0.0);
         }
 
         [Test]
         public void RadiansInverseFor45Test()
         {
-            AssertRadiansInverseForDegrees(45.0, 315.0);
+            AssertRadiansInverseForDegrees(45.0,
+                                           315.0);
         }
 
         [Test]
         public void RadiansInverseFor90Test()
         {
-            AssertRadiansInverseForDegrees(90.0, 270.0);
+            AssertRadiansInverseForDegrees(90.0,
+                                           270.0);
         }
 
         [Test]
         public void RadiansInverseForZeroTest()
         {
-            AssertRadiansInverseForDegrees(0.0, 0.0);
+            AssertRadiansInverseForDegrees(0.0,
+                                           0.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor135DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(135.0, 315.0);
+            AssertRelativeToXAxisCountertclockwise(135.0,
+                                                   315.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor180DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(180.0, 270.0);
+            AssertRelativeToXAxisCountertclockwise(180.0,
+                                                   270.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor225DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(225.0, 225.0);
+            AssertRelativeToXAxisCountertclockwise(225.0,
+                                                   225.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor270DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(270.0, 180.0);
+            AssertRelativeToXAxisCountertclockwise(270.0,
+                                                   180.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor315DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(315.0, 135.0);
+            AssertRelativeToXAxisCountertclockwise(315.0,
+                                                   135.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor360DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(360.0, 90.0);
+            AssertRelativeToXAxisCountertclockwise(360.0,
+                                                   90.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor45DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(45.0, 45.0);
+            AssertRelativeToXAxisCountertclockwise(45.0,
+                                                   45.0);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCountertclockwiseFor90DegreesTest()
         {
-            AssertRelativeToXAxisCountertclockwise(90.0, 0.0);
+            AssertRelativeToXAxisCountertclockwise(90.0,
+                                                   0.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor0DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(0.0, 90.0);
+            AssertRadiansRelativeToYAxisClockwise(0.0,
+                                                  90.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor135DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(135.0, 315.0);
+            AssertRadiansRelativeToYAxisClockwise(135.0,
+                                                  315.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor180DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(180.0, 270.0);
+            AssertRadiansRelativeToYAxisClockwise(180.0,
+                                                  270.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor225DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(225.0, 225.0);
+            AssertRadiansRelativeToYAxisClockwise(225.0,
+                                                  225.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor270DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(270.0, 180.0);
+            AssertRadiansRelativeToYAxisClockwise(270.0,
+                                                  180.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor315DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(315.0, 135.0);
+            AssertRadiansRelativeToYAxisClockwise(315.0,
+                                                  135.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor360DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(360.0, 90.0);
+            AssertRadiansRelativeToYAxisClockwise(360.0,
+                                                  90.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor45DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(45.0, 45.0);
+            AssertRadiansRelativeToYAxisClockwise(45.0,
+                                                  45.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseFor90DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(90.0, 0.0);
+            AssertRadiansRelativeToYAxisClockwise(90.0,
+                                                  0.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseForZeroDegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(0.0, 90.0);
+            AssertRadiansRelativeToYAxisClockwise(0.0,
+                                                  90.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseForZeroPlusEpsilonDegreesTest()
         {
             Angle angle = Angle.FromRadians(0.0 + SelkieConstants.EpsilonRadians);
-            AssertRadiansRelativeToYAxisClockwise(angle.Degrees, 90.0);
+            AssertRadiansRelativeToYAxisClockwise(angle.Degrees,
+                                                  90.0);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseForZeroPlusHalfEpsilonDegreesTest()
         {
-            Angle angle = Angle.For360Degrees + Angle.FromRadians(SelkieConstants.EpsilonRadians/2.0);
-            AssertRadiansRelativeToYAxisClockwise(angle.Degrees, 90.0);
+            Angle angle = Angle.For360Degrees + Angle.FromRadians(SelkieConstants.EpsilonRadians / 2.0);
+            AssertRadiansRelativeToYAxisClockwise(angle.Degrees,
+                                                  90.0);
         }
 
         [Test]
@@ -864,7 +953,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle actual = Angle.For45Degrees;
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor45Degrees, actual.Radians);
+            NUnitHelper.AssertRadians(Angle.RadiansFor45Degrees,
+                                      actual.Radians);
         }
 
         [Test]
@@ -875,7 +965,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
             const string expected = "[Radians: 3.14 Degrees: 180.00]";
             string actual = one.ToString();
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected,
+                            actual);
         }
     }
 }

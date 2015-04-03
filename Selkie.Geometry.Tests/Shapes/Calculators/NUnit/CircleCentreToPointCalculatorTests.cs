@@ -12,45 +12,55 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class CircleCentreToPointCalculatorTests
     {
+        private CircleCentreToPointCalculator m_Calculator;
+        private Point m_CentrePoint;
+        private Point m_Point;
+        private double m_RadiusOne;
+
         [SetUp]
         public void Setup()
         {
-            m_CentrePoint = new Point(3.0, 4.0);
-            m_Point = new Point(5.0, 4.0);
+            m_CentrePoint = new Point(3.0,
+                                      4.0);
+            m_Point = new Point(5.0,
+                                4.0);
             m_RadiusOne = 2.0;
 
-            m_Calculator = new CircleCentreToPointCalculator(m_CentrePoint, m_Point);
+            m_Calculator = new CircleCentreToPointCalculator(m_CentrePoint,
+                                                             m_Point);
         }
-
-        private Point m_CentrePoint;
-        private double m_RadiusOne;
-        private Point m_Point;
-        private CircleCentreToPointCalculator m_Calculator;
 
         private void AssertAngleRelativeToXAxisCounterClockwiseForDegrees(double degrees)
         {
             Angle angle = Angle.FromDegrees(degrees);
 
-            double x = m_CentrePoint.X + (m_RadiusOne*Math.Cos(angle.Radians));
-            double y = m_CentrePoint.Y + (m_RadiusOne*Math.Sin(angle.Radians));
+            double x = m_CentrePoint.X + ( m_RadiusOne * Math.Cos(angle.Radians) );
+            double y = m_CentrePoint.Y + ( m_RadiusOne * Math.Sin(angle.Radians) );
 
-            var point = new Point(x, y);
+            Point point = new Point(x,
+                                    y);
 
             Angle expected = angle;
-            Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint, point);
+            Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint,
+                                                                                      point);
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected,
+                            actual);
         }
 
         [Test]
         public void AngleRelativeToXAxisCounterClockwiseDeltaXDeltaYLessEpsilonTest()
         {
-            var centrePoint = new Point(-3.0, 4.0);
-            var point = new Point(-5.0, 2.0);
+            Point centrePoint = new Point(-3.0,
+                                          4.0);
+            Point point = new Point(-5.0,
+                                    2.0);
 
-            Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(centrePoint, point);
+            Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(centrePoint,
+                                                                                      point);
 
-            Assert.AreEqual(Angle.For225Degrees, actual);
+            Assert.AreEqual(Angle.For225Degrees,
+                            actual);
         }
 
         [Test]
@@ -62,8 +72,8 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
             Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint,
                                                                                       point);
 
-
-            Assert.AreEqual(Angle.ForZeroDegrees, actual);
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            actual);
         }
 
         [Test]
@@ -99,14 +109,17 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void AngleRelativeToXAxisCounterClockwiseFor360DegreesTest()
         {
-            double x = m_CentrePoint.X + (m_RadiusOne*Math.Cos(Angle.RadiansFor360Degrees));
-            double y = m_CentrePoint.Y + (m_RadiusOne*Math.Sin(Angle.RadiansFor360Degrees));
+            double x = m_CentrePoint.X + ( m_RadiusOne * Math.Cos(Angle.RadiansFor360Degrees) );
+            double y = m_CentrePoint.Y + ( m_RadiusOne * Math.Sin(Angle.RadiansFor360Degrees) );
 
-            var point = new Point(x, y);
+            Point point = new Point(x,
+                                    y);
 
-            Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint, point);
+            Angle actual = m_Calculator.CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint,
+                                                                                      point);
 
-            Assert.AreEqual(Angle.ForZeroDegrees, actual);
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            actual);
         }
 
         [Test]
@@ -130,57 +143,72 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void CalculateForCentrePointUnknownTest()
         {
-            var calculator = new CircleCentreToPointCalculator(Point.Unknown, new Point(0.0, 0.0));
+            CircleCentreToPointCalculator calculator = new CircleCentreToPointCalculator(Point.Unknown,
+                                                                                         new Point(0.0,
+                                                                                                   0.0));
 
-            Assert.AreEqual(Angle.ForZeroDegrees, calculator.AngleRelativeToYAxisCounterclockwise,
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            calculator.AngleRelativeToYAxisCounterclockwise,
                             "RadiansRelativeToYAxisCounterclockwise");
-            Assert.AreEqual(Angle.ForZeroDegrees, calculator.AngleRelativeToYAxisClockwise,
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            calculator.AngleRelativeToYAxisClockwise,
                             "RadiansRelativeToYAxisClockwise");
-            Assert.AreEqual(Angle.ForZeroDegrees, calculator.AngleRelativeToYAxisCounterclockwise,
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            calculator.AngleRelativeToYAxisCounterclockwise,
                             "RadiansRelativeToYAxisCounterclockwise");
         }
 
         [Test]
         public void CalculateForPointUnknownTest()
         {
-            var calculator = new CircleCentreToPointCalculator(new Point(0.0, 0.0), Point.Unknown);
+            CircleCentreToPointCalculator calculator = new CircleCentreToPointCalculator(new Point(0.0,
+                                                                                                   0.0),
+                                                                                         Point.Unknown);
 
-            Assert.AreEqual(Angle.ForZeroDegrees, calculator.AngleRelativeToYAxisCounterclockwise,
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            calculator.AngleRelativeToYAxisCounterclockwise,
                             "RadiansRelativeToYAxisCounterclockwise");
-            Assert.AreEqual(Angle.ForZeroDegrees, calculator.AngleRelativeToYAxisClockwise,
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            calculator.AngleRelativeToYAxisClockwise,
                             "RadiansRelativeToYAxisClockwise");
-            Assert.AreEqual(Angle.ForZeroDegrees, calculator.AngleRelativeToYAxisCounterclockwise,
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            calculator.AngleRelativeToYAxisCounterclockwise,
                             "RadiansRelativeToYAxisCounterclockwise");
         }
 
         [Test]
         public void CentrePointTest()
         {
-            Assert.AreEqual(m_CentrePoint, m_Calculator.CentrePoint);
+            Assert.AreEqual(m_CentrePoint,
+                            m_Calculator.CentrePoint);
         }
 
         [Test]
         public void PointTest()
         {
-            Assert.AreEqual(m_Point, m_Calculator.Point);
+            Assert.AreEqual(m_Point,
+                            m_Calculator.Point);
         }
 
         [Test]
         public void RadiansRelativeToXAxisCounterClockwiseTest()
         {
-            Assert.AreEqual(Angle.ForZeroDegrees, m_Calculator.AngleRelativeToXAxisCounterClockwise);
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            m_Calculator.AngleRelativeToXAxisCounterClockwise);
         }
 
         [Test]
         public void RadiansRelativeToYAxisClockwiseTest()
         {
-            Assert.AreEqual(Angle.For90Degrees, m_Calculator.AngleRelativeToYAxisClockwise);
+            Assert.AreEqual(Angle.For90Degrees,
+                            m_Calculator.AngleRelativeToYAxisClockwise);
         }
 
         [Test]
         public void RadiansRelativeToYAxisCounterclockwiseTest()
         {
-            Assert.AreEqual(Angle.For270Degrees, m_Calculator.AngleRelativeToYAxisCounterclockwise);
+            Assert.AreEqual(Angle.For270Degrees,
+                            m_Calculator.AngleRelativeToYAxisCounterclockwise);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Selkie.Geometry.Shapes
         Point EndPoint { get; }
 
         [NotNull]
-        IEnumerable<IPolylineSegment> Segments { get; }
+        IEnumerable <IPolylineSegment> Segments { get; }
 
         double Length { get; }
         void AddSegment([NotNull] IPolylineSegment segment);

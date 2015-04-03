@@ -6,11 +6,11 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public class Circle : ICircle, IEquatable<Circle>
+    public class Circle : ICircle,
+                          IEquatable <Circle>
     {
         public static readonly ICircle Unknown = new Circle();
         private readonly ICircleCentreToPointCalculator m_Calculator;
-
         private readonly Point m_CentrePoint;
         private readonly bool m_IsUnknown;
         private readonly double m_Radius;
@@ -25,7 +25,9 @@ namespace Selkie.Geometry.Shapes
         public Circle(double x,
                       double y,
                       double radius)
-            : this(new Point(x, y), radius)
+            : this(new Point(x,
+                             y),
+                   radius)
         {
         }
 
@@ -41,20 +43,24 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsUnknown
         {
-            get { return m_IsUnknown; }
+            get
+            {
+                return m_IsUnknown;
+            }
         }
 
         public Point PointOnCircle(Angle angle)
         {
             double r = m_Radius;
 
-            double x = r*Math.Cos(angle.Radians);
-            double y = r*Math.Sin(angle.Radians);
+            double x = r * Math.Cos(angle.Radians);
+            double y = r * Math.Sin(angle.Radians);
 
             x += m_CentrePoint.X;
             y += m_CentrePoint.Y;
 
-            var point = new Point(x, y);
+            Point point = new Point(x,
+                                    y);
 
             return point;
         }
@@ -76,27 +82,40 @@ namespace Selkie.Geometry.Shapes
 
         public Point CentrePoint
         {
-            get { return m_CentrePoint; }
+            get
+            {
+                return m_CentrePoint;
+            }
         }
 
         public double X
         {
-            get { return m_CentrePoint.X; }
+            get
+            {
+                return m_CentrePoint.X;
+            }
         }
 
         public double Y
         {
-            get { return m_CentrePoint.Y; }
+            get
+            {
+                return m_CentrePoint.Y;
+            }
         }
 
         public double Radius
         {
-            get { return m_Radius; }
+            get
+            {
+                return m_Radius;
+            }
         }
 
         public double Distance(ICircle other)
         {
-            var line = new Line(m_CentrePoint, other.CentrePoint);
+            Line line = new Line(m_CentrePoint,
+                                 other.CentrePoint);
 
             return line.Length;
         }
@@ -115,24 +134,26 @@ namespace Selkie.Geometry.Shapes
 
             double radians;
 
-            if (IsInsideEpsilonForPoints(deltaY, deltaX))
+            if ( IsInsideEpsilonForPoints(deltaY,
+                                          deltaX) )
             {
-                if (Math.Abs(deltaX) < SelkieConstants.EpsilonRadians)
+                if ( Math.Abs(deltaX) < SelkieConstants.EpsilonRadians )
                 {
                     radians = m_CentrePoint.Y < point.Y
-                        ? Angle.RadiansFor90Degrees
-                        : Angle.RadiansFor270Degrees;
+                                  ? Angle.RadiansFor90Degrees
+                                  : Angle.RadiansFor270Degrees;
                 }
                 else
                 {
                     radians = m_CentrePoint.X < point.X
-                        ? Angle.RadiansForZeroDegrees
-                        : Angle.RadiansFor180Degrees;
+                                  ? Angle.RadiansForZeroDegrees
+                                  : Angle.RadiansFor180Degrees;
                 }
             }
             else
             {
-                radians = Math.Atan2(deltaY, deltaX);
+                radians = Math.Atan2(deltaY,
+                                     deltaX);
             }
 
             return Angle.FromRadians(radians);
@@ -145,11 +166,13 @@ namespace Selkie.Geometry.Shapes
         // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(Circle other)
         {
-            if (ReferenceEquals(null, other))
+            if ( ReferenceEquals(null,
+                                 other) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, other))
+            if ( ReferenceEquals(this,
+                                 other) )
             {
                 return true;
             }
@@ -162,7 +185,9 @@ namespace Selkie.Geometry.Shapes
         public Angle AngleBetweenPointsClockwise([NotNull] Point startPoint,
                                                  [NotNull] Point endPoint)
         {
-            var calculator = new CircleCentrePointToPointCalculator(m_CentrePoint, startPoint, endPoint);
+            CircleCentrePointToPointCalculator calculator = new CircleCentrePointToPointCalculator(m_CentrePoint,
+                                                                                                   startPoint,
+                                                                                                   endPoint);
 
             return calculator.AngleClockwise;
         }
@@ -170,22 +195,23 @@ namespace Selkie.Geometry.Shapes
         private static bool IsInsideEpsilonForPoints(double deltaY,
                                                      double deltaX)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
+            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy || Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if ( ReferenceEquals(null,
+                                 obj) )
             {
                 return false;
             }
-            if (ReferenceEquals(this, obj))
+            if ( ReferenceEquals(this,
+                                 obj) )
             {
                 return true;
             }
-            if (obj.GetType() != typeof (Circle))
+            if ( obj.GetType() != typeof ( Circle ) )
             {
                 return false;
             }
@@ -196,20 +222,24 @@ namespace Selkie.Geometry.Shapes
         {
             unchecked
             {
-                return ((m_CentrePoint != null ? m_CentrePoint.GetHashCode() : 0)*397) ^ m_Radius.GetHashCode();
+                return ( ( m_CentrePoint != null
+                               ? m_CentrePoint.GetHashCode()
+                               : 0 ) * 397 ) ^ m_Radius.GetHashCode();
             }
         }
 
         public static bool operator ==(Circle left,
                                        Circle right)
         {
-            return Equals(left, right);
+            return Equals(left,
+                          right);
         }
 
         public static bool operator !=(Circle left,
                                        Circle right)
         {
-            return !Equals(left, right);
+            return !Equals(left,
+                           right);
         }
     }
 }

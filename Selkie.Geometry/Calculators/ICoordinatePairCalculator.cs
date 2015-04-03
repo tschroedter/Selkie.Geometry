@@ -10,12 +10,12 @@ namespace Selkie.Geometry.Calculators
         ICircle Circle { get; }
 
         [NotNull]
-        Tuple<double, double> Xt1And2 { get; }
+        Tuple <double, double> Xt1And2 { get; }
 
         [NotNull]
-        Tuple<double, double> Yt1And2 { get; }
+        Tuple <double, double> Yt1And2 { get; }
 
         [NotNull]
-        Tuple<Point, Point> Points { get; }
+        Tuple <Point, Point> Points { get; }
     }
 }

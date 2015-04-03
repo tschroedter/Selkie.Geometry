@@ -18,7 +18,7 @@ namespace Selkie.Geometry.Shapes
         double Radius { get; }
         double LengthClockwise { get; }
         double LengthCounterClockwise { get; }
-        SelkieConstants.TurnDirection TurnDirection { get; }
+        Constants.TurnDirection TurnDirection { get; }
         bool IsUnknown { get; }
     }
 }

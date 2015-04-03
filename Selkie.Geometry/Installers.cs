@@ -2,7 +2,7 @@
 
 namespace Selkie.Geometry
 {
-    public class Installer : BaseInstaller<Installer>
+    public class Installer : BaseInstaller <Installer>
     {
     }
 }
