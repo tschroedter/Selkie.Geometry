@@ -12,13 +12,13 @@
     <releaseNotes>
     </releaseNotes>
     <summary>
-      This package contains classes for 2D geometry calculations. It defines primitves like angle and distance. Shapes like circles, lines, arc segments and polylines. Multple calculator e.g. to find intersection points and tangents.
+      This package contains classes for 2D geometry calculations. It defines primitves like angle and distance. Shapes like circles, lines, arc segments and polylines. Multple calculators e.g. to find intersection points and tangents.
     </summary>
     <language>en-US</language>
     <projectUrl>https://nuget.org/packages/Selkie.Common</projectUrl>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <licenseUrl>https://github.com/tschroedter/Selkie.Geometry/blob/master/LICENSE</licenseUrl>
     <copyright>Copyright © Thomas Schroedter 2015</copyright>
     <dependencies>
       <group targetFramework="net40">
