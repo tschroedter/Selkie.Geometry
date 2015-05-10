@@ -12,7 +12,7 @@
     <releaseNotes>
     </releaseNotes>
     <summary>
-      This package contains classes for 2D geometry calculations. It defines primitves like angle and distance. Shapes like circles, lines, arc segments and polylines. Multple calculator e.g. to find intersection points and tangents.
+      This package contains classes for 2D geometry calculations. It defines primitves like angle and distance. Shapes like circles, lines, arc segments and polylines. Multple calculators e.g. to find intersection points and tangents.
     </summary>
     <language>en-US</language>
     <projectUrl>https://nuget.org/packages/Selkie.Common</projectUrl>
