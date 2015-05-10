@@ -18,7 +18,7 @@ namespace Selkie.Geometry.Shapes
         Point PointOnCircle([NotNull] Angle angle);
 
         bool IsPointOnCircle([NotNull] Point startPoint);
-        bool Intersects([NotNull] ICircle finishPointStarPort);
+        bool Intersects([NotNull] ICircle finishPointStarboard);
 
         [NotNull]
         Angle GetAngleRelativeToXAxis([NotNull] Point point);

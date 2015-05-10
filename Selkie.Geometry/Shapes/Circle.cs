@@ -72,9 +72,9 @@ namespace Selkie.Geometry.Shapes
             return Math.Abs(m_Radius - distance) <= SelkieConstants.EpsilonDistance;
         }
 
-        public bool Intersects(ICircle finishPointStarPort)
+        public bool Intersects(ICircle finishPointStarboard)
         {
-            double distance = Distance(finishPointStarPort);
+            double distance = Distance(finishPointStarboard);
             double delta = distance - m_Radius;
 
             return delta < 0 || Math.Abs(delta) <= SelkieConstants.EpsilonDistance;

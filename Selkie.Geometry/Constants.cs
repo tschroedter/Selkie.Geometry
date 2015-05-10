@@ -22,7 +22,7 @@ namespace Selkie.Geometry
         public enum CircleSide
         {
             Port,
-            StarPort,
+            Starboard,
             Unknown
         }
 
@@ -55,7 +55,7 @@ namespace Selkie.Geometry
         public enum Side
         {
             Port,
-            StarPort,
+            Starboard,
             Unknown
         }
 
