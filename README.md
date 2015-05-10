@@ -1,6 +1,6 @@
 # Selkie.Geometry
 
-The Selkie.Geometry project creates a NuGet package. This package contains classes for 2D geometry calculations. It defines primitves like angle and distance. Shapes like circles, lines, arc segments and polylines. Multple calculator e.g. to find intersection points and tangents.
+The Selkie.Geometry project creates a NuGet package. This package contains classes for 2D geometry calculations. It defines primitves like angle and distance. Shapes like circles, lines, arc segments and polylines. Multple calculators e.g. to find intersection points and tangents.
  
 # Examples:
 * To-do here
