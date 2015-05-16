@@ -13,11 +13,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class QuadrantFourAndTwoTests
         {
-            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -33,11 +28,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentLinesIntersectionPointCalculator(m_Pair);
             }
 
+            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void IntersectionPointTest()
             {
-                Point expected = new Point(40.0,
-                                           -40.0);
+                var expected = new Point(40.0,
+                                         -40.0);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(expected,
@@ -58,11 +58,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class QuadrantOneAndThreeTests
         {
-            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -78,11 +73,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentLinesIntersectionPointCalculator(m_Pair);
             }
 
+            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void IntersectionPointTest()
             {
-                Point expected = new Point(40.0,
-                                           40.0);
+                var expected = new Point(40.0,
+                                         40.0);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(expected,
@@ -103,11 +103,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class QuadrantThreeAndOneTests
         {
-            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -123,11 +118,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentLinesIntersectionPointCalculator(m_Pair);
             }
 
+            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void IntersectionPointTest()
             {
-                Point expected = new Point(-40.0,
-                                           -40.0);
+                var expected = new Point(-40.0,
+                                         -40.0);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(expected,
@@ -148,11 +148,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class QuadrantTwoAndFourTests
         {
-            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -168,11 +163,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentLinesIntersectionPointCalculator(m_Pair);
             }
 
+            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void IntersectionPointTest()
             {
-                Point expected = new Point(-40.0,
-                                           40.0);
+                var expected = new Point(-40.0,
+                                         40.0);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(expected,
@@ -193,13 +193,13 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class UnknownTests
         {
-            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
-
             [SetUp]
             public void Setup()
             {
                 m_Calculator = OuterTangentLinesIntersectionPointCalculator.Unknown;
             }
+
+            private OuterTangentLinesIntersectionPointCalculator m_Calculator;
 
             [Test]
             public void UnknownTest()

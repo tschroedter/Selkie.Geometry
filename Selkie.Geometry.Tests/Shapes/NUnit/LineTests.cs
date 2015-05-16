@@ -11,10 +11,6 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class LineTests
     {
-        private Point m_EndPoint;
-        private Line m_Line;
-        private Point m_StartPoint;
-
         [SetUp]
         public void Setup()
         {
@@ -28,12 +24,16 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                               m_EndPoint);
         }
 
+        private Point m_EndPoint;
+        private Line m_Line;
+        private Point m_StartPoint;
+
         [Test]
         public void AngleToXAxisForDirectionReverseTest()
         {
-            Line line = new Line(m_StartPoint,
-                                 m_EndPoint,
-                                 Constants.LineDirection.Reverse);
+            var line = new Line(m_StartPoint,
+                                m_EndPoint,
+                                Constants.LineDirection.Reverse);
 
             Angle expected = Angle.FromDegrees(233.13010235415598); // 53.13 + 180.0
             Angle actual = line.AngleToXAxis;
@@ -45,10 +45,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForCase180Test()
         {
-            Point startPoint = new Point(750.0,
-                                         1420.0);
-            Point endPoint = new Point(550.0,
+            var startPoint = new Point(750.0,
                                        1420.0);
+            var endPoint = new Point(550.0,
+                                     1420.0);
 
             const double expected = Angle.RadiansFor180Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -62,10 +62,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForFor135DegreesTest()
         {
-            Point startPoint = new Point(0.0,
-                                         0.0);
-            Point endPoint = new Point(-1.0,
-                                       1.0);
+            var startPoint = new Point(0.0,
+                                       0.0);
+            var endPoint = new Point(-1.0,
+                                     1.0);
 
             const double expected = Angle.RadiansFor135Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -79,10 +79,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForFor180DegreeLineInReverseTest()
         {
-            Point startPoint = new Point(0.0,
-                                         10.0);
-            Point endPoint = new Point(100.0,
+            var startPoint = new Point(0.0,
                                        10.0);
+            var endPoint = new Point(100.0,
+                                     10.0);
 
             const double expected = Angle.RadiansFor180Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -96,10 +96,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForFor225DegreesTest()
         {
-            Point startPoint = new Point(0.0,
-                                         0.0);
-            Point endPoint = new Point(-1.0,
-                                       -1.0);
+            var startPoint = new Point(0.0,
+                                       0.0);
+            var endPoint = new Point(-1.0,
+                                     -1.0);
 
             const double expected = Angle.RadiansFor225Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -113,10 +113,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForFor315DegreesTest()
         {
-            Point startPoint = new Point(0.0,
-                                         0.0);
-            Point endPoint = new Point(1.0,
-                                       -1.0);
+            var startPoint = new Point(0.0,
+                                       0.0);
+            var endPoint = new Point(1.0,
+                                     -1.0);
 
             const double expected = Angle.RadiansFor315Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -130,10 +130,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForFor45DegreesTest()
         {
-            Point startPoint = new Point(0.0,
-                                         0.0);
-            Point endPoint = new Point(1.0,
-                                       1.0);
+            var startPoint = new Point(0.0,
+                                       0.0);
+            var endPoint = new Point(1.0,
+                                     1.0);
 
             const double expected = Angle.RadiansFor45Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -147,10 +147,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForFor90DegreeLineInReverseTest()
         {
-            Point startPoint = new Point(0.0,
-                                         10.0);
-            Point endPoint = new Point(100.0,
+            var startPoint = new Point(0.0,
                                        10.0);
+            var endPoint = new Point(100.0,
+                                     10.0);
 
             const double expected = Angle.RadiansFor180Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -164,10 +164,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForForZeroDegreeLineInReverseTest()
         {
-            Point startPoint = new Point(100.0,
-                                         10.0);
-            Point endPoint = new Point(0.0,
+            var startPoint = new Point(100.0,
                                        10.0);
+            var endPoint = new Point(0.0,
+                                     10.0);
 
             const double expected = Angle.RadiansForZeroDegrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -181,10 +181,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CalculateAngleInRadiansRelativeToXAxisForForZeroDegreesTest()
         {
-            Point startPoint = new Point(0.0,
-                                         0.0);
-            Point endPoint = new Point(0.0,
-                                       1.0);
+            var startPoint = new Point(0.0,
+                                       0.0);
+            var endPoint = new Point(0.0,
+                                     1.0);
 
             const double expected = Angle.RadiansFor90Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
@@ -199,14 +199,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void CaseOneForwardTest()
         {
             //         var line1 = new Line(1, new Point(150, 610), new Point(350, 610));
-            Point startPoint = new Point(350,
-                                         520);
-            Point endPoint = new Point(150,
+            var startPoint = new Point(350,
                                        520);
+            var endPoint = new Point(150,
+                                     520);
 
-            Line line = new Line(0,
-                                 startPoint,
-                                 endPoint);
+            var line = new Line(0,
+                                startPoint,
+                                endPoint);
 
             Assert.AreEqual(0,
                             line.Id,
@@ -226,14 +226,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void CaseOneReverseTest()
         {
             //         var line1 = new Line(1, new Point(150, 610), new Point(350, 610));
-            Point startPoint = new Point(350,
-                                         520);
-            Point endPoint = new Point(150,
+            var startPoint = new Point(350,
                                        520);
+            var endPoint = new Point(150,
+                                     520);
 
-            ILine line = new Line(0,
-                                  startPoint,
-                                  endPoint).Reverse() as ILine;
+            var line = new Line(0,
+                                startPoint,
+                                endPoint).Reverse() as ILine;
 
             Assert.NotNull(line);
             Assert.AreEqual(0,
@@ -253,13 +253,13 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CaseOneTest()
         {
-            Point startPoint = new Point(10.0,
-                                         2.5);
-            Point endPoint = new Point(16.0,
+            var startPoint = new Point(10.0,
                                        2.5);
+            var endPoint = new Point(16.0,
+                                     2.5);
 
-            Line line = new Line(startPoint,
-                                 endPoint);
+            var line = new Line(startPoint,
+                                endPoint);
 
             const double expected = Angle.RadiansForZeroDegrees;
             double actual = line.AngleToXAxis.Radians;
@@ -271,14 +271,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CaseOneTwoForwardTest()
         {
-            Point startPoint = new Point(150,
-                                         610);
-            Point endPoint = new Point(350,
+            var startPoint = new Point(150,
                                        610);
+            var endPoint = new Point(350,
+                                     610);
 
-            Line line = new Line(0,
-                                 startPoint,
-                                 endPoint);
+            var line = new Line(0,
+                                startPoint,
+                                endPoint);
 
             Assert.AreEqual(0,
                             line.Id,
@@ -297,14 +297,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CaseTwoReverseTest()
         {
-            Point startPoint = new Point(150,
-                                         610);
-            Point endPoint = new Point(350,
+            var startPoint = new Point(150,
                                        610);
+            var endPoint = new Point(350,
+                                     610);
 
-            ILine line = new Line(0,
-                                  startPoint,
-                                  endPoint).Reverse() as ILine;
+            var line = new Line(0,
+                                startPoint,
+                                endPoint).Reverse() as ILine;
 
             Assert.NotNull(line);
             Assert.AreEqual(0,
@@ -324,13 +324,13 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CaseTwoTest()
         {
-            Point startPoint = new Point(11.0,
-                                         2.5);
-            Point endPoint = new Point(10.0,
-                                       14.0);
+            var startPoint = new Point(11.0,
+                                       2.5);
+            var endPoint = new Point(10.0,
+                                     14.0);
 
-            Line line = new Line(startPoint,
-                                 endPoint);
+            var line = new Line(startPoint,
+                                endPoint);
 
             const double expected = 1.6575346654708818d;
             double actual = line.AngleToXAxis.Radians;
@@ -342,9 +342,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CompareToForLineWithHigherIdTest()
         {
-            Line other = new Line(2,
-                                  m_StartPoint,
-                                  m_EndPoint);
+            var other = new Line(2,
+                                 m_StartPoint,
+                                 m_EndPoint);
 
             Assert.True(m_Line.CompareTo(other) == -1);
         }
@@ -352,9 +352,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CompareToForLineWithLowerIdTest()
         {
-            Line other = new Line(0,
-                                  m_StartPoint,
-                                  m_EndPoint);
+            var other = new Line(0,
+                                 m_StartPoint,
+                                 m_EndPoint);
 
             Assert.True(m_Line.CompareTo(other) == 1);
         }
@@ -368,10 +368,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void ConstructorX1Y1X2Y2Test()
         {
-            Line line = new Line(1.0,
-                                 2.0,
-                                 3.0,
-                                 4.0);
+            var line = new Line(1.0,
+                                2.0,
+                                3.0,
+                                4.0);
 
             Assert.AreEqual(1.0,
                             line.X1,
@@ -401,14 +401,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsOperatorReturnsFalseForDifferentValuesTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(1.0,
-                                            2.0),
-                                  new Point(3.0,
-                                            4.0));
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(1.0,
+                                           2.0),
+                                 new Point(3.0,
+                                           4.0));
 
             Assert.False(line1 == line2);
         }
@@ -416,14 +416,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsOperatorReturnsTrueForSameValuesTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
 
             Assert.True(line1 == line2);
         }
@@ -431,15 +431,15 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForDifferentDirectionTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0),
-                                  Constants.LineDirection.Reverse);
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0),
+                                 Constants.LineDirection.Reverse);
 
             Assert.False(line1.Equals(line2));
         }
@@ -447,16 +447,16 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForDifferentUnknownTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0),
-                                  Constants.LineDirection.Forward,
-                                  true);
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0),
+                                 Constants.LineDirection.Forward,
+                                 true);
 
             Assert.False(line1.Equals(line2));
         }
@@ -464,14 +464,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForDifferentValuesTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(1.0,
-                                            2.0),
-                                  new Point(3.0,
-                                            4.0));
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(1.0,
+                                           2.0),
+                                 new Point(3.0,
+                                           4.0));
 
             Assert.False(line1.Equals(line2));
         }
@@ -479,10 +479,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForNullTest()
         {
-            Line line = new Line(new Point(0.0,
-                                           0.0),
-                                 new Point(10.0,
-                                           10.0));
+            var line = new Line(new Point(0.0,
+                                          0.0),
+                                new Point(10.0,
+                                          10.0));
 
             Assert.False(line.Equals(null));
         }
@@ -490,10 +490,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForOtherTypeTest()
         {
-            Line line = new Line(new Point(0.0,
-                                           0.0),
-                                 new Point(10.0,
-                                           10.0));
+            var line = new Line(new Point(0.0,
+                                          0.0),
+                                new Point(10.0,
+                                          10.0));
 
             Assert.False(line.Equals(new object()));
         }
@@ -501,10 +501,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsTrueForSameTest()
         {
-            Line line = new Line(new Point(0.0,
-                                           0.0),
-                                 new Point(10.0,
-                                           10.0));
+            var line = new Line(new Point(0.0,
+                                          0.0),
+                                new Point(10.0,
+                                          10.0));
 
             Assert.True(line.Equals(line));
         }
@@ -512,14 +512,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsTrueForSameValuesTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
 
             Assert.True(line1.Equals(line2));
         }
@@ -534,12 +534,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsOnlineReturnsFalseForPointNotOnLineTest()
         {
-            Line line = new Line(0.0,
-                                 0.0,
-                                 10.0,
-                                 10.0);
-            Point point = new Point(100.0,
-                                    -100.0);
+            var line = new Line(0.0,
+                                0.0,
+                                10.0,
+                                10.0);
+            var point = new Point(100.0,
+                                  -100.0);
 
             Assert.False(line.IsOnLine(point));
         }
@@ -547,10 +547,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsOnlineReturnsTrueForEndPointTest()
         {
-            Line line = new Line(0.0,
-                                 0.0,
-                                 10.0,
-                                 10.0);
+            var line = new Line(0.0,
+                                0.0,
+                                10.0,
+                                10.0);
 
             Assert.True(line.IsOnLine(line.EndPoint));
         }
@@ -558,12 +558,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsOnlineReturnsTrueForPointOnLineTest()
         {
-            Line line = new Line(0.0,
-                                 0.0,
-                                 10.0,
-                                 10.0);
-            Point point = new Point(5.0,
-                                    5.0);
+            var line = new Line(0.0,
+                                0.0,
+                                10.0,
+                                10.0);
+            var point = new Point(5.0,
+                                  5.0);
 
             Assert.True(line.IsOnLine(point));
         }
@@ -571,10 +571,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void IsOnlineReturnsTrueForStartPointTest()
         {
-            Line line = new Line(0.0,
-                                 0.0,
-                                 10.0,
-                                 10.0);
+            var line = new Line(0.0,
+                                0.0,
+                                10.0,
+                                10.0);
 
             Assert.True(line.IsOnLine(line.StartPoint));
         }
@@ -616,14 +616,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void NotEqualsOperatorReturnsFalseForSameValuesTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
 
             Assert.False(line1 != line2);
         }
@@ -631,14 +631,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void NotEqualsOperatorReturnsTrueForDifferentValuesTest()
         {
-            Line line1 = new Line(new Point(0.0,
-                                            0.0),
-                                  new Point(10.0,
-                                            10.0));
-            Line line2 = new Line(new Point(1.0,
-                                            2.0),
-                                  new Point(3.0,
-                                            4.0));
+            var line1 = new Line(new Point(0.0,
+                                           0.0),
+                                 new Point(10.0,
+                                           10.0));
+            var line2 = new Line(new Point(1.0,
+                                           2.0),
+                                 new Point(3.0,
+                                           4.0));
 
             Assert.True(line1 != line2);
         }
@@ -686,9 +686,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void SurveyDirectionTest()
         {
-            Line line = new Line(m_StartPoint,
-                                 m_EndPoint,
-                                 Constants.LineDirection.Reverse);
+            var line = new Line(m_StartPoint,
+                                m_EndPoint,
+                                Constants.LineDirection.Reverse);
 
             Assert.AreEqual(Constants.LineDirection.Reverse,
                             line.RunDirection);

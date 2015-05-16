@@ -1,5 +1,6 @@
-<?xml version="1.0"?>
-<package >
+﻿<?xml version="1.0"?>
+
+<package>
   <metadata>
     <id>Selkie.Geometry</id>
     <version>1.0.0.0</version>

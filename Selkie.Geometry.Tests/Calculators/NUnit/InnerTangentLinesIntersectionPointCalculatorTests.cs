@@ -11,11 +11,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusOfOneIsBiggerAndNumberOfTangentsIsFourTests
         {
-            private InnerTangentLinesIntersectionPointCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -31,11 +26,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new InnerTangentLinesIntersectionPointCalculator(m_Pair);
             }
 
+            private InnerTangentLinesIntersectionPointCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void InnerTangentLinesIntersectionPointTest()
             {
-                Point expected = new Point(-1.0,
-                                           0.6);
+                var expected = new Point(-1.0,
+                                         0.6);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(actual,
@@ -52,7 +52,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void UnknownTest()
             {
-                InnerTangentLinesIntersectionPointCalculator calculator = InnerTangentLinesIntersectionPointCalculator.Unknown;
+                InnerTangentLinesIntersectionPointCalculator calculator =
+                    InnerTangentLinesIntersectionPointCalculator.Unknown;
 
                 Assert.True(calculator.IsUnknown,
                             "IsUnknown");

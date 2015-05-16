@@ -7,8 +7,9 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public class Line : ILine,
-                        IEquatable <Line>
+    public class Line
+        : ILine,
+          IEquatable <Line>
     {
         public const int UnknownId = int.MinValue;
         public static readonly Line Unknown = new Line();
@@ -159,126 +160,8 @@ namespace Selkie.Geometry.Shapes
             return Equals(other.m_EndPoint,
                           m_EndPoint) && Equals(other.m_StartPoint,
                                                 m_StartPoint) && Equals(other.m_LineDirection,
-                                                                        m_LineDirection) && other.m_IsUnknown.Equals(m_IsUnknown);
-        }
-
-        #endregion
-
-        #region ILine Members
-
-        public int Id
-        {
-            get
-            {
-                return m_Id;
-            }
-        }
-
-        public Constants.LineDirection RunDirection
-        {
-            get
-            {
-                return m_LineDirection;
-            }
-        }
-
-        public Angle AngleToXAxis
-        {
-            get
-            {
-                return m_AngleToXAxis;
-            }
-        }
-
-        public Point StartPoint
-        {
-            get
-            {
-                return m_StartPoint;
-            }
-        }
-
-        public Point EndPoint
-        {
-            get
-            {
-                return m_EndPoint;
-            }
-        }
-
-        public double Length
-        {
-            get
-            {
-                return m_Length;
-            }
-        }
-
-        public IPolylineSegment Reverse()
-        {
-            Line reverse = new Line(m_Id,
-                                    m_EndPoint,
-                                    m_StartPoint);
-
-            return reverse;
-        }
-
-        public double X1
-        {
-            get
-            {
-                return StartPoint.X;
-            }
-        }
-
-        public double Y1
-        {
-            get
-            {
-                return StartPoint.Y;
-            }
-        }
-
-        public double X2
-        {
-            get
-            {
-                return EndPoint.X;
-            }
-        }
-
-        public double Y2
-        {
-            get
-            {
-                return EndPoint.Y;
-            }
-        }
-
-        public Constants.TurnDirection TurnDirection(Point point)
-        {
-            LineDirectionCalculator calculator = new LineDirectionCalculator(this,
-                                                                             point);
-
-            return calculator.Direction;
-        }
-
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
-
-        public bool Equals([NotNull] ILine other)
-        {
-            return Equals(other as Line);
-        }
-
-        public int CompareTo([NotNull] ILine other)
-        {
-            return m_Id.CompareTo(other.Id);
+                                                                        m_LineDirection) &&
+                   other.m_IsUnknown.Equals(m_IsUnknown);
         }
 
         #endregion
@@ -297,7 +180,8 @@ namespace Selkie.Geometry.Shapes
             double deltaYEnd1AndEnd2 = m_EndPoint.Y - m_StartPoint.Y;
             double deltaXEnd1AndEnd2 = m_EndPoint.X - m_StartPoint.X;
 
-            return Math.Abs(deltaYCheckAndEnd / deltaXCheckAndEnd - deltaYEnd1AndEnd2 / deltaXEnd1AndEnd2) < SelkieConstants.EpsilonDistance;
+            return Math.Abs(deltaYCheckAndEnd / deltaXCheckAndEnd - deltaYEnd1AndEnd2 / deltaXEnd1AndEnd2) <
+                   SelkieConstants.EpsilonDistance;
         }
 
         private double CalculateLength()
@@ -349,7 +233,8 @@ namespace Selkie.Geometry.Shapes
         private static bool IsDeltaXOrDeltaYLessThanEpsilon(double deltaX,
                                                             double deltaY)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonRadians || Math.Abs(deltaY) < SelkieConstants.EpsilonRadians;
+            return Math.Abs(deltaX) < SelkieConstants.EpsilonRadians ||
+                   Math.Abs(deltaY) < SelkieConstants.EpsilonRadians;
         }
 
         private static double CalculateRadians(double deltaY,
@@ -410,7 +295,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return false;
             }
-            return Equals((Line) obj);
+            return Equals(( Line ) obj);
         }
 
         public override int GetHashCode()
@@ -442,5 +327,124 @@ namespace Selkie.Geometry.Shapes
             return !Equals(left,
                            right);
         }
+
+        #region ILine Members
+
+        public int Id
+        {
+            get
+            {
+                return m_Id;
+            }
+        }
+
+        public Constants.LineDirection RunDirection
+        {
+            get
+            {
+                return m_LineDirection;
+            }
+        }
+
+        public Angle AngleToXAxis
+        {
+            get
+            {
+                return m_AngleToXAxis;
+            }
+        }
+
+        public Point StartPoint
+        {
+            get
+            {
+                return m_StartPoint;
+            }
+        }
+
+        public Point EndPoint
+        {
+            get
+            {
+                return m_EndPoint;
+            }
+        }
+
+        public double Length
+        {
+            get
+            {
+                return m_Length;
+            }
+        }
+
+        public IPolylineSegment Reverse()
+        {
+            var reverse = new Line(m_Id,
+                                   m_EndPoint,
+                                   m_StartPoint);
+
+            return reverse;
+        }
+
+        public double X1
+        {
+            get
+            {
+                return StartPoint.X;
+            }
+        }
+
+        public double Y1
+        {
+            get
+            {
+                return StartPoint.Y;
+            }
+        }
+
+        public double X2
+        {
+            get
+            {
+                return EndPoint.X;
+            }
+        }
+
+        public double Y2
+        {
+            get
+            {
+                return EndPoint.Y;
+            }
+        }
+
+        public Constants.TurnDirection TurnDirection(Point point)
+        {
+            var calculator = new LineDirectionCalculator(this,
+                                                         point);
+
+            return calculator.Direction;
+        }
+
+        public bool IsUnknown
+        {
+            get
+            {
+                return m_IsUnknown;
+            }
+        }
+
+        public bool Equals([NotNull] ILine other)
+        {
+            return Equals(other as Line);
+        }
+
+        public int CompareTo([NotNull] ILine other)
+        {
+            return m_Id.CompareTo(other.Id);
+        }
+
+        #endregion
     }
 }

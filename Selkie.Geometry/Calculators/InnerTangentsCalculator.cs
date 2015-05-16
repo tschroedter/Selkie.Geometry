@@ -57,7 +57,7 @@ namespace Selkie.Geometry.Calculators
         [NotNull]
         private Point CalculateInnerTangentLinesIntersectionPoint([NotNull] ICirclePair circlePair)
         {
-            InnerTangentLinesIntersectionPointCalculator calculator = new InnerTangentLinesIntersectionPointCalculator(circlePair);
+            var calculator = new InnerTangentLinesIntersectionPointCalculator(circlePair);
 
             return calculator.IntersectionPoint;
         }
@@ -68,64 +68,12 @@ namespace Selkie.Geometry.Calculators
             Tuple <double, double> xt1And2 = CircleOneCalculateXt1And2(circle);
             Tuple <double, double> yt1And2 = CircleOneCalculateYt1And2(circle);
 
-            CoordinatePairCalculator calculator = new CoordinatePairCalculator(circle,
-                                                                               xt1And2,
-                                                                               yt1And2);
+            var calculator = new CoordinatePairCalculator(circle,
+                                                          xt1And2,
+                                                          yt1And2);
 
             return calculator.Points;
         }
-
-        #region IInnerTangentsCalculator Members
-
-        public bool HasTangentPoints
-        {
-            get
-            {
-                return m_HasTangentPoints;
-            }
-        }
-
-        public Point CircleZeroTangentPointOne
-        {
-            get
-            {
-                return m_CircleZeroTangentPointOne;
-            }
-        }
-
-        public Point CircleZeroTangentPointTwo
-        {
-            get
-            {
-                return m_CircleZeroTangentPointTwo;
-            }
-        }
-
-        public Point CircleOneTangentPointOne
-        {
-            get
-            {
-                return m_CircleOneTangentPointOne;
-            }
-        }
-
-        public Point CircleOneTangentPointTwo
-        {
-            get
-            {
-                return m_CircleOneTangentPointTwo;
-            }
-        }
-
-        public Point IntersectionPoint
-        {
-            get
-            {
-                return m_IntersectionPoint;
-            }
-        }
-
-        #endregion
 
         [NotNull]
         // ReSharper disable once MethodTooLong
@@ -198,5 +146,57 @@ namespace Selkie.Geometry.Calculators
             return new Tuple <double, double>(resultOne,
                                               resultTwo);
         }
+
+        #region IInnerTangentsCalculator Members
+
+        public bool HasTangentPoints
+        {
+            get
+            {
+                return m_HasTangentPoints;
+            }
+        }
+
+        public Point CircleZeroTangentPointOne
+        {
+            get
+            {
+                return m_CircleZeroTangentPointOne;
+            }
+        }
+
+        public Point CircleZeroTangentPointTwo
+        {
+            get
+            {
+                return m_CircleZeroTangentPointTwo;
+            }
+        }
+
+        public Point CircleOneTangentPointOne
+        {
+            get
+            {
+                return m_CircleOneTangentPointOne;
+            }
+        }
+
+        public Point CircleOneTangentPointTwo
+        {
+            get
+            {
+                return m_CircleOneTangentPointTwo;
+            }
+        }
+
+        public Point IntersectionPoint
+        {
+            get
+            {
+                return m_IntersectionPoint;
+            }
+        }
+
+        #endregion
     }
 }

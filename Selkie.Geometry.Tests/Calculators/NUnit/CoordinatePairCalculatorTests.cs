@@ -11,13 +11,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class CoordinatePairCalculatorTests
     {
-        private CoordinatePairCalculator m_Calculator;
-        private ICircle m_Circle;
-        private Point m_Point180;
-        private Point m_Point45;
-        private Tuple <double, double> m_Xt1And2;
-        private Tuple <double, double> m_Yt1And2;
-
         [SetUp]
         public void Setup()
         {
@@ -38,6 +31,13 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                                                         m_Yt1And2);
         }
 
+        private CoordinatePairCalculator m_Calculator;
+        private ICircle m_Circle;
+        private Point m_Point180;
+        private Point m_Point45;
+        private Tuple <double, double> m_Xt1And2;
+        private Tuple <double, double> m_Yt1And2;
+
         [Test]
         public void CircleTest()
         {
@@ -48,7 +48,7 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [Test]
         public void ConstructorEmptyTest()
         {
-            CoordinatePairCalculator calculator = new CoordinatePairCalculator();
+            var calculator = new CoordinatePairCalculator();
 
             Assert.AreEqual(Circle.Unknown,
                             calculator.Circle,
@@ -81,8 +81,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [Test]
         public void DeterminePointsForX1IsNaNTest()
         {
-            Tuple <double, double> tuple = new Tuple <double, double>(double.NaN,
-                                                                      2.0);
+            var tuple = new Tuple <double, double>(double.NaN,
+                                                   2.0);
 
             Tuple <Point, Point> actual = m_Calculator.Calculate(m_Circle,
                                                                  tuple,
@@ -99,8 +99,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [Test]
         public void DeterminePointsForX2IsNaNTest()
         {
-            Tuple <double, double> tuple = new Tuple <double, double>(1.0,
-                                                                      double.NaN);
+            var tuple = new Tuple <double, double>(1.0,
+                                                   double.NaN);
 
             Tuple <Point, Point> actual = m_Calculator.Calculate(m_Circle,
                                                                  tuple,
@@ -117,8 +117,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [Test]
         public void DeterminePointsForY1IsNaNTest()
         {
-            Tuple <double, double> tuple = new Tuple <double, double>(double.NaN,
-                                                                      2.0);
+            var tuple = new Tuple <double, double>(double.NaN,
+                                                   2.0);
 
             Tuple <Point, Point> actual = m_Calculator.Calculate(m_Circle,
                                                                  m_Xt1And2,
@@ -135,8 +135,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [Test]
         public void DeterminePointsForY2IsNaNTest()
         {
-            Tuple <double, double> tuple = new Tuple <double, double>(1.0,
-                                                                      double.NaN);
+            var tuple = new Tuple <double, double>(1.0,
+                                                   double.NaN);
 
             Tuple <Point, Point> actual = m_Calculator.Calculate(m_Circle,
                                                                  m_Xt1And2,
@@ -155,15 +155,15 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         {
             Point onCircle = m_Circle.PointOnCircle(Angle.For90Degrees);
 
-            Point point1 = new Point(1000.0,
-                                     1000.0);
-            Point point2 = new Point(onCircle.X,
-                                     onCircle.Y);
+            var point1 = new Point(1000.0,
+                                   1000.0);
+            var point2 = new Point(onCircle.X,
+                                   onCircle.Y);
 
-            Tuple <double, double> tuple1 = new Tuple <double, double>(point1.X,
-                                                                       point2.X);
-            Tuple <double, double> tuple2 = new Tuple <double, double>(point1.Y,
-                                                                       point2.Y);
+            var tuple1 = new Tuple <double, double>(point1.X,
+                                                    point2.X);
+            var tuple2 = new Tuple <double, double>(point1.Y,
+                                                    point2.Y);
 
             Assert.Throws <ArgumentException>(() => m_Calculator.Calculate(m_Circle,
                                                                            tuple1,
@@ -175,15 +175,15 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         {
             Point onCircle = m_Circle.PointOnCircle(Angle.For90Degrees);
 
-            Point point1 = new Point(onCircle.X,
-                                     onCircle.Y);
-            Point point2 = new Point(1000.0,
-                                     1000.0);
+            var point1 = new Point(onCircle.X,
+                                   onCircle.Y);
+            var point2 = new Point(1000.0,
+                                   1000.0);
 
-            Tuple <double, double> tuple1 = new Tuple <double, double>(point1.X,
-                                                                       point2.X);
-            Tuple <double, double> tuple2 = new Tuple <double, double>(point1.Y,
-                                                                       point2.Y);
+            var tuple1 = new Tuple <double, double>(point1.X,
+                                                    point2.X);
+            var tuple2 = new Tuple <double, double>(point1.Y,
+                                                    point2.Y);
 
             Assert.Throws <ArgumentException>(() => m_Calculator.Calculate(m_Circle,
                                                                            tuple1,

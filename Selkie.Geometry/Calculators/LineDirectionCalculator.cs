@@ -66,13 +66,13 @@ namespace Selkie.Geometry.Calculators
 
             switch ( side )
             {
-                case Side.Right :
+                case Side.Right:
                     return Constants.TurnDirection.Clockwise;
 
-                case Side.Left :
+                case Side.Left:
                     return Constants.TurnDirection.Counterclockwise;
 
-                default :
+                default:
                     return Constants.TurnDirection.Unknown;
             }
         }

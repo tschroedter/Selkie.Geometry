@@ -12,8 +12,6 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class PointTests
     {
-        private Point m_Point;
-
         [SetUp]
         public void Setup()
         {
@@ -21,15 +19,17 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                                 4.0);
         }
 
+        private Point m_Point;
+
         [Test]
         public void AngleBetweenPointsFor135DegreesCaseOneTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(20.0,
-                                  0.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(20.0,
+                                0.0);
 
             Angle expected = Angle.For135Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -42,12 +42,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AngleBetweenPointsFor135DegreesCaseTwoTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(0.0,
-                                  0.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(0.0,
+                                0.0);
 
             Angle expected = Angle.For135Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -60,12 +60,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AngleBetweenPointsFor180DegreesCaseOneTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(10.0,
-                                  0.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(10.0,
+                                0.0);
 
             Angle expected = Angle.For180Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -78,12 +78,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AngleBetweenPointsFor45DegreesCaseOneTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(20.0,
-                                  20.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(20.0,
+                                20.0);
 
             Angle expected = Angle.For45Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -96,12 +96,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AngleBetweenPointsFor45DegreesCaseTwoTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(0.0,
-                                  20.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(0.0,
+                                20.0);
 
             Angle expected = Angle.For45Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -114,12 +114,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AngleBetweenPointsFor90DegreesCaseOneTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(20.0,
-                                  10.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(20.0,
+                                10.0);
 
             Angle expected = Angle.For90Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -132,12 +132,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AngleBetweenPointsFor90DegreesCaseTwoTest()
         {
-            Point centre = new Point(10.0,
-                                     10.0);
-            Point one = new Point(10.0,
-                                  20.0);
-            Point two = new Point(0.0,
-                                  10.0);
+            var centre = new Point(10.0,
+                                   10.0);
+            var one = new Point(10.0,
+                                20.0);
+            var two = new Point(0.0,
+                                10.0);
 
             Angle expected = Angle.For90Degrees;
             Angle actual = centre.AngleBetweenPoints(one,
@@ -150,8 +150,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void DistanceTest()
         {
-            Point other = new Point(3.0,
-                                    8.0);
+            var other = new Point(3.0,
+                                  8.0);
 
             const double expected = 4.0;
             double actual = m_Point.DistanceTo(other);
@@ -164,8 +164,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsOperatorReturnsTrueForSameTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             // ReSharper disable EqualExpressionComparison
             Assert.True(point == point);
@@ -175,8 +175,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForNullTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             Assert.False(point.Equals(null));
         }
@@ -184,8 +184,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForOtherTypeTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             Assert.False(point.Equals(new object()));
         }
@@ -193,10 +193,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsFalseForSameValueWithDeltaTest()
         {
-            Point point1 = new Point(1.0,
-                                     2.0);
-            Point point2 = new Point(1.0 + SelkieConstants.EpsilonPointXy,
-                                     2.0 + SelkieConstants.EpsilonPointXy);
+            var point1 = new Point(1.0,
+                                   2.0);
+            var point2 = new Point(1.0 + SelkieConstants.EpsilonPointXy,
+                                   2.0 + SelkieConstants.EpsilonPointXy);
 
             Assert.False(point1.Equals(point2));
         }
@@ -204,10 +204,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsForForDifferentValueTest()
         {
-            Point point1 = new Point(1.0,
-                                     2.0);
-            Point point2 = new Point(2.0,
-                                     3.0);
+            var point1 = new Point(1.0,
+                                   2.0);
+            var point2 = new Point(2.0,
+                                   3.0);
 
             Assert.False(point1 == point2);
         }
@@ -215,8 +215,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsTrueForSameTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             Assert.True(point.Equals(point));
         }
@@ -224,10 +224,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsTrueForSameValueTest()
         {
-            Point point1 = new Point(1.0,
-                                     2.0);
-            Point point2 = new Point(1.0,
-                                     2.0);
+            var point1 = new Point(1.0,
+                                   2.0);
+            var point2 = new Point(1.0,
+                                   2.0);
 
             Assert.True(point1.Equals(point2));
         }
@@ -235,10 +235,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void EqualsReturnsTrueForSameValueWitHalfhDeltaTest()
         {
-            Point point1 = new Point(1.0,
-                                     2.0);
-            Point point2 = new Point(1.0 + SelkieConstants.EpsilonPointXy / 2.0,
-                                     2.0 + SelkieConstants.EpsilonPointXy / 2.0);
+            var point1 = new Point(1.0,
+                                   2.0);
+            var point2 = new Point(1.0 + SelkieConstants.EpsilonPointXy / 2.0,
+                                   2.0 + SelkieConstants.EpsilonPointXy / 2.0);
 
             Assert.True(point1.Equals(point2));
         }
@@ -246,8 +246,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void GetHashCodeTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             Assert.DoesNotThrow(() => point.GetHashCode());
@@ -324,8 +324,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void NotEqualsOperatorReturnsFalseForSameTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             // ReSharper disable EqualExpressionComparison
             Assert.False(point != point);
@@ -335,10 +335,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void NotEqualsReturnsForTrueForDifferentValueTest()
         {
-            Point point1 = new Point(1.0,
-                                     2.0);
-            Point point2 = new Point(2.0,
-                                     3.0);
+            var point1 = new Point(1.0,
+                                   2.0);
+            var point2 = new Point(2.0,
+                                   3.0);
 
             Assert.True(point1 != point2);
         }
@@ -346,8 +346,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToForSamePointTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
+            var point = new Point(1.0,
+                                  2.0);
 
             Point actual = point.RelativeTo(point);
 
@@ -362,10 +362,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantFourCaseOneTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
-            Point other = new Point(-2.0,
-                                    4.0);
+            var point = new Point(1.0,
+                                  2.0);
+            var other = new Point(-2.0,
+                                  4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -380,10 +380,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantFourCaseTwoTest()
         {
-            Point point = new Point(-5.0,
-                                    10.0);
-            Point other = new Point(-2.0,
-                                    4.0);
+            var point = new Point(-5.0,
+                                  10.0);
+            var other = new Point(-2.0,
+                                  4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -398,10 +398,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantOneCaseOneTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
-            Point other = new Point(2.0,
-                                    4.0);
+            var point = new Point(1.0,
+                                  2.0);
+            var other = new Point(2.0,
+                                  4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -416,10 +416,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantOneCaseTwoTest()
         {
-            Point point = new Point(3.0,
-                                    6.0);
-            Point other = new Point(2.0,
-                                    4.0);
+            var point = new Point(3.0,
+                                  6.0);
+            var other = new Point(2.0,
+                                  4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -434,10 +434,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantThreeCaseOneTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
-            Point other = new Point(-2.0,
-                                    -4.0);
+            var point = new Point(1.0,
+                                  2.0);
+            var other = new Point(-2.0,
+                                  -4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -452,10 +452,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantThreeCaseTwoTest()
         {
-            Point point = new Point(-5.0,
-                                    -10.0);
-            Point other = new Point(-2.0,
-                                    -4.0);
+            var point = new Point(-5.0,
+                                  -10.0);
+            var other = new Point(-2.0,
+                                  -4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -470,10 +470,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantTwoCaseOneTest()
         {
-            Point point = new Point(1.0,
-                                    2.0);
-            Point other = new Point(2.0,
-                                    -4.0);
+            var point = new Point(1.0,
+                                  2.0);
+            var other = new Point(2.0,
+                                  -4.0);
 
             Point actual = point.RelativeTo(other);
 
@@ -488,10 +488,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void RelativeToQuadrantTwoCaseTwoTest()
         {
-            Point point = new Point(3.0,
-                                    -10.0);
-            Point other = new Point(2.0,
-                                    -4.0);
+            var point = new Point(3.0,
+                                  -10.0);
+            var other = new Point(2.0,
+                                  -4.0);
 
             Point actual = point.RelativeTo(other);
 

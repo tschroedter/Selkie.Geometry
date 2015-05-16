@@ -11,14 +11,6 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class PolyineTests
     {
-        private Point m_EndPointOne;
-        private Point m_EndPointTwo;
-        private Polyline m_Polyline;
-        private IPolylineSegment m_Segment1;
-        private IPolylineSegment m_Segment2;
-        private Point m_StartPointOne;
-        private Point m_StartPointTwo;
-
         [SetUp]
         public void Setup()
         {
@@ -42,6 +34,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
 
             m_Polyline = new Polyline();
         }
+
+        private Point m_EndPointOne;
+        private Point m_EndPointTwo;
+        private Polyline m_Polyline;
+        private IPolylineSegment m_Segment1;
+        private IPolylineSegment m_Segment2;
+        private Point m_StartPointOne;
+        private Point m_StartPointTwo;
 
         [Test]
         public void AddTest()
@@ -148,10 +148,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
 
             m_Polyline.Reverse();
 
-            m_Segment1.Received()
-                      .Reverse();
-            m_Segment2.Received()
-                      .Reverse();
+            m_Segment1.Received().Reverse();
+            m_Segment2.Received().Reverse();
         }
     }
 }

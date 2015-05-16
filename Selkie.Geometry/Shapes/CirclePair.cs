@@ -57,6 +57,44 @@ namespace Selkie.Geometry.Shapes
                        : one;
         }
 
+        // ReSharper disable once MethodTooLong
+        private int CalculatedNumberOfTangents(double distance,
+                                               double r0,
+                                               double r1)
+        {
+            double r0MinusR1 = r0 - r1;
+            double r0PlusR1 = r0 + r1;
+
+            if ( distance < r0MinusR1 )
+            {
+                return 0;
+            }
+
+            if ( Math.Abs(distance - r0MinusR1) < SelkieConstants.EpsilonDistance )
+            {
+                return 1;
+            }
+
+            if ( r0MinusR1 < distance &&
+                 distance < r0PlusR1 )
+            {
+                return 2;
+            }
+
+            if ( Math.Abs(distance - r0PlusR1) < SelkieConstants.EpsilonDistance )
+            {
+                return 3;
+            }
+
+            // Note: There can't be more than 4 
+            //       if (distance > r0PlusR1)
+            //         {
+            //            return 4;
+            //         }
+
+            return 4;
+        }
+
         #region ICirclePair Members
 
         public ICircle Zero
@@ -108,43 +146,5 @@ namespace Selkie.Geometry.Shapes
         }
 
         #endregion
-
-        // ReSharper disable once MethodTooLong
-        private int CalculatedNumberOfTangents(double distance,
-                                               double r0,
-                                               double r1)
-        {
-            double r0MinusR1 = r0 - r1;
-            double r0PlusR1 = r0 + r1;
-
-            if ( distance < r0MinusR1 )
-            {
-                return 0;
-            }
-
-            if ( Math.Abs(distance - r0MinusR1) < SelkieConstants.EpsilonDistance )
-            {
-                return 1;
-            }
-
-            if ( r0MinusR1 < distance &&
-                 distance < r0PlusR1 )
-            {
-                return 2;
-            }
-
-            if ( Math.Abs(distance - r0PlusR1) < SelkieConstants.EpsilonDistance )
-            {
-                return 3;
-            }
-
-            // Note: There can't be more than 4 
-            //       if (distance > r0PlusR1)
-            //         {
-            //            return 4;
-            //         }
-
-            return 4;
-        }
     }
 }

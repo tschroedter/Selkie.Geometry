@@ -13,11 +13,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusOfOneIsBiggerAndNumberOfTangentsIsFourTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -33,11 +28,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
 
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void CircleOneOuterTangentPointOneTest()
             {
-                Point expected = new Point(-1.44,
-                                           2.83);
+                var expected = new Point(-1.44,
+                                         2.83);
                 Point actual = m_Calculator.CircleOneTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -48,8 +48,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleOneOuterTangentPointTwoTest()
             {
-                Point expected = new Point(-2.97,
-                                           1.74);
+                var expected = new Point(-2.97,
+                                         1.74);
                 Point actual = m_Calculator.CircleOneTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -60,8 +60,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointOneTest()
             {
-                Point expected = new Point(5.24,
-                                           -1.69);
+                var expected = new Point(5.24,
+                                         -1.69);
                 Point actual = m_Calculator.CircleZeroTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -72,8 +72,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointTwoTest()
             {
-                Point expected = new Point(-0.86,
-                                           -6.04);
+                var expected = new Point(-0.86,
+                                         -6.04);
                 Point actual = m_Calculator.CircleZeroTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -84,8 +84,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void OuterTangentLinesIntersectionPointTest()
             {
-                Point expected = new Point(-3.67,
-                                           4.33);
+                var expected = new Point(-3.67,
+                                         4.33);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(expected,
@@ -97,11 +97,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusOfTwoIsBiggerAndNumberOfTangentsIsFourTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -117,11 +112,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
 
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void CircleOneOuterTangentPointOneTest()
             {
-                Point expected = new Point(2.44,
-                                           -5.83);
+                var expected = new Point(2.44,
+                                         -5.83);
                 Point actual = m_Calculator.CircleOneTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -132,8 +132,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleOneOuterTangentPointTwoTest()
             {
-                Point expected = new Point(3.97,
-                                           -4.74);
+                var expected = new Point(3.97,
+                                         -4.74);
                 Point actual = m_Calculator.CircleOneTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -144,8 +144,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointOneTest()
             {
-                Point expected = new Point(-4.24,
-                                           -1.31);
+                var expected = new Point(-4.24,
+                                         -1.31);
                 Point actual = m_Calculator.CircleZeroTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -156,8 +156,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointTwoTest()
             {
-                Point expected = new Point(1.86,
-                                           3.04);
+                var expected = new Point(1.86,
+                                         3.04);
                 Point actual = m_Calculator.CircleZeroTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -168,8 +168,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void OuterTangentLinesIntersectionPointTest()
             {
-                Point expected = new Point(4.67,
-                                           -7.33);
+                var expected = new Point(4.67,
+                                         -7.33);
                 Point actual = m_Calculator.IntersectionPoint;
 
                 Assert.AreEqual(expected,
@@ -181,11 +181,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusSameAndOneTangentTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -200,6 +195,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
 
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
+
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
 
             [Test]
             public void CircleOneOuterTangentPointOneTest()
@@ -257,11 +257,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusSameCaseFourTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -277,11 +272,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
 
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void CircleOneOuterTangentPointOneTest()
             {
-                Point expected = new Point(8.68,
-                                           3.42);
+                var expected = new Point(8.68,
+                                         3.42);
                 Point actual = m_Calculator.CircleOneTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -292,8 +292,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleOneOuterTangentPointTwoTest()
             {
-                Point expected = new Point(13.32,
-                                           1.57);
+                var expected = new Point(13.32,
+                                         1.57);
                 Point actual = m_Calculator.CircleOneTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -304,8 +304,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointOneTest()
             {
-                Point expected = new Point(12.32,
-                                           -0.93);
+                var expected = new Point(12.32,
+                                         -0.93);
                 Point actual = m_Calculator.CircleZeroTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -316,8 +316,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointTwoTest()
             {
-                Point expected = new Point(7.68,
-                                           0.93);
+                var expected = new Point(7.68,
+                                         0.93);
                 Point actual = m_Calculator.CircleZeroTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -340,11 +340,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusSameCaseOneTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -360,17 +355,22 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
 
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void CalculateTangenPointsForOneBothSameRadiusTest()
             {
-                Circle one = new Circle(new Point(2.0,
-                                                  2.0),
-                                        2.0);
-                Circle two = new Circle(new Point(7.0,
-                                                  6.0),
-                                        2.0);
-                CirclePair pair = new CirclePair(one,
-                                                 two);
+                var one = new Circle(new Point(2.0,
+                                               2.0),
+                                     2.0);
+                var two = new Circle(new Point(7.0,
+                                               6.0),
+                                     2.0);
+                var pair = new CirclePair(one,
+                                          two);
 
                 Tuple <Point, Point> actual = m_Calculator.CalculateTangenPointsForOneBothSameRadius(pair);
 
@@ -387,14 +387,14 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CalculateTangenPointsForZeroBothSameRadiusTest()
             {
-                Circle one = new Circle(new Point(2.0,
-                                                  2.0),
-                                        2.0);
-                Circle two = new Circle(new Point(7.0,
-                                                  6.0),
-                                        2.0);
-                CirclePair pair = new CirclePair(one,
-                                                 two);
+                var one = new Circle(new Point(2.0,
+                                               2.0),
+                                     2.0);
+                var two = new Circle(new Point(7.0,
+                                               6.0),
+                                     2.0);
+                var pair = new CirclePair(one,
+                                          two);
 
                 Tuple <Point, Point> actual = m_Calculator.CalculateTangenPointsForZeroBothSameRadius(pair);
 
@@ -412,11 +412,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusSameCaseThreeTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -432,11 +427,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
 
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void CircleOneOuterTangentPointOneTest()
             {
-                Point expected = new Point(14.88,
-                                           4.74);
+                var expected = new Point(14.88,
+                                         4.74);
                 Point actual = m_Calculator.CircleOneTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -447,8 +447,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleOneOuterTangentPointTwoTest()
             {
-                Point expected = new Point(17.12,
-                                           0.26);
+                var expected = new Point(17.12,
+                                         0.26);
                 Point actual = m_Calculator.CircleOneTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -459,8 +459,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointOneTest()
             {
-                Point expected = new Point(12.12,
-                                           -2.24);
+                var expected = new Point(12.12,
+                                         -2.24);
                 Point actual = m_Calculator.CircleZeroTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -471,8 +471,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointTwoTest()
             {
-                Point expected = new Point(9.88,
-                                           2.24);
+                var expected = new Point(9.88,
+                                         2.24);
                 Point actual = m_Calculator.CircleZeroTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -495,11 +495,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class RadiusSameCaseTwoTests
         {
-            private OuterTangentsCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -515,11 +510,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new OuterTangentsCalculator(m_Pair);
             }
 
+            private OuterTangentsCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
+
             [Test]
             public void CircleOneOuterTangentPointOneTest()
             {
-                Point expected = new Point(7.51,
-                                           13.78);
+                var expected = new Point(7.51,
+                                         13.78);
                 Point actual = m_Calculator.CircleOneTangentPointTwo;
 
                 Assert.AreEqual(expected,
@@ -530,8 +530,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleOneOuterTangentPointTwoTest()
             {
-                Point expected = new Point(12.49,
-                                           14.22);
+                var expected = new Point(12.49,
+                                         14.22);
                 Point actual = m_Calculator.CircleOneTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -542,8 +542,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointOneTest()
             {
-                Point expected = new Point(13.49,
-                                           2.72);
+                var expected = new Point(13.49,
+                                         2.72);
                 Point actual = m_Calculator.CircleZeroTangentPointOne;
 
                 Assert.AreEqual(expected,
@@ -554,8 +554,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CircleZeroOuterTangentPointTwoTest()
             {
-                Point expected = new Point(8.51,
-                                           2.28);
+                var expected = new Point(8.51,
+                                         2.28);
                 Point actual = m_Calculator.CircleZeroTangentPointTwo;
 
                 Assert.AreEqual(expected,

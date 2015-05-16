@@ -35,8 +35,8 @@ namespace Selkie.Geometry.Calculators
 
                 if ( m_IsCirclesTouchAtSinglePoint )
                 {
-                    Line line = new Line(circlePair.Zero.CentrePoint,
-                                         circlePair.One.CentrePoint);
+                    var line = new Line(circlePair.Zero.CentrePoint,
+                                        circlePair.One.CentrePoint);
                     Point point = circlePair.Zero.PointOnCircle(line.AngleToXAxis);
 
                     m_IntersectionPointOne = point;
@@ -56,7 +56,9 @@ namespace Selkie.Geometry.Calculators
                                           double d,
                                           double r0MinusR1Abs)
         {
-            return Math.Abs(d) < SelkieConstants.EpsilonDistance && r0MinusR1Abs < SelkieConstants.EpsilonDistance && Math.Abs(circlePair.Zero.X - circlePair.One.X) < SelkieConstants.EpsilonDistance && Math.Abs(circlePair.Zero.Y - circlePair.One.Y) < SelkieConstants.EpsilonDistance;
+            return Math.Abs(d) < SelkieConstants.EpsilonDistance && r0MinusR1Abs < SelkieConstants.EpsilonDistance &&
+                   Math.Abs(circlePair.Zero.X - circlePair.One.X) < SelkieConstants.EpsilonDistance &&
+                   Math.Abs(circlePair.Zero.Y - circlePair.One.Y) < SelkieConstants.EpsilonDistance;
         }
 
         private int DetermineNumberOfIntersectionPoints([NotNull] Tuple <Point, Point> points)
@@ -78,50 +80,6 @@ namespace Selkie.Geometry.Calculators
 
             return 2;
         }
-
-        #region ICirclesIntersectionPointsCalculator Members
-
-        public bool HasIntersectionPoints
-        {
-            get
-            {
-                return m_HasIntersectionPoints;
-            }
-        }
-
-        public bool IsCirclesAreSame
-        {
-            get
-            {
-                return m_IsCirclesAreSame;
-            }
-        }
-
-        public bool IsCirclesTouchAtSinglePoint
-        {
-            get
-            {
-                return m_IsCirclesTouchAtSinglePoint;
-            }
-        }
-
-        public Point IntersectionPointOne
-        {
-            get
-            {
-                return m_IntersectionPointOne;
-            }
-        }
-
-        public Point IntersectionPointTwo
-        {
-            get
-            {
-                return m_IntersectionPointTwo;
-            }
-        }
-
-        #endregion
 
         [NotNull]
         // ReSharper disable once MethodTooLong
@@ -249,13 +207,57 @@ namespace Selkie.Geometry.Calculators
             double ix2 = cx2 - h * ( cy2 - cy0 ) / distance;
             double iy2 = cy2 + h * ( cx2 - cx0 ) / distance;
 
-            Point one = new Point(ix1,
-                                  iy1);
-            Point two = new Point(ix2,
-                                  iy2);
+            var one = new Point(ix1,
+                                iy1);
+            var two = new Point(ix2,
+                                iy2);
 
             return new Tuple <Point, Point>(one,
                                             two);
         }
+
+        #region ICirclesIntersectionPointsCalculator Members
+
+        public bool HasIntersectionPoints
+        {
+            get
+            {
+                return m_HasIntersectionPoints;
+            }
+        }
+
+        public bool IsCirclesAreSame
+        {
+            get
+            {
+                return m_IsCirclesAreSame;
+            }
+        }
+
+        public bool IsCirclesTouchAtSinglePoint
+        {
+            get
+            {
+                return m_IsCirclesTouchAtSinglePoint;
+            }
+        }
+
+        public Point IntersectionPointOne
+        {
+            get
+            {
+                return m_IntersectionPointOne;
+            }
+        }
+
+        public Point IntersectionPointTwo
+        {
+            get
+            {
+                return m_IntersectionPointTwo;
+            }
+        }
+
+        #endregion
     }
 }

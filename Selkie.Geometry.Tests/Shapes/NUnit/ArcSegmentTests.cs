@@ -12,12 +12,6 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class ArcSegmentTests
     {
-        private Circle m_Circle;
-        private Point m_EndPoint;
-        private ArcSegment m_Segment;
-        private Point m_StartPoint;
-        private Constants.TurnDirection m_TurnDirection;
-
         [SetUp]
         public void Setup()
         {
@@ -35,6 +29,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                                        m_EndPoint,
                                        m_TurnDirection);
         }
+
+        private Circle m_Circle;
+        private Point m_EndPoint;
+        private ArcSegment m_Segment;
+        private Point m_StartPoint;
+        private Constants.TurnDirection m_TurnDirection;
 
         private void AssertCalculateLengthForDegrees(double degrees)
         {
@@ -56,12 +56,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Azimuth0DegreesTest()
         {
-            Point endPoint = new Point(2.0,
-                                       7.0);
+            var endPoint = new Point(2.0,
+                                     7.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             Angle expected = Angle.ForZeroDegrees;
             Angle actual = segment.AngleClockwise;
@@ -73,12 +73,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Azimuth180DegreesTest()
         {
-            Point endPoint = new Point(2.0,
-                                       -1.0);
+            var endPoint = new Point(2.0,
+                                     -1.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             Angle expected = Angle.For180Degrees;
             Angle actual = segment.AngleClockwise;
@@ -90,12 +90,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Azimuth270DegreesTest()
         {
-            Point endPoint = new Point(6.0,
-                                       3.0);
+            var endPoint = new Point(6.0,
+                                     3.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             Angle expected = Angle.For270Degrees;
             Angle actual = segment.AngleCounterClockwise;
@@ -107,12 +107,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Azimuth90DegreesTest()
         {
-            Point endPoint = new Point(6.0,
-                                       3.0);
+            var endPoint = new Point(6.0,
+                                     3.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             Angle expected = Angle.For90Degrees;
             Angle actual = segment.AngleClockwise;
@@ -124,17 +124,17 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AzimuthFor180DegreesTest()
         {
-            Circle circle = new Circle(0.0,
-                                       0.0,
-                                       100.0);
-            Point startPoint = new Point(100.0,
-                                         0.0);
-            Point endPoint = new Point(-100.0,
+            var circle = new Circle(0.0,
+                                    0.0,
+                                    100.0);
+            var startPoint = new Point(100.0,
                                        0.0);
+            var endPoint = new Point(-100.0,
+                                     0.0);
 
-            ArcSegment segment = new ArcSegment(circle,
-                                                startPoint,
-                                                endPoint);
+            var segment = new ArcSegment(circle,
+                                         startPoint,
+                                         endPoint);
 
             Angle expected = Angle.For180Degrees;
             Angle actual = segment.AngleClockwise;
@@ -146,17 +146,17 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void AzimuthFor270DegreesTest()
         {
-            Circle circle = new Circle(0.0,
-                                       0.0,
-                                       100.0);
-            Point startPoint = new Point(100.0,
-                                         0.0);
-            Point endPoint = new Point(0.0,
-                                       100.0);
+            var circle = new Circle(0.0,
+                                    0.0,
+                                    100.0);
+            var startPoint = new Point(100.0,
+                                       0.0);
+            var endPoint = new Point(0.0,
+                                     100.0);
 
-            ArcSegment segment = new ArcSegment(circle,
-                                                startPoint,
-                                                endPoint);
+            var segment = new ArcSegment(circle,
+                                         startPoint,
+                                         endPoint);
 
             Angle expected = Angle.For270Degrees;
             Angle actual = segment.AngleClockwise;
@@ -242,17 +242,17 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void CaseOneTest()
         {
-            Circle circle = new Circle(-25.0,
-                                       156.13,
-                                       100.0);
-            Point startPoint = new Point(-87.5,
-                                         78.06);
-            Point endPoint = new Point(37.5,
+            var circle = new Circle(-25.0,
+                                    156.13,
+                                    100.0);
+            var startPoint = new Point(-87.5,
                                        78.06);
+            var endPoint = new Point(37.5,
+                                     78.06);
 
-            ArcSegment segment = new ArcSegment(circle,
-                                                startPoint,
-                                                endPoint);
+            var segment = new ArcSegment(circle,
+                                         startPoint,
+                                         endPoint);
 
             Angle expected = Angle.FromRadians(4.9330162985305783);
             Angle actual = segment.AngleClockwise;
@@ -292,12 +292,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Length0DegreesTest()
         {
-            Point endPoint = new Point(2.0,
-                                       7.0);
+            var endPoint = new Point(2.0,
+                                     7.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             double actual = segment.LengthClockwise;
 
@@ -310,12 +310,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Length180DegreesTest()
         {
-            Point endPoint = new Point(2.0,
-                                       -1.0);
+            var endPoint = new Point(2.0,
+                                     -1.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             double actual = segment.LengthClockwise;
 
@@ -328,12 +328,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Length270DegreesTest()
         {
-            Point endPoint = new Point(6.0,
-                                       3.0);
+            var endPoint = new Point(6.0,
+                                     3.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             double actual = segment.LengthCounterClockwise;
 
@@ -346,12 +346,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void Length90DegreesTest()
         {
-            Point endPoint = new Point(6.0,
-                                       3.0);
+            var endPoint = new Point(6.0,
+                                     3.0);
 
-            ArcSegment segment = new ArcSegment(m_Circle,
-                                                m_StartPoint,
-                                                endPoint);
+            var segment = new ArcSegment(m_Circle,
+                                         m_StartPoint,
+                                         endPoint);
 
             double actual = segment.LengthClockwise;
 
@@ -405,7 +405,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void ReverseTest()
         {
-            IArcSegment actual = m_Segment.Reverse() as IArcSegment;
+            var actual = m_Segment.Reverse() as IArcSegment;
 
             Assert.NotNull(actual);
             Assert.AreEqual(m_Segment.LengthClockwise,
@@ -463,11 +463,11 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void ValidatePointReturnsFalseForOnCircleTest()
         {
-            Circle circle = new Circle(0.0,
-                                       0.0,
-                                       100.0);
-            Point startPoint = new Point(170.71,
-                                         170.71);
+            var circle = new Circle(0.0,
+                                    0.0,
+                                    100.0);
+            var startPoint = new Point(170.71,
+                                       170.71);
 
             Assert.False(m_Segment.ValidatePoint(circle,
                                                  startPoint));
@@ -476,11 +476,11 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void ValidatePointReturnsTrueForOnCircleTest()
         {
-            Circle circle = new Circle(0.0,
-                                       0.0,
-                                       100.0);
-            Point startPoint = new Point(70.71,
-                                         70.71);
+            var circle = new Circle(0.0,
+                                    0.0,
+                                    100.0);
+            var startPoint = new Point(70.71,
+                                       70.71);
 
             Assert.True(m_Segment.ValidatePoint(circle,
                                                 startPoint));
@@ -489,13 +489,13 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void ValidateStartAndEndPointThrowsForEndPointNotOnCircleTest()
         {
-            Circle circle = new Circle(0.0,
-                                       0.0,
+            var circle = new Circle(0.0,
+                                    0.0,
+                                    100.0);
+            var startPoint = new Point(0.0,
                                        100.0);
-            Point startPoint = new Point(0.0,
-                                         100.0);
-            Point endPoint = new Point(170.71,
-                                       170.71);
+            var endPoint = new Point(170.71,
+                                     170.71);
 
             Assert.Throws <ArgumentException>(() => m_Segment.ValidateStartAndEndPoint(circle,
                                                                                        startPoint,
@@ -505,13 +505,13 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void ValidateStartAndEndPointThrowsForStartPointNotOnCircleTest()
         {
-            Circle circle = new Circle(0.0,
-                                       0.0,
+            var circle = new Circle(0.0,
+                                    0.0,
+                                    100.0);
+            var startPoint = new Point(100.0,
                                        100.0);
-            Point startPoint = new Point(100.0,
-                                         100.0);
-            Point endPoint = new Point(170.71,
-                                       170.71);
+            var endPoint = new Point(170.71,
+                                     170.71);
 
             Assert.Throws <ArgumentException>(() => m_Segment.ValidateStartAndEndPoint(circle,
                                                                                        startPoint,

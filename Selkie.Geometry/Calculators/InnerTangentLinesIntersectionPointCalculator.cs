@@ -6,7 +6,8 @@ namespace Selkie.Geometry.Calculators
     public class InnerTangentLinesIntersectionPointCalculator : IInnerTangentLinesIntersectionPointCalculator
     {
         // ReSharper disable InconsistentNaming
-        public static InnerTangentLinesIntersectionPointCalculator Unknown = new InnerTangentLinesIntersectionPointCalculator();
+        public static InnerTangentLinesIntersectionPointCalculator Unknown =
+            new InnerTangentLinesIntersectionPointCalculator();
 
         // ReSharper restore InconsistentNaming
         private readonly bool m_IsUnknown;
