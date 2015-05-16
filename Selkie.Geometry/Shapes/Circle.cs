@@ -6,8 +6,9 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public class Circle : ICircle,
-                          IEquatable <Circle>
+    public class Circle
+        : ICircle,
+          IEquatable <Circle>
     {
         public static readonly ICircle Unknown = new Circle();
         private readonly ICircleCentreToPointCalculator m_Calculator;
@@ -39,6 +40,88 @@ namespace Selkie.Geometry.Shapes
             m_Calculator = new CircleCentreToPointCalculator(m_CentrePoint);
         }
 
+        #region IEquatable<Circle> Members
+
+        // ReSharper disable once CodeAnnotationAnalyzer
+        public bool Equals(Circle other)
+        {
+            if ( ReferenceEquals(null,
+                                 other) )
+            {
+                return false;
+            }
+            if ( ReferenceEquals(this,
+                                 other) )
+            {
+                return true;
+            }
+            return other.CentrePoint.Equals(m_CentrePoint) && other.Radius.Equals(m_Radius);
+        }
+
+        #endregion
+
+        [NotNull]
+        public Angle AngleBetweenPointsClockwise([NotNull] Point startPoint,
+                                                 [NotNull] Point endPoint)
+        {
+            var calculator = new CircleCentrePointToPointCalculator(m_CentrePoint,
+                                                                    startPoint,
+                                                                    endPoint);
+
+            return calculator.AngleClockwise;
+        }
+
+        private static bool IsInsideEpsilonForPoints(double deltaY,
+                                                     double deltaX)
+        {
+            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
+                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
+        }
+
+        // ReSharper disable once CodeAnnotationAnalyzer
+        public override bool Equals(object obj)
+        {
+            if ( ReferenceEquals(null,
+                                 obj) )
+            {
+                return false;
+            }
+            if ( ReferenceEquals(this,
+                                 obj) )
+            {
+                return true;
+            }
+            if ( obj.GetType() != typeof ( Circle ) )
+            {
+                return false;
+            }
+            return Equals(( Circle ) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ( ( m_CentrePoint != null
+                               ? m_CentrePoint.GetHashCode()
+                               : 0 ) * 397 ) ^ m_Radius.GetHashCode();
+            }
+        }
+
+        public static bool operator ==(Circle left,
+                                       Circle right)
+        {
+            return Equals(left,
+                          right);
+        }
+
+        public static bool operator !=(Circle left,
+                                       Circle right)
+        {
+            return !Equals(left,
+                           right);
+        }
+
         #region ICircle Members
 
         public bool IsUnknown
@@ -59,8 +142,8 @@ namespace Selkie.Geometry.Shapes
             x += m_CentrePoint.X;
             y += m_CentrePoint.Y;
 
-            Point point = new Point(x,
-                                    y);
+            var point = new Point(x,
+                                  y);
 
             return point;
         }
@@ -114,8 +197,8 @@ namespace Selkie.Geometry.Shapes
 
         public double Distance(ICircle other)
         {
-            Line line = new Line(m_CentrePoint,
-                                 other.CentrePoint);
+            var line = new Line(m_CentrePoint,
+                                other.CentrePoint);
 
             return line.Length;
         }
@@ -160,86 +243,5 @@ namespace Selkie.Geometry.Shapes
         }
 
         #endregion
-
-        #region IEquatable<Circle> Members
-
-        // ReSharper disable once CodeAnnotationAnalyzer
-        public bool Equals(Circle other)
-        {
-            if ( ReferenceEquals(null,
-                                 other) )
-            {
-                return false;
-            }
-            if ( ReferenceEquals(this,
-                                 other) )
-            {
-                return true;
-            }
-            return other.CentrePoint.Equals(m_CentrePoint) && other.Radius.Equals(m_Radius);
-        }
-
-        #endregion
-
-        [NotNull]
-        public Angle AngleBetweenPointsClockwise([NotNull] Point startPoint,
-                                                 [NotNull] Point endPoint)
-        {
-            CircleCentrePointToPointCalculator calculator = new CircleCentrePointToPointCalculator(m_CentrePoint,
-                                                                                                   startPoint,
-                                                                                                   endPoint);
-
-            return calculator.AngleClockwise;
-        }
-
-        private static bool IsInsideEpsilonForPoints(double deltaY,
-                                                     double deltaX)
-        {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy || Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
-        }
-
-        // ReSharper disable once CodeAnnotationAnalyzer
-        public override bool Equals(object obj)
-        {
-            if ( ReferenceEquals(null,
-                                 obj) )
-            {
-                return false;
-            }
-            if ( ReferenceEquals(this,
-                                 obj) )
-            {
-                return true;
-            }
-            if ( obj.GetType() != typeof ( Circle ) )
-            {
-                return false;
-            }
-            return Equals((Circle) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ( ( m_CentrePoint != null
-                               ? m_CentrePoint.GetHashCode()
-                               : 0 ) * 397 ) ^ m_Radius.GetHashCode();
-            }
-        }
-
-        public static bool operator ==(Circle left,
-                                       Circle right)
-        {
-            return Equals(left,
-                          right);
-        }
-
-        public static bool operator !=(Circle left,
-                                       Circle right)
-        {
-            return !Equals(left,
-                           right);
-        }
     }
 }

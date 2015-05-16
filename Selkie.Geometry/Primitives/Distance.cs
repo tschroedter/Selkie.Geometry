@@ -128,7 +128,7 @@ namespace Selkie.Geometry.Primitives
             {
                 return false;
             }
-            return Equals((Distance) obj);
+            return Equals(( Distance ) obj);
         }
 
         public override int GetHashCode()

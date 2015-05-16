@@ -10,11 +10,6 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class CircleCentrePointToPointCalculatorTests
     {
-        private CircleCentrePointToPointCalculator m_Calculator;
-        private Point m_CentrePoint;
-        private Point m_EndPoint;
-        private Point m_StartPoint;
-
         [SetUp]
         public void Setup()
         {
@@ -29,6 +24,11 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
                                                                   m_StartPoint,
                                                                   m_EndPoint);
         }
+
+        private CircleCentrePointToPointCalculator m_Calculator;
+        private Point m_CentrePoint;
+        private Point m_EndPoint;
+        private Point m_StartPoint;
 
         [Test]
         public void CentrePointTest()
@@ -47,12 +47,12 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void RadiansBetweenPointsCounterClockwiseForAngleTwoBiggerThanAngleOneTest()
         {
-            Point centrePoint = new Point(3.0,
-                                          4.0);
-            Point startPoint = new Point(1.0,
-                                         4.0);
-            Point endPoint = new Point(3.0,
-                                       6.0);
+            var centrePoint = new Point(3.0,
+                                        4.0);
+            var startPoint = new Point(1.0,
+                                       4.0);
+            var endPoint = new Point(3.0,
+                                     6.0);
 
             Angle expected = Angle.For270Degrees;
             Angle actual = m_Calculator.RadiansBetweenPointsCounterClockwise(centrePoint,

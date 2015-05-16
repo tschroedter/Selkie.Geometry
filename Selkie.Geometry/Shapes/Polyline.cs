@@ -93,7 +93,7 @@ namespace Selkie.Geometry.Shapes
 
             segments.Reverse();
 
-            Polyline reverse = new Polyline(segments);
+            var reverse = new Polyline(segments);
 
             return reverse;
         }

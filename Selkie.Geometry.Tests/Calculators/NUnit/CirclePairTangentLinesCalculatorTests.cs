@@ -16,15 +16,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CirclePairGeneralTests
         {
-            private CirclePairTangentLinesCalculator m_Calculator;
-
             [SetUp]
             public void Setup()
             {
                 m_Calculator = new CirclePairTangentLinesCalculator(Substitute.For <IOuterTangentsCalculator>(),
                                                                     Substitute.For <IInnerTangentsCalculator>(),
-                                                                    Substitute.For <ICirclesIntersectionPointsCalculator>());
+                                                                    Substitute
+                                                                        .For <ICirclesIntersectionPointsCalculator>());
             }
+
+            private CirclePairTangentLinesCalculator m_Calculator;
 
             [Test]
             public void CirclePairDefaultTest()
@@ -35,7 +36,7 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CirclePairRoundtripTest()
             {
-                ICirclePair pair = Substitute.For <ICirclePair>();
+                var pair = Substitute.For <ICirclePair>();
 
                 m_Calculator.CirclePair = pair;
 
@@ -122,35 +123,35 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CreateFourTangentsTest()
             {
-                Line line1 = new Line(m_OuterCircleZeroTangentPointOne,
-                                      m_OuterCircleOneTangentPointOne);
-                Line line2 = new Line(m_OuterCircleZeroTangentPointTwo,
-                                      m_OuterCircleOneTangentPointTwo);
+                var line1 = new Line(m_OuterCircleZeroTangentPointOne,
+                                     m_OuterCircleOneTangentPointOne);
+                var line2 = new Line(m_OuterCircleZeroTangentPointTwo,
+                                     m_OuterCircleOneTangentPointTwo);
 
-                Line line3 = new Line(m_InnerCircleZeroTangentPointOne,
-                                      m_InnerCircleOneTangentPointOne);
-                Line line4 = new Line(m_InnerCircleZeroTangentPointTwo,
-                                      m_InnerCircleOneTangentPointTwo);
+                var line3 = new Line(m_InnerCircleZeroTangentPointOne,
+                                     m_InnerCircleOneTangentPointOne);
+                var line4 = new Line(m_InnerCircleZeroTangentPointTwo,
+                                     m_InnerCircleOneTangentPointTwo);
 
                 m_LinesCalculator.CreateFourTangents();
 
-                List <ILine> expectedOuter = new List <ILine>
-                                             {
-                                                 line1,
-                                                 line2
-                                             };
-                List <ILine> expectedInner = new List <ILine>
-                                             {
-                                                 line3,
-                                                 line4
-                                             };
-                List <ILine> expectedAll = new List <ILine>
-                                           {
-                                               line1,
-                                               line2,
-                                               line3,
-                                               line4
-                                           };
+                var expectedOuter = new List <ILine>
+                                    {
+                                        line1,
+                                        line2
+                                    };
+                var expectedInner = new List <ILine>
+                                    {
+                                        line3,
+                                        line4
+                                    };
+                var expectedAll = new List <ILine>
+                                  {
+                                      line1,
+                                      line2,
+                                      line3,
+                                      line4
+                                  };
 
                 NUnitHelper.AssertSequenceEqual(expectedOuter,
                                                 m_LinesCalculator.OuterTangents,
@@ -166,16 +167,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CreateInnerTangentsTest()
             {
-                Line line1 = new Line(m_InnerCircleZeroTangentPointOne,
-                                      m_InnerCircleOneTangentPointOne);
-                Line line2 = new Line(m_InnerCircleZeroTangentPointTwo,
-                                      m_InnerCircleOneTangentPointTwo);
+                var line1 = new Line(m_InnerCircleZeroTangentPointOne,
+                                     m_InnerCircleOneTangentPointOne);
+                var line2 = new Line(m_InnerCircleZeroTangentPointTwo,
+                                     m_InnerCircleOneTangentPointTwo);
 
-                List <ILine> expected = new List <ILine>
-                                        {
-                                            line1,
-                                            line2
-                                        };
+                var expected = new List <ILine>
+                               {
+                                   line1,
+                                   line2
+                               };
                 IEnumerable <ILine> actual = m_LinesCalculator.CreateInnerTangents();
 
                 NUnitHelper.AssertSequenceEqual(expected,
@@ -186,15 +187,15 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CreateOneTangentTest()
             {
-                Line line = new Line(m_IntersectionPointOne,
-                                     m_IntersectionPointTwo);
+                var line = new Line(m_IntersectionPointOne,
+                                    m_IntersectionPointTwo);
 
                 m_LinesCalculator.CreateOneTangent();
 
-                List <ILine> expectedInner = new List <ILine>
-                                             {
-                                                 line
-                                             };
+                var expectedInner = new List <ILine>
+                                    {
+                                        line
+                                    };
 
                 NUnitHelper.AssertSequenceEqual(expectedInner,
                                                 m_LinesCalculator.InnerTangents,
@@ -210,16 +211,16 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CreateOuterTangentsTest()
             {
-                Line line1 = new Line(m_OuterCircleZeroTangentPointOne,
-                                      m_OuterCircleOneTangentPointOne);
-                Line line2 = new Line(m_OuterCircleZeroTangentPointTwo,
-                                      m_OuterCircleOneTangentPointTwo);
+                var line1 = new Line(m_OuterCircleZeroTangentPointOne,
+                                     m_OuterCircleOneTangentPointOne);
+                var line2 = new Line(m_OuterCircleZeroTangentPointTwo,
+                                     m_OuterCircleOneTangentPointTwo);
 
-                List <ILine> expected = new List <ILine>
-                                        {
-                                            line1,
-                                            line2
-                                        };
+                var expected = new List <ILine>
+                               {
+                                   line1,
+                                   line2
+                               };
                 IEnumerable <ILine> actual = m_LinesCalculator.CreateOuterTangents();
 
                 NUnitHelper.AssertSequenceEqual(expected,
@@ -230,30 +231,30 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CreateThreeTangentTest()
             {
-                Line line1 = new Line(m_OuterCircleZeroTangentPointOne,
-                                      m_OuterCircleOneTangentPointOne);
-                Line line2 = new Line(m_OuterCircleZeroTangentPointTwo,
-                                      m_OuterCircleOneTangentPointTwo);
-                Line line3 = new Line(m_IntersectionPointOne,
-                                      m_IntersectionPointTwo);
+                var line1 = new Line(m_OuterCircleZeroTangentPointOne,
+                                     m_OuterCircleOneTangentPointOne);
+                var line2 = new Line(m_OuterCircleZeroTangentPointTwo,
+                                     m_OuterCircleOneTangentPointTwo);
+                var line3 = new Line(m_IntersectionPointOne,
+                                     m_IntersectionPointTwo);
 
                 m_LinesCalculator.CreateThreeTangents();
 
-                List <ILine> expectedOuter = new List <ILine>
-                                             {
-                                                 line1,
-                                                 line2
-                                             };
-                List <ILine> expectedInner = new List <ILine>
-                                             {
-                                                 line3
-                                             };
-                List <ILine> expectedTangents = new List <ILine>
-                                                {
-                                                    line3,
-                                                    line1,
-                                                    line2
-                                                };
+                var expectedOuter = new List <ILine>
+                                    {
+                                        line1,
+                                        line2
+                                    };
+                var expectedInner = new List <ILine>
+                                    {
+                                        line3
+                                    };
+                var expectedTangents = new List <ILine>
+                                       {
+                                           line3,
+                                           line1,
+                                           line2
+                                       };
 
                 NUnitHelper.AssertSequenceEqual(expectedInner,
                                                 m_LinesCalculator.InnerTangents,
@@ -269,18 +270,18 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void CreateTwoTangentsTest()
             {
-                Line line1 = new Line(m_OuterCircleZeroTangentPointOne,
-                                      m_OuterCircleOneTangentPointOne);
-                Line line2 = new Line(m_OuterCircleZeroTangentPointTwo,
-                                      m_OuterCircleOneTangentPointTwo);
+                var line1 = new Line(m_OuterCircleZeroTangentPointOne,
+                                     m_OuterCircleOneTangentPointOne);
+                var line2 = new Line(m_OuterCircleZeroTangentPointTwo,
+                                     m_OuterCircleOneTangentPointTwo);
 
                 m_LinesCalculator.CreateTwoTangents();
 
-                List <ILine> expectedOuter = new List <ILine>
-                                             {
-                                                 line1,
-                                                 line2
-                                             };
+                var expectedOuter = new List <ILine>
+                                    {
+                                        line1,
+                                        line2
+                                    };
 
                 NUnitHelper.AssertSequenceEqual(expectedOuter,
                                                 m_LinesCalculator.OuterTangents,
@@ -319,12 +320,12 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             {
                 m_CirclePair.NumberOfTangents.Returns(4);
 
-                CirclePairTangentLinesCalculator lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
-                                                                                              m_InnerTangentsCalculator,
-                                                                                              m_CirclesIntersectionPointsCalculator)
-                                                         {
-                                                             CirclePair = m_CirclePair
-                                                         };
+                var lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
+                                                                 m_InnerTangentsCalculator,
+                                                                 m_CirclesIntersectionPointsCalculator)
+                            {
+                                CirclePair = m_CirclePair
+                            };
 
                 lines.Calculate();
 
@@ -344,12 +345,12 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             {
                 m_CirclePair.NumberOfTangents.Returns(1);
 
-                CirclePairTangentLinesCalculator lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
-                                                                                              m_InnerTangentsCalculator,
-                                                                                              m_CirclesIntersectionPointsCalculator)
-                                                         {
-                                                             CirclePair = m_CirclePair
-                                                         };
+                var lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
+                                                                 m_InnerTangentsCalculator,
+                                                                 m_CirclesIntersectionPointsCalculator)
+                            {
+                                CirclePair = m_CirclePair
+                            };
 
                 lines.Calculate();
 
@@ -369,12 +370,12 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             {
                 m_CirclePair.NumberOfTangents.Returns(3);
 
-                CirclePairTangentLinesCalculator lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
-                                                                                              m_InnerTangentsCalculator,
-                                                                                              m_CirclesIntersectionPointsCalculator)
-                                                         {
-                                                             CirclePair = m_CirclePair
-                                                         };
+                var lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
+                                                                 m_InnerTangentsCalculator,
+                                                                 m_CirclesIntersectionPointsCalculator)
+                            {
+                                CirclePair = m_CirclePair
+                            };
 
                 lines.Calculate();
 
@@ -394,12 +395,12 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             {
                 m_CirclePair.NumberOfTangents.Returns(2);
 
-                CirclePairTangentLinesCalculator lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
-                                                                                              m_InnerTangentsCalculator,
-                                                                                              m_CirclesIntersectionPointsCalculator)
-                                                         {
-                                                             CirclePair = m_CirclePair
-                                                         };
+                var lines = new CirclePairTangentLinesCalculator(m_OuterTangentsCalculator,
+                                                                 m_InnerTangentsCalculator,
+                                                                 m_CirclesIntersectionPointsCalculator)
+                            {
+                                CirclePair = m_CirclePair
+                            };
 
                 lines.Calculate();
 
@@ -419,12 +420,12 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             {
                 m_CirclePair.NumberOfTangents.Returns(0);
 
-                CirclePairTangentLinesCalculator lines = new CirclePairTangentLinesCalculator(Substitute.For <IOuterTangentsCalculator>(),
-                                                                                              Substitute.For <IInnerTangentsCalculator>(),
-                                                                                              Substitute.For <ICirclesIntersectionPointsCalculator>())
-                                                         {
-                                                             CirclePair = m_CirclePair
-                                                         };
+                var lines = new CirclePairTangentLinesCalculator(Substitute.For <IOuterTangentsCalculator>(),
+                                                                 Substitute.For <IInnerTangentsCalculator>(),
+                                                                 Substitute.For <ICirclesIntersectionPointsCalculator>())
+                            {
+                                CirclePair = m_CirclePair
+                            };
 
                 lines.Calculate();
 
@@ -443,11 +444,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CirclePairTangentLinesCalculatorCaseTwoTests
         {
-            private CirclePairTangentLinesCalculator m_Calculator;
-            private Circle m_One;
-            private CirclePair m_Pair;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -464,6 +460,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
 
                 m_Calculator.Calculate();
             }
+
+            private CirclePairTangentLinesCalculator m_Calculator;
+            private Circle m_One;
+            private CirclePair m_Pair;
+            private Circle m_Two;
 
             [Test]
             public void DefaultInnerTangentsTest()
@@ -489,10 +490,10 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void InnerTangentLineOneTest()
             {
-                Line expected = new Line(new Point(13.15,
-                                                   3.77),
-                                         new Point(7.85,
-                                                   12.73));
+                var expected = new Line(new Point(13.15,
+                                                  3.77),
+                                        new Point(7.85,
+                                                  12.73));
 
                 ILine actual = m_Calculator.InnerTangents.First();
 
@@ -507,10 +508,10 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void InnerTangentLineTwoTest()
             {
-                Line expected = new Line(new Point(8.66,
-                                                   3.38),
-                                         new Point(12.34,
-                                                   13.12));
+                var expected = new Line(new Point(8.66,
+                                                  3.38),
+                                        new Point(12.34,
+                                                  13.12));
 
                 ILine actual = m_Calculator.InnerTangents.Last();
 
@@ -525,10 +526,10 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void OuterTangentLineOneTest()
             {
-                Line expected = new Line(new Point(13.49,
-                                                   2.72),
-                                         new Point(12.49,
-                                                   14.22));
+                var expected = new Line(new Point(13.49,
+                                                  2.72),
+                                        new Point(12.49,
+                                                  14.22));
 
                 ILine actual = m_Calculator.OuterTangents.First();
 
@@ -543,10 +544,10 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void OuterTangentLineTwoTest()
             {
-                Line expected = new Line(new Point(8.51,
-                                                   2.28),
-                                         new Point(7.51,
-                                                   13.78));
+                var expected = new Line(new Point(8.51,
+                                                  2.28),
+                                        new Point(7.51,
+                                                  13.78));
 
                 ILine actual = m_Calculator.OuterTangents.Last();
 

@@ -36,8 +36,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorEqualsReturnsFalseForDifferentValuesTest()
         {
-            Distance one = new Distance(2.0);
-            Distance two = new Distance(3.0);
+            var one = new Distance(2.0);
+            var two = new Distance(3.0);
 
             Assert.False(one == two);
         }
@@ -45,8 +45,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorEqualsReturnsFalseForInsideEpsilonTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(3.0 + SelkieConstants.EpsilonDistance);
+            var one = new Distance(3.0);
+            var two = new Distance(3.0 + SelkieConstants.EpsilonDistance);
 
             Assert.False(one != two);
         }
@@ -54,8 +54,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorEqualsReturnsTrueForDifferentValuesTest()
         {
-            Distance one = new Distance(2.0);
-            Distance two = new Distance(3.0);
+            var one = new Distance(2.0);
+            var two = new Distance(3.0);
 
             Assert.True(one != two);
         }
@@ -63,8 +63,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorEqualsReturnsTrueForInsideEpsilonTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(3.0 + SelkieConstants.EpsilonDistance);
+            var one = new Distance(3.0);
+            var two = new Distance(3.0 + SelkieConstants.EpsilonDistance);
 
             Assert.True(one == two);
         }
@@ -72,8 +72,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorEqualsReturnsTrueForSameValueTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(3.0);
+            var one = new Distance(3.0);
+            var two = new Distance(3.0);
 
             Assert.True(one == two);
         }
@@ -81,8 +81,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorGreaterOrEqualReturnsFalseForOneIsGreaterThanTwoNegativeEpsilonTest()
         {
-            Distance one = new Distance(2.0 - SelkieConstants.EpsilonDistance);
-            Distance two = new Distance(2.0);
+            var one = new Distance(2.0 - SelkieConstants.EpsilonDistance);
+            var two = new Distance(2.0);
 
             Assert.False(one >= two);
         }
@@ -90,8 +90,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorGreaterOrEqualReturnsTrueForOneIsGreaterThanTwoEpsilonTest()
         {
-            Distance one = new Distance(2.0 + SelkieConstants.EpsilonDistance);
-            Distance two = new Distance(2.0);
+            var one = new Distance(2.0 + SelkieConstants.EpsilonDistance);
+            var two = new Distance(2.0);
 
             Assert.True(one >= two);
         }
@@ -99,8 +99,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorGreaterOrEqualReturnsTrueForOneIsGreaterThanTwoTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(3.0);
+            var two = new Distance(2.0);
 
             Assert.True(one >= two);
         }
@@ -108,8 +108,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorGreaterOrEqualReturnsTrueForSameValueTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(3.0);
+            var one = new Distance(3.0);
+            var two = new Distance(3.0);
 
             Assert.True(one >= two);
         }
@@ -117,8 +117,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorGreaterReturnsFalseForOneIsLessThanTwoTest()
         {
-            Distance one = new Distance(1.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(1.0);
+            var two = new Distance(2.0);
 
             Assert.False(one > two);
         }
@@ -126,8 +126,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorGreaterReturnsTrueForOneIsGreaterThanTwoTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(3.0);
+            var two = new Distance(2.0);
 
             Assert.True(one > two);
         }
@@ -135,8 +135,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorLessOrEqualReturnsFalseForOneIsGreaterThanTwoNegativeEpsilonTest()
         {
-            Distance one = new Distance(2.0 - SelkieConstants.EpsilonDistance);
-            Distance two = new Distance(2.0);
+            var one = new Distance(2.0 - SelkieConstants.EpsilonDistance);
+            var two = new Distance(2.0);
 
             Assert.True(one <= two);
         }
@@ -144,8 +144,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorLessOrEqualReturnsTrueForOneIsGreaterThanTwoEpsilonTest()
         {
-            Distance one = new Distance(2.0 + SelkieConstants.EpsilonDistance);
-            Distance two = new Distance(2.0);
+            var one = new Distance(2.0 + SelkieConstants.EpsilonDistance);
+            var two = new Distance(2.0);
 
             Assert.False(one <= two);
         }
@@ -153,8 +153,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorLessOrEqualReturnsTrueForOneIsGreaterThanTwoTest()
         {
-            Distance one = new Distance(1.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(1.0);
+            var two = new Distance(2.0);
 
             Assert.True(one <= two);
         }
@@ -162,8 +162,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorLessOrEqualReturnsTrueForSameValueTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(3.0);
+            var one = new Distance(3.0);
+            var two = new Distance(3.0);
 
             Assert.True(one <= two);
         }
@@ -171,8 +171,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorLessReturnsFalseForOneIsGreaterThanTwoTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(3.0);
+            var two = new Distance(2.0);
 
             Assert.False(one < two);
         }
@@ -180,8 +180,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorLessReturnsTrueForOneIsLessThanTwoTest()
         {
-            Distance one = new Distance(1.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(1.0);
+            var two = new Distance(2.0);
 
             Assert.True(one < two);
         }
@@ -189,10 +189,10 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorMinusTest()
         {
-            Distance one = new Distance(1.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(1.0);
+            var two = new Distance(2.0);
 
-            Distance expected = new Distance(-1.0);
+            var expected = new Distance(-1.0);
             Distance actual = one - two;
 
             Assert.AreEqual(expected,
@@ -202,8 +202,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorNotEqualsReturnsFalseForSameValueTest()
         {
-            Distance one = new Distance(3.0);
-            Distance two = new Distance(3.0);
+            var one = new Distance(3.0);
+            var two = new Distance(3.0);
 
             Assert.False(one != two);
         }
@@ -211,10 +211,10 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void OperatorPlusTest()
         {
-            Distance one = new Distance(1.0);
-            Distance two = new Distance(2.0);
+            var one = new Distance(1.0);
+            var two = new Distance(2.0);
 
-            Distance expected = new Distance(3.0);
+            var expected = new Distance(3.0);
             Distance actual = one + two;
 
             Assert.AreEqual(expected,

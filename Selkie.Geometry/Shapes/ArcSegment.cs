@@ -46,9 +46,10 @@ namespace Selkie.Geometry.Shapes
             m_StartPoint = startPoint;
             m_EndPoint = endPoint;
             m_TurnDirection = arcTurnDirection;
-            ICircleCentrePointToPointCalculator calculator = new CircleCentrePointToPointCalculator(m_Circle.CentrePoint,
-                                                                                                    m_StartPoint,
-                                                                                                    m_EndPoint);
+            ICircleCentrePointToPointCalculator calculator = new CircleCentrePointToPointCalculator(
+                m_Circle.CentrePoint,
+                m_StartPoint,
+                m_EndPoint);
 
             m_AngleClockwise = calculator.AngleClockwise;
             m_AngleCounterClockwise = calculator.RadiansCounterClockwise;
@@ -196,10 +197,10 @@ namespace Selkie.Geometry.Shapes
 
         public IPolylineSegment Reverse()
         {
-            ArcSegment reverse = new ArcSegment(m_Circle,
-                                                m_EndPoint,
-                                                m_StartPoint,
-                                                m_TurnDirection);
+            var reverse = new ArcSegment(m_Circle,
+                                         m_EndPoint,
+                                         m_StartPoint,
+                                         m_TurnDirection);
 
             return reverse;
         }

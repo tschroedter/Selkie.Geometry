@@ -68,7 +68,8 @@ namespace Selkie.Geometry.Shapes
                 return true;
             }
 
-            return Math.Abs(m_X - other.X) < SelkieConstants.EpsilonPointXy && Math.Abs(m_Y - other.Y) < SelkieConstants.EpsilonPointXy;
+            return Math.Abs(m_X - other.X) < SelkieConstants.EpsilonPointXy &&
+                   Math.Abs(m_Y - other.Y) < SelkieConstants.EpsilonPointXy;
         }
 
         #endregion
@@ -117,8 +118,8 @@ namespace Selkie.Geometry.Shapes
             double newX = x + r * Math.Sin(radians);
             double newY = y + r * Math.Cos(radians);
 
-            Point point = new Point(newX,
-                                    newY);
+            var point = new Point(newX,
+                                  newY);
 
             return point;
         }
@@ -155,7 +156,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return false;
             }
-            return Equals((Point) obj);
+            return Equals(( Point ) obj);
         }
 
         public override int GetHashCode()

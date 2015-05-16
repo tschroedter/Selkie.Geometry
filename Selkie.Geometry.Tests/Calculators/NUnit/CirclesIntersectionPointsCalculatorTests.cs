@@ -15,11 +15,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CalculatePointsForSameYTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private CirclePair m_CirclePair;
-            private Circle m_One;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -35,19 +30,24 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
 
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private CirclePair m_CirclePair;
+            private Circle m_One;
+            private Circle m_Two;
+
             [Test]
             public void ZeroXBiggerThanOneXTest()
             {
-                Circle circle = new Circle(new Point(10.0,
-                                                     20.0),
-                                           1.0);
-                CirclePair pair = new CirclePair(m_One,
-                                                 circle);
+                var circle = new Circle(new Point(10.0,
+                                                  20.0),
+                                        1.0);
+                var pair = new CirclePair(m_One,
+                                          circle);
 
-                Tuple <Point, Point> expected = new Tuple <Point, Point>(new Point(9.0,
-                                                                                   20.0),
-                                                                         new Point(11.0,
-                                                                                   20));
+                var expected = new Tuple <Point, Point>(new Point(9.0,
+                                                                  20.0),
+                                                        new Point(11.0,
+                                                                  20));
                 Tuple <Point, Point> actual = m_Calculator.CalculatePointsForSameY(pair);
 
                 Assert.AreEqual(expected,
@@ -57,10 +57,10 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void ZeroXLessThanOneXTest()
             {
-                Tuple <Point, Point> expected = new Tuple <Point, Point>(new Point(4.0,
-                                                                                   20.0),
-                                                                         new Point(9.0,
-                                                                                   20));
+                var expected = new Tuple <Point, Point>(new Point(4.0,
+                                                                  20.0),
+                                                        new Point(9.0,
+                                                                  20));
                 Tuple <Point, Point> actual = m_Calculator.CalculatePointsForSameY(m_CirclePair);
 
                 Assert.AreEqual(expected,
@@ -75,11 +75,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CalculatePointsForSpecialCasesTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -95,22 +90,27 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
 
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
+
             [Test]
             public void DeltaXMinusDoubleRadiusLessInsideEpsilonTest()
             {
-                Circle one = new Circle(1.0,
-                                        -2.0,
-                                        3.0);
-                Circle two = new Circle(7.0,
-                                        -2.0,
-                                        3.0);
-                CirclePair pair = new CirclePair(one,
-                                                 two);
+                var one = new Circle(1.0,
+                                     -2.0,
+                                     3.0);
+                var two = new Circle(7.0,
+                                     -2.0,
+                                     3.0);
+                var pair = new CirclePair(one,
+                                          two);
 
-                Tuple <Point, Point> expected = new Tuple <Point, Point>(new Point(4.0,
-                                                                                   -2.0),
-                                                                         new Point(4.0,
-                                                                                   -2.0));
+                var expected = new Tuple <Point, Point>(new Point(4.0,
+                                                                  -2.0),
+                                                        new Point(4.0,
+                                                                  -2.0));
                 Tuple <Point, Point> actual = m_Calculator.CalculatePointsForSpecialCases(pair);
 
                 Assert.AreEqual(expected,
@@ -121,19 +121,19 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void DeltaYMinusDoubleRadiusLessInsideEpsilonTest()
             {
-                Circle one = new Circle(1.0,
-                                        -1.0,
-                                        3.0);
-                Circle two = new Circle(1.0,
-                                        5.0,
-                                        3.0);
-                CirclePair pair = new CirclePair(one,
-                                                 two);
+                var one = new Circle(1.0,
+                                     -1.0,
+                                     3.0);
+                var two = new Circle(1.0,
+                                     5.0,
+                                     3.0);
+                var pair = new CirclePair(one,
+                                          two);
 
-                Tuple <Point, Point> expected = new Tuple <Point, Point>(new Point(1.0,
-                                                                                   2.0),
-                                                                         new Point(1.0,
-                                                                                   2.0));
+                var expected = new Tuple <Point, Point>(new Point(1.0,
+                                                                  2.0),
+                                                        new Point(1.0,
+                                                                  2.0));
                 Tuple <Point, Point> actual = m_Calculator.CalculatePointsForSpecialCases(pair);
 
                 Assert.AreEqual(expected,
@@ -149,11 +149,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CalculatePointsSameXTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private CirclePair m_CirclePair;
-            private Circle m_One;
-            private Circle m_Two;
-
             [SetUp]
             public void Setup()
             {
@@ -169,19 +164,24 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
 
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private CirclePair m_CirclePair;
+            private Circle m_One;
+            private Circle m_Two;
+
             [Test]
             public void ZeroYBiggerThanOneYTest()
             {
-                Circle circle = new Circle(new Point(10.0,
-                                                     20.0),
-                                           1.0);
-                CirclePair pair = new CirclePair(m_One,
-                                                 circle);
+                var circle = new Circle(new Point(10.0,
+                                                  20.0),
+                                        1.0);
+                var pair = new CirclePair(m_One,
+                                          circle);
 
-                Tuple <Point, Point> expected = new Tuple <Point, Point>(new Point(10.0,
-                                                                                   19.0),
-                                                                         new Point(1.0,
-                                                                                   21));
+                var expected = new Tuple <Point, Point>(new Point(10.0,
+                                                                  19.0),
+                                                        new Point(1.0,
+                                                                  21));
                 Tuple <Point, Point> actual = m_Calculator.CalculatePointsSameX(pair);
 
                 Assert.AreEqual(expected,
@@ -191,10 +191,10 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void ZeroYLessThanOneYTest()
             {
-                Tuple <Point, Point> expected = new Tuple <Point, Point>(new Point(1.0,
-                                                                                   5.0),
-                                                                         new Point(1.0,
-                                                                                   17));
+                var expected = new Tuple <Point, Point>(new Point(1.0,
+                                                                  5.0),
+                                                        new Point(1.0,
+                                                                  17));
                 Tuple <Point, Point> actual = m_Calculator.CalculatePointsSameX(m_CirclePair);
 
                 Assert.AreEqual(expected,
@@ -209,11 +209,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CircleInsideCircleNoIntersectionPointsTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -228,6 +223,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
 
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
+
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
 
             [Test]
             public void HasIntersectionPointsTest()
@@ -277,11 +277,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CircleInsideCircleOneIntersectionPointsTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -297,6 +292,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
 
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
+
             [Test]
             public void HasIntersectionPointsTest()
             {
@@ -306,8 +306,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void IntersectionPointOneTest()
             {
-                Point expected = new Point(4.0,
-                                           2.0);
+                var expected = new Point(4.0,
+                                         2.0);
                 Point actual = m_Calculator.IntersectionPointOne;
 
                 Assert.AreEqual(expected,
@@ -318,8 +318,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void IntersectionPointTwoTest()
             {
-                Point expected = new Point(4.0,
-                                           2.0);
+                var expected = new Point(4.0,
+                                         2.0);
                 Point actual = m_Calculator.IntersectionPointTwo;
 
                 Assert.AreEqual(expected,
@@ -347,11 +347,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CircleOutsideCircleNoIntersectionPointsTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -366,6 +361,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
 
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
+
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
 
             [Test]
             public void HasIntersectionPointsTest()
@@ -415,11 +415,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class CircleOutsideCircleOneIntersectionPointsTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -435,6 +430,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
 
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
+
             [Test]
             public void HasIntersectionPointsTest()
             {
@@ -444,8 +444,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void IntersectionPointOneTest()
             {
-                Point expected = new Point(4.0,
-                                           2.0);
+                var expected = new Point(4.0,
+                                         2.0);
                 Point actual = m_Calculator.IntersectionPointOne;
 
                 Assert.AreEqual(actual,
@@ -456,8 +456,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void IntersectionPointTwoTest()
             {
-                Point expected = new Point(4.0,
-                                           2.0);
+                var expected = new Point(4.0,
+                                         2.0);
                 Point actual = m_Calculator.IntersectionPointTwo;
 
                 Assert.AreEqual(actual,
@@ -485,11 +485,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class SameCirclesTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -504,6 +499,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
 
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
+
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
 
             [Test]
             public void HasIntersectionPointsTest()
@@ -553,11 +553,6 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
         [TestFixture]
         internal sealed class TwoIntersectionPointsTests
         {
-            private CirclesIntersectionPointsCalculator m_Calculator;
-            private Circle m_CircleOne;
-            private CirclePair m_CirclePair;
-            private Circle m_CircleZero;
-
             [SetUp]
             public void Setup()
             {
@@ -573,6 +568,11 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
                 m_Calculator = new CirclesIntersectionPointsCalculator(m_CirclePair);
             }
 
+            private CirclesIntersectionPointsCalculator m_Calculator;
+            private Circle m_CircleOne;
+            private CirclePair m_CirclePair;
+            private Circle m_CircleZero;
+
             [Test]
             public void HasIntersectionPointsTest()
             {
@@ -582,8 +582,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void IntersectionPointOneTest()
             {
-                Point expected = new Point(3.86,
-                                           2.91);
+                var expected = new Point(3.86,
+                                         2.91);
                 Point actual = m_Calculator.IntersectionPointOne;
 
                 Assert.AreEqual(expected,
@@ -594,8 +594,8 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             [Test]
             public void IntersectionPointTwoTest()
             {
-                Point expected = new Point(-0.38,
-                                           0.078);
+                var expected = new Point(-0.38,
+                                         0.078);
                 Point actual = m_Calculator.IntersectionPointTwo;
 
                 Assert.AreEqual(expected,

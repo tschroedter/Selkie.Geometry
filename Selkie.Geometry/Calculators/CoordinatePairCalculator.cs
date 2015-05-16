@@ -36,42 +36,6 @@ namespace Selkie.Geometry.Calculators
                                  yt1And2);
         }
 
-        #region ICoordinatePairCalculator Members
-
-        public ICircle Circle
-        {
-            get
-            {
-                return m_Circle;
-            }
-        }
-
-        public Tuple <double, double> Xt1And2
-        {
-            get
-            {
-                return m_Xt1And2;
-            }
-        }
-
-        public Tuple <double, double> Yt1And2
-        {
-            get
-            {
-                return m_Yt1And2;
-            }
-        }
-
-        public Tuple <Point, Point> Points
-        {
-            get
-            {
-                return m_Points;
-            }
-        }
-
-        #endregion
-
         [NotNull]
         // ReSharper disable once MethodTooLong
         internal Tuple <Point, Point> Calculate([NotNull] ICircle circle,
@@ -91,10 +55,10 @@ namespace Selkie.Geometry.Calculators
             double yt1 = yt1And2.Item1;
             double yt2 = yt1And2.Item2;
 
-            Point pointOne = new Point(xt1,
-                                       yt1);
-            Point pointTwo = new Point(xt2,
-                                       yt2);
+            var pointOne = new Point(xt1,
+                                     yt1);
+            var pointTwo = new Point(xt2,
+                                     yt2);
 
             if ( !circle.IsPointOnCircle(pointOne) )
             {
@@ -135,7 +99,44 @@ namespace Selkie.Geometry.Calculators
                                                 [NotNull] Tuple <double, double> xt1And2,
                                                 [NotNull] Tuple <double, double> yt1And2)
         {
-            return circle.IsUnknown || double.IsNaN(xt1And2.Item1) || double.IsNaN(xt1And2.Item2) || double.IsNaN(yt1And2.Item1) || double.IsNaN(yt1And2.Item2);
+            return circle.IsUnknown || double.IsNaN(xt1And2.Item1) || double.IsNaN(xt1And2.Item2) ||
+                   double.IsNaN(yt1And2.Item1) || double.IsNaN(yt1And2.Item2);
         }
+
+        #region ICoordinatePairCalculator Members
+
+        public ICircle Circle
+        {
+            get
+            {
+                return m_Circle;
+            }
+        }
+
+        public Tuple <double, double> Xt1And2
+        {
+            get
+            {
+                return m_Xt1And2;
+            }
+        }
+
+        public Tuple <double, double> Yt1And2
+        {
+            get
+            {
+                return m_Yt1And2;
+            }
+        }
+
+        public Tuple <Point, Point> Points
+        {
+            get
+            {
+                return m_Points;
+            }
+        }
+
+        #endregion
     }
 }

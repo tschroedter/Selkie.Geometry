@@ -5,9 +5,10 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface ILine : IPolylineSegment,
-                             IEquatable <ILine>,
-                             IComparable <ILine>
+    public interface ILine
+        : IPolylineSegment,
+          IEquatable <ILine>,
+          IComparable <ILine>
     {
         double X1 { get; }
         double Y1 { get; }
