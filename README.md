@@ -11,7 +11,7 @@ Selkie.Windsor is part of the Selkie project which is based on Castle Windsor an
 
 The project started as a little ant colony optimization application. Over time the application grew and was split up into different services which communicate via RabbitMQ. The whole project is used to try out TDD, BDD, DRY and SOLID.
 
-# Selkie projects:
+### Selkie Projects
 
 * [Selkie](https://github.com/tschroedter/Selkie)
 * Selkie ACO
@@ -21,8 +21,9 @@ The project started as a little ant colony optimization application. Over time t
 * [Selkie NUnit Extensions](https://github.com/tschroedter/Selkie.NUnit.Extensions)
 * Selkie Racetrack
 * Selkie Services ACO
-* Selkie Services Common
-* Selkie Services Lines
+* [Selkie Services Common](https://github.com/tschroedter/Selkie.Services.Common)
+* [Selkie Services Lines](https://github.com/tschroedter/Selkie.Services.Lines)
+* [Selkie Services Lines Common](https://github.com/tschroedter/Selkie.Services.Lines.Common)
 * Selkie Services Monitor
 * Selkie Services Racetracks
 * Selkie Web
