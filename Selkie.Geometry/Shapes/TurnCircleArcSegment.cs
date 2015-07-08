@@ -1,9 +1,11 @@
 ﻿using JetBrains.Annotations;
 using Selkie.Geometry.Primitives;
+using Selkie.Windsor;
 using Selkie.Windsor.Extensions;
 
 namespace Selkie.Geometry.Shapes
 {
+    [ProjectComponent(Lifestyle.Transient)]
     public class TurnCircleArcSegment : ITurnCircleArcSegment
     {
         public static readonly ITurnCircleArcSegment Unknown = new TurnCircleArcSegment();
