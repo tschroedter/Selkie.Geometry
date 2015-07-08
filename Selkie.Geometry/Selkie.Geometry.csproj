@@ -75,10 +75,12 @@
     <Compile Include="Shapes\ILine.cs" />
     <Compile Include="Shapes\IPolyline.cs" />
     <Compile Include="Shapes\IPolylineSegment.cs" />
+    <Compile Include="Shapes\ITurnCircleArcSegment.cs" />
     <Compile Include="Shapes\Line.cs" />
     <Compile Include="Shapes\Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Polyline.cs" />
+    <Compile Include="Shapes\TurnCircleArcSegment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
