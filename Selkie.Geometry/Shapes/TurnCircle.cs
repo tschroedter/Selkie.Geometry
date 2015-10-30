@@ -8,7 +8,7 @@ namespace Selkie.Geometry.Shapes
     [ProjectComponent(Lifestyle.Transient)]
     public class TurnCircle
         : ITurnCircle,
-          IEquatable<TurnCircle>
+          IEquatable <TurnCircle>
     {
         public static TurnCircle Unknown = new TurnCircle();
         private readonly ICircle m_Circle;
@@ -45,13 +45,13 @@ namespace Selkie.Geometry.Shapes
         // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(TurnCircle other)
         {
-            if (ReferenceEquals(null,
-                                 other))
+            if ( ReferenceEquals(null,
+                                 other) )
             {
                 return false;
             }
-            if (ReferenceEquals(this,
-                                 other))
+            if ( ReferenceEquals(this,
+                                 other) )
             {
                 return true;
             }
@@ -75,33 +75,33 @@ namespace Selkie.Geometry.Shapes
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null,
-                                 obj))
+            if ( ReferenceEquals(null,
+                                 obj) )
             {
                 return false;
             }
-            if (ReferenceEquals(this,
-                                 obj))
+            if ( ReferenceEquals(this,
+                                 obj) )
             {
                 return true;
             }
-            if (obj.GetType() != typeof(TurnCircle))
+            if ( obj.GetType() != typeof ( TurnCircle ) )
             {
                 return false;
             }
-            return Equals((TurnCircle)obj);
+            return Equals(( TurnCircle ) obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                int result = (m_Circle != null
+                int result = ( m_Circle != null
                                    ? m_Circle.GetHashCode()
-                                   : 0);
-                result = (result * 397) ^ m_Side.GetHashCode();
-                result = (result * 397) ^ m_Origin.GetHashCode();
-                result = (result * 397) ^ m_TurnDirection.GetHashCode();
+                                   : 0 );
+                result = ( result * 397 ) ^ m_Side.GetHashCode();
+                result = ( result * 397 ) ^ m_Origin.GetHashCode();
+                result = ( result * 397 ) ^ m_TurnDirection.GetHashCode();
                 return result;
             }
         }
