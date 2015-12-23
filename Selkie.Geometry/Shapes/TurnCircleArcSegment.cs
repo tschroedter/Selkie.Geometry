@@ -34,9 +34,9 @@ namespace Selkie.Geometry.Shapes
                                     [NotNull] Point endPoint)
         {
             ArcSegment = new ArcSegment(circle,
-                                          startPoint,
-                                          endPoint,
-                                          direction);
+                                        startPoint,
+                                        endPoint,
+                                        direction);
 
             m_Direction = direction;
             m_CircleOrigin = circleOrigin;

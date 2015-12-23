@@ -39,8 +39,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             double expectedRadians = Angle.FromDegrees(expectedDegrees).Radians;
             // ReSharper restore MaximumChainedReferences
 
-            double x = m_CentrePoint.X + ( m_RadiusOne * Math.Cos(radians) );
-            double y = m_CentrePoint.Y + ( m_RadiusOne * Math.Sin(radians) );
+            double x = m_CentrePoint.X + m_RadiusOne * Math.Cos(radians);
+            double y = m_CentrePoint.Y + m_RadiusOne * Math.Sin(radians);
 
             var point = new Point(x,
                                   y);

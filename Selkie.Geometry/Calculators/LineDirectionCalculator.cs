@@ -110,7 +110,7 @@ namespace Selkie.Geometry.Calculators
 
             double slope = ( by - ay ) / ( bx - ax );
             double yIntercept = ay - ax * slope;
-            double cSolution = ( slope * cx ) + yIntercept;
+            double cSolution = slope * cx + yIntercept;
 
             if ( cy > cSolution )
             {

@@ -20,12 +20,12 @@ namespace Selkie.Geometry.Shapes
         {
             Distance = Math.Abs(zero.Distance(one));
             Zero = CalculatedCircleZero(zero,
-                                          one);
-            One = CalculatedCircleOne(zero,
                                         one);
+            One = CalculatedCircleOne(zero,
+                                      one);
             NumberOfTangents = CalculatedNumberOfTangents(Distance,
-                                                            Zero.Radius,
-                                                            One.Radius);
+                                                          Zero.Radius,
+                                                          One.Radius);
         }
 
         public bool IsUnknown { get; private set; }

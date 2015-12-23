@@ -48,13 +48,13 @@ namespace Selkie.Geometry.Shapes
             AngleCounterClockwise = calculator.AngleRelativeToYAxisClockwise;
 
             LengthClockwise = CalculateLength(AngleClockwise,
-                                                m_Circle.Radius);
+                                              m_Circle.Radius);
             LengthCounterClockwise = CalculateLength(AngleCounterClockwise,
-                                                       m_Circle.Radius);
+                                                     m_Circle.Radius);
 
             Length = arcTurnDirection == Constants.TurnDirection.Clockwise
-                           ? LengthClockwise
-                           : LengthCounterClockwise;
+                         ? LengthClockwise
+                         : LengthCounterClockwise;
         }
 
         public bool IsUnknown { get; private set; }
@@ -95,7 +95,7 @@ namespace Selkie.Geometry.Shapes
         internal double CalculateLength([NotNull] Angle angle,
                                         double radius)
         {
-            double length = ( angle.Degrees * Math.PI * radius ) / 180.0;
+            double length = angle.Degrees * Math.PI * radius / 180.0;
 
             return length;
         }

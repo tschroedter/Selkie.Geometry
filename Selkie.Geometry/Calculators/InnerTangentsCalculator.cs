@@ -101,8 +101,8 @@ namespace Selkie.Geometry.Calculators
             double squareRootXt = Math.Sqrt(xpMinusCSquare + ypMinusDSquare - rSquare);
 
             double commonBottom = xpMinusCSquare + ypMinusDSquare;
-            double topOne = rSquareMultiplyXpMinusA + ( rMultipleYbMinusB * squareRootXt );
-            double topTwo = rSquareMultiplyXpMinusA - ( rMultipleYbMinusB * squareRootXt );
+            double topOne = rSquareMultiplyXpMinusA + rMultipleYbMinusB * squareRootXt;
+            double topTwo = rSquareMultiplyXpMinusA - rMultipleYbMinusB * squareRootXt;
 
             double resultOne = topOne / commonBottom + c;
             double resultTwo = topTwo / commonBottom + c;
@@ -137,8 +137,8 @@ namespace Selkie.Geometry.Calculators
             double squareRootXt = Math.Sqrt(xpMinusCSquare + ypMinusDSquare - rSquare);
 
             double commonBottom = xpMinusCSquare + ypMinusDSquare;
-            double topOne = rSquareMultiplyYpMinusB + ( rMultipleXpMinusA * squareRootXt );
-            double topTwo = rSquareMultiplyYpMinusB - ( rMultipleXpMinusA * squareRootXt );
+            double topOne = rSquareMultiplyYpMinusB + rMultipleXpMinusA * squareRootXt;
+            double topTwo = rSquareMultiplyYpMinusB - rMultipleXpMinusA * squareRootXt;
 
             double resultOne = topOne / commonBottom + d;
             double resultTwo = topTwo / commonBottom + d;

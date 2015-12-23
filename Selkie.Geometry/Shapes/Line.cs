@@ -131,8 +131,8 @@ namespace Selkie.Geometry.Shapes
             RunDirection = lineDirection;
             Length = CalculateLength();
             AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint,
-                                                                    endPoint,
-                                                                    lineDirection);
+                                                                  endPoint,
+                                                                  lineDirection);
         }
 
         #region IEquatable<Line> Members
@@ -152,8 +152,8 @@ namespace Selkie.Geometry.Shapes
             }
             return Equals(other.EndPoint,
                           EndPoint) && Equals(other.StartPoint,
-                                                StartPoint) && Equals(other.RunDirection,
-                                                                        RunDirection) &&
+                                              StartPoint) && Equals(other.RunDirection,
+                                                                    RunDirection) &&
                    other.IsUnknown.Equals(IsUnknown);
         }
 

@@ -77,7 +77,7 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void ConvertDegreesToRadiansForZeroMinusHalfEpsilonTest()
         {
-            const double degrees = 0.0 - ( Angle.EpsilonDegrees / 2.0 );
+            const double degrees = 0.0 - Angle.EpsilonDegrees / 2.0;
             double actual = Angle.ConvertDegreesToRadians(degrees);
 
             NUnitHelper.AssertDegrees(0.0,
@@ -97,7 +97,7 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void ConvertDegreesToRadiansForZeroPlusHalfEpsilonTest()
         {
-            const double degrees = 0.0 + ( Angle.EpsilonDegrees / 2.0 );
+            const double degrees = 0.0 + Angle.EpsilonDegrees / 2.0;
             double actual = Angle.ConvertDegreesToRadians(degrees);
 
             NUnitHelper.AssertDegrees(0.0,
@@ -569,8 +569,8 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void NormalizeRadiansForZeroMinusHalfEpsilonTest()
         {
-            const double expected = Angle.RadiansFor360Degrees - ( Angle.EpsilonRadians / 2.0 );
-            double actual = Angle.NormalizeRadians(0.0 - ( Angle.EpsilonRadians / 2.0 ));
+            const double expected = Angle.RadiansFor360Degrees - Angle.EpsilonRadians / 2.0;
+            double actual = Angle.NormalizeRadians(0.0 - Angle.EpsilonRadians / 2.0);
 
             NUnitHelper.AssertRadians(expected,
                                       actual);
@@ -589,7 +589,7 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         [Test]
         public void NormalizeRadiansForZeroPlusHalfEpsilonTest()
         {
-            const double degrees = 0.0 + ( Angle.EpsilonRadians / 2.0 );
+            const double degrees = 0.0 + Angle.EpsilonRadians / 2.0;
             double actual = Angle.NormalizeRadians(degrees);
 
             NUnitHelper.AssertRadians(0.0,

@@ -6,9 +6,9 @@ namespace Selkie.Geometry.Shapes.Calculators
     public class CircleCentrePointToPointCalculator : ICircleCentrePointToPointCalculator
     {
         private readonly Angle m_AngleRelativeToYAxisClockwise;
+        private readonly Angle m_AngleRelativeToYAxisCounterClockwise;
         private readonly Point m_CentrePoint;
         private readonly Point m_EndPoint;
-        private readonly Angle m_AngleRelativeToYAxisCounterClockwise;
         private readonly Point m_StartPoint;
 
         public CircleCentrePointToPointCalculator([NotNull] Point centrePoint,

@@ -51,9 +51,9 @@ namespace Selkie.Geometry.Shapes
             }
             return Equals(other.Circle,
                           Circle) && Equals(other.Side,
-                                              Side) && Equals(other.Origin,
-                                                                Origin) && Equals(other.TurnDirection,
-                                                                                    TurnDirection);
+                                            Side) && Equals(other.Origin,
+                                                            Origin) && Equals(other.TurnDirection,
+                                                                              TurnDirection);
         }
 
         #endregion
