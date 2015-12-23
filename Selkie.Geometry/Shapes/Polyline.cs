@@ -7,15 +7,17 @@ namespace Selkie.Geometry.Shapes
     public class Polyline : IPolyline
     {
         private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
-        private Point m_EndPoint = Point.Unknown;
-        private Point m_StartPoint = Point.Unknown;
 
         public Polyline()
         {
+            EndPoint = Point.Unknown;
+            StartPoint = Point.Unknown;
         }
 
         private Polyline([NotNull] IEnumerable <IPolylineSegment> segments)
         {
+            EndPoint = Point.Unknown;
+            StartPoint = Point.Unknown;
             foreach ( IPolylineSegment segment in segments )
             {
                 AddSegment(segment);
@@ -55,25 +57,13 @@ namespace Selkie.Geometry.Shapes
             m_Segments.Add(segment);
             Length += segment.Length;
 
-            m_StartPoint = DetermineStartPoint(m_Segments);
-            m_EndPoint = DetermineEndPoint(m_Segments);
+            StartPoint = DetermineStartPoint(m_Segments);
+            EndPoint = DetermineEndPoint(m_Segments);
         }
 
-        public Point StartPoint
-        {
-            get
-            {
-                return m_StartPoint;
-            }
-        }
+        public Point StartPoint { get; private set; }
 
-        public Point EndPoint
-        {
-            get
-            {
-                return m_EndPoint;
-            }
-        }
+        public Point EndPoint { get; private set; }
 
         public IEnumerable <IPolylineSegment> Segments
         {

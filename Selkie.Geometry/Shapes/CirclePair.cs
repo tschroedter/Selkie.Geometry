@@ -7,37 +7,28 @@ namespace Selkie.Geometry.Shapes
     public class CirclePair : ICirclePair
     {
         public static readonly ICirclePair Unknown = new CirclePair(true);
-        private readonly double m_Distance;
-        private readonly bool m_IsUnknown;
-        private readonly int m_NumberOfTangents;
-        private readonly ICircle m_One = Circle.Unknown;
-        private readonly ICircle m_Zero = Circle.Unknown;
 
         private CirclePair(bool isUnknown)
         {
-            m_IsUnknown = isUnknown;
+            One = Circle.Unknown;
+            Zero = Circle.Unknown;
+            IsUnknown = isUnknown;
         }
 
         public CirclePair([NotNull] ICircle zero,
                           [NotNull] ICircle one)
         {
-            m_Distance = Math.Abs(zero.Distance(one));
-            m_Zero = CalculatedCircleZero(zero,
+            Distance = Math.Abs(zero.Distance(one));
+            Zero = CalculatedCircleZero(zero,
                                           one);
-            m_One = CalculatedCircleOne(zero,
+            One = CalculatedCircleOne(zero,
                                         one);
-            m_NumberOfTangents = CalculatedNumberOfTangents(m_Distance,
-                                                            m_Zero.Radius,
-                                                            m_One.Radius);
+            NumberOfTangents = CalculatedNumberOfTangents(Distance,
+                                                            Zero.Radius,
+                                                            One.Radius);
         }
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; private set; }
 
         [NotNull]
         private ICircle CalculatedCircleZero([NotNull] ICircle one,
@@ -97,27 +88,15 @@ namespace Selkie.Geometry.Shapes
 
         #region ICirclePair Members
 
-        public ICircle Zero
-        {
-            get
-            {
-                return m_Zero;
-            }
-        }
+        public ICircle Zero { get; private set; }
 
-        public ICircle One
-        {
-            get
-            {
-                return m_One;
-            }
-        }
+        public ICircle One { get; private set; }
 
         public double RadiusZero
         {
             get
             {
-                return m_Zero.Radius;
+                return Zero.Radius;
             }
         }
 
@@ -125,25 +104,13 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_One.Radius;
+                return One.Radius;
             }
         }
 
-        public int NumberOfTangents
-        {
-            get
-            {
-                return m_NumberOfTangents;
-            }
-        }
+        public int NumberOfTangents { get; private set; }
 
-        public double Distance
-        {
-            get
-            {
-                return m_Distance;
-            }
-        }
+        public double Distance { get; private set; }
 
         #endregion
     }

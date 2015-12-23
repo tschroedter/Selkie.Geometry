@@ -9,22 +9,20 @@ namespace Selkie.Geometry.Shapes
     public class TurnCircleArcSegment : ITurnCircleArcSegment
     {
         public static readonly ITurnCircleArcSegment Unknown = new TurnCircleArcSegment();
-        private readonly IArcSegment m_ArcSegment;
         private readonly Constants.CircleOrigin m_CircleOrigin;
         private readonly Constants.TurnDirection m_Direction;
-        private readonly bool m_IsUnknown;
 
         private TurnCircleArcSegment()
         {
-            m_IsUnknown = true;
-            m_ArcSegment = Shapes.ArcSegment.Unknown;
+            IsUnknown = true;
+            ArcSegment = Shapes.ArcSegment.Unknown;
         }
 
         private TurnCircleArcSegment(IArcSegment arcSegment,
                                      Constants.TurnDirection direction,
                                      Constants.CircleOrigin circleOrigin)
         {
-            m_ArcSegment = arcSegment;
+            ArcSegment = arcSegment;
             m_Direction = direction;
             m_CircleOrigin = circleOrigin;
         }
@@ -35,7 +33,7 @@ namespace Selkie.Geometry.Shapes
                                     [NotNull] Point startPoint,
                                     [NotNull] Point endPoint)
         {
-            m_ArcSegment = new ArcSegment(circle,
+            ArcSegment = new ArcSegment(circle,
                                           startPoint,
                                           endPoint,
                                           direction);
@@ -48,44 +46,32 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.TurnDirection == Constants.TurnDirection.Clockwise
-                           ? m_ArcSegment.AngleClockwise
-                           : m_ArcSegment.AngleCounterClockwise;
+                return ArcSegment.TurnDirection == Constants.TurnDirection.Clockwise
+                           ? ArcSegment.AngleClockwise
+                           : ArcSegment.AngleCounterClockwise;
             }
         }
 
         public override string ToString()
         {
             return "CentrePoint: {0} StartPoint: {1} EndPoint: {2} Direction: {3}"
-                .Inject(m_ArcSegment.CentrePoint,
-                        m_ArcSegment.StartPoint,
-                        m_ArcSegment.EndPoint,
-                        m_ArcSegment.TurnDirection);
+                .Inject(ArcSegment.CentrePoint,
+                        ArcSegment.StartPoint,
+                        ArcSegment.EndPoint,
+                        ArcSegment.TurnDirection);
         }
 
         #region ITurnCircleArcSegment Members
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; private set; }
 
-        public IArcSegment ArcSegment
-        {
-            get
-            {
-                return m_ArcSegment;
-            }
-        }
+        public IArcSegment ArcSegment { get; private set; }
 
         public Point CentrePoint
         {
             get
             {
-                return m_ArcSegment.CentrePoint;
+                return ArcSegment.CentrePoint;
             }
         }
 
@@ -93,7 +79,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.AngleClockwise;
+                return ArcSegment.AngleClockwise;
             }
         }
 
@@ -101,7 +87,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.AngleCounterClockwise;
+                return ArcSegment.AngleCounterClockwise;
             }
         }
 
@@ -109,7 +95,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.StartPoint;
+                return ArcSegment.StartPoint;
             }
         }
 
@@ -117,7 +103,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.EndPoint;
+                return ArcSegment.EndPoint;
             }
         }
 
@@ -125,15 +111,15 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.TurnDirection == Constants.TurnDirection.Clockwise
-                           ? m_ArcSegment.LengthClockwise
-                           : m_ArcSegment.LengthCounterClockwise;
+                return ArcSegment.TurnDirection == Constants.TurnDirection.Clockwise
+                           ? ArcSegment.LengthClockwise
+                           : ArcSegment.LengthCounterClockwise;
             }
         }
 
         public IPolylineSegment Reverse()
         {
-            var arcSegment = m_ArcSegment.Reverse() as IArcSegment;
+            var arcSegment = ArcSegment.Reverse() as IArcSegment;
 
             Constants.CircleOrigin origin = m_CircleOrigin == Constants.CircleOrigin.Start
                                                 ? Constants.CircleOrigin.Finish
@@ -151,7 +137,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.Radius;
+                return ArcSegment.Radius;
             }
         }
 
@@ -159,7 +145,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.LengthClockwise;
+                return ArcSegment.LengthClockwise;
             }
         }
 
@@ -167,7 +153,7 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_ArcSegment.LengthCounterClockwise;
+                return ArcSegment.LengthCounterClockwise;
             }
         }
 

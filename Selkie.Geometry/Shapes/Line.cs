@@ -13,13 +13,6 @@ namespace Selkie.Geometry.Shapes
     {
         public const int UnknownId = int.MinValue;
         public static readonly Line Unknown = new Line();
-        private readonly Angle m_AngleToXAxis;
-        private readonly Point m_EndPoint;
-        private readonly int m_Id;
-        private readonly bool m_IsUnknown;
-        private readonly double m_Length;
-        private readonly Constants.LineDirection m_LineDirection;
-        private readonly Point m_StartPoint;
 
         private Line()
             : this(UnknownId,
@@ -131,13 +124,13 @@ namespace Selkie.Geometry.Shapes
                       Constants.LineDirection lineDirection,
                       bool isUnknown)
         {
-            m_Id = id;
-            m_StartPoint = startPoint;
-            m_EndPoint = endPoint;
-            m_IsUnknown = isUnknown;
-            m_LineDirection = lineDirection;
-            m_Length = CalculateLength();
-            m_AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint,
+            Id = id;
+            StartPoint = startPoint;
+            EndPoint = endPoint;
+            IsUnknown = isUnknown;
+            RunDirection = lineDirection;
+            Length = CalculateLength();
+            AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                     endPoint,
                                                                     lineDirection);
         }
@@ -157,28 +150,28 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            return Equals(other.m_EndPoint,
-                          m_EndPoint) && Equals(other.m_StartPoint,
-                                                m_StartPoint) && Equals(other.m_LineDirection,
-                                                                        m_LineDirection) &&
-                   other.m_IsUnknown.Equals(m_IsUnknown);
+            return Equals(other.EndPoint,
+                          EndPoint) && Equals(other.StartPoint,
+                                                StartPoint) && Equals(other.RunDirection,
+                                                                        RunDirection) &&
+                   other.IsUnknown.Equals(IsUnknown);
         }
 
         #endregion
 
         public bool IsOnLine(Point point)
         {
-            if ( m_StartPoint == point ||
-                 m_EndPoint == point )
+            if ( StartPoint == point ||
+                 EndPoint == point )
             {
                 return true;
             }
 
-            double deltaYCheckAndEnd = point.Y - m_StartPoint.Y;
-            double deltaXCheckAndEnd = point.X - m_StartPoint.X;
+            double deltaYCheckAndEnd = point.Y - StartPoint.Y;
+            double deltaXCheckAndEnd = point.X - StartPoint.X;
 
-            double deltaYEnd1AndEnd2 = m_EndPoint.Y - m_StartPoint.Y;
-            double deltaXEnd1AndEnd2 = m_EndPoint.X - m_StartPoint.X;
+            double deltaYEnd1AndEnd2 = EndPoint.Y - StartPoint.Y;
+            double deltaXEnd1AndEnd2 = EndPoint.X - StartPoint.X;
 
             return Math.Abs(deltaYCheckAndEnd / deltaXCheckAndEnd - deltaYEnd1AndEnd2 / deltaXEnd1AndEnd2) <
                    SelkieConstants.EpsilonDistance;
@@ -272,10 +265,10 @@ namespace Selkie.Geometry.Shapes
 
         public override string ToString()
         {
-            return "[{0:F2},{1:F2}] - [{2:F2},{3:F2}]".Inject(m_StartPoint.X,
-                                                              m_StartPoint.Y,
-                                                              m_EndPoint.X,
-                                                              m_EndPoint.Y);
+            return "[{0:F2},{1:F2}] - [{2:F2},{3:F2}]".Inject(StartPoint.X,
+                                                              StartPoint.Y,
+                                                              EndPoint.X,
+                                                              EndPoint.Y);
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -302,14 +295,10 @@ namespace Selkie.Geometry.Shapes
         {
             unchecked
             {
-                int result = ( m_EndPoint != null
-                                   ? m_EndPoint.GetHashCode()
-                                   : 0 );
-                result = ( result * 397 ) ^ ( m_StartPoint != null
-                                                  ? m_StartPoint.GetHashCode()
-                                                  : 0 );
-                result = ( result * 397 ) ^ m_LineDirection.GetHashCode();
-                result = ( result * 397 ) ^ m_IsUnknown.GetHashCode();
+                int result = EndPoint.GetHashCode();
+                result = ( result * 397 ) ^ StartPoint.GetHashCode();
+                result = ( result * 397 ) ^ RunDirection.GetHashCode();
+                result = ( result * 397 ) ^ IsUnknown.GetHashCode();
                 return result;
             }
         }
@@ -330,59 +319,23 @@ namespace Selkie.Geometry.Shapes
 
         #region ILine Members
 
-        public int Id
-        {
-            get
-            {
-                return m_Id;
-            }
-        }
+        public int Id { get; private set; }
 
-        public Constants.LineDirection RunDirection
-        {
-            get
-            {
-                return m_LineDirection;
-            }
-        }
+        public Constants.LineDirection RunDirection { get; private set; }
 
-        public Angle AngleToXAxis
-        {
-            get
-            {
-                return m_AngleToXAxis;
-            }
-        }
+        public Angle AngleToXAxis { get; private set; }
 
-        public Point StartPoint
-        {
-            get
-            {
-                return m_StartPoint;
-            }
-        }
+        public Point StartPoint { get; private set; }
 
-        public Point EndPoint
-        {
-            get
-            {
-                return m_EndPoint;
-            }
-        }
+        public Point EndPoint { get; private set; }
 
-        public double Length
-        {
-            get
-            {
-                return m_Length;
-            }
-        }
+        public double Length { get; private set; }
 
         public IPolylineSegment Reverse()
         {
-            var reverse = new Line(m_Id,
-                                   m_EndPoint,
-                                   m_StartPoint);
+            var reverse = new Line(Id,
+                                   EndPoint,
+                                   StartPoint);
 
             return reverse;
         }
@@ -427,13 +380,7 @@ namespace Selkie.Geometry.Shapes
             return calculator.Direction;
         }
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; private set; }
 
         public bool Equals([NotNull] ILine other)
         {
@@ -442,7 +389,7 @@ namespace Selkie.Geometry.Shapes
 
         public int CompareTo([NotNull] ILine other)
         {
-            return m_Id.CompareTo(other.Id);
+            return Id.CompareTo(other.Id);
         }
 
         #endregion

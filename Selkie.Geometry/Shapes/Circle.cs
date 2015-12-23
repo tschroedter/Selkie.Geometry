@@ -12,15 +12,12 @@ namespace Selkie.Geometry.Shapes
     {
         public static readonly ICircle Unknown = new Circle();
         private readonly ICircleCentreToPointCalculator m_Calculator;
-        private readonly Point m_CentrePoint;
-        private readonly bool m_IsUnknown;
-        private readonly double m_Radius;
 
         private Circle()
         {
-            m_IsUnknown = true;
-            m_CentrePoint = Point.Unknown;
-            m_Calculator = new CircleCentreToPointCalculator(m_CentrePoint);
+            IsUnknown = true;
+            CentrePoint = Point.Unknown;
+            m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
 
         public Circle(double x,
@@ -35,9 +32,9 @@ namespace Selkie.Geometry.Shapes
         public Circle([NotNull] Point centrePoint,
                       double radius)
         {
-            m_CentrePoint = centrePoint;
-            m_Radius = radius;
-            m_Calculator = new CircleCentreToPointCalculator(m_CentrePoint);
+            CentrePoint = centrePoint;
+            Radius = radius;
+            m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
 
         #region IEquatable<Circle> Members
@@ -55,7 +52,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            return other.CentrePoint.Equals(m_CentrePoint) && other.Radius.Equals(m_Radius);
+            return other.CentrePoint.Equals(CentrePoint) && other.Radius.Equals(Radius);
         }
 
         #endregion
@@ -64,7 +61,7 @@ namespace Selkie.Geometry.Shapes
         public Angle AngleBetweenPointsClockwise([NotNull] Point startPoint,
                                                  [NotNull] Point endPoint)
         {
-            var calculator = new CircleCentrePointToPointCalculator(m_CentrePoint,
+            var calculator = new CircleCentrePointToPointCalculator(CentrePoint,
                                                                     startPoint,
                                                                     endPoint);
 
@@ -102,9 +99,7 @@ namespace Selkie.Geometry.Shapes
         {
             unchecked
             {
-                return ( ( m_CentrePoint != null
-                               ? m_CentrePoint.GetHashCode()
-                               : 0 ) * 397 ) ^ m_Radius.GetHashCode();
+                return ( CentrePoint.GetHashCode() * 397 ) ^ Radius.GetHashCode();
             }
         }
 
@@ -124,23 +119,17 @@ namespace Selkie.Geometry.Shapes
 
         #region ICircle Members
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; private set; }
 
         public Point PointOnCircle(Angle angle)
         {
-            double r = m_Radius;
+            double r = Radius;
 
             double x = r * Math.Cos(angle.Radians);
             double y = r * Math.Sin(angle.Radians);
 
-            x += m_CentrePoint.X;
-            y += m_CentrePoint.Y;
+            x += CentrePoint.X;
+            y += CentrePoint.Y;
 
             var point = new Point(x,
                                   y);
@@ -150,32 +139,26 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsPointOnCircle(Point startPoint)
         {
-            double distance = m_CentrePoint.DistanceTo(startPoint);
+            double distance = CentrePoint.DistanceTo(startPoint);
 
-            return Math.Abs(m_Radius - distance) <= SelkieConstants.EpsilonDistance;
+            return Math.Abs(Radius - distance) <= SelkieConstants.EpsilonDistance;
         }
 
         public bool Intersects(ICircle finishPointStarboard)
         {
             double distance = Distance(finishPointStarboard);
-            double delta = distance - m_Radius;
+            double delta = distance - Radius;
 
             return delta < 0 || Math.Abs(delta) <= SelkieConstants.EpsilonDistance;
         }
 
-        public Point CentrePoint
-        {
-            get
-            {
-                return m_CentrePoint;
-            }
-        }
+        public Point CentrePoint { get; private set; }
 
         public double X
         {
             get
             {
-                return m_CentrePoint.X;
+                return CentrePoint.X;
             }
         }
 
@@ -183,21 +166,15 @@ namespace Selkie.Geometry.Shapes
         {
             get
             {
-                return m_CentrePoint.Y;
+                return CentrePoint.Y;
             }
         }
 
-        public double Radius
-        {
-            get
-            {
-                return m_Radius;
-            }
-        }
+        public double Radius { get; private set; }
 
         public double Distance(ICircle other)
         {
-            var line = new Line(m_CentrePoint,
+            var line = new Line(CentrePoint,
                                 other.CentrePoint);
 
             return line.Length;
@@ -212,8 +189,8 @@ namespace Selkie.Geometry.Shapes
 
         public Angle GetAngleRelativeToXAxis(Point point)
         {
-            double deltaX = point.X - m_CentrePoint.X;
-            double deltaY = point.Y - m_CentrePoint.Y;
+            double deltaX = point.X - CentrePoint.X;
+            double deltaY = point.Y - CentrePoint.Y;
 
             double radians;
 
@@ -222,13 +199,13 @@ namespace Selkie.Geometry.Shapes
             {
                 if ( Math.Abs(deltaX) < SelkieConstants.EpsilonRadians )
                 {
-                    radians = m_CentrePoint.Y < point.Y
+                    radians = CentrePoint.Y < point.Y
                                   ? Angle.RadiansFor90Degrees
                                   : Angle.RadiansFor270Degrees;
                 }
                 else
                 {
-                    radians = m_CentrePoint.X < point.X
+                    radians = CentrePoint.X < point.X
                                   ? Angle.RadiansForZeroDegrees
                                   : Angle.RadiansFor180Degrees;
                 }
