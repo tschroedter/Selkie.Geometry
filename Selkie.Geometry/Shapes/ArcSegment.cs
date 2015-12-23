@@ -35,7 +35,7 @@ namespace Selkie.Geometry.Shapes
         public ArcSegment([NotNull] ICircle circle,
                           [NotNull] Point startPoint,
                           [NotNull] Point endPoint,
-                          Constants.TurnDirection arcTurnDirection = Constants.TurnDirection.Unknown)
+                          Constants.TurnDirection arcTurnDirection = Constants.TurnDirection.Clockwise)
 
         {
             ValidateStartAndEndPoint(circle,
@@ -51,8 +51,8 @@ namespace Selkie.Geometry.Shapes
                 m_StartPoint,
                 m_EndPoint);
 
-            m_AngleClockwise = calculator.AngleClockwise;
-            m_AngleCounterClockwise = calculator.RadiansCounterClockwise;
+            m_AngleClockwise = calculator.AngleRelativeToYAxisCounterClockwise;
+            m_AngleCounterClockwise = calculator.AngleRelativeToYAxisClockwise;
 
             m_LengthClockwise = CalculateLength(m_AngleClockwise,
                                                 m_Circle.Radius);

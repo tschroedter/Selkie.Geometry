@@ -68,7 +68,7 @@ namespace Selkie.Geometry.Shapes
                                                                     startPoint,
                                                                     endPoint);
 
-            return calculator.AngleClockwise;
+            return calculator.AngleRelativeToYAxisClockwise;
         }
 
         private static bool IsInsideEpsilonForPoints(double deltaY,

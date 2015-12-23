@@ -61,7 +61,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             var point2 = new Point(3.0,
                                    6.0);
 
-            Angle expected = Angle.For270Degrees;
+            Angle expected = Angle.For90Degrees;
             Angle actual = m_One.AngleBetweenPointsClockwise(point1,
                                                              point2);
 

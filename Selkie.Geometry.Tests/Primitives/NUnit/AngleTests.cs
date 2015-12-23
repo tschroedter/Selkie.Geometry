@@ -12,13 +12,13 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
     [ExcludeFromCodeCoverage]
     internal sealed class AngleTests
     {
-        private void AssertRadiansRelativeToYAxisClockwise(double degrees,
-                                                           double expectedDegrees)
+        private void AssertRadiansRelativeToYAxisCounterClockwise(double degrees,
+                                                                  double expectedDegrees)
         {
             Angle angle = Angle.FromDegrees(degrees);
             Angle expectedRadians = Angle.FromDegrees(expectedDegrees);
 
-            Angle actual = Angle.RelativeToYAxisClockwise(angle);
+            Angle actual = Angle.RelativeToYAxisCounterclockwise(angle);
 
             Assert.AreEqual(expectedRadians,
                             actual);
@@ -863,89 +863,89 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor0DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor0DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(0.0,
-                                                  90.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(0.0,
+                                                         90.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor135DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor135DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(135.0,
-                                                  315.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(135.0,
+                                                         315.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor180DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor180DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(180.0,
-                                                  270.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(180.0,
+                                                         270.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor225DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor225DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(225.0,
-                                                  225.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(225.0,
+                                                         225.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor270DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor270DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(270.0,
-                                                  180.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(270.0,
+                                                         180.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor315DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor315DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(315.0,
-                                                  135.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(315.0,
+                                                         135.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor360DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor360DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(360.0,
-                                                  90.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(360.0,
+                                                         90.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor45DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor45DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(45.0,
-                                                  45.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(45.0,
+                                                         45.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseFor90DegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseFor90DegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(90.0,
-                                                  0.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(90.0,
+                                                         0.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseForZeroDegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseForZeroDegreesTest()
         {
-            AssertRadiansRelativeToYAxisClockwise(0.0,
-                                                  90.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(0.0,
+                                                         90.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseForZeroPlusEpsilonDegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseForZeroPlusEpsilonDegreesTest()
         {
             Angle angle = Angle.FromRadians(0.0 + SelkieConstants.EpsilonRadians);
-            AssertRadiansRelativeToYAxisClockwise(angle.Degrees,
-                                                  90.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(angle.Degrees,
+                                                         90.0);
         }
 
         [Test]
-        public void RadiansRelativeToYAxisClockwiseForZeroPlusHalfEpsilonDegreesTest()
+        public void RadiansRelativeToYAxisCounterClockwiseForZeroPlusHalfEpsilonDegreesTest()
         {
             Angle angle = Angle.For360Degrees + Angle.FromRadians(SelkieConstants.EpsilonRadians / 2.0);
-            AssertRadiansRelativeToYAxisClockwise(angle.Degrees,
-                                                  90.0);
+            AssertRadiansRelativeToYAxisCounterClockwise(angle.Degrees,
+                                                         90.0);
         }
 
         [Test]

@@ -200,14 +200,14 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void RadiansRelativeToYAxisClockwiseTest()
         {
-            Assert.AreEqual(Angle.For90Degrees,
+            Assert.AreEqual(Angle.For270Degrees,
                             m_Calculator.AngleRelativeToYAxisClockwise);
         }
 
         [Test]
         public void RadiansRelativeToYAxisCounterclockwiseTest()
         {
-            Assert.AreEqual(Angle.For270Degrees,
+            Assert.AreEqual(Angle.For90Degrees,
                             m_Calculator.AngleRelativeToYAxisCounterclockwise);
         }
     }

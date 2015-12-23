@@ -5,10 +5,10 @@ namespace Selkie.Geometry.Shapes.Calculators
 {
     public class CircleCentrePointToPointCalculator : ICircleCentrePointToPointCalculator
     {
-        private readonly Angle m_AngleClockwise;
+        private readonly Angle m_AngleRelativeToYAxisClockwise;
         private readonly Point m_CentrePoint;
         private readonly Point m_EndPoint;
-        private readonly Angle m_RadiansCounterClockwise;
+        private readonly Angle m_AngleRelativeToYAxisCounterClockwise;
         private readonly Point m_StartPoint;
 
         public CircleCentrePointToPointCalculator([NotNull] Point centrePoint,
@@ -26,10 +26,10 @@ namespace Selkie.Geometry.Shapes.Calculators
                 return;
             }
 
-            m_RadiansCounterClockwise = RadiansBetweenPointsCounterClockwise(centrePoint,
-                                                                             startPoint,
-                                                                             endPoint);
-            m_AngleClockwise = Angle.Inverse(m_RadiansCounterClockwise);
+            m_AngleRelativeToYAxisCounterClockwise = RadiansBetweenPointsCounterClockwise(centrePoint,
+                                                                                          startPoint,
+                                                                                          endPoint);
+            m_AngleRelativeToYAxisClockwise = Angle.Inverse(m_AngleRelativeToYAxisCounterClockwise);
         }
 
         [NotNull]
@@ -76,19 +76,19 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
-        public Angle AngleClockwise
+        public Angle AngleRelativeToYAxisClockwise
         {
             get
             {
-                return m_AngleClockwise;
+                return m_AngleRelativeToYAxisClockwise;
             }
         }
 
-        public Angle RadiansCounterClockwise
+        public Angle AngleRelativeToYAxisCounterClockwise
         {
             get
             {
-                return m_RadiansCounterClockwise;
+                return m_AngleRelativeToYAxisCounterClockwise;
             }
         }
 
