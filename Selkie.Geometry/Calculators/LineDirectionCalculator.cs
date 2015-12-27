@@ -7,6 +7,7 @@ namespace Selkie.Geometry.Calculators
 {
     public class LineDirectionCalculator : ILineDirectionCalculator
     {
+        // todo missing public construtor
         private readonly Constants.TurnDirection m_Direction;
         private readonly ILine m_Line;
         private readonly Point m_Point;

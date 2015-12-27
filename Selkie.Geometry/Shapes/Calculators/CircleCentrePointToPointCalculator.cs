@@ -37,15 +37,15 @@ namespace Selkie.Geometry.Shapes.Calculators
                                                             [NotNull] Point startPoint,
                                                             [NotNull] Point endPoint)
         {
-            ICircleCentreToPointCalculator calculatorOne = new CircleCentreToPointCalculator(centrePoint,
-                                                                                             startPoint);
-            ICircleCentreToPointCalculator calculatorTwo = new CircleCentreToPointCalculator(centrePoint,
+            ICircleCentreToPointCalculator calculatorStart = new CircleCentreToPointCalculator(centrePoint,
+                                                                                               startPoint);
+            ICircleCentreToPointCalculator calculatorEnd = new CircleCentreToPointCalculator(centrePoint,
                                                                                              endPoint);
 
-            Angle radiansOne = calculatorOne.AngleRelativeToYAxisCounterclockwise;
-            Angle radiansTwo = calculatorTwo.AngleRelativeToYAxisCounterclockwise;
+            Angle angleStart = calculatorStart.AngleRelativeToYAxisCounterclockwise;
+            Angle angleEnd = calculatorEnd.AngleRelativeToYAxisCounterclockwise;
 
-            Angle angle = radiansTwo - radiansOne;
+            Angle angle = angleEnd - angleStart;
 
             return angle;
         }

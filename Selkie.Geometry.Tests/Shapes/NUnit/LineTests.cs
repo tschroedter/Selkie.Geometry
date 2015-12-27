@@ -710,8 +710,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void TurnDirectionTest()
         {
-            Constants.TurnDirection actual = m_Line.TurnDirection(new Point(20.0,
-                                                                            20.0));
+            Constants.TurnDirection actual = m_Line.IsPointInsideCircle(new Point(20.0,
+                                                                                  20.0));
 
             Assert.AreEqual(Constants.TurnDirection.Clockwise,
                             actual);

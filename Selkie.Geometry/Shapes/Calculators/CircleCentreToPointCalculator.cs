@@ -84,7 +84,7 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
-        public Angle AngleRelativeToYAxisClockwise
+        public Angle AngleRelativeToYAxisClockwise // todo double check if this is really Clockwise
         {
             get
             {
@@ -96,7 +96,7 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
-        public Angle AngleRelativeToYAxisCounterclockwise
+        public Angle AngleRelativeToYAxisCounterclockwise // todo double check if this is really Counterclockwise
         {
             get
             {
@@ -108,6 +108,7 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
+        // todo double check if this is really Counterclockwise
         public Angle CalculateAngleRelativeToXAxisCounterClockwise(Point centre,
                                                                    Point point)
         {

@@ -177,6 +177,11 @@ namespace Selkie.Geometry.Shapes
                    SelkieConstants.EpsilonDistance;
         }
 
+        public Constants.TurnDirection TurnDirectionToPoint(Point point)
+        {
+            throw new NotImplementedException();
+        }
+
         private double CalculateLength()
         {
             double x1 = StartPoint.X;
@@ -372,7 +377,7 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public Constants.TurnDirection TurnDirection(Point point)
+        public Constants.TurnDirection IsPointInsideCircle(Point point)
         {
             var calculator = new LineDirectionCalculator(this,
                                                          point);

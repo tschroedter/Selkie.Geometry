@@ -6,12 +6,28 @@ namespace Selkie.Geometry.Shapes
 {
     public class Polyline : IPolyline
     {
+        public const int UnknownId = int.MinValue;
+        public static readonly Polyline Unknown = new Polyline();
+
         private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
 
-        public Polyline()
+        private Polyline()
         {
+            Id = UnknownId;
+            IsUnknown = true;
             EndPoint = Point.Unknown;
             StartPoint = Point.Unknown;
+            RunDirection = Constants.LineDirection.Unknown;
+        }
+
+        public Polyline(int id,
+                        Constants.LineDirection runDirection)
+        {
+            Id = id;
+            IsUnknown = false;
+            EndPoint = Point.Unknown;
+            StartPoint = Point.Unknown;
+            RunDirection = runDirection;
         }
 
         private Polyline([NotNull] IEnumerable <IPolylineSegment> segments)
@@ -61,6 +77,20 @@ namespace Selkie.Geometry.Shapes
             EndPoint = DetermineEndPoint(m_Segments);
         }
 
+        public Constants.TurnDirection TurnDirectionToPoint(Point point)
+        {
+            IPolylineSegment firstSegment = m_Segments.FirstOrDefault();
+
+            if ( firstSegment == null )
+            {
+                return Constants.TurnDirection.Unknown;
+            }
+
+            Constants.TurnDirection turnDirection = firstSegment.TurnDirectionToPoint(point);
+
+            return turnDirection;
+        }
+
         public Point StartPoint { get; private set; }
 
         public Point EndPoint { get; private set; }
@@ -73,7 +103,13 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
+        public int Id { get; private set; }
+
+        public bool IsUnknown { get; private set; }
+
         public double Length { get; private set; }
+
+        public Constants.LineDirection RunDirection { get; private set; } // todo
 
         public IPolyline Reverse()
         {
@@ -86,6 +122,21 @@ namespace Selkie.Geometry.Shapes
             var reverse = new Polyline(segments);
 
             return reverse;
+        }
+
+        public bool IsOnLine(Point point)
+        {
+            foreach ( IPolylineSegment segment in m_Segments )
+            {
+                bool isOneSegment = segment.IsOnLine(point);
+
+                if ( isOneSegment )
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         #endregion

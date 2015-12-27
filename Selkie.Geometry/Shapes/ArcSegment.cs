@@ -144,6 +144,20 @@ namespace Selkie.Geometry.Shapes
             return reverse;
         }
 
+        public bool IsOnLine(Point point)
+        {
+            var calculator = new IsPointOnArcSegmentCalculator(this,
+                                                               point);
+
+            return calculator.IsPointOnArcSegment;
+        }
+
+        public Constants.TurnDirection TurnDirectionToPoint(Point point)
+        {
+            // todo figure out how to do it, tangent line
+            throw new NotImplementedException("TurnDirectionToPoint not implemented yet!");
+        }
+
         #endregion
     }
 }

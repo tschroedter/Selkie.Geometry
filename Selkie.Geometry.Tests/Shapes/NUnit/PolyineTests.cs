@@ -14,6 +14,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [SetUp]
         public void Setup()
         {
+            m_DoesNotMatter = new Point(0.0,
+                                        0.0);
+
             m_StartPointOne = new Point(-10.0,
                                         -10.0);
             m_EndPointOne = new Point(10.0,
@@ -32,91 +35,136 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             m_Segment2.StartPoint.Returns(m_StartPointTwo);
             m_Segment2.EndPoint.Returns(m_EndPointTwo);
 
-            m_Polyline = new Polyline();
+            m_Sut = new Polyline(123,
+                                 Constants.LineDirection.Forward);
         }
 
         private Point m_EndPointOne;
         private Point m_EndPointTwo;
-        private Polyline m_Polyline;
+        private Polyline m_Sut;
         private IPolylineSegment m_Segment1;
         private IPolylineSegment m_Segment2;
         private Point m_StartPointOne;
         private Point m_StartPointTwo;
+        private Point m_DoesNotMatter;
 
         [Test]
         public void AddTest()
         {
-            m_Polyline.AddSegment(m_Segment1);
+            // Arrange
+            // Act
+            m_Sut.AddSegment(m_Segment1);
 
+            // Assert
             Assert.AreEqual(1,
-                            m_Polyline.Segments.Count(),
+                            m_Sut.Segments.Count(),
                             "Count");
             Assert.AreEqual(m_Segment1,
-                            m_Polyline.Segments.First(),
+                            m_Sut.Segments.First(),
                             "First");
             Assert.AreEqual(1.0,
-                            m_Polyline.Length,
+                            m_Sut.Length,
                             "Length");
             Assert.AreEqual(m_StartPointOne,
-                            m_Polyline.StartPoint,
+                            m_Sut.StartPoint,
                             "StartPoint");
             Assert.AreEqual(m_EndPointOne,
-                            m_Polyline.EndPoint,
+                            m_Sut.EndPoint,
                             "EndtPoint");
         }
 
         [Test]
         public void AddTwiceTest()
         {
-            m_Polyline.AddSegment(m_Segment1);
-            m_Polyline.AddSegment(m_Segment2);
+            // Arrange
+            // Act
+            m_Sut.AddSegment(m_Segment1);
+            m_Sut.AddSegment(m_Segment2);
 
+            // Assert
             Assert.AreEqual(2,
-                            m_Polyline.Segments.Count(),
+                            m_Sut.Segments.Count(),
                             "Count");
             Assert.AreEqual(m_Segment1,
-                            m_Polyline.Segments.First(),
+                            m_Sut.Segments.First(),
                             "First");
             Assert.AreEqual(m_Segment2,
-                            m_Polyline.Segments.Last(),
+                            m_Sut.Segments.Last(),
                             "Last");
             Assert.AreEqual(3.0,
-                            m_Polyline.Length,
+                            m_Sut.Length,
                             "Length");
             Assert.AreEqual(m_StartPointOne,
-                            m_Polyline.StartPoint,
+                            m_Sut.StartPoint,
                             "StartPoint");
             Assert.AreEqual(m_EndPointTwo,
-                            m_Polyline.EndPoint,
+                            m_Sut.EndPoint,
                             "EndtPoint");
+        }
+
+        [Test]
+        public void Constructor_SetsId_WhenCalled()
+        {
+            Assert.AreEqual(123,
+                            m_Sut.Id);
+        }
+
+        [Test]
+        public void Constructor_SetsIsUnknownToFalse_WhenCalled()
+        {
+            Assert.AreEqual(false,
+                            m_Sut.IsUnknown);
+        }
+
+        [Test]
+        public void Constructor_SetsLength_WhenCalled()
+        {
+            // Arrange
+            // Act
+            m_Sut.AddSegment(m_Segment1);
+            m_Sut.AddSegment(m_Segment2);
+
+            // Assert
+            Assert.AreEqual(3.0,
+                            m_Sut.Length);
+        }
+
+        [Test]
+        public void Constructor_SetsRunDirectionToForward_WhenCalled()
+        {
+            Assert.AreEqual(Constants.LineDirection.Forward,
+                            m_Sut.RunDirection);
         }
 
         [Test]
         public void DefaultEndPointTest()
         {
             Assert.AreEqual(Point.Unknown,
-                            m_Polyline.EndPoint);
+                            m_Sut.EndPoint);
         }
 
         [Test]
         public void DefaultSegmentsTest()
         {
             Assert.AreEqual(0,
-                            m_Polyline.Segments.Count());
+                            m_Sut.Segments.Count());
         }
 
         [Test]
         public void DefaultStartPointTest()
         {
             Assert.AreEqual(Point.Unknown,
-                            m_Polyline.StartPoint);
+                            m_Sut.StartPoint);
         }
 
         [Test]
         public void DetermineEndPointReturnsPointUnknownForLastIsNullTest()
         {
-            Point actual = m_Polyline.DetermineEndPoint(new List <IPolylineSegment>());
+            // Arrange
+            // Act
+            Point actual = m_Sut.DetermineEndPoint(new List <IPolylineSegment>());
 
+            // Assert
             Assert.AreEqual(Point.Unknown,
                             actual);
         }
@@ -124,32 +172,130 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void DetermineStartPointReturnsPointUnknownForLastIsNullTest()
         {
-            Point actual = m_Polyline.DetermineStartPoint(new List <IPolylineSegment>());
+            // Arrange
+            // Act
+            Point actual = m_Sut.DetermineStartPoint(new List <IPolylineSegment>());
 
+            // Assert
             Assert.AreEqual(Point.Unknown,
                             actual);
         }
 
         [Test]
-        public void LengthTest()
+        public void IsOnLine_CallsIsOnlineOnSegments_WhenCalled()
         {
-            m_Polyline.AddSegment(m_Segment1);
-            m_Polyline.AddSegment(m_Segment2);
+            // Arrange
+            m_Sut.AddSegment(m_Segment1);
+            m_Sut.AddSegment(m_Segment2);
 
-            Assert.AreEqual(3.0,
-                            m_Polyline.Length);
+            // Act
+            m_Sut.IsOnLine(m_StartPointOne);
+
+            // Assert
+            m_Segment1.Received().IsOnLine(m_StartPointOne);
+            m_Segment2.Received().IsOnLine(m_StartPointOne);
+        }
+
+        [Test]
+        public void IsOnLine_ReturnsTrue_ForPointIsOnLine()
+        {
+            // Arrange
+            m_Segment1.IsOnLine(m_StartPointOne).Returns(true);
+
+            m_Sut.AddSegment(m_Segment1);
+            m_Sut.AddSegment(m_Segment2);
+
+            // Act
+            bool actual = m_Sut.IsOnLine(m_StartPointOne);
+
+            // Assert
+            Assert.True(actual);
         }
 
         [Test]
         public void ReverseCallsReverseOnSegmentsTest()
         {
-            m_Polyline.AddSegment(m_Segment1);
-            m_Polyline.AddSegment(m_Segment2);
+            // Arrange
+            m_Sut.AddSegment(m_Segment1);
+            m_Sut.AddSegment(m_Segment2);
 
-            m_Polyline.Reverse();
+            // Act
+            m_Sut.Reverse();
 
+            // Assert
             m_Segment1.Received().Reverse();
             m_Segment2.Received().Reverse();
+        }
+
+        [Test]
+        public void TurnDirectionToPoint_ReturnsUnknown_ForNoSegments()
+        {
+            // Arrange
+            // Act
+            Constants.TurnDirection actual = m_Sut.TurnDirectionToPoint(m_DoesNotMatter);
+
+            // Assert
+            Assert.AreEqual(Constants.TurnDirection.Unknown,
+                            actual);
+        }
+
+        [Test]
+        public void Unknown_EndPointReturnsUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.AreEqual(Point.Unknown,
+                            sut.EndPoint);
+        }
+
+        [Test]
+        public void Unknown_HasUnknownId_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.AreEqual(int.MinValue,
+                            sut.Id);
+        }
+
+        [Test]
+        public void Unknown_ReturnsTrueForIsUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.True(sut.IsUnknown);
+        }
+
+        [Test]
+        public void Unknown_RunDirectionReturnsUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.AreEqual(Constants.LineDirection.Unknown,
+                            sut.RunDirection);
+        }
+
+        [Test]
+        public void Unknown_StartPointReturnsUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.AreEqual(Point.Unknown,
+                            sut.StartPoint);
         }
     }
 }

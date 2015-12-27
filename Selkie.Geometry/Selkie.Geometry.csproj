@@ -63,6 +63,7 @@
     <Compile Include="Primitives\Angle.cs" />
     <Compile Include="Primitives\Distance.cs" />
     <Compile Include="Shapes\ArcSegment.cs" />
+    <Compile Include="Shapes\Calculators\IIsPointOnPolylineSegmentsCalculator.cs" />
     <Compile Include="Shapes\Circle.cs" />
     <Compile Include="Shapes\Calculators\CircleCentrePointToPointCalculator.cs" />
     <Compile Include="Shapes\Calculators\CircleCentreToPointCalculator.cs" />
@@ -72,9 +73,12 @@
     <Compile Include="Shapes\Calculators\ICircleCentrePointToPointCalculator.cs" />
     <Compile Include="Shapes\Calculators\ICircleCentreToPointCalculator.cs" />
     <Compile Include="Shapes\ICirclePair.cs" />
+    <Compile Include="Shapes\Calculators\IIsPointOnArcSegmentCalculator.cs" />
     <Compile Include="Shapes\ILine.cs" />
     <Compile Include="Shapes\IPolyline.cs" />
     <Compile Include="Shapes\IPolylineSegment.cs" />
+    <Compile Include="Shapes\Calculators\IsPointOnPolylineSegmentsCalculator.cs" />
+    <Compile Include="Shapes\Calculators\IsPointOnArcSegmentCalculator.cs" />
     <Compile Include="Shapes\ITurnCircle.cs" />
     <Compile Include="Shapes\ITurnCircleArcSegment.cs" />
     <Compile Include="Shapes\Line.cs" />

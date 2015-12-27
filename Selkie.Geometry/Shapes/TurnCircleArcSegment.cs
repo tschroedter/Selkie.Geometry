@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using Selkie.Geometry.Primitives;
 using Selkie.Windsor;
 using Selkie.Windsor.Extensions;
@@ -18,9 +19,9 @@ namespace Selkie.Geometry.Shapes
             ArcSegment = Shapes.ArcSegment.Unknown;
         }
 
-        private TurnCircleArcSegment(IArcSegment arcSegment,
-                                     Constants.TurnDirection direction,
-                                     Constants.CircleOrigin circleOrigin)
+        internal TurnCircleArcSegment(IArcSegment arcSegment,
+                                      Constants.TurnDirection direction,
+                                      Constants.CircleOrigin circleOrigin)
         {
             ArcSegment = arcSegment;
             m_Direction = direction;
@@ -64,6 +65,11 @@ namespace Selkie.Geometry.Shapes
         #region ITurnCircleArcSegment Members
 
         public bool IsUnknown { get; private set; }
+
+        public bool IsPointInsideCircle(Point point)
+        {
+            throw new NotImplementedException();
+        }
 
         public IArcSegment ArcSegment { get; private set; }
 
@@ -131,6 +137,17 @@ namespace Selkie.Geometry.Shapes
 
 
             return reverse;
+        }
+
+        public bool IsOnLine(Point point)
+        {
+            return ArcSegment.IsOnLine(point);
+        }
+
+        public Constants.TurnDirection TurnDirectionToPoint(Point point)
+        {
+            // todo need to take this.TurnDirection into account? figure out how to do it, tangent line
+            throw new NotImplementedException("TurnDirectionToPoint not implemented yet!");
         }
 
         public double Radius
