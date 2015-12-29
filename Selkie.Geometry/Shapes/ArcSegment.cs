@@ -146,15 +146,21 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsOnLine(Point point)
         {
-            var calculator = new IsPointOnArcSegmentCalculator(this,
-                                                               point);
+            var calculator = new IsPointOnArcSegmentCalculator
+                             {
+                                 ArcSegment = this,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
+
 
             return calculator.IsPointOnArcSegment;
         }
 
         public Constants.TurnDirection TurnDirectionToPoint(Point point)
         {
-            // todo figure out how to do it, tangent line
+            // todo figure out how to do it, tangent line -=> calculate circle center point to point and calculate intersection point with ArcSegment
             throw new NotImplementedException("TurnDirectionToPoint not implemented yet!");
         }
 

@@ -379,8 +379,13 @@ namespace Selkie.Geometry.Shapes
 
         public Constants.TurnDirection IsPointInsideCircle(Point point)
         {
-            var calculator = new LineDirectionCalculator(this,
-                                                         point);
+            var calculator = new LineDirectionCalculator
+                             {
+                                 Line = this,
+                                 Point = point
+                             };
+
+            calculator.Calculate(); // todo IoC Calculator testing
 
             return calculator.Direction;
         }

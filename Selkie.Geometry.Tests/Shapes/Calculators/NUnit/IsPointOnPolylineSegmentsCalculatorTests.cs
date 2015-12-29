@@ -31,6 +31,20 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         private Line[] m_Segments;
 
         [Test]
+        public void IsOnLine_ReturnsFalse_ForPointNotOnLine()
+        {
+            // Arrange
+            var point = new Point(-1234.0,
+                                  0.0);
+
+            // Act
+            bool actual = m_Sut.IsOnLine(point);
+
+            // Assert
+            Assert.False(actual);
+        }
+
+        [Test]
         public void IsOnLine_ReturnsTrue_ForEndPoint()
         {
             // Arrange

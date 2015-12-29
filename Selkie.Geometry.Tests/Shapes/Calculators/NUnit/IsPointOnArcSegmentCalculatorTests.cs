@@ -61,15 +61,54 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         }
 
         [Test]
+        public void Calculate_DoesNothing_ForArcSegmentIsUnknown()
+        {
+            // Arrange
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = ArcSegment.Unknown,
+                          Point = m_StartPoint
+                      };
+
+            // Act
+            sut.Calculate();
+
+            // Assert
+            Assert.False(sut.IsPointOnArcSegment);
+        }
+
+        [Test]
+        public void Calculate_DoesNothing_ForPointIsUnknown()
+        {
+            // Arrange
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = Point.Unknown
+                      };
+
+            // Act
+            sut.Calculate();
+
+            // Assert
+            Assert.False(sut.IsPointOnArcSegment);
+        }
+
+        [Test]
         public void IsPointOnArcSegment_ReturnsFalse_ForHalfwayPointPlusDeltaTwoTimes()
         {
             // Arrange
             double doubleDelta = SelkieConstants.EpsilonDistance * 2;
             var halfway = new Point(6.0 + doubleDelta,
                                     3.0);
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = halfway
+                      };
+
             // Act
-            var sut = new IsPointOnArcSegmentCalculator(m_ArcSegment,
-                                                        halfway);
+            sut.Calculate();
 
             // Assert
             Assert.False(sut.IsPointOnArcSegment);
@@ -83,8 +122,11 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
                                         m_ArcSegment.Radius,
                                         180.5);
             // Act
-            var sut = new IsPointOnArcSegmentCalculator(m_ArcSegment,
-                                                        point);
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = point
+                      };
 
             // Assert
             Assert.False(sut.IsPointOnArcSegment);
@@ -97,8 +139,14 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
             Point point = PointOnCircle(m_ArcSegment,
                                         359.5);
 
-            var sut = new IsPointOnArcSegmentCalculator(m_ArcSegment,
-                                                        point);
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = point
+                      };
+
+            // Act
+            sut.Calculate();
 
             // Assert
             Assert.False(sut.IsPointOnArcSegment);
@@ -108,9 +156,14 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         public void IsPointOnArcSegment_ReturnsTrue_ForEndPoint()
         {
             // Arrange
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = m_EndPoint
+                      };
+
             // Act
-            var sut = new IsPointOnArcSegmentCalculator(m_ArcSegment,
-                                                        m_EndPoint);
+            sut.Calculate();
 
             // Assert
             Assert.True(sut.IsPointOnArcSegment);
@@ -122,9 +175,14 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
             // Arrange
             var halfway = new Point(6.0,
                                     3.0);
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = halfway
+                      };
+
             // Act
-            var sut = new IsPointOnArcSegmentCalculator(m_ArcSegment,
-                                                        halfway);
+            sut.Calculate();
 
             // Assert
             Assert.True(sut.IsPointOnArcSegment);
@@ -134,9 +192,14 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         public void IsPointOnArcSegment_ReturnsTrue_ForStartPoint()
         {
             // Arrange
+            var sut = new IsPointOnArcSegmentCalculator
+                      {
+                          ArcSegment = m_ArcSegment,
+                          Point = m_StartPoint
+                      };
+
             // Act
-            var sut = new IsPointOnArcSegmentCalculator(m_ArcSegment,
-                                                        m_StartPoint);
+            sut.Calculate();
 
             // Assert
             Assert.True(sut.IsPointOnArcSegment);

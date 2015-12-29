@@ -2,7 +2,6 @@
 
 namespace Selkie.Geometry.Shapes.Calculators
 {
-    // todo testing
     public class IsPointOnPolylineSegmentsCalculator : IIsPointOnPolylineSegmentsCalculator
     {
         private readonly IEnumerable <IPolylineSegment> m_Segments;

@@ -6,7 +6,12 @@ namespace Selkie.Geometry.Shapes.Calculators
     {
         bool IsPointOnArcSegment { get; }
 
-        void Calculate([NotNull] IArcSegment segment,
-                       [NotNull] Point point);
+        [NotNull]
+        IArcSegment ArcSegment { get; set; }
+
+        [NotNull]
+        Point Point { get; set; }
+
+        void Calculate();
     }
 }

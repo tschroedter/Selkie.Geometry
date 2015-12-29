@@ -7,20 +7,26 @@ namespace Selkie.Geometry.Shapes.Calculators
 {
     public class IsPointOnArcSegmentCalculator : IIsPointOnArcSegmentCalculator
     {
-        // todo better to have properties ArcSegment, Point, and call Calculate
-
-        public IsPointOnArcSegmentCalculator([NotNull] IArcSegment segment,
-                                             [NotNull] Point point)
+        public IsPointOnArcSegmentCalculator()
         {
-            Calculate(segment,
-                      point);
+            ArcSegment = Shapes.ArcSegment.Unknown;
+            Point = Point.Unknown;
         }
 
-        public void Calculate(IArcSegment segment,
-                              Point point)
+        public IArcSegment ArcSegment { get; set; }
+
+        public Point Point { get; set; }
+
+        public void Calculate()
         {
-            IsPointOnArcSegment = CalculateIfPointIsOnArcSegment(segment,
-                                                                 point);
+            if ( ArcSegment.IsUnknown ||
+                 Point.IsUnknown )
+            {
+                return;
+            }
+
+            IsPointOnArcSegment = CalculateIfPointIsOnArcSegment(ArcSegment,
+                                                                 Point);
         }
 
         public bool IsPointOnArcSegment { get; private set; }
