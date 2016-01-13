@@ -179,7 +179,16 @@ namespace Selkie.Geometry.Shapes
 
         public Constants.TurnDirection TurnDirectionToPoint(Point point)
         {
-            throw new NotImplementedException();
+            // todo testing
+            var calculator = new LineDirectionCalculator()
+                             {
+                                 Line = this,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
+
+            return calculator.Direction;
         }
 
         private double CalculateLength()
