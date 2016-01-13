@@ -14,7 +14,7 @@ namespace Selkie.Geometry.Shapes
         public const int UnknownId = int.MinValue;
         public static readonly Line Unknown = new Line();
 
-        private readonly ILineDirectionCalculator m_Calculator = new LineDirectionCalculator();
+        private readonly ILineDirectionCalculator m_Calculator = new LineDirectionCalculator(); // todo IoC
 
         private Line()
             : this(UnknownId,
@@ -181,16 +181,12 @@ namespace Selkie.Geometry.Shapes
 
         public Constants.TurnDirection TurnDirectionToPoint(Point point)
         {
-            // todo testing
-            var calculator = new LineDirectionCalculator
-                             {
-                                 Line = this,
-                                 Point = point
-                             };
+            m_Calculator.Line = this;
+            m_Calculator.Point = point;
 
-            calculator.Calculate();
+            m_Calculator.Calculate();
 
-            return calculator.Direction;
+            return m_Calculator.Direction;
         }
 
         private double CalculateLength()
@@ -386,18 +382,6 @@ namespace Selkie.Geometry.Shapes
             {
                 return EndPoint.Y;
             }
-        }
-
-        public Constants.TurnDirection IsPointInsideCircle(Point point)
-        {
-            // todo testing
-            // todo IoC Calculator testing
-            m_Calculator.Line = this;
-            m_Calculator.Point = point;
-
-            m_Calculator.Calculate();
-
-            return m_Calculator.Direction;
         }
 
         public bool IsUnknown { get; private set; }
