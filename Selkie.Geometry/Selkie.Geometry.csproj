@@ -51,6 +51,7 @@
     <Compile Include="Calculators\ICoordinatePairCalculator.cs" />
     <Compile Include="Calculators\IInnerTangentLinesIntersectionPointCalculator.cs" />
     <Compile Include="Calculators\IInnerTangentsCalculator.cs" />
+    <Compile Include="Calculators\ILineDirectionCalculator.cs" />
     <Compile Include="Calculators\InnerTangentLinesIntersectionPointCalculator.cs" />
     <Compile Include="Calculators\InnerTangentsCalculator.cs" />
     <Compile Include="Installers.cs" />

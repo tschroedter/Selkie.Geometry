@@ -163,9 +163,4 @@ namespace Selkie.Geometry.Calculators
 
         #endregion
     }
-
-    public interface ILineDirectionCalculator
-    {
-        void Calculate();
-    }
 }
