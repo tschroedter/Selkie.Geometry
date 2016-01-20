@@ -7,43 +7,25 @@ namespace Selkie.Geometry.Calculators
 {
     public class LineDirectionCalculator : ILineDirectionCalculator
     {
-        private readonly Constants.TurnDirection m_Direction;
-        private readonly ILine m_Line;
-        private readonly Point m_Point;
-
-        public LineDirectionCalculator([NotNull] ILine line,
-                                       [NotNull] Point point)
+        public LineDirectionCalculator()
         {
-            m_Line = line;
-            m_Point = point;
-            m_Direction = Calculate(line,
-                                    point);
+            Line = Shapes.Line.Unknown;
+            Point = Point.Unknown;
+            Direction = Constants.TurnDirection.Unknown;
         }
 
         [NotNull]
-        public ILine Line
-        {
-            get
-            {
-                return m_Line;
-            }
-        }
+        public ILine Line { get; set; }
 
         [NotNull]
-        public Point Point
-        {
-            get
-            {
-                return m_Point;
-            }
-        }
+        public Point Point { get; set; }
 
-        public Constants.TurnDirection Direction
+        public Constants.TurnDirection Direction { get; private set; }
+
+        public void Calculate()
         {
-            get
-            {
-                return m_Direction;
-            }
+            Direction = Calculate(Line,
+                                  Point);
         }
 
         // ReSharper disable once MethodTooLong
@@ -110,7 +92,7 @@ namespace Selkie.Geometry.Calculators
 
             double slope = ( by - ay ) / ( bx - ax );
             double yIntercept = ay - ax * slope;
-            double cSolution = ( slope * cx ) + yIntercept;
+            double cSolution = slope * cx + yIntercept;
 
             if ( cy > cSolution )
             {
@@ -180,9 +162,5 @@ namespace Selkie.Geometry.Calculators
         }
 
         #endregion
-    }
-
-    public interface ILineDirectionCalculator
-    {
     }
 }

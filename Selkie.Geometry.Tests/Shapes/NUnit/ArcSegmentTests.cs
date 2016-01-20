@@ -24,15 +24,15 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                                    -1.0);
             m_TurnDirection = Constants.TurnDirection.Counterclockwise;
 
-            m_Segment = new ArcSegment(m_Circle,
-                                       m_StartPoint,
-                                       m_EndPoint,
-                                       m_TurnDirection);
+            m_Sut = new ArcSegment(m_Circle,
+                                   m_StartPoint,
+                                   m_EndPoint,
+                                   m_TurnDirection);
         }
 
         private Circle m_Circle;
         private Point m_EndPoint;
-        private ArcSegment m_Segment;
+        private ArcSegment m_Sut;
         private Point m_StartPoint;
         private Constants.TurnDirection m_TurnDirection;
 
@@ -44,8 +44,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             double expected = circumference / ( 360.0 / degrees );
             Angle radians = Angle.FromDegrees(degrees);
 
-            double actual = m_Segment.CalculateLength(radians,
-                                                      radius);
+            double actual = m_Sut.CalculateLength(radians,
+                                                  radius);
 
             NUnitHelper.AssertIsEquivalent(expected,
                                            actual,
@@ -169,7 +169,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void CalculateAngleInRadiansRelativeToYAxisClockwiseCallsCalculatorTest()
         {
             Angle expected = Angle.For180Degrees;
-            Angle actual = m_Segment.AngleClockwise;
+            Angle actual = m_Sut.AngleClockwise;
 
             Assert.AreEqual(expected,
                             actual);
@@ -179,7 +179,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void CalculateAngleInRadiansRelativeToYAxisCounterClockwiseCallsCalculatorTest()
         {
             Angle expected = Angle.For180Degrees;
-            Angle actual = m_Segment.AngleCounterClockwise;
+            Angle actual = m_Sut.AngleCounterClockwise;
 
             Assert.AreEqual(expected,
                             actual);
@@ -273,20 +273,45 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void CentrePointTest()
         {
             Assert.AreEqual(m_Circle.CentrePoint,
-                            m_Segment.CentrePoint);
+                            m_Sut.CentrePoint);
         }
 
         [Test]
         public void EndPointTest()
         {
             Assert.AreEqual(m_EndPoint,
-                            m_Segment.EndPoint);
+                            m_Sut.EndPoint);
+        }
+
+        [Test]
+        public void IsOnLine_ExpectedResult_UnderCondition()
+        {
+            // Arrange
+            // Act
+            bool actual = m_Sut.IsOnLine(m_StartPoint);
+
+            // Assert
+            Assert.True(actual);
+        }
+
+        [Test]
+        public void IsOnLine_ReturnFalse_ForPointNotOnLine()
+        {
+            // Arrange
+            var notOnCircle = new Point(-1234.0,
+                                        -1234.0);
+
+            // Act
+            bool actual = m_Sut.IsOnLine(notOnCircle);
+
+            // Assert
+            Assert.False(actual);
         }
 
         [Test]
         public void IsUnknonTest()
         {
-            Assert.False(m_Segment.IsUnknown);
+            Assert.False(m_Sut.IsUnknown);
         }
 
         [Test]
@@ -365,7 +390,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void LengthCounterClockwiseTest()
         {
             const double expected = 12.57;
-            double actual = m_Segment.LengthCounterClockwise;
+            double actual = m_Sut.LengthCounterClockwise;
 
             NUnitHelper.AssertIsEquivalent(expected,
                                            actual,
@@ -377,7 +402,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void LengthTest()
         {
             const double expected = 12.57;
-            double actual = m_Segment.Length;
+            double actual = m_Sut.Length;
 
             NUnitHelper.AssertIsEquivalent(expected,
                                            actual,
@@ -389,7 +414,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void RadiansCounterClockwiseTest()
         {
             Angle expected = Angle.For180Degrees;
-            Angle actual = m_Segment.AngleCounterClockwise;
+            Angle actual = m_Sut.AngleCounterClockwise;
 
             Assert.AreEqual(expected,
                             actual);
@@ -399,28 +424,28 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void RadiusTest()
         {
             Assert.AreEqual(m_Circle.Radius,
-                            m_Segment.Radius);
+                            m_Sut.Radius);
         }
 
         [Test]
         public void ReverseTest()
         {
-            var actual = m_Segment.Reverse() as IArcSegment;
+            var actual = m_Sut.Reverse() as IArcSegment;
 
             Assert.NotNull(actual);
-            Assert.AreEqual(m_Segment.LengthClockwise,
+            Assert.AreEqual(m_Sut.LengthClockwise,
                             actual.Length,
                             "Length");
-            Assert.AreEqual(m_Segment.EndPoint,
+            Assert.AreEqual(m_Sut.EndPoint,
                             actual.StartPoint,
                             "StartPoint");
-            Assert.AreEqual(m_Segment.StartPoint,
+            Assert.AreEqual(m_Sut.StartPoint,
                             actual.EndPoint,
                             "EndPoint");
             Assert.AreEqual(Constants.TurnDirection.Counterclockwise,
                             actual.TurnDirection,
                             "TurnDirection");
-            Assert.AreEqual(m_Segment.AngleClockwise,
+            Assert.AreEqual(m_Sut.AngleClockwise,
                             actual.AngleClockwise,
                             "RadiansClockwise");
         }
@@ -429,14 +454,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void StartPointTest()
         {
             Assert.AreEqual(m_StartPoint,
-                            m_Segment.StartPoint);
+                            m_Sut.StartPoint);
         }
 
         [Test]
         public void TurnDirectionTest()
         {
             Assert.AreEqual(m_TurnDirection,
-                            m_Segment.TurnDirection);
+                            m_Sut.TurnDirection);
         }
 
         [Test]
@@ -469,8 +494,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             var startPoint = new Point(170.71,
                                        170.71);
 
-            Assert.False(m_Segment.ValidatePoint(circle,
-                                                 startPoint));
+            Assert.False(m_Sut.ValidatePoint(circle,
+                                             startPoint));
         }
 
         [Test]
@@ -482,8 +507,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             var startPoint = new Point(70.71,
                                        70.71);
 
-            Assert.True(m_Segment.ValidatePoint(circle,
-                                                startPoint));
+            Assert.True(m_Sut.ValidatePoint(circle,
+                                            startPoint));
         }
 
         [Test]
@@ -497,9 +522,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             var endPoint = new Point(170.71,
                                      170.71);
 
-            Assert.Throws <ArgumentException>(() => m_Segment.ValidateStartAndEndPoint(circle,
-                                                                                       startPoint,
-                                                                                       endPoint));
+            Assert.Throws <ArgumentException>(() => m_Sut.ValidateStartAndEndPoint(circle,
+                                                                                   startPoint,
+                                                                                   endPoint));
         }
 
         [Test]
@@ -513,9 +538,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             var endPoint = new Point(170.71,
                                      170.71);
 
-            Assert.Throws <ArgumentException>(() => m_Segment.ValidateStartAndEndPoint(circle,
-                                                                                       startPoint,
-                                                                                       endPoint));
+            Assert.Throws <ArgumentException>(() => m_Sut.ValidateStartAndEndPoint(circle,
+                                                                                   startPoint,
+                                                                                   endPoint));
         }
     }
 }

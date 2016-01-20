@@ -14,5 +14,9 @@ namespace Selkie.Geometry.Shapes
 
         [NotNull]
         IPolylineSegment Reverse();
+
+        bool IsOnLine(Point point);
+
+        Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
     }
 }

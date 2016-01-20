@@ -6,6 +6,7 @@ namespace Selkie.Geometry.Shapes
     {
         [NotNull]
         IArcSegment ArcSegment { get; }
+
         Constants.CircleOrigin CircleOrigin { get; }
     }
 }

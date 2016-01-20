@@ -20,8 +20,13 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             m_Point = new Point(5.0,
                                 0.0);
 
-            m_Calculator = new LineDirectionCalculator(m_Line,
-                                                       m_Point);
+            m_Calculator = new LineDirectionCalculator
+                           {
+                               Line = m_Line,
+                               Point = m_Point
+                           };
+
+            m_Calculator.Calculate();
         }
 
         private LineDirectionCalculator m_Calculator;
@@ -97,8 +102,13 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             var point = new Point(-1,
                                   -1);
 
-            var calculator = new LineDirectionCalculator(line,
-                                                         point);
+            var calculator = new LineDirectionCalculator
+                             {
+                                 Line = line,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
 
             Assert.AreEqual(Constants.TurnDirection.Counterclockwise,
                             calculator.Direction);
@@ -116,8 +126,13 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             var point = new Point(1,
                                   1);
 
-            var calculator = new LineDirectionCalculator(line,
-                                                         point);
+            var calculator = new LineDirectionCalculator
+                             {
+                                 Line = line,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
 
             Assert.AreEqual(Constants.TurnDirection.Clockwise,
                             calculator.Direction);
@@ -135,8 +150,13 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             var point = new Point(-1,
                                   0);
 
-            var calculator = new LineDirectionCalculator(line,
-                                                         point);
+            var calculator = new LineDirectionCalculator
+                             {
+                                 Line = line,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
 
             Assert.AreEqual(Constants.TurnDirection.Unknown,
                             calculator.Direction);
@@ -207,8 +227,15 @@ namespace Selkie.Geometry.Tests.Calculators.NUnit
             var point = new Point(5.0,
                                   0.0);
 
-            m_Calculator = new LineDirectionCalculator(line,
-                                                       point);
+            var calculator = new LineDirectionCalculator
+                             {
+                                 Line = line,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
+
+            // todo figure out what needs to be asserted here
         }
 
         [Test]

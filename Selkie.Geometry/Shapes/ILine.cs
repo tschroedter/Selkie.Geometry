@@ -21,7 +21,5 @@ namespace Selkie.Geometry.Shapes
 
         Constants.LineDirection RunDirection { get; }
         int Id { get; }
-        Constants.TurnDirection TurnDirection([NotNull] Point point);
-        bool IsOnLine([NotNull] Point point);
     }
 }

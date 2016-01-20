@@ -34,8 +34,8 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         {
             Angle angle = Angle.FromDegrees(degrees);
 
-            double x = m_CentrePoint.X + ( m_RadiusOne * Math.Cos(angle.Radians) );
-            double y = m_CentrePoint.Y + ( m_RadiusOne * Math.Sin(angle.Radians) );
+            double x = m_CentrePoint.X + m_RadiusOne * Math.Cos(angle.Radians);
+            double y = m_CentrePoint.Y + m_RadiusOne * Math.Sin(angle.Radians);
 
             var point = new Point(x,
                                   y);
@@ -109,8 +109,8 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void AngleRelativeToXAxisCounterClockwiseFor360DegreesTest()
         {
-            double x = m_CentrePoint.X + ( m_RadiusOne * Math.Cos(Angle.RadiansFor360Degrees) );
-            double y = m_CentrePoint.Y + ( m_RadiusOne * Math.Sin(Angle.RadiansFor360Degrees) );
+            double x = m_CentrePoint.X + m_RadiusOne * Math.Cos(Angle.RadiansFor360Degrees);
+            double y = m_CentrePoint.Y + m_RadiusOne * Math.Sin(Angle.RadiansFor360Degrees);
 
             var point = new Point(x,
                                   y);
@@ -200,14 +200,14 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void RadiansRelativeToYAxisClockwiseTest()
         {
-            Assert.AreEqual(Angle.For90Degrees,
+            Assert.AreEqual(Angle.For270Degrees,
                             m_Calculator.AngleRelativeToYAxisClockwise);
         }
 
         [Test]
         public void RadiansRelativeToYAxisCounterclockwiseTest()
         {
-            Assert.AreEqual(Angle.For270Degrees,
+            Assert.AreEqual(Angle.For90Degrees,
                             m_Calculator.AngleRelativeToYAxisCounterclockwise);
         }
     }

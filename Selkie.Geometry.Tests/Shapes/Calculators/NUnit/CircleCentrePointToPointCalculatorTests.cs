@@ -31,6 +31,16 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         private Point m_StartPoint;
 
         [Test]
+        public void AngleRelativeToYAxisCounterClockwiseTest()
+        {
+            Angle expected = Angle.For90Degrees;
+            Angle actual = m_Calculator.AngleRelativeToYAxisCounterClockwise;
+
+            Assert.AreEqual(expected,
+                            actual);
+        }
+
+        [Test]
         public void CentrePointTest()
         {
             Assert.AreEqual(m_CentrePoint,
@@ -49,10 +59,10 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         {
             var centrePoint = new Point(3.0,
                                         4.0);
-            var startPoint = new Point(1.0,
-                                       4.0);
-            var endPoint = new Point(3.0,
-                                     6.0);
+            var startPoint = new Point(3.0,
+                                       6.0);
+            var endPoint = new Point(1.0,
+                                     4.0);
 
             Angle expected = Angle.For270Degrees;
             Angle actual = m_Calculator.RadiansBetweenPointsCounterClockwise(centrePoint,
@@ -66,18 +76,8 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         [Test]
         public void RadiansClockwiseTest()
         {
-            Angle expected = Angle.FromDegrees(90.0);
-            Angle actual = m_Calculator.AngleClockwise;
-
-            Assert.AreEqual(expected,
-                            actual);
-        }
-
-        [Test]
-        public void RadiansCounterClockwiseTest()
-        {
-            Angle expected = Angle.FromDegrees(270.0);
-            Angle actual = m_Calculator.RadiansCounterClockwise;
+            Angle expected = Angle.For270Degrees;
+            Angle actual = m_Calculator.AngleRelativeToYAxisClockwise;
 
             Assert.AreEqual(expected,
                             actual);

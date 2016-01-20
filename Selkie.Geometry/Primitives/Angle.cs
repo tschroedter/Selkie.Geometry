@@ -124,7 +124,7 @@ namespace Selkie.Geometry.Primitives
         }
 
         [NotNull]
-        public static Angle RelativeToYAxisClockwise([NotNull] Angle angle)
+        public static Angle RelativeToYAxisCounterclockwise([NotNull] Angle angle)
         {
             double radiansXAxis = angle.Radians;
 

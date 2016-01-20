@@ -12,30 +12,23 @@ namespace Selkie.Geometry.Shapes
     {
         public static readonly IArcSegment Unknown = new ArcSegment();
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly Angle m_AngleClockwise;
-        private readonly Angle m_AngleCounterClockwise;
         private readonly ICircle m_Circle;
-        private readonly Point m_EndPoint;
-        private readonly bool m_IsUnknown;
-        private readonly double m_Length;
-        private readonly double m_LengthClockwise;
-        private readonly double m_LengthCounterClockwise;
-        private readonly Point m_StartPoint;
-        private readonly Constants.TurnDirection m_TurnDirection;
 
         private ArcSegment()
         {
-            m_IsUnknown = true;
+            IsUnknown = true;
             m_Circle = Circle.Unknown;
-            m_StartPoint = Point.Unknown;
-            m_EndPoint = Point.Unknown;
-            m_TurnDirection = Constants.TurnDirection.Unknown;
+            StartPoint = Point.Unknown;
+            EndPoint = Point.Unknown;
+            TurnDirection = Constants.TurnDirection.Unknown;
+            AngleClockwise = Angle.Unknown;
+            AngleCounterClockwise = Angle.Unknown;
         }
 
         public ArcSegment([NotNull] ICircle circle,
                           [NotNull] Point startPoint,
                           [NotNull] Point endPoint,
-                          Constants.TurnDirection arcTurnDirection = Constants.TurnDirection.Unknown)
+                          Constants.TurnDirection arcTurnDirection = Constants.TurnDirection.Clockwise)
 
         {
             ValidateStartAndEndPoint(circle,
@@ -43,34 +36,28 @@ namespace Selkie.Geometry.Shapes
                                      endPoint);
 
             m_Circle = circle;
-            m_StartPoint = startPoint;
-            m_EndPoint = endPoint;
-            m_TurnDirection = arcTurnDirection;
+            StartPoint = startPoint;
+            EndPoint = endPoint;
+            TurnDirection = arcTurnDirection;
             ICircleCentrePointToPointCalculator calculator = new CircleCentrePointToPointCalculator(
                 m_Circle.CentrePoint,
-                m_StartPoint,
-                m_EndPoint);
+                StartPoint,
+                EndPoint);
 
-            m_AngleClockwise = calculator.AngleClockwise;
-            m_AngleCounterClockwise = calculator.RadiansCounterClockwise;
+            AngleClockwise = calculator.AngleRelativeToYAxisCounterClockwise;
+            AngleCounterClockwise = calculator.AngleRelativeToYAxisClockwise;
 
-            m_LengthClockwise = CalculateLength(m_AngleClockwise,
-                                                m_Circle.Radius);
-            m_LengthCounterClockwise = CalculateLength(m_AngleCounterClockwise,
-                                                       m_Circle.Radius);
+            LengthClockwise = CalculateLength(AngleClockwise,
+                                              m_Circle.Radius);
+            LengthCounterClockwise = CalculateLength(AngleCounterClockwise,
+                                                     m_Circle.Radius);
 
-            m_Length = arcTurnDirection == Constants.TurnDirection.Clockwise
-                           ? m_LengthClockwise
-                           : m_LengthCounterClockwise;
+            Length = arcTurnDirection == Constants.TurnDirection.Clockwise
+                         ? LengthClockwise
+                         : LengthCounterClockwise;
         }
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; private set; }
 
         internal void ValidateStartAndEndPoint([NotNull] ICircle circle,
                                                [NotNull] Point startPoint,
@@ -108,20 +95,14 @@ namespace Selkie.Geometry.Shapes
         internal double CalculateLength([NotNull] Angle angle,
                                         double radius)
         {
-            double length = ( angle.Degrees * Math.PI * radius ) / 180.0;
+            double length = angle.Degrees * Math.PI * radius / 180.0;
 
             return length;
         }
 
         #region IArcSegment Members
 
-        public Constants.TurnDirection TurnDirection
-        {
-            get
-            {
-                return m_TurnDirection;
-            }
-        }
+        public Constants.TurnDirection TurnDirection { get; private set; }
 
         public Point CentrePoint
         {
@@ -139,70 +120,48 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public Point StartPoint
-        {
-            get
-            {
-                return m_StartPoint;
-            }
-        }
+        public Point StartPoint { get; private set; }
 
-        public Point EndPoint
-        {
-            get
-            {
-                return m_EndPoint;
-            }
-        }
+        public Point EndPoint { get; private set; }
 
-        public Angle AngleClockwise
-        {
-            get
-            {
-                return m_AngleClockwise;
-            }
-        }
+        public Angle AngleClockwise { get; private set; }
 
-        public Angle AngleCounterClockwise
-        {
-            get
-            {
-                return m_AngleCounterClockwise;
-            }
-        }
+        public Angle AngleCounterClockwise { get; private set; }
 
-        public double Length
-        {
-            get
-            {
-                return m_Length;
-            }
-        }
+        public double Length { get; private set; }
 
-        public double LengthClockwise
-        {
-            get
-            {
-                return m_LengthClockwise;
-            }
-        }
+        public double LengthClockwise { get; private set; }
 
-        public double LengthCounterClockwise
-        {
-            get
-            {
-                return m_LengthCounterClockwise;
-            }
-        }
+        public double LengthCounterClockwise { get; private set; }
 
         public IPolylineSegment Reverse()
         {
             var reverse = new ArcSegment(m_Circle,
-                                         m_EndPoint,
-                                         m_StartPoint,
-                                         m_TurnDirection);
+                                         EndPoint,
+                                         StartPoint,
+                                         TurnDirection);
 
             return reverse;
+        }
+
+        public bool IsOnLine(Point point)
+        {
+            var calculator = new IsPointOnArcSegmentCalculator
+                             {
+                                 ArcSegment = this,
+                                 Point = point
+                             };
+
+            calculator.Calculate();
+
+
+            return calculator.IsPointOnArcSegment;
+        }
+
+        public Constants.TurnDirection TurnDirectionToPoint(Point point)
+        {
+            // todo figure out how to do it, tangent line -=> calculate circle center point to point and calculate intersection point with ArcSegment
+            throw new NotImplementedException("TurnDirectionToPoint not implemented yet!");
         }
 
         #endregion

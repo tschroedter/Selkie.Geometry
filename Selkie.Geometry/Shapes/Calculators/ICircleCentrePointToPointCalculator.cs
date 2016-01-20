@@ -15,9 +15,9 @@ namespace Selkie.Geometry.Shapes.Calculators
         Point EndPoint { get; }
 
         [NotNull]
-        Angle AngleClockwise { get; }
+        Angle AngleRelativeToYAxisClockwise { get; }
 
         [NotNull]
-        Angle RadiansCounterClockwise { get; }
+        Angle AngleRelativeToYAxisCounterClockwise { get; }
     }
 }

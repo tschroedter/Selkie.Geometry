@@ -6,16 +6,34 @@ namespace Selkie.Geometry.Shapes
 {
     public class Polyline : IPolyline
     {
-        private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
-        private Point m_EndPoint = Point.Unknown;
-        private Point m_StartPoint = Point.Unknown;
+        public const int UnknownId = int.MinValue;
+        public static readonly Polyline Unknown = new Polyline();
 
-        public Polyline()
+        private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
+
+        private Polyline()
         {
+            Id = UnknownId;
+            IsUnknown = true;
+            EndPoint = Point.Unknown;
+            StartPoint = Point.Unknown;
+            RunDirection = Constants.LineDirection.Unknown;
+        }
+
+        public Polyline(int id,
+                        Constants.LineDirection runDirection)
+        {
+            Id = id;
+            IsUnknown = false;
+            EndPoint = Point.Unknown;
+            StartPoint = Point.Unknown;
+            RunDirection = runDirection;
         }
 
         private Polyline([NotNull] IEnumerable <IPolylineSegment> segments)
         {
+            EndPoint = Point.Unknown;
+            StartPoint = Point.Unknown;
             foreach ( IPolylineSegment segment in segments )
             {
                 AddSegment(segment);
@@ -55,25 +73,27 @@ namespace Selkie.Geometry.Shapes
             m_Segments.Add(segment);
             Length += segment.Length;
 
-            m_StartPoint = DetermineStartPoint(m_Segments);
-            m_EndPoint = DetermineEndPoint(m_Segments);
+            StartPoint = DetermineStartPoint(m_Segments);
+            EndPoint = DetermineEndPoint(m_Segments);
         }
 
-        public Point StartPoint
+        public Constants.TurnDirection TurnDirectionToPoint(Point point)
         {
-            get
+            IPolylineSegment firstSegment = m_Segments.FirstOrDefault();
+
+            if ( firstSegment == null )
             {
-                return m_StartPoint;
+                return Constants.TurnDirection.Unknown;
             }
+
+            Constants.TurnDirection turnDirection = firstSegment.TurnDirectionToPoint(point);
+
+            return turnDirection;
         }
 
-        public Point EndPoint
-        {
-            get
-            {
-                return m_EndPoint;
-            }
-        }
+        public Point StartPoint { get; private set; }
+
+        public Point EndPoint { get; private set; }
 
         public IEnumerable <IPolylineSegment> Segments
         {
@@ -83,7 +103,13 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
+        public int Id { get; private set; }
+
+        public bool IsUnknown { get; private set; }
+
         public double Length { get; private set; }
+
+        public Constants.LineDirection RunDirection { get; private set; } // todo
 
         public IPolyline Reverse()
         {
@@ -96,6 +122,21 @@ namespace Selkie.Geometry.Shapes
             var reverse = new Polyline(segments);
 
             return reverse;
+        }
+
+        public bool IsOnLine(Point point)
+        {
+            foreach ( IPolylineSegment segment in m_Segments )
+            {
+                bool isOneSegment = segment.IsOnLine(point);
+
+                if ( isOneSegment )
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         #endregion

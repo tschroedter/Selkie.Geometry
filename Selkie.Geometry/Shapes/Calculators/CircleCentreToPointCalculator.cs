@@ -67,8 +67,9 @@ namespace Selkie.Geometry.Shapes.Calculators
             // Note: maybe it's enough to calculate m_AngleRelativeToXAxisCounterClockwise
             AngleRelativeToXAxisCounterClockwise = CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint,
                                                                                                  point);
-            AngleRelativeToYAxisClockwise = Angle.RelativeToYAxisClockwise(AngleRelativeToXAxisCounterClockwise);
-            AngleRelativeToYAxisCounterclockwise = Angle.Inverse(AngleRelativeToYAxisClockwise);
+            AngleRelativeToYAxisCounterclockwise =
+                Angle.RelativeToYAxisCounterclockwise(AngleRelativeToXAxisCounterClockwise);
+            AngleRelativeToYAxisClockwise = Angle.Inverse(AngleRelativeToYAxisCounterclockwise);
         }
 
         public Angle AngleRelativeToXAxisCounterClockwise
@@ -83,7 +84,7 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
-        public Angle AngleRelativeToYAxisClockwise
+        public Angle AngleRelativeToYAxisClockwise // todo double check if this is really Clockwise
         {
             get
             {
@@ -95,7 +96,7 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
-        public Angle AngleRelativeToYAxisCounterclockwise
+        public Angle AngleRelativeToYAxisCounterclockwise // todo double check if this is really Counterclockwise
         {
             get
             {
@@ -107,6 +108,7 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
         }
 
+        // todo double check if this is really Counterclockwise
         public Angle CalculateAngleRelativeToXAxisCounterClockwise(Point centre,
                                                                    Point point)
         {

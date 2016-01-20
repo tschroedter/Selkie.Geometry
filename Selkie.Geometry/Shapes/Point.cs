@@ -9,48 +9,27 @@ namespace Selkie.Geometry.Shapes
     public class Point : IEquatable <Point>
     {
         public static readonly Point Unknown = new Point();
-        private readonly bool m_IsUnknown;
-        private readonly double m_X;
-        private readonly double m_Y;
 
         private Point()
         {
-            m_X = double.NaN;
-            m_Y = double.NaN;
-            m_IsUnknown = true;
+            X = double.NaN;
+            Y = double.NaN;
+            IsUnknown = true;
         }
 
         public Point(double x,
                      double y)
         {
-            m_X = x;
-            m_Y = y;
-            m_IsUnknown = false;
+            X = x;
+            Y = y;
+            IsUnknown = false;
         }
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; private set; }
 
-        public double X
-        {
-            get
-            {
-                return m_X;
-            }
-        }
+        public double X { get; private set; }
 
-        public double Y
-        {
-            get
-            {
-                return m_Y;
-            }
-        }
+        public double Y { get; private set; }
 
         #region IEquatable<Point> Members
 
@@ -68,8 +47,8 @@ namespace Selkie.Geometry.Shapes
                 return true;
             }
 
-            return Math.Abs(m_X - other.X) < SelkieConstants.EpsilonPointXy &&
-                   Math.Abs(m_Y - other.Y) < SelkieConstants.EpsilonPointXy;
+            return Math.Abs(X - other.X) < SelkieConstants.EpsilonPointXy &&
+                   Math.Abs(Y - other.Y) < SelkieConstants.EpsilonPointXy;
         }
 
         #endregion
@@ -77,8 +56,8 @@ namespace Selkie.Geometry.Shapes
         [NotNull]
         public Point RelativeTo([NotNull] Point other)
         {
-            double x = m_X - other.X;
-            double y = m_Y - other.Y;
+            double x = X - other.X;
+            double y = Y - other.Y;
 
             return new Point(x,
                              y);
@@ -111,8 +90,8 @@ namespace Selkie.Geometry.Shapes
         public Point Move(double distance,
                           double radians)
         {
-            double x = m_X;
-            double y = m_Y;
+            double x = X;
+            double y = Y;
             double r = distance;
 
             double newX = x + r * Math.Sin(radians);
@@ -126,8 +105,8 @@ namespace Selkie.Geometry.Shapes
 
         public double DistanceTo([NotNull] Point other)
         {
-            double x = ( other.X - m_X ) * ( other.X - m_X );
-            double y = ( other.Y - m_Y ) * ( other.Y - m_Y );
+            double x = ( other.X - X ) * ( other.X - X );
+            double y = ( other.Y - Y ) * ( other.Y - Y );
             double distance = Math.Sqrt(x + y);
 
             return distance;
@@ -135,8 +114,8 @@ namespace Selkie.Geometry.Shapes
 
         public override string ToString()
         {
-            return "[{0},{1}]".Inject(m_X,
-                                      m_Y);
+            return "[{0},{1}]".Inject(X,
+                                      Y);
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -163,9 +142,9 @@ namespace Selkie.Geometry.Shapes
         {
             unchecked
             {
-                int result = m_X.GetHashCode();
-                result = ( result * 397 ) ^ m_Y.GetHashCode();
-                result = ( result * 397 ) ^ m_IsUnknown.GetHashCode();
+                int result = X.GetHashCode();
+                result = ( result * 397 ) ^ Y.GetHashCode();
+                result = ( result * 397 ) ^ IsUnknown.GetHashCode();
                 return result;
             }
         }

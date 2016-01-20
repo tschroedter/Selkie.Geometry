@@ -35,7 +35,7 @@ namespace Selkie.Geometry
             Forward,
             Reverse,
             Unknown
-        };
+        }
 
         #endregion
 
