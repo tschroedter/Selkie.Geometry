@@ -9,27 +9,48 @@ namespace Selkie.Geometry.Shapes
     public class Point : IEquatable <Point>
     {
         public static readonly Point Unknown = new Point();
+        private readonly double m_X;
+        private readonly double m_Y;
+        private readonly bool m_IsUnknown;
 
         private Point()
         {
-            X = double.NaN;
-            Y = double.NaN;
-            IsUnknown = true;
+            m_X = double.NaN;
+            m_Y = double.NaN;
+            m_IsUnknown = true;
         }
 
         public Point(double x,
                      double y)
         {
-            X = x;
-            Y = y;
-            IsUnknown = false;
+            m_X = x;
+            m_Y = y;
+            m_IsUnknown = false;
         }
 
-        public bool IsUnknown { get; private set; }
+        public bool IsUnknown
+        {
+            get
+            {
+                return m_IsUnknown;
+            }
+        }
 
-        public double X { get; private set; }
+        public double X
+        {
+            get
+            {
+                return m_X;
+            }
+        }
 
-        public double Y { get; private set; }
+        public double Y
+        {
+            get
+            {
+                return m_Y;
+            }
+        }
 
         #region IEquatable<Point> Members
 

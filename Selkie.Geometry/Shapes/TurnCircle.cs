@@ -11,14 +11,19 @@ namespace Selkie.Geometry.Shapes
           IEquatable <TurnCircle>
     {
         public static TurnCircle Unknown = new TurnCircle();
+        private readonly ICircle m_Circle;
+        private readonly Constants.CircleSide m_Side;
+        private readonly Distance m_Radius;
+        private readonly Constants.CircleOrigin m_Origin;
+        private readonly Constants.TurnDirection m_TurnDirection;
 
         private TurnCircle()
         {
-            Circle = Shapes.Circle.Unknown;
-            Side = Constants.CircleSide.Unknown;
-            Origin = Constants.CircleOrigin.Unknown;
-            TurnDirection = Constants.TurnDirection.Unknown;
-            Radius = Distance.Unknown;
+            m_Circle = Shapes.Circle.Unknown;
+            m_Side = Constants.CircleSide.Unknown;
+            m_Origin = Constants.CircleOrigin.Unknown;
+            m_TurnDirection = Constants.TurnDirection.Unknown;
+            m_Radius = Distance.Unknown;
             IsUnknown = true;
         }
 
@@ -27,11 +32,11 @@ namespace Selkie.Geometry.Shapes
                           Constants.CircleOrigin origin,
                           Constants.TurnDirection turnDirection)
         {
-            Circle = circle;
-            Side = side;
-            Origin = origin;
-            TurnDirection = turnDirection;
-            Radius = new Distance(Circle.Radius);
+            m_Circle = circle;
+            m_Side = side;
+            m_Origin = origin;
+            m_TurnDirection = turnDirection;
+            m_Radius = new Distance(Circle.Radius);
         }
 
         #region IEquatable<TurnCircle> Members
@@ -108,7 +113,13 @@ namespace Selkie.Geometry.Shapes
 
         #region ITurnCircle Members
 
-        public ICircle Circle { get; private set; }
+        public ICircle Circle
+        {
+            get
+            {
+                return m_Circle;
+            }
+        }
 
         public Point CentrePoint
         {
@@ -118,18 +129,42 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public Distance Radius { get; private set; }
+        public Distance Radius
+        {
+            get
+            {
+                return m_Radius;
+            }
+        }
 
-        public Constants.CircleSide Side { get; private set; }
+        public Constants.CircleSide Side
+        {
+            get
+            {
+                return m_Side;
+            }
+        }
 
-        public Constants.CircleOrigin Origin { get; private set; }
+        public Constants.CircleOrigin Origin
+        {
+            get
+            {
+                return m_Origin;
+            }
+        }
 
         public bool IsPointOnCircle(Point point)
         {
             return Circle.IsPointOnCircle(point);
         }
 
-        public Constants.TurnDirection TurnDirection { get; private set; }
+        public Constants.TurnDirection TurnDirection
+        {
+            get
+            {
+                return m_TurnDirection;
+            }
+        }
 
         #endregion
     }

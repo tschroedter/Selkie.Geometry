@@ -98,7 +98,7 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators.NUnit
         public void IsPointOnArcSegment_ReturnsFalse_ForHalfwayPointPlusDeltaTwoTimes()
         {
             // Arrange
-            double doubleDelta = SelkieConstants.EpsilonDistance * 2;
+            const double doubleDelta = SelkieConstants.EpsilonDistance * 2;
             var halfway = new Point(6.0 + doubleDelta,
                                     3.0);
             var sut = new IsPointOnArcSegmentCalculator
