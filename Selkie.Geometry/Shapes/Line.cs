@@ -15,6 +15,10 @@ namespace Selkie.Geometry.Shapes
         public static readonly Line Unknown = new Line();
 
         private readonly ILineDirectionCalculator m_Calculator = new LineDirectionCalculator(); // todo IoC
+        private readonly Point m_EndPoint;
+        private readonly bool m_IsUnknown;
+        private readonly Constants.LineDirection m_RunDirection;
+        private readonly Point m_StartPoint;
 
         private Line()
             : this(UnknownId,
@@ -127,10 +131,10 @@ namespace Selkie.Geometry.Shapes
                       bool isUnknown)
         {
             Id = id;
-            StartPoint = startPoint;
-            EndPoint = endPoint;
-            IsUnknown = isUnknown;
-            RunDirection = lineDirection;
+            m_StartPoint = startPoint;
+            m_EndPoint = endPoint;
+            m_IsUnknown = isUnknown;
+            m_RunDirection = lineDirection;
             Length = CalculateLength();
             AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                   endPoint,
@@ -333,13 +337,31 @@ namespace Selkie.Geometry.Shapes
 
         public int Id { get; private set; }
 
-        public Constants.LineDirection RunDirection { get; private set; }
+        public Constants.LineDirection RunDirection
+        {
+            get
+            {
+                return m_RunDirection;
+            }
+        }
 
         public Angle AngleToXAxis { get; private set; }
 
-        public Point StartPoint { get; private set; }
+        public Point StartPoint
+        {
+            get
+            {
+                return m_StartPoint;
+            }
+        }
 
-        public Point EndPoint { get; private set; }
+        public Point EndPoint
+        {
+            get
+            {
+                return m_EndPoint;
+            }
+        }
 
         public double Length { get; private set; }
 
@@ -384,7 +406,13 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public bool IsUnknown { get; private set; }
+        public bool IsUnknown
+        {
+            get
+            {
+                return m_IsUnknown;
+            }
+        }
 
         public bool Equals([NotNull] ILine other)
         {

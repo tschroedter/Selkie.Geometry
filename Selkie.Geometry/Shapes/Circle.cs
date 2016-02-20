@@ -12,11 +12,13 @@ namespace Selkie.Geometry.Shapes
     {
         public static readonly ICircle Unknown = new Circle();
         private readonly ICircleCentreToPointCalculator m_Calculator;
+        private readonly Point m_CentrePoint;
+        private readonly double m_Radius;
 
         private Circle()
         {
             IsUnknown = true;
-            CentrePoint = Point.Unknown;
+            m_CentrePoint = Point.Unknown;
             m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
 
@@ -32,8 +34,8 @@ namespace Selkie.Geometry.Shapes
         public Circle([NotNull] Point centrePoint,
                       double radius)
         {
-            CentrePoint = centrePoint;
-            Radius = radius;
+            m_CentrePoint = centrePoint;
+            m_Radius = radius;
             m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
 
@@ -152,7 +154,13 @@ namespace Selkie.Geometry.Shapes
             return delta < 0 || Math.Abs(delta) <= SelkieConstants.EpsilonDistance;
         }
 
-        public Point CentrePoint { get; private set; }
+        public Point CentrePoint
+        {
+            get
+            {
+                return m_CentrePoint;
+            }
+        }
 
         public double X
         {
@@ -170,7 +178,13 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public double Radius { get; private set; }
+        public double Radius
+        {
+            get
+            {
+                return m_Radius;
+            }
+        }
 
         public double Distance(ICircle other)
         {
