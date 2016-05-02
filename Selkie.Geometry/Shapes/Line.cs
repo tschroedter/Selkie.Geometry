@@ -37,14 +37,15 @@ namespace Selkie.Geometry.Shapes
                     double y1,
                     double x2,
                     double y2,
-                    Constants.LineDirection runDirection = Constants.LineDirection.Forward)
+                    Constants.LineDirection runDirection = Constants.LineDirection.Forward,
+                    bool isUnknown = false)
             : this(id,
                    new Point(x1,
                              y1),
                    new Point(x2,
                              y2),
                    runDirection,
-                   false)
+                   isUnknown)
         {
         }
 
