@@ -6,75 +6,27 @@ namespace Selkie.Geometry.Surveying
 {
     public class SurveyLine : ISurveyLine
     {
-        private readonly ILine m_Line;
-
         public SurveyLine([NotNull] ILine line)
         {
-            m_Line = line;
+            IsUnknown = line.IsUnknown;
+            StartPoint = new Point(line.StartPoint.X,
+                                   line.StartPoint.Y);
+            EndPoint = new Point(line.EndPoint.X,
+                                 line.EndPoint.Y);
+            AngleToXAxisAtStartPoint = line.AngleToXAxis;
+            AngleToXAxisAtEndPoint = line.AngleToXAxis;
+            RunDirection = line.RunDirection;
+            Id = line.Id;
+            Length = line.Length;
         }
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_Line.IsUnknown;
-            }
-        }
-
-        public Angle AngleToXAxisAtStartPoint
-        {
-            get
-            {
-                return m_Line.AngleToXAxis;
-            }
-        }
-
-        public Angle AngleToXAxisAtEndPoint
-        {
-            get
-            {
-                return m_Line.AngleToXAxis;
-            }
-        }
-
-        public Constants.LineDirection RunDirection
-        {
-            get
-            {
-                return m_Line.RunDirection;
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                return m_Line.Id;
-            }
-        }
-
-        public double Length
-        {
-            get
-            {
-                return m_Line.Length;
-            }
-        }
-
-        public Point StartPoint
-        {
-            get
-            {
-                return m_Line.StartPoint;
-            }
-        }
-
-        public Point EndPoint
-        {
-            get
-            {
-                return m_Line.EndPoint;
-            }
-        }
+        public bool IsUnknown { get; private set; }
+        public Point StartPoint { get; private set; }
+        public Point EndPoint { get; private set; }
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+        public Constants.LineDirection RunDirection { get; private set; }
+        public int Id { get; private set; }
+        public double Length { get; private set; }
     }
 }
