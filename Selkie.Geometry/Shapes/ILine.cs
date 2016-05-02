@@ -19,7 +19,7 @@ namespace Selkie.Geometry.Shapes
         [NotNull]
         Angle AngleToXAxis { get; }
 
-        Constants.LineDirection RunDirection { get; }
+        Constants.LineDirection RunDirection { get; } // todo maybe call LineDirection
         int Id { get; }
     }
 }
