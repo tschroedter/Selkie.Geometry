@@ -22,5 +22,7 @@ namespace Selkie.Geometry.Surveying
         int Id { get; }
 
         double Length { get; }
+
+        ISurveyFeature Reverse();
     }
 }

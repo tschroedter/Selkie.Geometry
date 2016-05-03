@@ -78,6 +78,18 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
         }
 
         [Test]
+        public void Reverse_ReturnsThis_WhenCalled()
+        {
+            // Arrange
+            // Act
+            ISurveyFeature actual = m_Sut.Reverse();
+
+            // Assert
+            Assert.AreEqual(actual,
+                            m_Sut);
+        }
+
+        [Test]
         public void RunDirection_ReturnsUnknown_WhenCalled()
         {
             // Arrange

@@ -84,6 +84,25 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
         }
 
         [Test]
+        public void Reverse_ReturnsReversedFeature_WhenCalled()
+        {
+            // Arrange
+            // Act
+            ISurveyFeature actual = m_Sut.Reverse();
+
+            // Assert
+            Assert.AreEqual(m_Line.Id,
+                            actual.Id,
+                            "Id");
+            Assert.AreEqual(m_Line.EndPoint,
+                            actual.StartPoint,
+                            "StartPoint");
+            Assert.AreEqual(m_Line.StartPoint,
+                            actual.EndPoint,
+                            "EndPoint");
+        }
+
+        [Test]
         public void RunDirection_ReturnsLineRunDirection_WhenCalled()
         {
             // Arrange

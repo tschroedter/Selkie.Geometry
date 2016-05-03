@@ -28,5 +28,16 @@ namespace Selkie.Geometry.Surveying
         public Constants.LineDirection RunDirection { get; private set; }
         public int Id { get; private set; }
         public double Length { get; private set; }
+
+        public ISurveyFeature Reverse()
+        {
+            var reverseLine = new Line(Id,
+                                       EndPoint,
+                                       StartPoint);
+
+            var reverse = new SurveyLine(reverseLine);
+
+            return reverse;
+        }
     }
 }
