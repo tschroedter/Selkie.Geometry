@@ -107,6 +107,7 @@
     <Compile Include="Shapes\NUnit\PolyineTests.cs" />
     <Compile Include="Shapes\NUnit\TurnCircleArcSegmentTests.cs" />
     <Compile Include="Shapes\NUnit\TurnCircleTests.cs" />
+    <Compile Include="Surveying\NUnit\SurveyFeatureTests.cs" />
     <Compile Include="Surveying\NUnit\SurveyLineTests.cs" />
   </ItemGroup>
   <ItemGroup>

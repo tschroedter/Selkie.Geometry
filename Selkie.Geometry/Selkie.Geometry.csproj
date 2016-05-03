@@ -90,6 +90,7 @@
     <Compile Include="Shapes\TurnCircleArcSegment.cs" />
     <Compile Include="Surveying\ISurveyFeature.cs" />
     <Compile Include="Surveying\ISurveyLine.cs" />
+    <Compile Include="Surveying\SurveyFeature.cs" />
     <Compile Include="Surveying\SurveyLine.cs" />
   </ItemGroup>
   <ItemGroup>
