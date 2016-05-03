@@ -12,9 +12,9 @@ namespace Selkie.Geometry.Shapes
     {
         public static TurnCircle Unknown = new TurnCircle();
         private readonly ICircle m_Circle;
-        private readonly Constants.CircleSide m_Side;
-        private readonly Distance m_Radius;
         private readonly Constants.CircleOrigin m_Origin;
+        private readonly Distance m_Radius;
+        private readonly Constants.CircleSide m_Side;
         private readonly Constants.TurnDirection m_TurnDirection;
 
         private TurnCircle()

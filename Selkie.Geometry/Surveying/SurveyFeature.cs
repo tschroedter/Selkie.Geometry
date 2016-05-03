@@ -21,6 +21,25 @@ namespace Selkie.Geometry.Surveying
             Length = UnknownLength;
         }
 
+        public SurveyFeature(int id,
+                             Point startPoint,
+                             Point endPoint,
+                             Angle angleToXAxisAtStartPoint,
+                             Angle angleToXAxisAtEndPoint,
+                             Constants.LineDirection runDirection,
+                             double length,
+                             bool isUnknown = false)
+        {
+            Id = id;
+            IsUnknown = isUnknown;
+            StartPoint = startPoint;
+            EndPoint = endPoint;
+            AngleToXAxisAtStartPoint = angleToXAxisAtStartPoint;
+            AngleToXAxisAtEndPoint = angleToXAxisAtEndPoint;
+            RunDirection = runDirection;
+            Length = length;
+        }
+
         public bool IsUnknown { get; private set; }
         public Point StartPoint { get; private set; }
         public Point EndPoint { get; private set; }
@@ -32,7 +51,24 @@ namespace Selkie.Geometry.Surveying
 
         public ISurveyFeature Reverse()
         {
-            return this;
+            if ( IsUnknown )
+            {
+                return this;
+            }
+
+            Angle angleToXAxisAtStartPoint =
+                Angle.FromDegrees(AngleToXAxisAtStartPoint.Degrees + Angle.For180Degrees.Degrees);
+            Angle angleToXAxisAtEndPoint =
+                Angle.FromDegrees(AngleToXAxisAtEndPoint.Degrees + Angle.For180Degrees.Degrees);
+
+            return new SurveyFeature(Id,
+                                     EndPoint,
+                                     StartPoint,
+                                     angleToXAxisAtStartPoint,
+                                     angleToXAxisAtEndPoint,
+                                     RunDirection,
+                                     Length,
+                                     IsUnknown);
         }
     }
 }

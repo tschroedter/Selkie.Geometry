@@ -9,9 +9,9 @@ namespace Selkie.Geometry.Shapes
     public class Point : IEquatable <Point>
     {
         public static readonly Point Unknown = new Point();
+        private readonly bool m_IsUnknown;
         private readonly double m_X;
         private readonly double m_Y;
-        private readonly bool m_IsUnknown;
 
         private Point()
         {

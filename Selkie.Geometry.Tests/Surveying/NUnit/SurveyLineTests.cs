@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
+using Selkie.Geometry.Primitives;
 using Selkie.Geometry.Shapes;
 using Selkie.Geometry.Surveying;
 
@@ -13,10 +14,10 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
         public void Setup()
         {
             m_Line = new Line(1,
-                              2.0,
-                              3.0,
-                              4.0,
-                              5.0);
+                              0.0,
+                              0.0,
+                              10.0,
+                              10.0);
 
             m_Sut = new SurveyLine(m_Line);
         }
@@ -91,8 +92,8 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
             ISurveyFeature actual = m_Sut.Reverse();
 
             // Assert
-            Assert.AreEqual(m_Line.Id,
-                            actual.Id,
+            Assert.AreEqual(actual.Id,
+                            m_Sut.Id,
                             "Id");
             Assert.AreEqual(m_Line.EndPoint,
                             actual.StartPoint,
@@ -100,6 +101,18 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
             Assert.AreEqual(m_Line.StartPoint,
                             actual.EndPoint,
                             "EndPoint");
+            Assert.AreEqual(Angle.For225Degrees,
+                            actual.AngleToXAxisAtStartPoint,
+                            "AngleToXAxisAtStartPoint");
+            Assert.AreEqual(Angle.For225Degrees,
+                            actual.AngleToXAxisAtEndPoint,
+                            "AngleToXAxisAtEndPoint");
+            Assert.AreEqual(Constants.LineDirection.Forward,
+                            actual.RunDirection,
+                            "RunDirection");
+            Assert.AreEqual(m_Line.Length,
+                            actual.Length,
+                            "Length");
         }
 
         [Test]
