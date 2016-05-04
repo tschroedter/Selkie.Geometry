@@ -1,5 +1,6 @@
 ﻿using Selkie.Geometry.Primitives;
 using Selkie.Geometry.Shapes;
+using Selkie.Windsor.Extensions;
 
 namespace Selkie.Geometry.Surveying
 {
@@ -69,6 +70,31 @@ namespace Selkie.Geometry.Surveying
                                      RunDirection,
                                      Length,
                                      IsUnknown);
+        }
+
+        public override string ToString()
+        {
+            string id = "[Id: {0}, IsUnknown: {1}]".Inject(Id,
+                                                           IsUnknown);
+
+            string points = "[{0:F2},{1:F2}] - [{2:F2},{3:F2}]".Inject(StartPoint.X,
+                                                                       StartPoint.Y,
+                                                                       EndPoint.X,
+                                                                       EndPoint.Y);
+
+            string angles = "[AngleAtStartPoint:{0:F2}, AngleAtEndPoint:{1:F2}]".Inject(
+                                                                                        AngleToXAxisAtStartPoint.Degrees,
+                                                                                        AngleToXAxisAtEndPoint.Degrees);
+
+            string length = "[Length:{0:F2}]".Inject(Length);
+
+            string runDirection = "[RunDirection:{0}]".Inject(RunDirection);
+
+            return "{0} {1} {2} {3} {4}".Inject(id,
+                                                points,
+                                                angles,
+                                                length,
+                                                runDirection);
         }
     }
 }
