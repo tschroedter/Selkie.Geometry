@@ -7,6 +7,9 @@ namespace Selkie.Geometry.Primitives
 {
     public sealed class Angle : IEquatable <Angle>
     {
+        private const double TwoPi = 2.0 * Math.PI;
+        private const double TwoPiMinusEpsilonRadians = TwoPi - EpsilonRadians;
+
         public const double RadiansFor360Degrees = 2.0 * Math.PI;
         public const double RadiansFor315Degrees = RadiansFor270Degrees + RadiansFor45Degrees;
         public const double RadiansFor270Degrees = RadiansFor360Degrees * 0.75;
@@ -43,26 +46,6 @@ namespace Selkie.Geometry.Primitives
                 return m_Degrees;
             }
         }
-
-        #region IEquatable<Angle> Members
-
-        // ReSharper disable once CodeAnnotationAnalyzer
-        public bool Equals(Angle other)
-        {
-            if ( ReferenceEquals(null,
-                                 other) )
-            {
-                return false;
-            }
-            if ( ReferenceEquals(this,
-                                 other) )
-            {
-                return true;
-            }
-            return Math.Abs(other.Radians - m_Radians) < EpsilonRadians;
-        }
-
-        #endregion
 
         [NotNull]
         public static Angle FromRadians(double radians)
@@ -317,6 +300,48 @@ namespace Selkie.Geometry.Primitives
 
             return FromRadians(radians);
         }
+
+        #region IEquatable<Angle> Members
+
+        // ReSharper disable once CodeAnnotationAnalyzer
+        public bool Equals(Angle other)
+        {
+            if ( ReferenceEquals(null,
+                                 other) )
+            {
+                return false;
+            }
+            if ( ReferenceEquals(this,
+                                 other) )
+            {
+                return true;
+            }
+
+            if ( IsEqualForZeroAnd2Pi(other) )
+            {
+                return true;
+            }
+
+            return Math.Abs(other.Radians - m_Radians) < EpsilonRadians;
+        }
+
+        private bool IsEqualForZeroAnd2Pi(Angle other)
+        {
+            if ( other.Radians < EpsilonRadians &&
+                 m_Radians > TwoPiMinusEpsilonRadians )
+            {
+                return true;
+            }
+
+            if ( other.Radians > TwoPiMinusEpsilonRadians &&
+                 m_Radians < EpsilonRadians )
+            {
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
 
         // ReSharper disable InconsistentNaming
         // ReSharper restore InconsistentNaming

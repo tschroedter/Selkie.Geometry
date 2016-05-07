@@ -233,6 +233,24 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         }
 
         [Test]
+        public void EqualsReturnsTrueForZeroAnd360Test()
+        {
+            Angle angle1 = Angle.ForZeroDegrees;
+            Angle angle2 = Angle.For360Degrees;
+
+            Assert.True(angle1.Equals(angle2));
+        }
+
+        [Test]
+        public void EqualsReturnsTrueFor360AndZeroTest()
+        {
+            Angle angle1 = Angle.For360Degrees;
+            Angle angle2 = Angle.ForZeroDegrees;
+
+            Assert.True(angle1.Equals(angle2));
+        }
+
+        [Test]
         public void For135DegreesTest()
         {
             const double expected = Math.PI / 2.0 + Math.PI / 4.0;
