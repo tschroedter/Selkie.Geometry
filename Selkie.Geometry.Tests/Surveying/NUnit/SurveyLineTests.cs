@@ -46,6 +46,16 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
         }
 
         [Test]
+        public void Constructor_SetsLine_WhenCalled()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.AreEqual(m_Line,
+                            m_Sut.Line);
+        }
+
+        [Test]
         public void EndPoint_ReturnsLinesEndPoint_WhenCalled()
         {
             // Arrange

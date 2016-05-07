@@ -17,6 +17,9 @@ namespace Selkie.Geometry.Surveying
                    line.Length,
                    line.IsUnknown)
         {
+            Line = line;
         }
+
+        public ILine Line { get; private set; }
     }
 }
