@@ -6,7 +6,8 @@ using SelkieConstants = Selkie.Geometry.Constants;
 namespace Selkie.Geometry.Shapes
 {
     public interface ILine
-        : IPolylineSegment,
+        : IShape,
+          IPolylineSegment,
           IEquatable <ILine>,
           IComparable <ILine>
     {

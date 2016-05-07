@@ -80,6 +80,7 @@
     <Compile Include="Shapes\IPolylineSegment.cs" />
     <Compile Include="Shapes\Calculators\IsPointOnPolylineSegmentsCalculator.cs" />
     <Compile Include="Shapes\Calculators\IsPointOnArcSegmentCalculator.cs" />
+    <Compile Include="Shapes\IShape.cs" />
     <Compile Include="Shapes\ITurnCircle.cs" />
     <Compile Include="Shapes\ITurnCircleArcSegment.cs" />
     <Compile Include="Shapes\Line.cs" />

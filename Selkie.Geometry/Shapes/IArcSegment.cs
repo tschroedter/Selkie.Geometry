@@ -4,7 +4,8 @@ using SelkieConstants = Selkie.Geometry.Constants;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface IArcSegment : IPolylineSegment
+    public interface IArcSegment
+        : IPolylineSegment
     {
         [NotNull]
         Point CentrePoint { get; }

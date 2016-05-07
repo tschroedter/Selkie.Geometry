@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface IPolyline
+    public interface IPolyline : IShape
     {
         int Id { get; }
         bool IsUnknown { get; }

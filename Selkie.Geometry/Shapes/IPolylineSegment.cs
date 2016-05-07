@@ -2,7 +2,7 @@
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface IPolylineSegment
+    public interface IPolylineSegment : IShape
     {
         double Length { get; }
 

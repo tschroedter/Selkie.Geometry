@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface ICirclePair
+    public interface ICirclePair : IShape
     {
         [NotNull]
         ICircle Zero { get; }

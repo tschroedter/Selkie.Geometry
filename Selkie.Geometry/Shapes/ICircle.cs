@@ -3,7 +3,7 @@ using Selkie.Geometry.Primitives;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface ICircle
+    public interface ICircle : IShape
     {
         [NotNull]
         Point CentrePoint { get; }
