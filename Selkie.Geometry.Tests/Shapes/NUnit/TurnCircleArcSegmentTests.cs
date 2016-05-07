@@ -35,6 +35,58 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         private Point m_EndPoint;
 
         [Test]
+        public void AngleToXAxisAtEndPoint_ReturnsAngle_ForClockwise()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            m_Sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtEndPoint_ReturnsAngle_ForCounterclockwiseTest()
+        {
+            // Arrange
+            // Act
+            var sut = new TurnCircleArcSegment(m_Circle,
+                                               Constants.TurnDirection.Counterclockwise,
+                                               Constants.CircleOrigin.Start,
+                                               m_StartPoint,
+                                               m_EndPoint);
+
+            // Assert
+            Assert.AreEqual(Angle.For180Degrees,
+                            sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPoint_ReturnsAngle_ForClockwise()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.AreEqual(Angle.For270Degrees,
+                            m_Sut.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPoint_ReturnsAngle_ForCounterclockwise()
+        {
+            // Arrange
+            // Act
+            var sut = new TurnCircleArcSegment(m_Circle,
+                                               Constants.TurnDirection.Counterclockwise,
+                                               Constants.CircleOrigin.Start,
+                                               m_StartPoint,
+                                               m_EndPoint);
+
+            // Assert
+            Assert.AreEqual(Angle.For90Degrees,
+                            sut.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
         public void Constructor_CreatesArcSegment_WhenCalled()
         {
             // Arrange
@@ -63,6 +115,42 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         {
             Assert.AreEqual(Angle.For270Degrees,
                             m_Sut.Angle);
+        }
+
+        [Test]
+        public void Constructor_SetsAngleToXAxisAtEndPoint_ForInternal()
+        {
+            // Arrange
+            var arcSegment = Substitute.For <IArcSegment>();
+            arcSegment.AngleToXAxisAtEndPoint.Returns(Angle.For45Degrees);
+            var sut = new TurnCircleArcSegment(arcSegment,
+                                               Constants.TurnDirection.Clockwise,
+                                               Constants.CircleOrigin.Start);
+
+            // Act
+            sut.IsOnLine(m_StartPoint);
+
+            // Assert
+            Assert.AreEqual(arcSegment.AngleToXAxisAtEndPoint,
+                            sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void Constructor_SetsAngleToXAxisAtStartPoint_ForInternal()
+        {
+            // Arrange
+            var arcSegment = Substitute.For <IArcSegment>();
+            arcSegment.AngleToXAxisAtStartPoint.Returns(Angle.For45Degrees);
+            var sut = new TurnCircleArcSegment(arcSegment,
+                                               Constants.TurnDirection.Clockwise,
+                                               Constants.CircleOrigin.Start);
+
+            // Act
+            sut.IsOnLine(m_StartPoint);
+
+            // Assert
+            Assert.AreEqual(arcSegment.AngleToXAxisAtStartPoint,
+                            sut.AngleToXAxisAtStartPoint);
         }
 
         [Test]
@@ -205,6 +293,32 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             // Assert
             Assert.AreEqual(expected,
                             actual);
+        }
+
+        [Test]
+        public void Unknown_SetsAngleToXAxisAtEndPointToUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            ITurnCircleArcSegment actual = TurnCircleArcSegment.Unknown;
+
+            // Assert
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxisAtEndPoint,
+                            "AngleToXAxisAtEndPoint");
+        }
+
+        [Test]
+        public void Unknown_SetsAngleToXAxisAtStartPointToUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            ITurnCircleArcSegment actual = TurnCircleArcSegment.Unknown;
+
+            // Assert
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxisAtStartPoint,
+                            "AngleToXAxisAtStartPoint");
         }
 
         [Test]

@@ -29,6 +29,26 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         private Point m_StartPoint;
 
         [Test]
+        public void AngleToXAxisAtEndPointTest()
+        {
+            Angle expected = Angle.FromDegrees(53.13010235415598);
+            Angle actual = m_Line.AngleToXAxisAtEndPoint;
+
+            Assert.AreEqual(expected,
+                            actual);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPointTest()
+        {
+            Angle expected = Angle.FromDegrees(53.13010235415598);
+            Angle actual = m_Line.AngleToXAxisAtStartPoint;
+
+            Assert.AreEqual(expected,
+                            actual);
+        }
+
+        [Test]
         public void AngleToXAxisForDirectionReverseTest()
         {
             var line = new Line(m_StartPoint,
@@ -37,6 +57,16 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
 
             Angle expected = Angle.FromDegrees(233.13010235415598); // 53.13 + 180.0
             Angle actual = line.AngleToXAxis;
+
+            Assert.AreEqual(expected,
+                            actual);
+        }
+
+        [Test]
+        public void AngleToXAxisTest()
+        {
+            Angle expected = Angle.FromDegrees(53.13010235415598);
+            Angle actual = m_Line.AngleToXAxis;
 
             Assert.AreEqual(expected,
                             actual);
@@ -596,6 +626,12 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             Assert.AreEqual(double.MaxValue,
                             actual.Y2,
                             "Y2");
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxisAtEndPoint,
+                            "AngleToXAxisAtEndPoint");
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxisAtStartPoint,
+                            "AngleToXAxisAtStartPoint");
         }
 
         [Test]
@@ -641,16 +677,6 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                                            4.0));
 
             Assert.True(line1 != line2);
-        }
-
-        [Test]
-        public void RadiansRelativeToXAxisTest()
-        {
-            Angle expected = Angle.FromDegrees(53.13010235415598);
-            Angle actual = m_Line.AngleToXAxis;
-
-            Assert.AreEqual(expected,
-                            actual);
         }
 
         [Test]
@@ -715,6 +741,33 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
 
             Assert.AreEqual(Constants.TurnDirection.Clockwise,
                             actual);
+        }
+
+        [Test]
+        public void Unknown_AngleToXAxisAtEndPointReturnsUnknown_WhenCalled()
+        {
+            Line actual = Line.Unknown;
+
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void Unknown_AngleToXAxisAtStartPointReturnsUnknown_WhenCalled()
+        {
+            Line actual = Line.Unknown;
+
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
+        public void Unknown_AngleToXAxisReturnsUnknown_WhenCalled()
+        {
+            Line actual = Line.Unknown;
+
+            Assert.AreEqual(Angle.Unknown,
+                            actual.AngleToXAxis);
         }
 
         [Test]

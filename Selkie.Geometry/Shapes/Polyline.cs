@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Selkie.Geometry.Primitives;
 
 namespace Selkie.Geometry.Shapes
 {
@@ -18,6 +19,8 @@ namespace Selkie.Geometry.Shapes
             EndPoint = Point.Unknown;
             StartPoint = Point.Unknown;
             RunDirection = Constants.LineDirection.Unknown;
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         public Polyline(int id,
@@ -28,6 +31,8 @@ namespace Selkie.Geometry.Shapes
             EndPoint = Point.Unknown;
             StartPoint = Point.Unknown;
             RunDirection = runDirection;
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         private Polyline([NotNull] IEnumerable <IPolylineSegment> segments)
@@ -75,6 +80,23 @@ namespace Selkie.Geometry.Shapes
 
             StartPoint = DetermineStartPoint(m_Segments);
             EndPoint = DetermineEndPoint(m_Segments);
+
+            AngleToXAxisAtStartPoint = DetermineAngleToXAxisAtStartPoint(m_Segments);
+            AngleToXAxisAtEndPoint = DetermineAngleToXAxisAtEndPoint(m_Segments);
+        }
+
+        private Angle DetermineAngleToXAxisAtEndPoint([NotNull] List <IPolylineSegment> segments)
+        {
+            IPolylineSegment segment = segments.First();
+
+            return segment.AngleToXAxisAtEndPoint;
+        }
+
+        private Angle DetermineAngleToXAxisAtStartPoint([NotNull] List <IPolylineSegment> segments)
+        {
+            IPolylineSegment segment = segments.First();
+
+            return segment.AngleToXAxisAtStartPoint;
         }
 
         public Constants.TurnDirection TurnDirectionToPoint(Point point)
@@ -103,13 +125,16 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+
         public int Id { get; private set; }
 
         public bool IsUnknown { get; private set; }
 
         public double Length { get; private set; }
 
-        public Constants.LineDirection RunDirection { get; private set; } // todo
+        public Constants.LineDirection RunDirection { get; private set; }
 
         public IPolyline Reverse()
         {

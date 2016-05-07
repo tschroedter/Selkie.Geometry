@@ -109,6 +109,7 @@
     <Compile Include="Shapes\NUnit\TurnCircleTests.cs" />
     <Compile Include="Surveying\NUnit\SurveyFeatureTests.cs" />
     <Compile Include="Surveying\NUnit\SurveyLineTests.cs" />
+    <Compile Include="Surveying\NUnit\SurveyPolylineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selkie.Geometry\Selkie.Geometry.csproj">

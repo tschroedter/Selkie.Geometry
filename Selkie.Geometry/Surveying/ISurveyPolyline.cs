@@ -3,9 +3,9 @@ using Selkie.Geometry.Shapes;
 
 namespace Selkie.Geometry.Surveying
 {
-    public interface ISurveyLine : ISurveyFeature
+    public interface ISurveyPolyline : ISurveyFeature
     {
         [NotNull]
-        ILine Line { get; }
+        IPolyline Polyline { get; }
     }
 }

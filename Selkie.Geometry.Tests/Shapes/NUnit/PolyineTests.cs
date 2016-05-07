@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
+using Selkie.Geometry.Primitives;
 using Selkie.Geometry.Shapes;
 
 namespace Selkie.Geometry.Tests.Shapes.NUnit
@@ -29,11 +30,14 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             m_Segment1 = Substitute.For <IPolylineSegment>();
             m_Segment1.StartPoint.Returns(m_StartPointOne);
             m_Segment1.EndPoint.Returns(m_EndPointOne);
+            m_Segment1.AngleToXAxisAtStartPoint.Returns(Angle.For45Degrees);
             m_Segment1.Length.Returns(1.0);
+
             m_Segment2 = Substitute.For <IPolylineSegment>();
             m_Segment2.Length.Returns(2.0);
             m_Segment2.StartPoint.Returns(m_StartPointTwo);
             m_Segment2.EndPoint.Returns(m_EndPointTwo);
+            m_Segment1.AngleToXAxisAtEndPoint.Returns(Angle.For180Degrees);
 
             m_Sut = new Polyline(123,
                                  Constants.LineDirection.Forward);
@@ -100,6 +104,84 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             Assert.AreEqual(m_EndPointTwo,
                             m_Sut.EndPoint,
                             "EndtPoint");
+        }
+
+        [Test]
+        public void AngleToXAxisAtEndPoint_ReturnsAngle_WhenSegmentAreAdded()
+        {
+            // Arrange
+            // Act
+            m_Sut.AddSegment(m_Segment1);
+
+            // Assert
+            Assert.AreEqual(m_Segment1.AngleToXAxisAtEndPoint,
+                            m_Sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtEndPoint_ReturnsAngle_WhenSegmentsAreAdded()
+        {
+            // Arrange
+            m_Sut.AddSegment(m_Segment1);
+
+            // Act
+            m_Sut.AddSegment(m_Segment2);
+
+            // Assert
+            Assert.AreEqual(m_Segment1.AngleToXAxisAtEndPoint,
+                            m_Sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtEndPoint_ReturnsUnknown_AsDefault()
+        {
+            // Arrange
+            // Act
+            var sut = new Polyline(1,
+                                   Constants.LineDirection.Forward);
+
+            // Assert
+            Assert.AreEqual(Angle.Unknown,
+                            sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPoint_ReturnsAngle_WhenSegmentAreAdded()
+        {
+            // Arrange
+            // Act
+            m_Sut.AddSegment(m_Segment1);
+
+            // Assert
+            Assert.AreEqual(m_Segment1.AngleToXAxisAtStartPoint,
+                            m_Sut.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPoint_ReturnsAngle_WhenSegmentsAreAdded()
+        {
+            // Arrange
+            m_Sut.AddSegment(m_Segment1);
+
+            // Act
+            m_Sut.AddSegment(m_Segment2);
+
+            // Assert
+            Assert.AreEqual(m_Segment1.AngleToXAxisAtStartPoint,
+                            m_Sut.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPoint_ReturnsUnknown_AsDefault()
+        {
+            // Arrange
+            // Act
+            var sut = new Polyline(1,
+                                   Constants.LineDirection.Forward);
+
+            // Assert
+            Assert.AreEqual(Angle.Unknown,
+                            sut.AngleToXAxisAtStartPoint);
         }
 
         [Test]
@@ -237,6 +319,30 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             // Assert
             Assert.AreEqual(Constants.TurnDirection.Unknown,
                             actual);
+        }
+
+        [Test]
+        public void Unknown_AngleToXAxisAtEndPointReturnsUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.AreEqual(Angle.Unknown,
+                            sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void Unknown_AngleToXAxisAtStartPointReturnsUnknown_WhenCreated()
+        {
+            // Arrange
+            // Act
+            Polyline sut = Polyline.Unknown;
+
+            // Assert
+            Assert.AreEqual(Angle.Unknown,
+                            sut.AngleToXAxisAtStartPoint);
         }
 
         [Test]

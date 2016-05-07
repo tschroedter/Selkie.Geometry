@@ -17,6 +17,9 @@ namespace Selkie.Geometry.Shapes
         {
             IsUnknown = true;
             ArcSegment = Shapes.ArcSegment.Unknown;
+
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         internal TurnCircleArcSegment(IArcSegment arcSegment,
@@ -26,6 +29,9 @@ namespace Selkie.Geometry.Shapes
             ArcSegment = arcSegment;
             m_Direction = direction;
             m_CircleOrigin = circleOrigin;
+
+            AngleToXAxisAtEndPoint = arcSegment.AngleToXAxisAtEndPoint;
+            AngleToXAxisAtStartPoint = arcSegment.AngleToXAxisAtStartPoint;
         }
 
         public TurnCircleArcSegment([NotNull] ICircle circle,
@@ -41,6 +47,9 @@ namespace Selkie.Geometry.Shapes
 
             m_Direction = direction;
             m_CircleOrigin = circleOrigin;
+
+            AngleToXAxisAtEndPoint = ArcSegment.AngleToXAxisAtEndPoint;
+            AngleToXAxisAtStartPoint = ArcSegment.AngleToXAxisAtStartPoint;
         }
 
         public Angle Angle
@@ -112,6 +121,9 @@ namespace Selkie.Geometry.Shapes
                 return ArcSegment.EndPoint;
             }
         }
+
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
 
         public double Length
         {

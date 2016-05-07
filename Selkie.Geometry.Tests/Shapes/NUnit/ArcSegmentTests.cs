@@ -54,6 +54,42 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         }
 
         [Test]
+        public void AngleToXAxisAtEndPointReturnsAngleForClockwiseTest()
+        {
+            var sut = new ArcSegment(m_Circle,
+                                     m_StartPoint,
+                                     m_EndPoint);
+
+            Assert.AreEqual(Angle.For180Degrees,
+                            sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtEndPointReturnsAngleTest()
+        {
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            m_Sut.AngleToXAxisAtEndPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPointReturnsAngleForClockwiseTest()
+        {
+            var sut = new ArcSegment(m_Circle,
+                                     m_StartPoint,
+                                     m_EndPoint);
+
+            Assert.AreEqual(Angle.ForZeroDegrees,
+                            sut.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
+        public void AngleToXAxisAtStartPointReturnsAngleTest()
+        {
+            Assert.AreEqual(Angle.For180Degrees,
+                            m_Sut.AngleToXAxisAtStartPoint);
+        }
+
+        [Test]
         public void Azimuth0DegreesTest()
         {
             var endPoint = new Point(2.0,

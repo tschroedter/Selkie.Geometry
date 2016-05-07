@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Selkie.Geometry.Primitives;
 
 namespace Selkie.Geometry.Shapes
 {
@@ -18,6 +19,9 @@ namespace Selkie.Geometry.Shapes
 
         [NotNull]
         IEnumerable <IPolylineSegment> Segments { get; }
+
+        Angle AngleToXAxisAtStartPoint { get; }
+        Angle AngleToXAxisAtEndPoint { get; }
 
         Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
 

@@ -14,7 +14,7 @@ namespace Selkie.Geometry.Shapes
         public const int UnknownId = int.MinValue;
         public static readonly Line Unknown = new Line();
 
-        private readonly ILineDirectionCalculator m_Calculator = new LineDirectionCalculator(); // todo IoC
+        private readonly ILineDirectionCalculator m_Calculator = new LineDirectionCalculator();
         private readonly Point m_EndPoint;
         private readonly bool m_IsUnknown;
         private readonly Constants.LineDirection m_RunDirection;
@@ -29,6 +29,9 @@ namespace Selkie.Geometry.Shapes
                    Constants.LineDirection.Unknown,
                    true)
         {
+            AngleToXAxis = Angle.Unknown;
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         // ReSharper disable once TooManyDependencies
@@ -139,6 +142,8 @@ namespace Selkie.Geometry.Shapes
             AngleToXAxis = CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                   endPoint,
                                                                   lineDirection);
+            AngleToXAxisAtStartPoint = AngleToXAxis;
+            AngleToXAxisAtEndPoint = AngleToXAxis;
         }
 
         #region IEquatable<Line> Members
@@ -362,6 +367,9 @@ namespace Selkie.Geometry.Shapes
                 return m_EndPoint;
             }
         }
+
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
 
         public double Length { get; private set; }
 

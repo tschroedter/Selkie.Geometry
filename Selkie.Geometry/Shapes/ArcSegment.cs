@@ -23,6 +23,8 @@ namespace Selkie.Geometry.Shapes
             TurnDirection = Constants.TurnDirection.Unknown;
             AngleClockwise = Angle.Unknown;
             AngleCounterClockwise = Angle.Unknown;
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         public ArcSegment([NotNull] ICircle circle,
@@ -55,9 +57,30 @@ namespace Selkie.Geometry.Shapes
             Length = arcTurnDirection == Constants.TurnDirection.Clockwise
                          ? LengthClockwise
                          : LengthCounterClockwise;
+
+            AngleToXAxisAtStartPoint = CalculateTangentAngleToXAxisAtPoint(circle.CentrePoint,
+                                                                           startPoint,
+                                                                           arcTurnDirection);
+            AngleToXAxisAtEndPoint = CalculateTangentAngleToXAxisAtPoint(circle.CentrePoint,
+                                                                         endPoint,
+                                                                         arcTurnDirection);
         }
 
         public bool IsUnknown { get; private set; }
+
+        private Angle CalculateTangentAngleToXAxisAtPoint([NotNull] Point centrePoint,
+                                                          [NotNull] Point pointOnCircle,
+                                                          Constants.TurnDirection turnDirection)
+        {
+            var line = new Line(centrePoint,
+                                pointOnCircle);
+
+            Angle angleToXAxis = turnDirection == Constants.TurnDirection.Clockwise
+                                     ? line.AngleToXAxis - Angle.For90Degrees
+                                     : line.AngleToXAxis + Angle.For90Degrees;
+
+            return angleToXAxis;
+        }
 
         internal void ValidateStartAndEndPoint([NotNull] ICircle circle,
                                                [NotNull] Point startPoint,
@@ -123,6 +146,8 @@ namespace Selkie.Geometry.Shapes
         public Point StartPoint { get; private set; }
 
         public Point EndPoint { get; private set; }
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
 
         public Angle AngleClockwise { get; private set; }
 

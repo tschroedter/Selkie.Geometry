@@ -207,6 +207,15 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         }
 
         [Test]
+        public void EqualsReturnsTrueFor360AndZeroTest()
+        {
+            Angle angle1 = Angle.For360Degrees;
+            Angle angle2 = Angle.ForZeroDegrees;
+
+            Assert.True(angle1.Equals(angle2));
+        }
+
+        [Test]
         public void EqualsReturnsTrueForSameTest()
         {
             Angle angle = Angle.For45Degrees;
@@ -237,15 +246,6 @@ namespace Selkie.Geometry.Tests.Primitives.NUnit
         {
             Angle angle1 = Angle.ForZeroDegrees;
             Angle angle2 = Angle.For360Degrees;
-
-            Assert.True(angle1.Equals(angle2));
-        }
-
-        [Test]
-        public void EqualsReturnsTrueFor360AndZeroTest()
-        {
-            Angle angle1 = Angle.For360Degrees;
-            Angle angle2 = Angle.ForZeroDegrees;
 
             Assert.True(angle1.Equals(angle2));
         }
