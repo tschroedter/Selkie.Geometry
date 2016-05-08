@@ -85,14 +85,14 @@ namespace Selkie.Geometry.Shapes
             AngleToXAxisAtEndPoint = DetermineAngleToXAxisAtEndPoint(m_Segments);
         }
 
-        private Angle DetermineAngleToXAxisAtEndPoint([NotNull] List <IPolylineSegment> segments)
+        private Angle DetermineAngleToXAxisAtEndPoint([NotNull] IEnumerable <IPolylineSegment> segments)
         {
             IPolylineSegment segment = segments.First();
 
             return segment.AngleToXAxisAtEndPoint;
         }
 
-        private Angle DetermineAngleToXAxisAtStartPoint([NotNull] List <IPolylineSegment> segments)
+        private Angle DetermineAngleToXAxisAtStartPoint([NotNull] IEnumerable <IPolylineSegment> segments)
         {
             IPolylineSegment segment = segments.First();
 

@@ -6,8 +6,7 @@ using SelkieConstants = Selkie.Geometry.Constants;
 namespace Selkie.Geometry.Shapes
 {
     public interface ILine
-        : IShape,
-          IPolylineSegment,
+        : IPolylineSegment,
           IEquatable <ILine>,
           IComparable <ILine>
     {
@@ -20,7 +19,7 @@ namespace Selkie.Geometry.Shapes
         [NotNull]
         Angle AngleToXAxis { get; }
 
-        Constants.LineDirection RunDirection { get; } // todo maybe call LineDirection
+        Constants.LineDirection RunDirection { get; }
         int Id { get; }
     }
 }

@@ -157,11 +157,11 @@ namespace Selkie.Geometry.Tests.Surveying.NUnit
         public void ToString_ReturnsString_WhenCalled()
         {
             // Arrange
-            string expected = "[Id: 1, IsUnknown: False] " +
-                              "[1.00,2.00] - [3.00,4.00] " +
-                              "[AngleAtStartPoint:45.00, AngleAtEndPoint:180.00] " +
-                              "[Length:123.00] " +
-                              "[RunDirection:Forward]";
+            const string expected = "[Id: 1, IsUnknown: False] " +
+                                    "[1.00,2.00] - [3.00,4.00] " +
+                                    "[AngleAtStartPoint:45.00, AngleAtEndPoint:180.00] " +
+                                    "[Length:123.00] " +
+                                    "[RunDirection:Forward]";
 
             // Act
             string actual = m_Sut.ToString();
