@@ -7,16 +7,10 @@ namespace Selkie.Geometry.Shapes.Calculators
 {
     public class CircleCentreToPointCalculator : ICircleCentreToPointCalculator
     {
-        private readonly Point m_CentrePoint;
-        private Angle m_AngleRelativeToXAxisCounterClockwise = Angle.Unknown;
-        private Angle m_AngleRelativeToYAxisClockwise = Angle.Unknown;
-        private Angle m_AngleRelativeToYAxisCounterclockwise = Angle.Unknown;
-        private Point m_Point = Point.Unknown;
-
         public CircleCentreToPointCalculator([NotNull] Point centrePoint,
                                              [NotNull] Point point)
         {
-            m_CentrePoint = centrePoint;
+            CentrePoint = centrePoint;
             Point = point;
 
             Calculate(Point);
@@ -24,37 +18,21 @@ namespace Selkie.Geometry.Shapes.Calculators
 
         public CircleCentreToPointCalculator([NotNull] Point centrePoint)
         {
-            m_CentrePoint = centrePoint;
+            CentrePoint = centrePoint;
             Point = Point.Unknown;
         }
 
         #region ICircleCentreToPointCalculator Members
 
-        public Point CentrePoint
-        {
-            get
-            {
-                return m_CentrePoint;
-            }
-        }
+        public Point CentrePoint { get; }
 
-        public Point Point
-        {
-            get
-            {
-                return m_Point;
-            }
-            private set
-            {
-                m_Point = value;
-            }
-        }
+        public Point Point { get; private set; }
 
         public void Calculate(Point point)
         {
             Point = point;
 
-            if ( m_CentrePoint.IsUnknown ||
+            if ( CentrePoint.IsUnknown ||
                  point.IsUnknown )
             {
                 AngleRelativeToXAxisCounterClockwise = Angle.ForZeroDegrees;
@@ -65,48 +43,20 @@ namespace Selkie.Geometry.Shapes.Calculators
             }
 
             // Note: maybe it's enough to calculate m_AngleRelativeToXAxisCounterClockwise
-            AngleRelativeToXAxisCounterClockwise = CalculateAngleRelativeToXAxisCounterClockwise(m_CentrePoint,
+            AngleRelativeToXAxisCounterClockwise = CalculateAngleRelativeToXAxisCounterClockwise(CentrePoint,
                                                                                                  point);
             AngleRelativeToYAxisCounterclockwise =
                 Angle.RelativeToYAxisCounterclockwise(AngleRelativeToXAxisCounterClockwise);
             AngleRelativeToYAxisClockwise = Angle.Inverse(AngleRelativeToYAxisCounterclockwise);
         }
 
-        public Angle AngleRelativeToXAxisCounterClockwise
-        {
-            get
-            {
-                return m_AngleRelativeToXAxisCounterClockwise;
-            }
-            private set
-            {
-                m_AngleRelativeToXAxisCounterClockwise = value;
-            }
-        }
+        public Angle AngleRelativeToXAxisCounterClockwise { get; private set; } = Angle.Unknown;
 
         public Angle AngleRelativeToYAxisClockwise // todo double check if this is really Clockwise
-        {
-            get
-            {
-                return m_AngleRelativeToYAxisClockwise;
-            }
-            private set
-            {
-                m_AngleRelativeToYAxisClockwise = value;
-            }
-        }
+        { get; private set; } = Angle.Unknown;
 
         public Angle AngleRelativeToYAxisCounterclockwise // todo double check if this is really Counterclockwise
-        {
-            get
-            {
-                return m_AngleRelativeToYAxisCounterclockwise;
-            }
-            private set
-            {
-                m_AngleRelativeToYAxisCounterclockwise = value;
-            }
-        }
+        { get; private set; } = Angle.Unknown;
 
         // todo double check if this is really Counterclockwise
         public Angle CalculateAngleRelativeToXAxisCounterClockwise(Point centre,

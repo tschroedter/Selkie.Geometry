@@ -16,10 +16,10 @@ namespace Selkie.Geometry.Shapes
         Angle AngleToXAxisAtEndPoint { get; }
         Angle AngleToXAxisAtStartPoint { get; }
 
+        bool IsOnLine(Point point);
+
         [NotNull]
         IPolylineSegment Reverse();
-
-        bool IsOnLine(Point point);
 
         Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
     }

@@ -6,36 +6,22 @@ namespace Selkie.Geometry.Primitives
 {
     public class Distance : IEquatable <Distance>
     {
-        public static readonly Distance Unknown = new Distance();
-        public static readonly Distance Zero = new Distance(0.0);
-        private readonly bool m_IsUnknown;
-        private readonly double m_Length;
-
         private Distance()
         {
-            m_IsUnknown = true;
+            IsUnknown = true;
         }
 
         public Distance(double length)
         {
-            m_Length = length;
+            Length = length;
         }
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public static readonly Distance Unknown = new Distance();
+        public static readonly Distance Zero = new Distance(0.0);
 
-        public double Length
-        {
-            get
-            {
-                return m_Length;
-            }
-        }
+        public bool IsUnknown { get; }
+
+        public double Length { get; }
 
         #region IEquatable<Distance> Members
 
@@ -52,7 +38,7 @@ namespace Selkie.Geometry.Primitives
             {
                 return true;
             }
-            return Math.Abs(m_Length - other.Length) < SelkieConstants.EpsilonDistance;
+            return Math.Abs(Length - other.Length) < SelkieConstants.EpsilonDistance;
         }
 
         #endregion
@@ -65,18 +51,11 @@ namespace Selkie.Geometry.Primitives
             return new Distance(length);
         }
 
-        public static Distance operator -(Distance one,
-                                          Distance two)
+        public static bool operator ==(Distance left,
+                                       Distance right)
         {
-            double length = one.Length - two.Length;
-
-            return new Distance(length);
-        }
-
-        public static bool operator <(Distance one,
-                                      Distance two)
-        {
-            return one.Length < two.Length;
+            return Equals(left,
+                          right);
         }
 
         public static bool operator >(Distance one,
@@ -85,23 +64,10 @@ namespace Selkie.Geometry.Primitives
             return one.Length > two.Length;
         }
 
-        public static bool operator <=(Distance one,
-                                       Distance two)
-        {
-            return one.Length <= two.Length;
-        }
-
         public static bool operator >=(Distance one,
                                        Distance two)
         {
             return one.Length >= two.Length;
-        }
-
-        public static bool operator ==(Distance left,
-                                       Distance right)
-        {
-            return Equals(left,
-                          right);
         }
 
         public static bool operator !=(Distance left,
@@ -109,6 +75,26 @@ namespace Selkie.Geometry.Primitives
         {
             return !Equals(left,
                            right);
+        }
+
+        public static bool operator <(Distance one,
+                                      Distance two)
+        {
+            return one.Length < two.Length;
+        }
+
+        public static bool operator <=(Distance one,
+                                       Distance two)
+        {
+            return one.Length <= two.Length;
+        }
+
+        public static Distance operator -(Distance one,
+                                          Distance two)
+        {
+            double length = one.Length - two.Length;
+
+            return new Distance(length);
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -133,12 +119,12 @@ namespace Selkie.Geometry.Primitives
 
         public override int GetHashCode()
         {
-            return m_Length.GetHashCode();
+            return Length.GetHashCode();
         }
 
         public override string ToString()
         {
-            return "Length: {0:F2}".Inject(m_Length);
+            return "Length: {0:F2}".Inject(Length);
         }
     }
 }

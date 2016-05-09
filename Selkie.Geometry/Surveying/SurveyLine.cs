@@ -20,6 +20,6 @@ namespace Selkie.Geometry.Surveying
             Line = line;
         }
 
-        public ILine Line { get; private set; }
+        public ILine Line { get; }
     }
 }

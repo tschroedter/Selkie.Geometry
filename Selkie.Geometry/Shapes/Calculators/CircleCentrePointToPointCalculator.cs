@@ -5,31 +5,27 @@ namespace Selkie.Geometry.Shapes.Calculators
 {
     public class CircleCentrePointToPointCalculator : ICircleCentrePointToPointCalculator
     {
-        private readonly Angle m_AngleRelativeToYAxisClockwise;
-        private readonly Angle m_AngleRelativeToYAxisCounterClockwise;
-        private readonly Point m_CentrePoint;
-        private readonly Point m_EndPoint;
-        private readonly Point m_StartPoint;
-
         public CircleCentrePointToPointCalculator([NotNull] Point centrePoint,
                                                   [NotNull] Point startPoint,
                                                   [NotNull] Point endPoint)
         {
-            m_CentrePoint = centrePoint;
-            m_StartPoint = startPoint;
-            m_EndPoint = endPoint;
+            CentrePoint = centrePoint;
+            StartPoint = startPoint;
+            EndPoint = endPoint;
+            AngleRelativeToYAxisCounterClockwise = Angle.Unknown;
+            AngleRelativeToYAxisClockwise = Angle.Unknown;
 
-            if ( m_CentrePoint == Point.Unknown ||
-                 m_StartPoint == Point.Unknown ||
-                 m_EndPoint == Point.Unknown )
+            if ( CentrePoint == Point.Unknown ||
+                 StartPoint == Point.Unknown ||
+                 EndPoint == Point.Unknown )
             {
                 return;
             }
 
-            m_AngleRelativeToYAxisCounterClockwise = RadiansBetweenPointsCounterClockwise(centrePoint,
-                                                                                          startPoint,
-                                                                                          endPoint);
-            m_AngleRelativeToYAxisClockwise = Angle.Inverse(m_AngleRelativeToYAxisCounterClockwise);
+            AngleRelativeToYAxisCounterClockwise = RadiansBetweenPointsCounterClockwise(centrePoint,
+                                                                                        startPoint,
+                                                                                        endPoint);
+            AngleRelativeToYAxisClockwise = Angle.Inverse(AngleRelativeToYAxisCounterClockwise);
         }
 
         [NotNull]
@@ -52,45 +48,15 @@ namespace Selkie.Geometry.Shapes.Calculators
 
         #region ICircleCentrePointToPointCalculator Members
 
-        public Point CentrePoint
-        {
-            get
-            {
-                return m_CentrePoint;
-            }
-        }
+        public Point CentrePoint { get; }
 
-        public Point StartPoint
-        {
-            get
-            {
-                return m_StartPoint;
-            }
-        }
+        public Point StartPoint { get; }
 
-        public Point EndPoint
-        {
-            get
-            {
-                return m_EndPoint;
-            }
-        }
+        public Point EndPoint { get; }
 
-        public Angle AngleRelativeToYAxisClockwise
-        {
-            get
-            {
-                return m_AngleRelativeToYAxisClockwise;
-            }
-        }
+        public Angle AngleRelativeToYAxisClockwise { get; }
 
-        public Angle AngleRelativeToYAxisCounterClockwise
-        {
-            get
-            {
-                return m_AngleRelativeToYAxisCounterClockwise;
-            }
-        }
+        public Angle AngleRelativeToYAxisCounterClockwise { get; }
 
         #endregion
     }

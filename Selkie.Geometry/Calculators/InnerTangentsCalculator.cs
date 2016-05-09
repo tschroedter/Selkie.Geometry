@@ -6,51 +6,44 @@ namespace Selkie.Geometry.Calculators
 {
     public class InnerTangentsCalculator : IInnerTangentsCalculator
     {
-        private readonly Point m_CircleOneTangentPointOne;
-        private readonly Point m_CircleOneTangentPointTwo;
-        private readonly Point m_CircleZeroTangentPointOne;
-        private readonly Point m_CircleZeroTangentPointTwo;
-        private readonly bool m_HasTangentPoints;
-        private readonly Point m_IntersectionPoint;
-
         public InnerTangentsCalculator([NotNull] ICirclePair circlePair)
         {
             if ( circlePair.NumberOfTangents < 3 )
             {
-                m_IntersectionPoint = Point.Unknown;
-                m_CircleZeroTangentPointOne = Point.Unknown;
-                m_CircleZeroTangentPointTwo = Point.Unknown;
-                m_CircleOneTangentPointOne = Point.Unknown;
-                m_CircleOneTangentPointTwo = Point.Unknown;
+                IntersectionPoint = Point.Unknown;
+                CircleZeroTangentPointOne = Point.Unknown;
+                CircleZeroTangentPointTwo = Point.Unknown;
+                CircleOneTangentPointOne = Point.Unknown;
+                CircleOneTangentPointTwo = Point.Unknown;
 
-                m_HasTangentPoints = false;
+                HasTangentPoints = false;
             }
             else if ( circlePair.NumberOfTangents == 3 )
             {
-                m_IntersectionPoint = CalculateInnerTangentLinesIntersectionPoint(circlePair);
+                IntersectionPoint = CalculateInnerTangentLinesIntersectionPoint(circlePair);
 
-                m_CircleZeroTangentPointOne = m_IntersectionPoint;
-                m_CircleZeroTangentPointTwo = m_IntersectionPoint;
+                CircleZeroTangentPointOne = IntersectionPoint;
+                CircleZeroTangentPointTwo = IntersectionPoint;
 
-                m_CircleOneTangentPointOne = m_IntersectionPoint;
-                m_CircleOneTangentPointTwo = m_IntersectionPoint;
+                CircleOneTangentPointOne = IntersectionPoint;
+                CircleOneTangentPointTwo = IntersectionPoint;
 
-                m_HasTangentPoints = true;
+                HasTangentPoints = true;
             }
             else
             {
-                m_IntersectionPoint = CalculateInnerTangentLinesIntersectionPoint(circlePair);
+                IntersectionPoint = CalculateInnerTangentLinesIntersectionPoint(circlePair);
 
                 Tuple <Point, Point> pairZero = CalculateTangentPointsForCircleOne(circlePair.Zero);
                 Tuple <Point, Point> pairOne = CalculateTangentPointsForCircleOne(circlePair.One);
 
-                m_CircleZeroTangentPointOne = pairZero.Item1;
-                m_CircleZeroTangentPointTwo = pairZero.Item2;
+                CircleZeroTangentPointOne = pairZero.Item1;
+                CircleZeroTangentPointTwo = pairZero.Item2;
 
-                m_CircleOneTangentPointOne = pairOne.Item1;
-                m_CircleOneTangentPointTwo = pairOne.Item2;
+                CircleOneTangentPointOne = pairOne.Item1;
+                CircleOneTangentPointTwo = pairOne.Item2;
 
-                m_HasTangentPoints = true;
+                HasTangentPoints = true;
             }
         }
 
@@ -83,8 +76,8 @@ namespace Selkie.Geometry.Calculators
             double r = circle.Radius;
             double c = circle.X;
             double d = circle.Y;
-            double xp = m_IntersectionPoint.X;
-            double yp = m_IntersectionPoint.Y;
+            double xp = IntersectionPoint.X;
+            double yp = IntersectionPoint.Y;
 
             double rSquare = Math.Pow(r,
                                       2);
@@ -119,8 +112,8 @@ namespace Selkie.Geometry.Calculators
             double r = circle.Radius;
             double c = circle.X;
             double d = circle.Y;
-            double xp = m_IntersectionPoint.X;
-            double yp = m_IntersectionPoint.Y;
+            double xp = IntersectionPoint.X;
+            double yp = IntersectionPoint.Y;
 
             double rSquare = Math.Pow(r,
                                       2);
@@ -149,53 +142,17 @@ namespace Selkie.Geometry.Calculators
 
         #region IInnerTangentsCalculator Members
 
-        public bool HasTangentPoints
-        {
-            get
-            {
-                return m_HasTangentPoints;
-            }
-        }
+        public bool HasTangentPoints { get; }
 
-        public Point CircleZeroTangentPointOne
-        {
-            get
-            {
-                return m_CircleZeroTangentPointOne;
-            }
-        }
+        public Point CircleZeroTangentPointOne { get; }
 
-        public Point CircleZeroTangentPointTwo
-        {
-            get
-            {
-                return m_CircleZeroTangentPointTwo;
-            }
-        }
+        public Point CircleZeroTangentPointTwo { get; }
 
-        public Point CircleOneTangentPointOne
-        {
-            get
-            {
-                return m_CircleOneTangentPointOne;
-            }
-        }
+        public Point CircleOneTangentPointOne { get; }
 
-        public Point CircleOneTangentPointTwo
-        {
-            get
-            {
-                return m_CircleOneTangentPointTwo;
-            }
-        }
+        public Point CircleOneTangentPointTwo { get; }
 
-        public Point IntersectionPoint
-        {
-            get
-            {
-                return m_IntersectionPoint;
-            }
-        }
+        public Point IntersectionPoint { get; }
 
         #endregion
     }

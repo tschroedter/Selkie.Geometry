@@ -20,6 +20,6 @@ namespace Selkie.Geometry.Surveying
             Polyline = polyline;
         }
 
-        public IPolyline Polyline { get; private set; }
+        public IPolyline Polyline { get; }
     }
 }

@@ -8,33 +8,31 @@ namespace Selkie.Geometry.Calculators
 {
     public class CoordinatePairCalculator : ICoordinatePairCalculator
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly ICircle m_Circle;
-        private readonly Tuple <Point, Point> m_Points;
-        private readonly Tuple <double, double> m_Xt1And2;
-        private readonly Tuple <double, double> m_Yt1And2;
-
         public CoordinatePairCalculator()
         {
-            m_Circle = Shapes.Circle.Unknown;
-            m_Xt1And2 = new Tuple <double, double>(double.NaN,
-                                                   double.NaN);
-            m_Yt1And2 = new Tuple <double, double>(double.NaN,
-                                                   double.NaN);
+            Circle = Shapes.Circle.Unknown;
+            Points = new Tuple <Point, Point>(Point.Unknown,
+                                              Point.Unknown);
+            Xt1And2 = new Tuple <double, double>(double.NaN,
+                                                 double.NaN);
+            Yt1And2 = new Tuple <double, double>(double.NaN,
+                                                 double.NaN);
         }
 
         public CoordinatePairCalculator([NotNull] ICircle circle,
                                         [NotNull] Tuple <double, double> xt1And2,
                                         [NotNull] Tuple <double, double> yt1And2)
         {
-            m_Circle = circle;
-            m_Xt1And2 = xt1And2;
-            m_Yt1And2 = yt1And2;
+            Circle = circle;
+            Xt1And2 = xt1And2;
+            Yt1And2 = yt1And2;
 
-            m_Points = Calculate(circle,
-                                 xt1And2,
-                                 yt1And2);
+            Points = Calculate(circle,
+                               xt1And2,
+                               yt1And2);
         }
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         [NotNull]
         // ReSharper disable once MethodTooLong
@@ -84,6 +82,14 @@ namespace Selkie.Geometry.Calculators
                                             pointTwo);
         }
 
+        private static bool AreInputFieldsValid([NotNull] ICircle circle,
+                                                [NotNull] Tuple <double, double> xt1And2,
+                                                [NotNull] Tuple <double, double> yt1And2)
+        {
+            return circle.IsUnknown || double.IsNaN(xt1And2.Item1) || double.IsNaN(xt1And2.Item2) ||
+                   double.IsNaN(yt1And2.Item1) || double.IsNaN(yt1And2.Item2);
+        }
+
         private static void PointIsNotOnCircle([NotNull] ICircle circle,
                                                [NotNull] Point point)
         {
@@ -95,47 +101,15 @@ namespace Selkie.Geometry.Calculators
             throw new ArgumentException(message);
         }
 
-        private static bool AreInputFieldsValid([NotNull] ICircle circle,
-                                                [NotNull] Tuple <double, double> xt1And2,
-                                                [NotNull] Tuple <double, double> yt1And2)
-        {
-            return circle.IsUnknown || double.IsNaN(xt1And2.Item1) || double.IsNaN(xt1And2.Item2) ||
-                   double.IsNaN(yt1And2.Item1) || double.IsNaN(yt1And2.Item2);
-        }
-
         #region ICoordinatePairCalculator Members
 
-        public ICircle Circle
-        {
-            get
-            {
-                return m_Circle;
-            }
-        }
+        public ICircle Circle { get; }
 
-        public Tuple <double, double> Xt1And2
-        {
-            get
-            {
-                return m_Xt1And2;
-            }
-        }
+        public Tuple <double, double> Xt1And2 { get; }
 
-        public Tuple <double, double> Yt1And2
-        {
-            get
-            {
-                return m_Yt1And2;
-            }
-        }
+        public Tuple <double, double> Yt1And2 { get; }
 
-        public Tuple <Point, Point> Points
-        {
-            get
-            {
-                return m_Points;
-            }
-        }
+        public Tuple <Point, Point> Points { get; }
 
         #endregion
     }

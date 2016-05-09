@@ -5,28 +5,26 @@ namespace Selkie.Geometry.Calculators
 {
     public class OuterTangentLinesIntersectionPointCalculator : IOuterTangentLinesIntersectionPointCalculator
     {
-        // ReSharper disable InconsistentNaming
-        public static OuterTangentLinesIntersectionPointCalculator Unknown =
-            new OuterTangentLinesIntersectionPointCalculator();
-
-        // ReSharper restore InconsistentNaming
-        private readonly bool m_IsUnknown;
-        private readonly Point m_Point;
-
         public OuterTangentLinesIntersectionPointCalculator([NotNull] ICirclePair pair)
         {
             double x = CalculateX(pair);
             double y = CalculateY(pair);
 
-            m_Point = new Point(x,
-                                y);
+            IntersectionPoint = new Point(x,
+                                          y);
         }
 
         private OuterTangentLinesIntersectionPointCalculator()
         {
-            m_Point = Point.Unknown;
-            m_IsUnknown = true;
+            IntersectionPoint = Point.Unknown;
+            IsUnknown = true;
         }
+
+        // ReSharper disable InconsistentNaming
+        public static OuterTangentLinesIntersectionPointCalculator Unknown =
+            new OuterTangentLinesIntersectionPointCalculator();
+
+        // ReSharper restore InconsistentNaming
 
         private double CalculateX([NotNull] ICirclePair pair)
         {
@@ -56,21 +54,9 @@ namespace Selkie.Geometry.Calculators
 
         #region IOuterTangentLinesIntersectionPointCalculator Members
 
-        public bool IsUnknown
-        {
-            get
-            {
-                return m_IsUnknown;
-            }
-        }
+        public bool IsUnknown { get; }
 
-        public Point IntersectionPoint
-        {
-            get
-            {
-                return m_Point;
-            }
-        }
+        public Point IntersectionPoint { get; }
 
         #endregion
     }

@@ -23,13 +23,13 @@ namespace Selkie.Geometry.Shapes
         Angle AngleToXAxisAtStartPoint { get; }
         Angle AngleToXAxisAtEndPoint { get; }
 
-        Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
-
         void AddSegment([NotNull] IPolylineSegment segment);
+
+        bool IsOnLine([NotNull] Point point);
 
         [NotNull]
         IPolyline Reverse();
 
-        bool IsOnLine([NotNull] Point point);
+        Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
     }
 }

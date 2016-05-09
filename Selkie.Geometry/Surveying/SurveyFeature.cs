@@ -6,10 +6,6 @@ namespace Selkie.Geometry.Surveying
 {
     public class SurveyFeature : ISurveyFeature
     {
-        internal const int UnknownId = -1;
-        internal const double UnknownLength = double.MaxValue;
-        public static SurveyFeature Unknown = new SurveyFeature();
-
         private SurveyFeature()
         {
             IsUnknown = true;
@@ -41,14 +37,18 @@ namespace Selkie.Geometry.Surveying
             Length = length;
         }
 
-        public bool IsUnknown { get; private set; }
-        public Point StartPoint { get; private set; }
-        public Point EndPoint { get; private set; }
-        public Angle AngleToXAxisAtStartPoint { get; private set; }
-        public Angle AngleToXAxisAtEndPoint { get; private set; }
-        public Constants.LineDirection RunDirection { get; private set; }
-        public int Id { get; private set; }
-        public double Length { get; private set; }
+        internal const int UnknownId = -1;
+        internal const double UnknownLength = double.MaxValue;
+        public static SurveyFeature Unknown = new SurveyFeature();
+
+        public bool IsUnknown { get; }
+        public Point StartPoint { get; }
+        public Point EndPoint { get; }
+        public Angle AngleToXAxisAtStartPoint { get; }
+        public Angle AngleToXAxisAtEndPoint { get; }
+        public Constants.LineDirection RunDirection { get; }
+        public int Id { get; }
+        public double Length { get; }
 
         public ISurveyFeature Reverse()
         {

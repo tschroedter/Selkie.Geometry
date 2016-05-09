@@ -10,15 +10,10 @@ namespace Selkie.Geometry.Shapes
         : ICircle,
           IEquatable <Circle>
     {
-        public static readonly ICircle Unknown = new Circle();
-        private readonly ICircleCentreToPointCalculator m_Calculator;
-        private readonly Point m_CentrePoint;
-        private readonly double m_Radius;
-
         private Circle()
         {
             IsUnknown = true;
-            m_CentrePoint = Point.Unknown;
+            CentrePoint = Point.Unknown;
             m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
 
@@ -34,10 +29,13 @@ namespace Selkie.Geometry.Shapes
         public Circle([NotNull] Point centrePoint,
                       double radius)
         {
-            m_CentrePoint = centrePoint;
-            m_Radius = radius;
+            CentrePoint = centrePoint;
+            Radius = radius;
             m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
+
+        public static readonly ICircle Unknown = new Circle();
+        private readonly ICircleCentreToPointCalculator m_Calculator;
 
         #region IEquatable<Circle> Members
 
@@ -59,6 +57,20 @@ namespace Selkie.Geometry.Shapes
 
         #endregion
 
+        public static bool operator ==(Circle left,
+                                       Circle right)
+        {
+            return Equals(left,
+                          right);
+        }
+
+        public static bool operator !=(Circle left,
+                                       Circle right)
+        {
+            return !Equals(left,
+                           right);
+        }
+
         [NotNull]
         public Angle AngleBetweenPointsClockwise([NotNull] Point startPoint,
                                                  [NotNull] Point endPoint)
@@ -68,13 +80,6 @@ namespace Selkie.Geometry.Shapes
                                                                     endPoint);
 
             return calculator.AngleRelativeToYAxisClockwise;
-        }
-
-        private static bool IsInsideEpsilonForPoints(double deltaY,
-                                                     double deltaX)
-        {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -105,23 +110,16 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public static bool operator ==(Circle left,
-                                       Circle right)
+        private static bool IsInsideEpsilonForPoints(double deltaY,
+                                                     double deltaX)
         {
-            return Equals(left,
-                          right);
-        }
-
-        public static bool operator !=(Circle left,
-                                       Circle right)
-        {
-            return !Equals(left,
-                           right);
+            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
+                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
         }
 
         #region ICircle Members
 
-        public bool IsUnknown { get; private set; }
+        public bool IsUnknown { get; }
 
         public Point PointOnCircle(Angle angle)
         {
@@ -154,37 +152,13 @@ namespace Selkie.Geometry.Shapes
             return delta < 0 || Math.Abs(delta) <= SelkieConstants.EpsilonDistance;
         }
 
-        public Point CentrePoint
-        {
-            get
-            {
-                return m_CentrePoint;
-            }
-        }
+        public Point CentrePoint { get; }
 
-        public double X
-        {
-            get
-            {
-                return CentrePoint.X;
-            }
-        }
+        public double X => CentrePoint.X;
 
-        public double Y
-        {
-            get
-            {
-                return CentrePoint.Y;
-            }
-        }
+        public double Y => CentrePoint.Y;
 
-        public double Radius
-        {
-            get
-            {
-                return m_Radius;
-            }
-        }
+        public double Radius { get; }
 
         public double Distance(ICircle other)
         {

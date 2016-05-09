@@ -10,10 +10,6 @@ namespace Selkie.Geometry.Shapes
 {
     public class ArcSegment : IArcSegment
     {
-        public static readonly IArcSegment Unknown = new ArcSegment();
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly ICircle m_Circle;
-
         private ArcSegment()
         {
             IsUnknown = true;
@@ -66,20 +62,24 @@ namespace Selkie.Geometry.Shapes
                                                                          arcTurnDirection);
         }
 
-        public bool IsUnknown { get; private set; }
+        public static readonly IArcSegment Unknown = new ArcSegment();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly ICircle m_Circle;
 
-        private Angle CalculateTangentAngleToXAxisAtPoint([NotNull] Point centrePoint,
-                                                          [NotNull] Point pointOnCircle,
-                                                          Constants.TurnDirection turnDirection)
+        public bool IsUnknown { get; }
+
+        internal double CalculateLength([NotNull] Angle angle,
+                                        double radius)
         {
-            var line = new Line(centrePoint,
-                                pointOnCircle);
+            double length = angle.Degrees * Math.PI * radius / 180.0;
 
-            Angle angleToXAxis = turnDirection == Constants.TurnDirection.Clockwise
-                                     ? line.AngleToXAxis - Angle.For90Degrees
-                                     : line.AngleToXAxis + Angle.For90Degrees;
+            return length;
+        }
 
-            return angleToXAxis;
+        internal bool ValidatePoint([NotNull] ICircle circle,
+                                    [NotNull] Point startPoint)
+        {
+            return circle.IsPointOnCircle(startPoint);
         }
 
         internal void ValidateStartAndEndPoint([NotNull] ICircle circle,
@@ -109,55 +109,43 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        internal bool ValidatePoint([NotNull] ICircle circle,
-                                    [NotNull] Point startPoint)
+        private Angle CalculateTangentAngleToXAxisAtPoint([NotNull] Point centrePoint,
+                                                          [NotNull] Point pointOnCircle,
+                                                          Constants.TurnDirection turnDirection)
         {
-            return circle.IsPointOnCircle(startPoint);
-        }
+            var line = new Line(centrePoint,
+                                pointOnCircle);
 
-        internal double CalculateLength([NotNull] Angle angle,
-                                        double radius)
-        {
-            double length = angle.Degrees * Math.PI * radius / 180.0;
+            Angle angleToXAxis = turnDirection == Constants.TurnDirection.Clockwise
+                                     ? line.AngleToXAxis - Angle.For90Degrees
+                                     : line.AngleToXAxis + Angle.For90Degrees;
 
-            return length;
+            return angleToXAxis;
         }
 
         #region IArcSegment Members
 
-        public Constants.TurnDirection TurnDirection { get; private set; }
+        public Constants.TurnDirection TurnDirection { get; }
 
-        public Point CentrePoint
-        {
-            get
-            {
-                return m_Circle.CentrePoint;
-            }
-        }
+        public Point CentrePoint => m_Circle.CentrePoint;
 
-        public double Radius
-        {
-            get
-            {
-                return m_Circle.Radius;
-            }
-        }
+        public double Radius => m_Circle.Radius;
 
-        public Point StartPoint { get; private set; }
+        public Point StartPoint { get; }
 
-        public Point EndPoint { get; private set; }
-        public Angle AngleToXAxisAtEndPoint { get; private set; }
-        public Angle AngleToXAxisAtStartPoint { get; private set; }
+        public Point EndPoint { get; }
+        public Angle AngleToXAxisAtEndPoint { get; }
+        public Angle AngleToXAxisAtStartPoint { get; }
 
-        public Angle AngleClockwise { get; private set; }
+        public Angle AngleClockwise { get; }
 
-        public Angle AngleCounterClockwise { get; private set; }
+        public Angle AngleCounterClockwise { get; }
 
-        public double Length { get; private set; }
+        public double Length { get; }
 
-        public double LengthClockwise { get; private set; }
+        public double LengthClockwise { get; }
 
-        public double LengthCounterClockwise { get; private set; }
+        public double LengthCounterClockwise { get; }
 
         public IPolylineSegment Reverse()
         {

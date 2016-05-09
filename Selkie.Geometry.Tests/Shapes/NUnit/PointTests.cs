@@ -15,11 +15,11 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [SetUp]
         public void Setup()
         {
-            m_Point = new Point(3.0,
-                                4.0);
+            m_Sut = new Point(3.0,
+                              4.0);
         }
 
-        private Point m_Point;
+        private Point m_Sut;
 
         [Test]
         public void AngleBetweenPointsFor135DegreesCaseOneTest()
@@ -154,7 +154,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                                   8.0);
 
             const double expected = 4.0;
-            double actual = m_Point.DistanceTo(other);
+            double actual = m_Sut.DistanceTo(other);
 
             NUnitHelper.AssertIsEquivalent(expected,
                                            actual,
@@ -168,7 +168,9 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
                                   2.0);
 
             // ReSharper disable EqualExpressionComparison
+#pragma warning disable CS1718 // Comparison made to same variable
             Assert.True(point == point);
+#pragma warning restore CS1718 // Comparison made to same variable
             // ReSharper restore EqualExpressionComparison
         }
 
@@ -259,10 +261,10 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             const double distance = 10.0;
             const double radians = Angle.RadiansFor180Degrees;
 
-            Point moved = m_Point.Move(distance,
-                                       radians);
+            Point moved = m_Sut.Move(distance,
+                                     radians);
 
-            NUnitHelper.AssertIsEquivalent(m_Point.X,
+            NUnitHelper.AssertIsEquivalent(m_Sut.X,
                                            moved.X,
                                            "X");
             NUnitHelper.AssertIsEquivalent(-6.0,
@@ -276,8 +278,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             const double distance = 10.0;
             const double radians = Angle.RadiansFor225Degrees;
 
-            Point moved = m_Point.Move(distance,
-                                       radians);
+            Point moved = m_Sut.Move(distance,
+                                     radians);
 
             NUnitHelper.AssertIsEquivalent(-4.07,
                                            moved.X,
@@ -293,8 +295,8 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             const double distance = 10.0;
             const double radians = Angle.RadiansFor45Degrees;
 
-            Point moved = m_Point.Move(distance,
-                                       radians);
+            Point moved = m_Sut.Move(distance,
+                                     radians);
 
             NUnitHelper.AssertIsEquivalent(10.07,
                                            moved.X,
@@ -310,13 +312,13 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
             const double distance = 10.0;
             const double radians = Angle.RadiansFor90Degrees;
 
-            Point moved = m_Point.Move(distance,
-                                       radians);
+            Point moved = m_Sut.Move(distance,
+                                     radians);
 
-            NUnitHelper.AssertIsEquivalent(m_Point.X + 10.0,
+            NUnitHelper.AssertIsEquivalent(m_Sut.X + 10.0,
                                            moved.X,
                                            "X");
-            NUnitHelper.AssertIsEquivalent(m_Point.Y,
+            NUnitHelper.AssertIsEquivalent(m_Sut.Y,
                                            moved.Y,
                                            "Y");
         }
@@ -324,11 +326,13 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void NotEqualsOperatorReturnsFalseForSameTest()
         {
-            var point = new Point(1.0,
-                                  2.0);
+            var sut = new Point(1.0,
+                                2.0);
 
             // ReSharper disable EqualExpressionComparison
-            Assert.False(point != point);
+#pragma warning disable CS1718 // Comparison made to same variable
+            Assert.False(sut != sut);
+#pragma warning restore CS1718 // Comparison made to same variable
             // ReSharper restore EqualExpressionComparison
         }
 
@@ -507,7 +511,7 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         public void ToStringTest()
         {
             const string expected = "[3,4]";
-            string actual = m_Point.ToString();
+            string actual = m_Sut.ToString();
 
             Assert.AreEqual(expected,
                             actual);
@@ -531,21 +535,21 @@ namespace Selkie.Geometry.Tests.Shapes.NUnit
         [Test]
         public void UnknownTest()
         {
-            Assert.False(m_Point.IsUnknown);
+            Assert.False(m_Sut.IsUnknown);
         }
 
         [Test]
         public void XTest()
         {
             Assert.AreEqual(3.0,
-                            m_Point.X);
+                            m_Sut.X);
         }
 
         [Test]
         public void YTest()
         {
             Assert.AreEqual(4.0,
-                            m_Point.Y);
+                            m_Sut.Y);
         }
     }
 }

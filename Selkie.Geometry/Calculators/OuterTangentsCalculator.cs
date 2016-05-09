@@ -7,25 +7,19 @@ namespace Selkie.Geometry.Calculators
 {
     public class OuterTangentsCalculator : IOuterTangentsCalculator
     {
-        private readonly Point m_CircleOneTangentPointOne;
-        private readonly Point m_CircleOneTangentPointTwo;
-        private readonly Point m_CircleZeroTangentPointOne;
-        private readonly Point m_CircleZeroTangentPointTwo;
-        private readonly Point m_IntersectionPoint;
-
         public OuterTangentsCalculator([NotNull] ICirclePair circlePair)
         {
             ICircle circleZero = circlePair.Zero;
             ICircle circleOne = circlePair.One;
 
-            m_IntersectionPoint = CalculateOuterTangentLinesIntersectionPoint(circlePair);
+            IntersectionPoint = CalculateOuterTangentLinesIntersectionPoint(circlePair);
 
             Tuple <Point, Point> pairZero;
             Tuple <Point, Point> pairOne;
 
-            if ( m_IntersectionPoint.IsUnknown ||
-                 double.IsInfinity(m_IntersectionPoint.X) ||
-                 double.IsInfinity(m_IntersectionPoint.Y) )
+            if ( IntersectionPoint.IsUnknown ||
+                 double.IsInfinity(IntersectionPoint.X) ||
+                 double.IsInfinity(IntersectionPoint.Y) )
             {
                 if ( circlePair.NumberOfTangents > 1 )
                 {
@@ -46,27 +40,11 @@ namespace Selkie.Geometry.Calculators
                 pairOne = CalculateTangentPointsForCircle(circleOne);
             }
 
-            m_CircleZeroTangentPointOne = pairZero.Item1;
-            m_CircleZeroTangentPointTwo = pairZero.Item2;
+            CircleZeroTangentPointOne = pairZero.Item1;
+            CircleZeroTangentPointTwo = pairZero.Item2;
 
-            m_CircleOneTangentPointOne = pairOne.Item1;
-            m_CircleOneTangentPointTwo = pairOne.Item2;
-        }
-
-        [NotNull]
-        internal Tuple <Point, Point> CalculateTangenPointsForZeroBothSameRadius([NotNull] ICirclePair circlePair)
-        {
-            var line = new Line(circlePair.Zero.CentrePoint,
-                                circlePair.One.CentrePoint);
-
-            Angle angle1 = line.AngleToXAxis - Angle.For90Degrees;
-            Angle angle2 = line.AngleToXAxis + Angle.For90Degrees;
-
-            Point point1 = circlePair.Zero.PointOnCircle(angle1);
-            Point point2 = circlePair.Zero.PointOnCircle(angle2);
-
-            return new Tuple <Point, Point>(point1,
-                                            point2);
+            CircleOneTangentPointOne = pairOne.Item1;
+            CircleOneTangentPointTwo = pairOne.Item2;
         }
 
         [NotNull]
@@ -80,6 +58,22 @@ namespace Selkie.Geometry.Calculators
 
             Point point1 = circlePair.One.PointOnCircle(angle1);
             Point point2 = circlePair.One.PointOnCircle(angle2);
+
+            return new Tuple <Point, Point>(point1,
+                                            point2);
+        }
+
+        [NotNull]
+        internal Tuple <Point, Point> CalculateTangenPointsForZeroBothSameRadius([NotNull] ICirclePair circlePair)
+        {
+            var line = new Line(circlePair.Zero.CentrePoint,
+                                circlePair.One.CentrePoint);
+
+            Angle angle1 = line.AngleToXAxis - Angle.For90Degrees;
+            Angle angle2 = line.AngleToXAxis + Angle.For90Degrees;
+
+            Point point1 = circlePair.Zero.PointOnCircle(angle1);
+            Point point2 = circlePair.Zero.PointOnCircle(angle2);
 
             return new Tuple <Point, Point>(point1,
                                             point2);
@@ -121,8 +115,8 @@ namespace Selkie.Geometry.Calculators
             double r = circle.Radius;
             double a = circle.X;
             double b = circle.Y;
-            double xp = m_IntersectionPoint.X;
-            double yp = m_IntersectionPoint.Y;
+            double xp = IntersectionPoint.X;
+            double yp = IntersectionPoint.Y;
 
             double rSquare = Math.Pow(r,
                                       2);
@@ -157,8 +151,8 @@ namespace Selkie.Geometry.Calculators
             double r = circle.Radius;
             double a = circle.X;
             double b = circle.Y;
-            double xp = m_IntersectionPoint.X;
-            double yp = m_IntersectionPoint.Y;
+            double xp = IntersectionPoint.X;
+            double yp = IntersectionPoint.Y;
 
             double rSquare = Math.Pow(r,
                                       2);
@@ -187,45 +181,15 @@ namespace Selkie.Geometry.Calculators
 
         #region IOuterTangentsCalculator Members
 
-        public Point CircleZeroTangentPointOne
-        {
-            get
-            {
-                return m_CircleZeroTangentPointOne;
-            }
-        }
+        public Point CircleZeroTangentPointOne { get; }
 
-        public Point CircleZeroTangentPointTwo
-        {
-            get
-            {
-                return m_CircleZeroTangentPointTwo;
-            }
-        }
+        public Point CircleZeroTangentPointTwo { get; }
 
-        public Point CircleOneTangentPointOne
-        {
-            get
-            {
-                return m_CircleOneTangentPointOne;
-            }
-        }
+        public Point CircleOneTangentPointOne { get; }
 
-        public Point CircleOneTangentPointTwo
-        {
-            get
-            {
-                return m_CircleOneTangentPointTwo;
-            }
-        }
+        public Point CircleOneTangentPointTwo { get; }
 
-        public Point IntersectionPoint
-        {
-            get
-            {
-                return m_IntersectionPoint;
-            }
-        }
+        public Point IntersectionPoint { get; }
 
         #endregion
     }

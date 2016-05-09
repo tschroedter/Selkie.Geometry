@@ -10,20 +10,13 @@ namespace Selkie.Geometry.Shapes
         : ITurnCircle,
           IEquatable <TurnCircle>
     {
-        public static TurnCircle Unknown = new TurnCircle();
-        private readonly ICircle m_Circle;
-        private readonly Constants.CircleOrigin m_Origin;
-        private readonly Distance m_Radius;
-        private readonly Constants.CircleSide m_Side;
-        private readonly Constants.TurnDirection m_TurnDirection;
-
         private TurnCircle()
         {
-            m_Circle = Shapes.Circle.Unknown;
-            m_Side = Constants.CircleSide.Unknown;
-            m_Origin = Constants.CircleOrigin.Unknown;
-            m_TurnDirection = Constants.TurnDirection.Unknown;
-            m_Radius = Distance.Unknown;
+            Circle = Shapes.Circle.Unknown;
+            Side = Constants.CircleSide.Unknown;
+            Origin = Constants.CircleOrigin.Unknown;
+            TurnDirection = Constants.TurnDirection.Unknown;
+            Radius = Distance.Unknown;
             IsUnknown = true;
         }
 
@@ -32,12 +25,14 @@ namespace Selkie.Geometry.Shapes
                           Constants.CircleOrigin origin,
                           Constants.TurnDirection turnDirection)
         {
-            m_Circle = circle;
-            m_Side = side;
-            m_Origin = origin;
-            m_TurnDirection = turnDirection;
-            m_Radius = new Distance(Circle.Radius);
+            Circle = circle;
+            Side = side;
+            Origin = origin;
+            TurnDirection = turnDirection;
+            Radius = new Distance(Circle.Radius);
         }
+
+        public static TurnCircle Unknown = new TurnCircle();
 
         #region IEquatable<TurnCircle> Members
 
@@ -63,7 +58,21 @@ namespace Selkie.Geometry.Shapes
 
         #endregion
 
-        public bool IsUnknown { get; private set; }
+        public bool IsUnknown { get; }
+
+        public static bool operator ==(TurnCircle left,
+                                       TurnCircle right)
+        {
+            return Equals(left,
+                          right);
+        }
+
+        public static bool operator !=(TurnCircle left,
+                                       TurnCircle right)
+        {
+            return !Equals(left,
+                           right);
+        }
 
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
@@ -97,74 +106,24 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public static bool operator ==(TurnCircle left,
-                                       TurnCircle right)
-        {
-            return Equals(left,
-                          right);
-        }
-
-        public static bool operator !=(TurnCircle left,
-                                       TurnCircle right)
-        {
-            return !Equals(left,
-                           right);
-        }
-
         #region ITurnCircle Members
 
-        public ICircle Circle
-        {
-            get
-            {
-                return m_Circle;
-            }
-        }
+        public ICircle Circle { get; }
 
-        public Point CentrePoint
-        {
-            get
-            {
-                return Circle.CentrePoint;
-            }
-        }
+        public Point CentrePoint => Circle.CentrePoint;
 
-        public Distance Radius
-        {
-            get
-            {
-                return m_Radius;
-            }
-        }
+        public Distance Radius { get; }
 
-        public Constants.CircleSide Side
-        {
-            get
-            {
-                return m_Side;
-            }
-        }
+        public Constants.CircleSide Side { get; }
 
-        public Constants.CircleOrigin Origin
-        {
-            get
-            {
-                return m_Origin;
-            }
-        }
+        public Constants.CircleOrigin Origin { get; }
 
         public bool IsPointOnCircle(Point point)
         {
             return Circle.IsPointOnCircle(point);
         }
 
-        public Constants.TurnDirection TurnDirection
-        {
-            get
-            {
-                return m_TurnDirection;
-            }
-        }
+        public Constants.TurnDirection TurnDirection { get; }
 
         #endregion
     }

@@ -7,11 +7,6 @@ namespace Selkie.Geometry.Shapes
 {
     public class Polyline : IPolyline
     {
-        public const int UnknownId = int.MinValue;
-        public static readonly Polyline Unknown = new Polyline();
-
-        private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
-
         private Polyline()
         {
             Id = UnknownId;
@@ -44,6 +39,11 @@ namespace Selkie.Geometry.Shapes
                 AddSegment(segment);
             }
         }
+
+        public const int UnknownId = int.MinValue;
+        public static readonly Polyline Unknown = new Polyline();
+
+        private readonly List <IPolylineSegment> m_Segments = new List <IPolylineSegment>();
 
         [NotNull]
         internal Point DetermineEndPoint([NotNull] IEnumerable <IPolylineSegment> segments)
@@ -117,24 +117,18 @@ namespace Selkie.Geometry.Shapes
 
         public Point EndPoint { get; private set; }
 
-        public IEnumerable <IPolylineSegment> Segments
-        {
-            get
-            {
-                return m_Segments;
-            }
-        }
+        public IEnumerable <IPolylineSegment> Segments => m_Segments;
 
         public Angle AngleToXAxisAtStartPoint { get; private set; }
         public Angle AngleToXAxisAtEndPoint { get; private set; }
 
-        public int Id { get; private set; }
+        public int Id { get; }
 
-        public bool IsUnknown { get; private set; }
+        public bool IsUnknown { get; }
 
         public double Length { get; private set; }
 
-        public Constants.LineDirection RunDirection { get; private set; }
+        public Constants.LineDirection RunDirection { get; }
 
         public IPolyline Reverse()
         {
