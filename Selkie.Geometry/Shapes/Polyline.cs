@@ -71,8 +71,6 @@ namespace Selkie.Geometry.Shapes
             return first.StartPoint;
         }
 
-        #region IPolyline Members
-
         public void AddSegment(IPolylineSegment segment)
         {
             m_Segments.Add(segment);
@@ -145,19 +143,8 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsOnLine(Point point)
         {
-            foreach ( IPolylineSegment segment in m_Segments )
-            {
-                bool isOneSegment = segment.IsOnLine(point);
-
-                if ( isOneSegment )
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return m_Segments.Select(segment => segment.IsOnLine(point))
+                             .Any(isOneSegment => isOneSegment);
         }
-
-        #endregion
     }
 }

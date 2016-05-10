@@ -21,12 +21,16 @@ namespace Selkie.Geometry.Calculators
         }
 
         // ReSharper disable InconsistentNaming
-        public static OuterTangentLinesIntersectionPointCalculator Unknown =
+        public static readonly OuterTangentLinesIntersectionPointCalculator Unknown =
             new OuterTangentLinesIntersectionPointCalculator();
 
         // ReSharper restore InconsistentNaming
 
-        private double CalculateX([NotNull] ICirclePair pair)
+        public bool IsUnknown { get; }
+
+        public Point IntersectionPoint { get; }
+
+        private static double CalculateX([NotNull] ICirclePair pair)
         {
             double a = pair.Zero.X;
             double c = pair.One.X;
@@ -39,7 +43,7 @@ namespace Selkie.Geometry.Calculators
             return x;
         }
 
-        private double CalculateY([NotNull] ICirclePair pair)
+        private static double CalculateY([NotNull] ICirclePair pair)
         {
             double b = pair.Zero.Y;
             double d = pair.One.Y;
@@ -51,13 +55,5 @@ namespace Selkie.Geometry.Calculators
 
             return x;
         }
-
-        #region IOuterTangentLinesIntersectionPointCalculator Members
-
-        public bool IsUnknown { get; }
-
-        public Point IntersectionPoint { get; }
-
-        #endregion
     }
 }

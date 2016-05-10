@@ -32,11 +32,8 @@ namespace Selkie.Geometry.Shapes
             Radius = new Distance(Circle.Radius);
         }
 
-        public static TurnCircle Unknown = new TurnCircle();
+        public static readonly TurnCircle Unknown = new TurnCircle();
 
-        #region IEquatable<TurnCircle> Members
-
-        // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(TurnCircle other)
         {
             if ( ReferenceEquals(null,
@@ -56,9 +53,24 @@ namespace Selkie.Geometry.Shapes
                                                                               TurnDirection);
         }
 
-        #endregion
-
         public bool IsUnknown { get; }
+
+        public ICircle Circle { get; }
+
+        public Point CentrePoint => Circle.CentrePoint;
+
+        public Distance Radius { get; }
+
+        public Constants.CircleSide Side { get; }
+
+        public Constants.CircleOrigin Origin { get; }
+
+        public bool IsPointOnCircle(Point point)
+        {
+            return Circle.IsPointOnCircle(point);
+        }
+
+        public Constants.TurnDirection TurnDirection { get; }
 
         public static bool operator ==(TurnCircle left,
                                        TurnCircle right)
@@ -74,7 +86,6 @@ namespace Selkie.Geometry.Shapes
                            right);
         }
 
-        // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
             if ( ReferenceEquals(null,
@@ -105,26 +116,5 @@ namespace Selkie.Geometry.Shapes
                 return result;
             }
         }
-
-        #region ITurnCircle Members
-
-        public ICircle Circle { get; }
-
-        public Point CentrePoint => Circle.CentrePoint;
-
-        public Distance Radius { get; }
-
-        public Constants.CircleSide Side { get; }
-
-        public Constants.CircleOrigin Origin { get; }
-
-        public bool IsPointOnCircle(Point point)
-        {
-            return Circle.IsPointOnCircle(point);
-        }
-
-        public Constants.TurnDirection TurnDirection { get; }
-
-        #endregion
     }
 }

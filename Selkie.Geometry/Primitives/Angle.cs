@@ -27,7 +27,17 @@ namespace Selkie.Geometry.Primitives
         public const double RadiansForZeroDegrees = 0.0;
         internal const double EpsilonRadians = SelkieConstants.EpsilonRadians;
         internal const double EpsilonDegrees = SelkieConstants.EpsilonDegrees;
-        public static Angle Unknown = new Angle(double.NegativeInfinity);
+        public static readonly Angle Unknown = new Angle(double.NegativeInfinity);
+
+        public static readonly Angle For360Degrees = FromRadians(RadiansFor360Degrees);
+        public static readonly Angle For315Degrees = FromRadians(RadiansFor270Degrees + RadiansFor45Degrees);
+        public static readonly Angle For270Degrees = FromRadians(RadiansFor360Degrees * 0.75);
+        public static readonly Angle For225Degrees = FromRadians(RadiansFor180Degrees + RadiansFor45Degrees);
+        public static readonly Angle For180Degrees = FromRadians(Math.PI);
+        public static readonly Angle For135Degrees = FromRadians(RadiansFor90Degrees + RadiansFor45Degrees);
+        public static readonly Angle For90Degrees = FromRadians(Math.PI / 2.0);
+        public static readonly Angle For45Degrees = FromRadians(Math.PI / 4.0);
+        public static readonly Angle ForZeroDegrees = FromRadians(0.0);
 
         public double Radians { get; }
 
@@ -287,9 +297,6 @@ namespace Selkie.Geometry.Primitives
             return radiansYAxis;
         }
 
-        #region IEquatable<Angle> Members
-
-        // ReSharper disable once CodeAnnotationAnalyzer
         public bool Equals(Angle other)
         {
             if ( ReferenceEquals(null,
@@ -326,21 +333,5 @@ namespace Selkie.Geometry.Primitives
             }
             return false;
         }
-
-        #endregion
-
-        // ReSharper disable InconsistentNaming
-        // ReSharper restore InconsistentNaming
-        // ReSharper disable InconsistentNaming 
-        public static Angle For360Degrees = FromRadians(RadiansFor360Degrees);
-        public static Angle For315Degrees = FromRadians(RadiansFor270Degrees + RadiansFor45Degrees);
-        public static Angle For270Degrees = FromRadians(RadiansFor360Degrees * 0.75);
-        public static Angle For225Degrees = FromRadians(RadiansFor180Degrees + RadiansFor45Degrees);
-        public static Angle For180Degrees = FromRadians(Math.PI);
-        public static Angle For135Degrees = FromRadians(RadiansFor90Degrees + RadiansFor45Degrees);
-        public static Angle For90Degrees = FromRadians(Math.PI / 2.0);
-        public static Angle For45Degrees = FromRadians(Math.PI / 4.0);
-        public static Angle ForZeroDegrees = FromRadians(0.0);
-        // ReSharper restore InconsistentNaming
     }
 }

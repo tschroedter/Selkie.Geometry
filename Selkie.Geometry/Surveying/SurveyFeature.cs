@@ -39,7 +39,7 @@ namespace Selkie.Geometry.Surveying
 
         internal const int UnknownId = -1;
         internal const double UnknownLength = double.MaxValue;
-        public static SurveyFeature Unknown = new SurveyFeature();
+        public static readonly SurveyFeature Unknown = new SurveyFeature();
 
         public bool IsUnknown { get; }
         public Point StartPoint { get; }
