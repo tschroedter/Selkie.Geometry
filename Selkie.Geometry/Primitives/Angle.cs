@@ -7,6 +7,15 @@ namespace Selkie.Geometry.Primitives
 {
     public sealed class Angle : IEquatable <Angle>
     {
+        private Angle(double radians)
+        {
+            m_Radians = NormalizeRadians(radians);
+            m_Degrees = radians * 180.0 / Math.PI;
+        }
+
+        private const double TwoPi = 2.0 * Math.PI;
+        private const double TwoPiMinusEpsilonRadians = TwoPi - EpsilonRadians;
+
         public const double RadiansFor360Degrees = 2.0 * Math.PI;
         public const double RadiansFor315Degrees = RadiansFor270Degrees + RadiansFor45Degrees;
         public const double RadiansFor270Degrees = RadiansFor360Degrees * 0.75;
@@ -19,14 +28,6 @@ namespace Selkie.Geometry.Primitives
         internal const double EpsilonRadians = SelkieConstants.EpsilonRadians;
         internal const double EpsilonDegrees = SelkieConstants.EpsilonDegrees;
         public static Angle Unknown = new Angle(double.NegativeInfinity);
-        private readonly double m_Degrees;
-        private readonly double m_Radians;
-
-        private Angle(double radians)
-        {
-            m_Radians = NormalizeRadians(radians);
-            m_Degrees = radians * 180.0 / Math.PI;
-        }
 
         public double Radians
         {
@@ -44,32 +45,21 @@ namespace Selkie.Geometry.Primitives
             }
         }
 
-        #region IEquatable<Angle> Members
+        private readonly double m_Degrees;
+        private readonly double m_Radians;
 
-        // ReSharper disable once CodeAnnotationAnalyzer
-        public bool Equals(Angle other)
+        public static double ConvertDegreesToRadians(double degrees)
         {
-            if ( ReferenceEquals(null,
-                                 other) )
-            {
-                return false;
-            }
-            if ( ReferenceEquals(this,
-                                 other) )
-            {
-                return true;
-            }
-            return Math.Abs(other.Radians - m_Radians) < EpsilonRadians;
+            return Math.Abs(degrees - 0.0) < EpsilonDegrees
+                       ? 0.0
+                       : NormalizeRadians(degrees * Math.PI / 180.0);
         }
 
-        #endregion
-
-        [NotNull]
-        public static Angle FromRadians(double radians)
+        public static double ConvertRadiansToDegrees(double radians)
         {
             radians = NormalizeRadians(radians);
 
-            return new Angle(radians);
+            return radians * 180.0 / Math.PI;
         }
 
         [NotNull]
@@ -80,21 +70,27 @@ namespace Selkie.Geometry.Primitives
             return new Angle(radians);
         }
 
-        public static double ConvertDegreesToRadians(double degrees)
-        {
-            if ( Math.Abs(degrees - 0.0) < EpsilonDegrees )
-            {
-                return 0.0;
-            }
-
-            return NormalizeRadians(degrees * Math.PI / 180.0);
-        }
-
-        public static double ConvertRadiansToDegrees(double radians)
+        [NotNull]
+        public static Angle FromRadians(double radians)
         {
             radians = NormalizeRadians(radians);
 
-            return radians * 180.0 / Math.PI;
+            return new Angle(radians);
+        }
+
+        [NotNull]
+        public static Angle Inverse([NotNull] Angle angle)
+        {
+            double radiansCounterclockwise = angle.Radians;
+
+            double radians = RadiansFor360Degrees - radiansCounterclockwise;
+
+            if ( Math.Abs(radians - RadiansFor360Degrees) < 0.01 )
+            {
+                radians = 0.0;
+            }
+
+            return FromRadians(radians);
         }
 
         public static double NormalizeRadians(double radians)
@@ -123,6 +119,83 @@ namespace Selkie.Geometry.Primitives
             return normalized;
         }
 
+        public static Angle operator +(Angle one,
+                                       Angle two)
+        {
+            double radians = NormalizeRadians(one.Radians + two.Radians);
+
+            return FromRadians(radians);
+        }
+
+        public static bool operator ==(Angle left,
+                                       Angle right)
+        {
+            return Equals(left,
+                          right);
+        }
+
+        public static bool operator >(Angle one,
+                                      Angle two)
+        {
+            double radians = one.Radians - two.Radians;
+
+            return radians > 0.0;
+        }
+
+        public static bool operator >=(Angle one,
+                                       Angle two)
+        {
+            double radians = one.Radians - two.Radians;
+
+            return radians >= 0.0;
+        }
+
+        public static bool operator !=(Angle left,
+                                       Angle right)
+        {
+            return !Equals(left,
+                           right);
+        }
+
+        public static bool operator <(Angle one,
+                                      Angle two)
+        {
+            double radians = one.Radians - two.Radians;
+
+            return radians < 0.0;
+        }
+
+        public static bool operator <=(Angle one,
+                                       Angle two)
+        {
+            double radians = one.Radians - two.Radians;
+
+            return radians <= 0.0;
+        }
+
+        public static Angle operator -(Angle one,
+                                       Angle two)
+        {
+            double radians = NormalizeRadians(one.Radians - two.Radians);
+
+            return FromRadians(radians);
+        }
+
+        [NotNull]
+        public static Angle RelativeToXAxisCountertclockwise([NotNull] Angle angle)
+        {
+            double radiansYAxisClockwise = angle.Radians;
+
+            if ( Math.Abs(RadiansFor90Degrees - radiansYAxisClockwise) <= 0.01 )
+            {
+                return ForZeroDegrees;
+            }
+
+            double radiansYAxis = DetermineRadiansYAxisCountertclockwise(radiansYAxisClockwise);
+
+            return FromRadians(radiansYAxis);
+        }
+
         [NotNull]
         public static Angle RelativeToYAxisCounterclockwise([NotNull] Angle angle)
         {
@@ -137,6 +210,33 @@ namespace Selkie.Geometry.Primitives
             double radiansYAxis = DetermineRadiansYAxisClockwise(radiansXAxis);
 
             return FromRadians(radiansYAxis);
+        }
+
+        // ReSharper disable once CodeAnnotationAnalyzer
+        public override bool Equals(object obj)
+        {
+            if ( ReferenceEquals(null,
+                                 obj) )
+            {
+                return false;
+            }
+            if ( ReferenceEquals(this,
+                                 obj) )
+            {
+                return true;
+            }
+            return obj is Angle && Equals(( Angle ) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return m_Radians.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "[Radians: {0:F2} Degrees: {1:F2}]".Inject(m_Radians,
+                                                              m_Degrees);
         }
 
         private static double DetermineRadiansYAxisClockwise(double radiansXAxis)
@@ -162,21 +262,6 @@ namespace Selkie.Geometry.Primitives
             return radiansYAxis;
         }
 
-        [NotNull]
-        public static Angle RelativeToXAxisCountertclockwise([NotNull] Angle angle)
-        {
-            double radiansYAxisClockwise = angle.Radians;
-
-            if ( Math.Abs(RadiansFor90Degrees - radiansYAxisClockwise) <= 0.01 )
-            {
-                return ForZeroDegrees;
-            }
-
-            double radiansYAxis = DetermineRadiansYAxisCountertclockwise(radiansYAxisClockwise);
-
-            return FromRadians(radiansYAxis);
-        }
-
         private static double DetermineRadiansYAxisCountertclockwise(double radiansYAxisClockwise)
         {
             double radiansYAxis;
@@ -200,123 +285,43 @@ namespace Selkie.Geometry.Primitives
             return radiansYAxis;
         }
 
-        public static Angle operator +(Angle one,
-                                       Angle two)
-        {
-            double radians = NormalizeRadians(one.Radians + two.Radians);
-
-            return FromRadians(radians);
-        }
-
-        public static Angle operator -(Angle one,
-                                       Angle two)
-        {
-            double radians = NormalizeRadians(one.Radians - two.Radians);
-
-            return FromRadians(radians);
-        }
-
-        public static bool operator >=(Angle one,
-                                       Angle two)
-        {
-            double radians = one.Radians - two.Radians;
-
-            if ( radians >= 0.0 )
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool operator <=(Angle one,
-                                       Angle two)
-        {
-            double radians = one.Radians - two.Radians;
-
-            if ( radians <= 0.0 )
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool operator >(Angle one,
-                                      Angle two)
-        {
-            double radians = one.Radians - two.Radians;
-
-            return radians > 0.0;
-        }
-
-        public static bool operator <(Angle one,
-                                      Angle two)
-        {
-            double radians = one.Radians - two.Radians;
-
-            return radians < 0.0;
-        }
-
-        public override string ToString()
-        {
-            return "[Radians: {0:F2} Degrees: {1:F2}]".Inject(m_Radians,
-                                                              m_Degrees);
-        }
+        #region IEquatable<Angle> Members
 
         // ReSharper disable once CodeAnnotationAnalyzer
-        public override bool Equals(object obj)
+        public bool Equals(Angle other)
         {
             if ( ReferenceEquals(null,
-                                 obj) )
+                                 other) )
             {
                 return false;
             }
             if ( ReferenceEquals(this,
-                                 obj) )
+                                 other) )
             {
                 return true;
             }
-            if ( obj.GetType() != typeof ( Angle ) )
+
+            if ( IsEqualForZeroAnd2Pi(other) )
             {
-                return false;
-            }
-            return Equals(( Angle ) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return m_Radians.GetHashCode();
-        }
-
-        public static bool operator ==(Angle left,
-                                       Angle right)
-        {
-            return Equals(left,
-                          right);
-        }
-
-        public static bool operator !=(Angle left,
-                                       Angle right)
-        {
-            return !Equals(left,
-                           right);
-        }
-
-        [NotNull]
-        public static Angle Inverse([NotNull] Angle angle)
-        {
-            double radiansCounterclockwise = angle.Radians;
-
-            double radians = RadiansFor360Degrees - radiansCounterclockwise;
-
-            if ( Math.Abs(radians - RadiansFor360Degrees) < 0.01 )
-            {
-                radians = 0.0;
+                return true;
             }
 
-            return FromRadians(radians);
+            return Math.Abs(other.Radians - m_Radians) < EpsilonRadians;
         }
+
+        private bool IsEqualForZeroAnd2Pi(Angle other)
+        {
+            if ( other.Radians < EpsilonRadians &&
+                 m_Radians > TwoPiMinusEpsilonRadians )
+            {
+                return true;
+            }
+
+            return other.Radians > TwoPiMinusEpsilonRadians &&
+                   m_Radians < EpsilonRadians;
+        }
+
+        #endregion
 
         // ReSharper disable InconsistentNaming
         // ReSharper restore InconsistentNaming

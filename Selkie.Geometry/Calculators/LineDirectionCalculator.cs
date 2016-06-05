@@ -54,6 +54,9 @@ namespace Selkie.Geometry.Calculators
                 case Side.Left:
                     return Constants.TurnDirection.Counterclockwise;
 
+                case Side.Unknown:
+                    return Constants.TurnDirection.Unknown;
+
                 default:
                     return Constants.TurnDirection.Unknown;
             }
@@ -78,7 +81,7 @@ namespace Selkie.Geometry.Calculators
             {
                 return FindSideForVerticalLine(ay,
                                                bx,
-                                               @by,
+                                               by,
                                                cx);
             }
 
@@ -86,7 +89,7 @@ namespace Selkie.Geometry.Calculators
             {
                 return FindSideForHorizontalLine(ax,
                                                  bx,
-                                                 @by,
+                                                 by,
                                                  cy);
             }
 
@@ -112,16 +115,16 @@ namespace Selkie.Geometry.Calculators
         // ReSharper disable once TooManyArguments
         private Side FindSideForHorizontalLine(double ax,
                                                double bx,
-                                               double @by,
+                                               double by,
                                                double cy)
         {
-            if ( cy < @by )
+            if ( cy < by )
             {
                 return bx > ax
                            ? Side.Right
                            : Side.Left;
             }
-            if ( cy > @by )
+            if ( cy > by )
             {
                 return bx > ax
                            ? Side.Left
@@ -133,19 +136,19 @@ namespace Selkie.Geometry.Calculators
         // ReSharper disable once TooManyArguments
         private Side FindSideForVerticalLine(double ay,
                                              double bx,
-                                             double @by,
+                                             double by,
                                              double cx)
 
         {
             if ( cx < bx )
             {
-                return @by > ay
+                return by > ay
                            ? Side.Left
                            : Side.Right;
             }
             if ( cx > bx )
             {
-                return @by > ay
+                return by > ay
                            ? Side.Right
                            : Side.Left;
             }

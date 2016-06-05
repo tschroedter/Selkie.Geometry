@@ -7,12 +7,6 @@ namespace Selkie.Geometry.Shapes.Calculators
 {
     public class CircleCentreToPointCalculator : ICircleCentreToPointCalculator
     {
-        private readonly Point m_CentrePoint;
-        private Angle m_AngleRelativeToXAxisCounterClockwise = Angle.Unknown;
-        private Angle m_AngleRelativeToYAxisClockwise = Angle.Unknown;
-        private Angle m_AngleRelativeToYAxisCounterclockwise = Angle.Unknown;
-        private Point m_Point = Point.Unknown;
-
         public CircleCentreToPointCalculator([NotNull] Point centrePoint,
                                              [NotNull] Point point)
         {
@@ -27,6 +21,12 @@ namespace Selkie.Geometry.Shapes.Calculators
             m_CentrePoint = centrePoint;
             Point = Point.Unknown;
         }
+
+        private readonly Point m_CentrePoint;
+        private Angle m_AngleRelativeToXAxisCounterClockwise = Angle.Unknown;
+        private Angle m_AngleRelativeToYAxisClockwise = Angle.Unknown;
+        private Angle m_AngleRelativeToYAxisCounterclockwise = Angle.Unknown;
+        private Point m_Point = Point.Unknown;
 
         #region ICircleCentreToPointCalculator Members
 

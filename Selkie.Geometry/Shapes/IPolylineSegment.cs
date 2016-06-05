@@ -1,8 +1,9 @@
 ﻿using JetBrains.Annotations;
+using Selkie.Geometry.Primitives;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface IPolylineSegment
+    public interface IPolylineSegment : IShape
     {
         double Length { get; }
 
@@ -12,10 +13,13 @@ namespace Selkie.Geometry.Shapes
         [NotNull]
         Point EndPoint { get; }
 
-        [NotNull]
-        IPolylineSegment Reverse();
+        Angle AngleToXAxisAtEndPoint { get; }
+        Angle AngleToXAxisAtStartPoint { get; }
 
         bool IsOnLine(Point point);
+
+        [NotNull]
+        IPolylineSegment Reverse();
 
         Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
     }

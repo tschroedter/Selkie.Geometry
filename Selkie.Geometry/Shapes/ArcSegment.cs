@@ -10,10 +10,6 @@ namespace Selkie.Geometry.Shapes
 {
     public class ArcSegment : IArcSegment
     {
-        public static readonly IArcSegment Unknown = new ArcSegment();
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly ICircle m_Circle;
-
         private ArcSegment()
         {
             IsUnknown = true;
@@ -23,6 +19,8 @@ namespace Selkie.Geometry.Shapes
             TurnDirection = Constants.TurnDirection.Unknown;
             AngleClockwise = Angle.Unknown;
             AngleCounterClockwise = Angle.Unknown;
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         public ArcSegment([NotNull] ICircle circle,
@@ -55,9 +53,34 @@ namespace Selkie.Geometry.Shapes
             Length = arcTurnDirection == Constants.TurnDirection.Clockwise
                          ? LengthClockwise
                          : LengthCounterClockwise;
+
+            AngleToXAxisAtStartPoint = CalculateTangentAngleToXAxisAtPoint(circle.CentrePoint,
+                                                                           startPoint,
+                                                                           arcTurnDirection);
+            AngleToXAxisAtEndPoint = CalculateTangentAngleToXAxisAtPoint(circle.CentrePoint,
+                                                                         endPoint,
+                                                                         arcTurnDirection);
         }
 
+        public static readonly IArcSegment Unknown = new ArcSegment();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly ICircle m_Circle;
+
         public bool IsUnknown { get; private set; }
+
+        internal double CalculateLength([NotNull] Angle angle,
+                                        double radius)
+        {
+            double length = angle.Degrees * Math.PI * radius / 180.0;
+
+            return length;
+        }
+
+        internal bool ValidatePoint([NotNull] ICircle circle,
+                                    [NotNull] Point startPoint)
+        {
+            return circle.IsPointOnCircle(startPoint);
+        }
 
         internal void ValidateStartAndEndPoint([NotNull] ICircle circle,
                                                [NotNull] Point startPoint,
@@ -73,31 +96,32 @@ namespace Selkie.Geometry.Shapes
 
                 throw new ArgumentException(message);
             }
-            if ( !ValidatePoint(circle,
-                                endPoint) )
+            if ( ValidatePoint(circle,
+                               endPoint) )
             {
-                string message = "EndPoint {0} is not on circle [{1}] with radius {2}!".Inject(endPoint,
-                                                                                               circle.CentrePoint,
-                                                                                               circle.Radius);
-
-                Logger.Error(message);
-
-                throw new ArgumentException(message);
+                return;
             }
+            string text = "EndPoint {0} is not on circle [{1}] with radius {2}!".Inject(endPoint,
+                                                                                        circle.CentrePoint,
+                                                                                        circle.Radius);
+
+            Logger.Error(text);
+
+            throw new ArgumentException(text);
         }
 
-        internal bool ValidatePoint([NotNull] ICircle circle,
-                                    [NotNull] Point startPoint)
+        private Angle CalculateTangentAngleToXAxisAtPoint([NotNull] Point centrePoint,
+                                                          [NotNull] Point pointOnCircle,
+                                                          Constants.TurnDirection turnDirection)
         {
-            return circle.IsPointOnCircle(startPoint);
-        }
+            var line = new Line(centrePoint,
+                                pointOnCircle);
 
-        internal double CalculateLength([NotNull] Angle angle,
-                                        double radius)
-        {
-            double length = angle.Degrees * Math.PI * radius / 180.0;
+            Angle angleToXAxis = turnDirection == Constants.TurnDirection.Clockwise
+                                     ? line.AngleToXAxis - Angle.For90Degrees
+                                     : line.AngleToXAxis + Angle.For90Degrees;
 
-            return length;
+            return angleToXAxis;
         }
 
         #region IArcSegment Members
@@ -123,6 +147,8 @@ namespace Selkie.Geometry.Shapes
         public Point StartPoint { get; private set; }
 
         public Point EndPoint { get; private set; }
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
 
         public Angle AngleClockwise { get; private set; }
 

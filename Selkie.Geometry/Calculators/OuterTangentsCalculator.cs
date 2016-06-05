@@ -7,12 +7,6 @@ namespace Selkie.Geometry.Calculators
 {
     public class OuterTangentsCalculator : IOuterTangentsCalculator
     {
-        private readonly Point m_CircleOneTangentPointOne;
-        private readonly Point m_CircleOneTangentPointTwo;
-        private readonly Point m_CircleZeroTangentPointOne;
-        private readonly Point m_CircleZeroTangentPointTwo;
-        private readonly Point m_IntersectionPoint;
-
         public OuterTangentsCalculator([NotNull] ICirclePair circlePair)
         {
             ICircle circleZero = circlePair.Zero;
@@ -53,21 +47,11 @@ namespace Selkie.Geometry.Calculators
             m_CircleOneTangentPointTwo = pairOne.Item2;
         }
 
-        [NotNull]
-        internal Tuple <Point, Point> CalculateTangenPointsForZeroBothSameRadius([NotNull] ICirclePair circlePair)
-        {
-            var line = new Line(circlePair.Zero.CentrePoint,
-                                circlePair.One.CentrePoint);
-
-            Angle angle1 = line.AngleToXAxis - Angle.For90Degrees;
-            Angle angle2 = line.AngleToXAxis + Angle.For90Degrees;
-
-            Point point1 = circlePair.Zero.PointOnCircle(angle1);
-            Point point2 = circlePair.Zero.PointOnCircle(angle2);
-
-            return new Tuple <Point, Point>(point1,
-                                            point2);
-        }
+        private readonly Point m_CircleOneTangentPointOne;
+        private readonly Point m_CircleOneTangentPointTwo;
+        private readonly Point m_CircleZeroTangentPointOne;
+        private readonly Point m_CircleZeroTangentPointTwo;
+        private readonly Point m_IntersectionPoint;
 
         [NotNull]
         internal Tuple <Point, Point> CalculateTangenPointsForOneBothSameRadius([NotNull] ICirclePair circlePair)
@@ -80,6 +64,22 @@ namespace Selkie.Geometry.Calculators
 
             Point point1 = circlePair.One.PointOnCircle(angle1);
             Point point2 = circlePair.One.PointOnCircle(angle2);
+
+            return new Tuple <Point, Point>(point1,
+                                            point2);
+        }
+
+        [NotNull]
+        internal Tuple <Point, Point> CalculateTangenPointsForZeroBothSameRadius([NotNull] ICirclePair circlePair)
+        {
+            var line = new Line(circlePair.Zero.CentrePoint,
+                                circlePair.One.CentrePoint);
+
+            Angle angle1 = line.AngleToXAxis - Angle.For90Degrees;
+            Angle angle2 = line.AngleToXAxis + Angle.For90Degrees;
+
+            Point point1 = circlePair.Zero.PointOnCircle(angle1);
+            Point point2 = circlePair.Zero.PointOnCircle(angle2);
 
             return new Tuple <Point, Point>(point1,
                                             point2);

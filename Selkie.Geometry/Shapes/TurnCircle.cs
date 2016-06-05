@@ -10,13 +10,6 @@ namespace Selkie.Geometry.Shapes
         : ITurnCircle,
           IEquatable <TurnCircle>
     {
-        public static TurnCircle Unknown = new TurnCircle();
-        private readonly ICircle m_Circle;
-        private readonly Constants.CircleSide m_Side;
-        private readonly Distance m_Radius;
-        private readonly Constants.CircleOrigin m_Origin;
-        private readonly Constants.TurnDirection m_TurnDirection;
-
         private TurnCircle()
         {
             m_Circle = Shapes.Circle.Unknown;
@@ -38,6 +31,13 @@ namespace Selkie.Geometry.Shapes
             m_TurnDirection = turnDirection;
             m_Radius = new Distance(Circle.Radius);
         }
+
+        public static TurnCircle Unknown = new TurnCircle();
+        private readonly ICircle m_Circle;
+        private readonly Constants.CircleOrigin m_Origin;
+        private readonly Distance m_Radius;
+        private readonly Constants.CircleSide m_Side;
+        private readonly Constants.TurnDirection m_TurnDirection;
 
         #region IEquatable<TurnCircle> Members
 
@@ -65,6 +65,20 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsUnknown { get; private set; }
 
+        public static bool operator ==(TurnCircle left,
+                                       TurnCircle right)
+        {
+            return Equals(left,
+                          right);
+        }
+
+        public static bool operator !=(TurnCircle left,
+                                       TurnCircle right)
+        {
+            return !Equals(left,
+                           right);
+        }
+
         // ReSharper disable once CodeAnnotationAnalyzer
         public override bool Equals(object obj)
         {
@@ -78,7 +92,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof ( TurnCircle ) )
+            if ( obj.GetType() != typeof( TurnCircle ) )
             {
                 return false;
             }
@@ -95,20 +109,6 @@ namespace Selkie.Geometry.Shapes
                 result = ( result * 397 ) ^ TurnDirection.GetHashCode();
                 return result;
             }
-        }
-
-        public static bool operator ==(TurnCircle left,
-                                       TurnCircle right)
-        {
-            return Equals(left,
-                          right);
-        }
-
-        public static bool operator !=(TurnCircle left,
-                                       TurnCircle right)
-        {
-            return !Equals(left,
-                           right);
         }
 
         #region ITurnCircle Members

@@ -57,19 +57,16 @@ namespace Selkie.Geometry.Shapes.Calculators
             Angle angleEnd = calculatorEnd.AngleRelativeToYAxisCounterclockwise;
             Angle anglePoint = calculatorPoint.AngleRelativeToYAxisCounterclockwise;
 
-            if ( angleStart.Degrees >= 0.0 )
+            if ( !( angleStart.Degrees >= 0.0 ) )
             {
-                if ( angleEnd.Degrees >= 0.0 )
-                {
-                    if ( anglePoint >= angleStart &&
-                         anglePoint <= angleEnd )
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
-
-            return false;
+            if ( !( angleEnd.Degrees >= 0.0 ) )
+            {
+                return false;
+            }
+            return anglePoint >= angleStart &&
+                   anglePoint <= angleEnd;
         }
 
         private bool IsDistanceToPointGreaterThanRadius(IArcSegment segment,

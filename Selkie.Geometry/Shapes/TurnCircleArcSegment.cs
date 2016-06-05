@@ -9,14 +9,13 @@ namespace Selkie.Geometry.Shapes
     [ProjectComponent(Lifestyle.Transient)]
     public class TurnCircleArcSegment : ITurnCircleArcSegment
     {
-        public static readonly ITurnCircleArcSegment Unknown = new TurnCircleArcSegment();
-        private readonly Constants.CircleOrigin m_CircleOrigin;
-        private readonly Constants.TurnDirection m_Direction;
-
         private TurnCircleArcSegment()
         {
             IsUnknown = true;
             ArcSegment = Shapes.ArcSegment.Unknown;
+
+            AngleToXAxisAtEndPoint = Angle.Unknown;
+            AngleToXAxisAtStartPoint = Angle.Unknown;
         }
 
         internal TurnCircleArcSegment(IArcSegment arcSegment,
@@ -26,6 +25,9 @@ namespace Selkie.Geometry.Shapes
             ArcSegment = arcSegment;
             m_Direction = direction;
             m_CircleOrigin = circleOrigin;
+
+            AngleToXAxisAtEndPoint = arcSegment.AngleToXAxisAtEndPoint;
+            AngleToXAxisAtStartPoint = arcSegment.AngleToXAxisAtStartPoint;
         }
 
         public TurnCircleArcSegment([NotNull] ICircle circle,
@@ -41,7 +43,12 @@ namespace Selkie.Geometry.Shapes
 
             m_Direction = direction;
             m_CircleOrigin = circleOrigin;
+
+            AngleToXAxisAtEndPoint = ArcSegment.AngleToXAxisAtEndPoint;
+            AngleToXAxisAtStartPoint = ArcSegment.AngleToXAxisAtStartPoint;
         }
+
+        public static readonly ITurnCircleArcSegment Unknown = new TurnCircleArcSegment();
 
         public Angle Angle
         {
@@ -52,6 +59,9 @@ namespace Selkie.Geometry.Shapes
                            : ArcSegment.AngleCounterClockwise;
             }
         }
+
+        private readonly Constants.CircleOrigin m_CircleOrigin;
+        private readonly Constants.TurnDirection m_Direction;
 
         public override string ToString()
         {
@@ -112,6 +122,9 @@ namespace Selkie.Geometry.Shapes
                 return ArcSegment.EndPoint;
             }
         }
+
+        public Angle AngleToXAxisAtEndPoint { get; private set; }
+        public Angle AngleToXAxisAtStartPoint { get; private set; }
 
         public double Length
         {

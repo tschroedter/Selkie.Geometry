@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Selkie.Geometry.Primitives;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface IPolyline
+    public interface IPolyline : IShape
     {
         int Id { get; }
         bool IsUnknown { get; }
@@ -19,13 +20,16 @@ namespace Selkie.Geometry.Shapes
         [NotNull]
         IEnumerable <IPolylineSegment> Segments { get; }
 
-        Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
+        Angle AngleToXAxisAtStartPoint { get; }
+        Angle AngleToXAxisAtEndPoint { get; }
 
         void AddSegment([NotNull] IPolylineSegment segment);
+
+        bool IsOnLine([NotNull] Point point);
 
         [NotNull]
         IPolyline Reverse();
 
-        bool IsOnLine([NotNull] Point point);
+        Constants.TurnDirection TurnDirectionToPoint([NotNull] Point point);
     }
 }

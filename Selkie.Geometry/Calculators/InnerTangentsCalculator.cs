@@ -6,13 +6,6 @@ namespace Selkie.Geometry.Calculators
 {
     public class InnerTangentsCalculator : IInnerTangentsCalculator
     {
-        private readonly Point m_CircleOneTangentPointOne;
-        private readonly Point m_CircleOneTangentPointTwo;
-        private readonly Point m_CircleZeroTangentPointOne;
-        private readonly Point m_CircleZeroTangentPointTwo;
-        private readonly bool m_HasTangentPoints;
-        private readonly Point m_IntersectionPoint;
-
         public InnerTangentsCalculator([NotNull] ICirclePair circlePair)
         {
             if ( circlePair.NumberOfTangents < 3 )
@@ -53,6 +46,13 @@ namespace Selkie.Geometry.Calculators
                 m_HasTangentPoints = true;
             }
         }
+
+        private readonly Point m_CircleOneTangentPointOne;
+        private readonly Point m_CircleOneTangentPointTwo;
+        private readonly Point m_CircleZeroTangentPointOne;
+        private readonly Point m_CircleZeroTangentPointTwo;
+        private readonly bool m_HasTangentPoints;
+        private readonly Point m_IntersectionPoint;
 
         [NotNull]
         private Point CalculateInnerTangentLinesIntersectionPoint([NotNull] ICirclePair circlePair)

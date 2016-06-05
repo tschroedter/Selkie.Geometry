@@ -10,11 +10,6 @@ namespace Selkie.Geometry.Shapes
         : ICircle,
           IEquatable <Circle>
     {
-        public static readonly ICircle Unknown = new Circle();
-        private readonly ICircleCentreToPointCalculator m_Calculator;
-        private readonly Point m_CentrePoint;
-        private readonly double m_Radius;
-
         private Circle()
         {
             IsUnknown = true;
@@ -39,6 +34,11 @@ namespace Selkie.Geometry.Shapes
             m_Calculator = new CircleCentreToPointCalculator(CentrePoint);
         }
 
+        public static readonly ICircle Unknown = new Circle();
+        private readonly ICircleCentreToPointCalculator m_Calculator;
+        private readonly Point m_CentrePoint;
+        private readonly double m_Radius;
+
         #region IEquatable<Circle> Members
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -59,6 +59,20 @@ namespace Selkie.Geometry.Shapes
 
         #endregion
 
+        public static bool operator ==(Circle left,
+                                       Circle right)
+        {
+            return Equals(left,
+                          right);
+        }
+
+        public static bool operator !=(Circle left,
+                                       Circle right)
+        {
+            return !Equals(left,
+                           right);
+        }
+
         [NotNull]
         public Angle AngleBetweenPointsClockwise([NotNull] Point startPoint,
                                                  [NotNull] Point endPoint)
@@ -68,13 +82,6 @@ namespace Selkie.Geometry.Shapes
                                                                     endPoint);
 
             return calculator.AngleRelativeToYAxisClockwise;
-        }
-
-        private static bool IsInsideEpsilonForPoints(double deltaY,
-                                                     double deltaX)
-        {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -90,7 +97,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof ( Circle ) )
+            if ( obj.GetType() != typeof( Circle ) )
             {
                 return false;
             }
@@ -105,18 +112,11 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public static bool operator ==(Circle left,
-                                       Circle right)
+        private static bool IsInsideEpsilonForPoints(double deltaY,
+                                                     double deltaX)
         {
-            return Equals(left,
-                          right);
-        }
-
-        public static bool operator !=(Circle left,
-                                       Circle right)
-        {
-            return !Equals(left,
-                           right);
+            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
+                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
         }
 
         #region ICircle Members

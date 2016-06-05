@@ -3,7 +3,7 @@ using Selkie.Geometry.Primitives;
 
 namespace Selkie.Geometry.Shapes
 {
-    public interface ICircle
+    public interface ICircle : IShape
     {
         [NotNull]
         Point CentrePoint { get; }
@@ -15,13 +15,14 @@ namespace Selkie.Geometry.Shapes
         double Distance([NotNull] ICircle other);
 
         [NotNull]
-        Point PointOnCircle([NotNull] Angle angle);
+        Angle GetAngleRelativeToXAxis([NotNull] Point point);
 
-        bool IsPointOnCircle([NotNull] Point startPoint);
         bool Intersects([NotNull] ICircle finishPointStarboard);
 
+        bool IsPointOnCircle([NotNull] Point startPoint);
+
         [NotNull]
-        Angle GetAngleRelativeToXAxis([NotNull] Point point);
+        Point PointOnCircle([NotNull] Angle angle);
 
         [NotNull]
         Angle RadiansRelativeToXAxisCounterClockwise([NotNull] Point point);

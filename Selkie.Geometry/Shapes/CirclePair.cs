@@ -6,8 +6,6 @@ namespace Selkie.Geometry.Shapes
 {
     public class CirclePair : ICirclePair
     {
-        public static readonly ICirclePair Unknown = new CirclePair(true);
-
         private CirclePair(bool isUnknown)
         {
             One = Circle.Unknown;
@@ -28,16 +26,9 @@ namespace Selkie.Geometry.Shapes
                                                           One.Radius);
         }
 
-        public bool IsUnknown { get; private set; }
+        public static readonly ICirclePair Unknown = new CirclePair(true);
 
-        [NotNull]
-        private ICircle CalculatedCircleZero([NotNull] ICircle one,
-                                             [NotNull] ICircle two)
-        {
-            return one.Radius > two.Radius
-                       ? one
-                       : two;
-        }
+        public bool IsUnknown { get; private set; }
 
         [NotNull]
         private ICircle CalculatedCircleOne([NotNull] ICircle one,
@@ -46,6 +37,15 @@ namespace Selkie.Geometry.Shapes
             return one.Radius > two.Radius
                        ? two
                        : one;
+        }
+
+        [NotNull]
+        private ICircle CalculatedCircleZero([NotNull] ICircle one,
+                                             [NotNull] ICircle two)
+        {
+            return one.Radius > two.Radius
+                       ? one
+                       : two;
         }
 
         // ReSharper disable once MethodTooLong

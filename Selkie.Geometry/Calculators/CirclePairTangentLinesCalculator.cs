@@ -6,14 +6,6 @@ namespace Selkie.Geometry.Calculators
 {
     public class CirclePairTangentLinesCalculator : ICirclePairTangentLinesCalculator
     {
-        private readonly ICirclesIntersectionPointsCalculator m_CirclesIntersectionPointsCalculator;
-        private readonly List <ILine> m_InnerTangents = new List <ILine>();
-        private readonly IInnerTangentsCalculator m_InnerTangentsCalculator;
-        private readonly List <ILine> m_OuterTangents = new List <ILine>();
-        private readonly IOuterTangentsCalculator m_OuterTangentsCalculator;
-        private readonly List <ILine> m_Tangents = new List <ILine>();
-        private ICirclePair m_CirclePair = Shapes.CirclePair.Unknown;
-
         public CirclePairTangentLinesCalculator([NotNull] ICirclePair circlePair)
         {
             m_CirclePair = circlePair;
@@ -32,6 +24,14 @@ namespace Selkie.Geometry.Calculators
             m_InnerTangentsCalculator = innerTangentsCalculator;
             m_CirclesIntersectionPointsCalculator = circlesIntersectionPointsCalculator;
         }
+
+        private readonly ICirclesIntersectionPointsCalculator m_CirclesIntersectionPointsCalculator;
+        private readonly List <ILine> m_InnerTangents = new List <ILine>();
+        private readonly IInnerTangentsCalculator m_InnerTangentsCalculator;
+        private readonly List <ILine> m_OuterTangents = new List <ILine>();
+        private readonly IOuterTangentsCalculator m_OuterTangentsCalculator;
+        private readonly List <ILine> m_Tangents = new List <ILine>();
+        private ICirclePair m_CirclePair = Shapes.CirclePair.Unknown;
 
         public ICirclePair CirclePair
         {
@@ -95,6 +95,35 @@ namespace Selkie.Geometry.Calculators
             }
         }
 
+        internal void CreateFourTangents()
+        {
+            IEnumerable <ILine> outerTangents = CreateOuterTangents();
+            IEnumerable <ILine> innerTangents = CreateInnerTangents();
+
+            m_OuterTangents.AddRange(outerTangents);
+            m_InnerTangents.AddRange(innerTangents);
+
+            m_Tangents.AddRange(m_OuterTangents);
+            m_Tangents.AddRange(m_InnerTangents);
+        }
+
+        [NotNull]
+        internal IEnumerable <ILine> CreateInnerTangents()
+        {
+            var innerTangentOne = new Line(m_InnerTangentsCalculator.CircleZeroTangentPointOne,
+                                           m_InnerTangentsCalculator.CircleOneTangentPointOne);
+            var innerTangentTwo = new Line(m_InnerTangentsCalculator.CircleZeroTangentPointTwo,
+                                           m_InnerTangentsCalculator.CircleOneTangentPointTwo);
+
+            var tangents = new List <ILine>
+                           {
+                               innerTangentOne,
+                               innerTangentTwo
+                           };
+
+            return tangents;
+        }
+
         internal void CreateOneTangent()
         {
             ILine innerTangent = CreateInnerTangent();
@@ -102,24 +131,6 @@ namespace Selkie.Geometry.Calculators
             m_InnerTangents.Add(innerTangent);
 
             m_Tangents.AddRange(m_InnerTangents);
-        }
-
-        [NotNull]
-        private ILine CreateInnerTangent()
-        {
-            var innerTangent = new Line(m_CirclesIntersectionPointsCalculator.IntersectionPointOne,
-                                        m_CirclesIntersectionPointsCalculator.IntersectionPointTwo);
-
-            return innerTangent;
-        }
-
-        internal void CreateTwoTangents()
-        {
-            IEnumerable <ILine> outerTangents = CreateOuterTangents();
-
-            m_OuterTangents.AddRange(outerTangents);
-
-            m_Tangents.AddRange(m_OuterTangents);
         }
 
         [NotNull]
@@ -145,33 +156,22 @@ namespace Selkie.Geometry.Calculators
             CreateTwoTangents();
         }
 
-        [NotNull]
-        internal IEnumerable <ILine> CreateInnerTangents()
-        {
-            var innerTangentOne = new Line(m_InnerTangentsCalculator.CircleZeroTangentPointOne,
-                                           m_InnerTangentsCalculator.CircleOneTangentPointOne);
-            var innerTangentTwo = new Line(m_InnerTangentsCalculator.CircleZeroTangentPointTwo,
-                                           m_InnerTangentsCalculator.CircleOneTangentPointTwo);
-
-            var tangents = new List <ILine>
-                           {
-                               innerTangentOne,
-                               innerTangentTwo
-                           };
-
-            return tangents;
-        }
-
-        internal void CreateFourTangents()
+        internal void CreateTwoTangents()
         {
             IEnumerable <ILine> outerTangents = CreateOuterTangents();
-            IEnumerable <ILine> innerTangents = CreateInnerTangents();
 
             m_OuterTangents.AddRange(outerTangents);
-            m_InnerTangents.AddRange(innerTangents);
 
             m_Tangents.AddRange(m_OuterTangents);
-            m_Tangents.AddRange(m_InnerTangents);
+        }
+
+        [NotNull]
+        private ILine CreateInnerTangent()
+        {
+            var innerTangent = new Line(m_CirclesIntersectionPointsCalculator.IntersectionPointOne,
+                                        m_CirclesIntersectionPointsCalculator.IntersectionPointTwo);
+
+            return innerTangent;
         }
     }
 }

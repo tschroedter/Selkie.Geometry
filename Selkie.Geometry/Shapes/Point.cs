@@ -8,11 +8,6 @@ namespace Selkie.Geometry.Shapes
 {
     public class Point : IEquatable <Point>
     {
-        public static readonly Point Unknown = new Point();
-        private readonly double m_X;
-        private readonly double m_Y;
-        private readonly bool m_IsUnknown;
-
         private Point()
         {
             m_X = double.NaN;
@@ -27,6 +22,8 @@ namespace Selkie.Geometry.Shapes
             m_Y = y;
             m_IsUnknown = false;
         }
+
+        public static readonly Point Unknown = new Point();
 
         public bool IsUnknown
         {
@@ -52,6 +49,10 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
+        private readonly bool m_IsUnknown;
+        private readonly double m_X;
+        private readonly double m_Y;
+
         #region IEquatable<Point> Members
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -74,14 +75,18 @@ namespace Selkie.Geometry.Shapes
 
         #endregion
 
-        [NotNull]
-        public Point RelativeTo([NotNull] Point other)
+        public static bool operator ==(Point left,
+                                       Point right)
         {
-            double x = X - other.X;
-            double y = Y - other.Y;
+            return Equals(left,
+                          right);
+        }
 
-            return new Point(x,
-                             y);
+        public static bool operator !=(Point left,
+                                       Point right)
+        {
+            return !Equals(left,
+                           right);
         }
 
         [NotNull]
@@ -107,23 +112,6 @@ namespace Selkie.Geometry.Shapes
             return Angle.FromRadians(radians);
         }
 
-        [NotNull]
-        public Point Move(double distance,
-                          double radians)
-        {
-            double x = X;
-            double y = Y;
-            double r = distance;
-
-            double newX = x + r * Math.Sin(radians);
-            double newY = y + r * Math.Cos(radians);
-
-            var point = new Point(newX,
-                                  newY);
-
-            return point;
-        }
-
         public double DistanceTo([NotNull] Point other)
         {
             double x = ( other.X - X ) * ( other.X - X );
@@ -131,12 +119,6 @@ namespace Selkie.Geometry.Shapes
             double distance = Math.Sqrt(x + y);
 
             return distance;
-        }
-
-        public override string ToString()
-        {
-            return "[{0},{1}]".Inject(X,
-                                      Y);
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
@@ -152,7 +134,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof ( Point ) )
+            if ( obj.GetType() != typeof( Point ) )
             {
                 return false;
             }
@@ -170,18 +152,37 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public static bool operator ==(Point left,
-                                       Point right)
+        [NotNull]
+        public Point Move(double distance,
+                          double radians)
         {
-            return Equals(left,
-                          right);
+            double x = X;
+            double y = Y;
+            double r = distance;
+
+            double newX = x + r * Math.Sin(radians);
+            double newY = y + r * Math.Cos(radians);
+
+            var point = new Point(newX,
+                                  newY);
+
+            return point;
         }
 
-        public static bool operator !=(Point left,
-                                       Point right)
+        [NotNull]
+        public Point RelativeTo([NotNull] Point other)
         {
-            return !Equals(left,
-                           right);
+            double x = X - other.X;
+            double y = Y - other.Y;
+
+            return new Point(x,
+                             y);
+        }
+
+        public override string ToString()
+        {
+            return "[{0},{1}]".Inject(X,
+                                      Y);
         }
     }
 }

@@ -8,12 +8,6 @@ namespace Selkie.Geometry.Calculators
 {
     public class CoordinatePairCalculator : ICoordinatePairCalculator
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly ICircle m_Circle;
-        private readonly Tuple <Point, Point> m_Points;
-        private readonly Tuple <double, double> m_Xt1And2;
-        private readonly Tuple <double, double> m_Yt1And2;
-
         public CoordinatePairCalculator()
         {
             m_Circle = Shapes.Circle.Unknown;
@@ -35,6 +29,12 @@ namespace Selkie.Geometry.Calculators
                                  xt1And2,
                                  yt1And2);
         }
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly ICircle m_Circle;
+        private readonly Tuple <Point, Point> m_Points;
+        private readonly Tuple <double, double> m_Xt1And2;
+        private readonly Tuple <double, double> m_Yt1And2;
 
         [NotNull]
         // ReSharper disable once MethodTooLong
@@ -84,6 +84,14 @@ namespace Selkie.Geometry.Calculators
                                             pointTwo);
         }
 
+        private static bool AreInputFieldsValid([NotNull] ICircle circle,
+                                                [NotNull] Tuple <double, double> xt1And2,
+                                                [NotNull] Tuple <double, double> yt1And2)
+        {
+            return circle.IsUnknown || double.IsNaN(xt1And2.Item1) || double.IsNaN(xt1And2.Item2) ||
+                   double.IsNaN(yt1And2.Item1) || double.IsNaN(yt1And2.Item2);
+        }
+
         private static void PointIsNotOnCircle([NotNull] ICircle circle,
                                                [NotNull] Point point)
         {
@@ -93,14 +101,6 @@ namespace Selkie.Geometry.Calculators
             Logger.Error(message);
 
             throw new ArgumentException(message);
-        }
-
-        private static bool AreInputFieldsValid([NotNull] ICircle circle,
-                                                [NotNull] Tuple <double, double> xt1And2,
-                                                [NotNull] Tuple <double, double> yt1And2)
-        {
-            return circle.IsUnknown || double.IsNaN(xt1And2.Item1) || double.IsNaN(xt1And2.Item2) ||
-                   double.IsNaN(yt1And2.Item1) || double.IsNaN(yt1And2.Item2);
         }
 
         #region ICoordinatePairCalculator Members
