@@ -1,4 +1,5 @@
-﻿using Selkie.Geometry.Primitives;
+﻿using JetBrains.Annotations;
+using Selkie.Geometry.Primitives;
 using Selkie.Geometry.Shapes;
 using Selkie.Windsor.Extensions;
 
@@ -19,13 +20,14 @@ namespace Selkie.Geometry.Surveying
         }
 
         public SurveyFeature(int id,
-                             Point startPoint,
-                             Point endPoint,
-                             Angle angleToXAxisAtStartPoint,
-                             Angle angleToXAxisAtEndPoint,
+                             [NotNull] Point startPoint,
+                             [NotNull] Point endPoint,
+                             [NotNull] Angle angleToXAxisAtStartPoint,
+                             [NotNull] Angle angleToXAxisAtEndPoint,
                              Constants.LineDirection runDirection,
                              double length,
-                             bool isUnknown = false)
+                             bool isUnknown = false,
+                             string geoJson = "")
         {
             Id = id;
             IsUnknown = isUnknown;
@@ -35,6 +37,18 @@ namespace Selkie.Geometry.Surveying
             AngleToXAxisAtEndPoint = angleToXAxisAtEndPoint;
             RunDirection = runDirection;
             Length = length;
+        }
+
+        public SurveyFeature([NotNull] SurveyFeatureData data)
+        {
+            Id = data.Id;
+            IsUnknown = data.IsUnknown;
+            StartPoint = data.StartPoint;
+            EndPoint = data.EndPoint;
+            AngleToXAxisAtStartPoint = data.AngleToXAxisAtStartPoint;
+            AngleToXAxisAtEndPoint = data.AngleToXAxisAtEndPoint;
+            RunDirection = data.RunDirection;
+            Length = data.Length;
         }
 
         internal const int UnknownId = -1;
