@@ -5,8 +5,6 @@ namespace Selkie.Geometry.Surveying
 {
     public class SurveyGeoJsonFeature : ISurveyGeoJsonFeature
     {
-        public static SurveyGeoJsonFeature Unknown = new SurveyGeoJsonFeature();
-
         private SurveyGeoJsonFeature()
         {
             SurveyFeature = Surveying.SurveyFeature.Unknown;
@@ -20,6 +18,8 @@ namespace Selkie.Geometry.Surveying
             SurveyFeature = surveyFeature;
             SurveyFeatureAsGeoJson = surveyFeatureAsGeoJson;
         }
+
+        public static SurveyGeoJsonFeature Unknown = new SurveyGeoJsonFeature();
 
         public int Id
         {

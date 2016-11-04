@@ -97,11 +97,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof( Circle ) )
-            {
-                return false;
-            }
-            return Equals(( Circle ) obj);
+            return obj.GetType() == typeof( Circle ) && Equals(( Circle ) obj);
         }
 
         public override int GetHashCode()

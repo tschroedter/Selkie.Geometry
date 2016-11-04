@@ -134,11 +134,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof( Point ) )
-            {
-                return false;
-            }
-            return Equals(( Point ) obj);
+            return obj.GetType() == typeof( Point ) && Equals(( Point ) obj);
         }
 
         public override int GetHashCode()

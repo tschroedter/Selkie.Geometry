@@ -126,6 +126,21 @@
     <Compile Include="Surveying\SurveyGeoJsonFeatureTests.cs" />
     <Compile Include="Surveying\SurveyLineTests.cs" />
     <Compile Include="Surveying\SurveyPolylineTests.cs" />
+    <Compile Include="Calculators\AngelInterpolationCalculatorTests.cs" />
+    <Compile Include="Calculators\AngleIntervallCalculatorTests.cs" />
+    <Compile Include="ThreeD\Calculators\CartesianSphericalArcCalculatorIntegrationTests.cs" />
+    <Compile Include="ThreeD\Primitives\CartesianCoordinatesHelper.cs" />
+    <Compile Include="ThreeD\Calculators\CartesianToSphericalCalculatorTests.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalArcCalculatorIntegrationTests.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalArcCalculatorTests.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalCoordinatesIntervallCalculatorTests.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalToCartesianCalculatorTests.cs" />
+    <Compile Include="ThreeD\Converters\CartesianCoordinatesToStringConverterTests.cs" />
+    <Compile Include="ThreeD\Calculators\PointDistanceCalculatorTests.cs" />
+    <Compile Include="ThreeD\Converters\RadiusPhiThetaToSphericalCoordinatesConverterTests.cs" />
+    <Compile Include="ThreeD\Primitives\SphericalCoordinatesHelper.cs" />
+    <Compile Include="ThreeD\Converters\SphericalCoordinatesToStringConverterTests.cs" />
+    <Compile Include="ThreeD\Shapes\PointTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selkie.Geometry\Selkie.Geometry.csproj">

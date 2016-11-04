@@ -50,12 +50,9 @@ namespace Selkie.Geometry.Shapes
         {
             IPolylineSegment last = segments.LastOrDefault();
 
-            if ( last == null )
-            {
-                return Point.Unknown;
-            }
-
-            return last.EndPoint;
+            return last == null
+                       ? Point.Unknown
+                       : last.EndPoint;
         }
 
         [NotNull]
@@ -63,12 +60,9 @@ namespace Selkie.Geometry.Shapes
         {
             IPolylineSegment first = segments.FirstOrDefault();
 
-            if ( first == null )
-            {
-                return Point.Unknown;
-            }
-
-            return first.StartPoint;
+            return first == null
+                       ? Point.Unknown
+                       : first.StartPoint;
         }
 
         #region IPolyline Members

@@ -92,11 +92,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof( TurnCircle ) )
-            {
-                return false;
-            }
-            return Equals(( TurnCircle ) obj);
+            return obj.GetType() == typeof( TurnCircle ) && Equals(( TurnCircle ) obj);
         }
 
         public override int GetHashCode()

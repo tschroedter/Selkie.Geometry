@@ -72,18 +72,15 @@ namespace Selkie.Geometry.Shapes
                 return 2;
             }
 
-            if ( Math.Abs(distance - r0PlusR1) < SelkieConstants.EpsilonDistance )
-            {
-                return 3;
-            }
+            return Math.Abs(distance - r0PlusR1) < SelkieConstants.EpsilonDistance
+                       ? 3
+                       : 4;
 
             // Note: There can't be more than 4 
             //       if (distance > r0PlusR1)
             //         {
             //            return 4;
             //         }
-
-            return 4;
         }
 
         #region ICirclePair Members

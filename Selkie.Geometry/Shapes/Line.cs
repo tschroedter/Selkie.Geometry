@@ -225,11 +225,7 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            if ( obj.GetType() != typeof( Line ) )
-            {
-                return false;
-            }
-            return Equals(( Line ) obj);
+            return obj.GetType() == typeof( Line ) && Equals(( Line ) obj);
         }
 
         public override int GetHashCode()
@@ -422,7 +418,7 @@ namespace Selkie.Geometry.Shapes
             }
         }
 
-        public bool Equals([NotNull] ILine other)
+        public bool Equals(ILine other)
         {
             return Equals(other as Line);
         }

@@ -43,6 +43,29 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculators\AngelInterpolationCalculator.cs" />
+    <Compile Include="Calculators\AngleIntervallCalculator.cs" />
+    <Compile Include="ThreeD\Calculators\CartesianSphericalArcCalculator.cs" />
+    <Compile Include="ThreeD\Calculators\CartesianToSphericalCalculator.cs" />
+    <Compile Include="Calculators\IAngelInterpolationCalculator.cs" />
+    <Compile Include="Calculators\IAngleIntervallCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\ICartesianSphericalArcCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Converters\ISphericalCoordinatesToStringConverter.cs" />
+    <Compile Include="ThreeD\Converters\SphericalCoordinatesToStringConverter.cs" />
+    <Compile Include="ThreeD\Interfaces\Converters\IRadiusPhiThetaToSphericalCoordinatesConverter.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\ISphericalCoordinatesIntervallCalculator.cs" />
+    <Compile Include="ThreeD\Converters\RadiusPhiThetaToSphericalCoordinatesConverter.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalCoordinatesIntervallCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\ISphericalArcCalculator.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalArcCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\ICalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\ICartesianToSphericalCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\IPointDistanceCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Calculators\ISphericalToCartesianCalculator.cs" />
+    <Compile Include="ThreeD\Calculators\SphericalToCartesianCalculator.cs" />
+    <Compile Include="ThreeD\Interfaces\Converters\IConverter.cs" />
+    <Compile Include="ThreeD\Interfaces\Converters\ICartesianCoordinatesToStringConverter.cs" />
+    <Compile Include="ThreeD\Shapes\Point.cs" />
     <Compile Include="Calculators\CirclePairTangentLinesCalculator.cs" />
     <Compile Include="Calculators\CirclesIntersectionPointsCalculator.cs" />
     <Compile Include="Calculators\CoordinatePairCalculator.cs" />
@@ -99,6 +122,10 @@
     <Compile Include="Surveying\SurveyGeoJsonFeature.cs" />
     <Compile Include="Surveying\SurveyLine.cs" />
     <Compile Include="Surveying\SurveyPolyline.cs" />
+    <Compile Include="ThreeD\Calculators\PointDistanceCalculator.cs" />
+    <Compile Include="ThreeD\Converters\CartesianCoordinatesToStringConverter.cs" />
+    <Compile Include="ThreeD\Primitives\CartesianCoordinates.cs" />
+    <Compile Include="ThreeD\Primitives\SphericalCoordinates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -141,6 +168,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(TargetDir)Selkie.Geometry.dll $(SolutionDir)NuGet.Selkie.Geometry\lib\net45 /Y /E</PostBuildEvent>
