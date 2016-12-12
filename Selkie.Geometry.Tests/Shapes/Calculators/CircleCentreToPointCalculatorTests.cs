@@ -109,8 +109,8 @@ namespace Selkie.Geometry.Tests.Shapes.Calculators
         [Test]
         public void AngleRelativeToXAxisCounterClockwiseFor360DegreesTest()
         {
-            double x = m_CentrePoint.X + m_RadiusOne * Math.Cos(Angle.RadiansFor360Degrees);
-            double y = m_CentrePoint.Y + m_RadiusOne * Math.Sin(Angle.RadiansFor360Degrees);
+            double x = m_CentrePoint.X + m_RadiusOne * Math.Cos(BaseAngle.RadiansFor360Degrees);
+            double y = m_CentrePoint.Y + m_RadiusOne * Math.Sin(BaseAngle.RadiansFor360Degrees);
 
             var point = new Point(x,
                                   y);

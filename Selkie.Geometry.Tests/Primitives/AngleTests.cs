@@ -47,100 +47,6 @@ namespace Selkie.Geometry.Tests.Primitives
         }
 
         [Test]
-        public void ConvertDegreesToRadiansCallsNormalizeRadiansTest()
-        {
-            double actual = Angle.ConvertDegreesToRadians(45.0 + 360.0);
-
-            NUnitHelper.AssertDegrees(Angle.RadiansFor45Degrees,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertDegreesToRadiansFor45DegreesTest()
-        {
-            double actual = Angle.ConvertDegreesToRadians(45.0);
-
-            NUnitHelper.AssertDegrees(Angle.RadiansFor45Degrees,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertDegreesToRadiansForZeroMinusEpsilonTest()
-        {
-            const double expected = Angle.RadiansFor360Degrees;
-            double actual = Angle.ConvertDegreesToRadians(0.0 - Angle.EpsilonDegrees);
-
-            NUnitHelper.AssertDegrees(expected,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertDegreesToRadiansForZeroMinusHalfEpsilonTest()
-        {
-            const double degrees = 0.0 - Angle.EpsilonDegrees / 2.0;
-            double actual = Angle.ConvertDegreesToRadians(degrees);
-
-            NUnitHelper.AssertDegrees(0.0,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertDegreesToRadiansForZeroPlusEpsilonTest()
-        {
-            const double expected = 0.0 + Angle.EpsilonDegrees;
-            double actual = Angle.ConvertDegreesToRadians(expected);
-
-            NUnitHelper.AssertDegrees(expected,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertDegreesToRadiansForZeroPlusHalfEpsilonTest()
-        {
-            const double degrees = 0.0 + Angle.EpsilonDegrees / 2.0;
-            double actual = Angle.ConvertDegreesToRadians(degrees);
-
-            NUnitHelper.AssertDegrees(0.0,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertDegreesToRadiansForZeroTest()
-        {
-            double actual = Angle.ConvertDegreesToRadians(0.0);
-
-            NUnitHelper.AssertDegrees(Angle.RadiansForZeroDegrees,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertRadiansToDegreesCallsNormalizeRadiansTest()
-        {
-            double actual = Angle.ConvertRadiansToDegrees(Angle.RadiansFor45Degrees + Angle.RadiansFor360Degrees);
-
-            NUnitHelper.AssertDegrees(45.0,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertRadiansToDegreesFor45DegreesTest()
-        {
-            double actual = Angle.ConvertRadiansToDegrees(Angle.RadiansFor45Degrees);
-
-            NUnitHelper.AssertDegrees(45.0,
-                                      actual);
-        }
-
-        [Test]
-        public void ConvertRadiansToDegreesForZeroTest()
-        {
-            double actual = Angle.ConvertRadiansToDegrees(Angle.RadiansForZeroDegrees);
-
-            NUnitHelper.AssertDegrees(0.0,
-                                      actual);
-        }
-
-        [Test]
         public void DegreesTest()
         {
             Angle actual = Angle.For45Degrees;
@@ -298,7 +204,7 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void For360DegreesTest()
         {
-            const double expected = Angle.RadiansFor360Degrees;
+            const double expected = BaseAngle.RadiansFor360Degrees;
 
             NUnitHelper.AssertRadians(expected,
                                       Angle.For360Degrees.Radians);
@@ -336,7 +242,7 @@ namespace Selkie.Geometry.Tests.Primitives
         {
             Angle actual = Angle.FromDegrees(180.0 * 3.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor180Degrees,
                                       actual.Radians);
             NUnitHelper.AssertDegrees(180.0,
                                       actual.Degrees);
@@ -347,7 +253,7 @@ namespace Selkie.Geometry.Tests.Primitives
         {
             Angle actual = Angle.FromDegrees(-180.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor180Degrees,
                                       actual.Radians);
             NUnitHelper.AssertDegrees(180.0,
                                       actual.Degrees);
@@ -358,7 +264,7 @@ namespace Selkie.Geometry.Tests.Primitives
         {
             Angle actual = Angle.FromDegrees(180.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor180Degrees,
                                       actual.Radians);
             NUnitHelper.AssertDegrees(180.0,
                                       actual.Degrees);
@@ -367,9 +273,9 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void FromRadiansForRadiansGreaterThan2PiTest()
         {
-            Angle actual = Angle.FromRadians(Angle.RadiansFor180Degrees * 3.0);
+            Angle actual = Angle.FromRadians(BaseAngle.RadiansFor180Degrees * 3.0);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor180Degrees,
                                       actual.Radians);
             NUnitHelper.AssertDegrees(180.0,
                                       actual.Degrees);
@@ -378,9 +284,9 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void FromRadiansForRadiansLessThanZeroTest()
         {
-            Angle actual = Angle.FromRadians(-Angle.RadiansFor180Degrees);
+            Angle actual = Angle.FromRadians(-BaseAngle.RadiansFor180Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor180Degrees,
                                       actual.Radians);
             NUnitHelper.AssertDegrees(180.0,
                                       actual.Degrees);
@@ -389,9 +295,9 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void FromRadiansTest()
         {
-            Angle actual = Angle.FromRadians(Angle.RadiansFor180Degrees);
+            Angle actual = Angle.FromRadians(BaseAngle.RadiansFor180Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor180Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor180Degrees,
                                       actual.Radians);
             NUnitHelper.AssertDegrees(180.0,
                                       actual.Degrees);
@@ -402,7 +308,7 @@ namespace Selkie.Geometry.Tests.Primitives
         {
             Angle angle1 = Angle.For45Degrees;
 
-            int expected = Angle.RadiansFor45Degrees.GetHashCode();
+            int expected = BaseAngle.RadiansFor45Degrees.GetHashCode();
             int actual = angle1.GetHashCode();
 
             Assert.AreEqual(expected,
@@ -559,26 +465,26 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void NormalizeRadiansForNegative405Test()
         {
-            double actual = Angle.NormalizeRadians(Angle.RadiansFor45Degrees + Angle.RadiansFor360Degrees);
+            double actual = Angle.NormalizeRadians(BaseAngle.RadiansFor45Degrees + BaseAngle.RadiansFor360Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor45Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor45Degrees,
                                       actual);
         }
 
         [Test]
         public void NormalizeRadiansForNegative45Test()
         {
-            double actual = Angle.NormalizeRadians(-Angle.RadiansFor45Degrees);
+            double actual = Angle.NormalizeRadians(-BaseAngle.RadiansFor45Degrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor315Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor315Degrees,
                                       actual);
         }
 
         [Test]
         public void NormalizeRadiansForZeroMinusEpsilonTest()
         {
-            const double expected = Angle.RadiansFor360Degrees - Angle.EpsilonDegrees;
-            double actual = Angle.NormalizeRadians(Angle.RadiansForZeroDegrees - Angle.EpsilonDegrees);
+            const double expected = BaseAngle.RadiansFor360Degrees - Angle.EpsilonDegrees;
+            double actual = Angle.NormalizeRadians(BaseAngle.RadiansForZeroDegrees - Angle.EpsilonDegrees);
 
             NUnitHelper.AssertDegrees(expected,
                                       actual);
@@ -587,7 +493,7 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void NormalizeRadiansForZeroMinusHalfEpsilonTest()
         {
-            const double expected = Angle.RadiansFor360Degrees - Angle.EpsilonRadians / 2.0;
+            const double expected = BaseAngle.RadiansFor360Degrees - Angle.EpsilonRadians / 2.0;
             double actual = Angle.NormalizeRadians(0.0 - Angle.EpsilonRadians / 2.0);
 
             NUnitHelper.AssertRadians(expected,
@@ -617,9 +523,9 @@ namespace Selkie.Geometry.Tests.Primitives
         [Test]
         public void NormalizeRadiansForZeroTest()
         {
-            double actual = Angle.NormalizeRadians(Angle.RadiansForZeroDegrees);
+            double actual = Angle.NormalizeRadians(BaseAngle.RadiansForZeroDegrees);
 
-            NUnitHelper.AssertRadians(Angle.RadiansForZeroDegrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansForZeroDegrees,
                                       actual);
         }
 
@@ -639,6 +545,61 @@ namespace Selkie.Geometry.Tests.Primitives
             Angle angle2 = Angle.For90Degrees;
 
             Assert.True(angle1 != angle2);
+        }
+
+        [Test]
+        [TestCase(0.0, 0.0, 0.0)]
+        [TestCase(0.0, 90.0, 270.0)]
+        [TestCase(90.0, 0.0, 90.0)]
+        [TestCase(90.0, 45.0, 45.0)]
+        [TestCase(90.0, 90.0, 0.0)]
+        [TestCase(90.0, 180.0, 270.0)]
+        [TestCase(180.0, 180.0, 0.0)]
+        [TestCase(270.0, 90.0, 180.0)]
+        [TestCase(270.0, 135.0, 135.0)]
+        public void OperatorMinus_AddsAngles_ForGivenAngles(
+            double oneInDegrees,
+            double twoInDegrees,
+            double expectedInDegrees)
+        {
+            // Arrange
+            Angle one = Angle.FromDegrees(oneInDegrees);
+            Angle two = Angle.FromDegrees(twoInDegrees);
+            Angle expected = Angle.FromDegrees(expectedInDegrees);
+
+            // Act
+            Angle actual = one - two;
+
+            // Assert
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
+        }
+
+        [Test]
+        [TestCase(0.0, 0.0, 0.0)]
+        [TestCase(90.0, 0.0, 90.0)]
+        [TestCase(90.0, 45.0, 135.0)]
+        [TestCase(90.0, 90.0, 180.0)]
+        [TestCase(90.0, 180.0, 270.0)]
+        [TestCase(180.0, 180.0, 360.0)]
+        [TestCase(270.0, 90.0, 360.0)]
+        [TestCase(270.0, 135.0, 45.0)]
+        public void OperatorPlus_AddsAngles_ForGivenAngles(
+            double oneInDegrees,
+            double twoInDegrees,
+            double expectedInDegrees)
+        {
+            // Arrange
+            Angle one = Angle.FromDegrees(oneInDegrees);
+            Angle two = Angle.FromDegrees(twoInDegrees);
+            Angle expected = Angle.FromDegrees(expectedInDegrees);
+
+            // Act
+            Angle actual = one + two;
+
+            // Assert
+            NUnitHelper.AssertDegrees(expected.Degrees,
+                                      actual.Degrees);
         }
 
         [Test]
@@ -686,7 +647,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = Math.PI / 2.0 + Math.PI / 4.0;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor135Degrees);
+                                      BaseAngle.RadiansFor135Degrees);
         }
 
         [Test]
@@ -695,7 +656,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = Math.PI;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor180Degrees);
+                                      BaseAngle.RadiansFor180Degrees);
         }
 
         [Test]
@@ -704,7 +665,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = Math.PI + Math.PI / 4.0;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor225Degrees);
+                                      BaseAngle.RadiansFor225Degrees);
         }
 
         [Test]
@@ -713,7 +674,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = 2.0 * Math.PI * 0.75;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor270Degrees);
+                                      BaseAngle.RadiansFor270Degrees);
         }
 
         [Test]
@@ -722,7 +683,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = 2.0 * Math.PI * 0.75 + Math.PI / 4.0;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor315Degrees);
+                                      BaseAngle.RadiansFor315Degrees);
         }
 
         [Test]
@@ -731,7 +692,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = 2.0 * Math.PI;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor360Degrees);
+                                      BaseAngle.RadiansFor360Degrees);
         }
 
         [Test]
@@ -740,7 +701,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = Math.PI / 4.0;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor45Degrees);
+                                      BaseAngle.RadiansFor45Degrees);
         }
 
         [Test]
@@ -749,7 +710,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = Math.PI / 2.0;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansFor90Degrees);
+                                      BaseAngle.RadiansFor90Degrees);
         }
 
         [Test]
@@ -758,7 +719,7 @@ namespace Selkie.Geometry.Tests.Primitives
             const double expected = 0.0;
 
             NUnitHelper.AssertRadians(expected,
-                                      Angle.RadiansForZeroDegrees);
+                                      BaseAngle.RadiansForZeroDegrees);
         }
 
         [Test]
@@ -971,7 +932,7 @@ namespace Selkie.Geometry.Tests.Primitives
         {
             Angle actual = Angle.For45Degrees;
 
-            NUnitHelper.AssertRadians(Angle.RadiansFor45Degrees,
+            NUnitHelper.AssertRadians(BaseAngle.RadiansFor45Degrees,
                                       actual.Radians);
         }
 

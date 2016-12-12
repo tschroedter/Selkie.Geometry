@@ -26,7 +26,8 @@ namespace Selkie.Geometry.Surveying
                              [NotNull] Angle angleToXAxisAtEndPoint,
                              Constants.LineDirection runDirection,
                              double length,
-                             bool isUnknown = false)
+                             bool isUnknown = false,
+                             [UsedImplicitly]string geoJson = "") // todo check why we don't use it
         {
             Id = id;
             IsUnknown = isUnknown;

@@ -27,14 +27,14 @@ namespace Selkie.Geometry.Tests.Surveying
                 m_Length = 123.0;
 
                 m_Data = new SurveyFeatureData(
-                    m_Id,
-                    m_StartPoint,
-                    m_EndPoint,
-                    m_AngleToXAxisAtStartPoint,
-                    m_AngleToXAxisAtEndPoint,
-                    m_RunDirection,
-                    m_Length,
-                    false);
+                                               m_Id,
+                                               m_StartPoint,
+                                               m_EndPoint,
+                                               m_AngleToXAxisAtStartPoint,
+                                               m_AngleToXAxisAtEndPoint,
+                                               m_RunDirection,
+                                               m_Length,
+                                               false);
 
                 m_Sut = new SurveyFeature(m_Data);
             }

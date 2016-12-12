@@ -15,81 +15,85 @@ namespace Selkie.Geometry.Calculators
             [NotNull] IAngleIntervallCalculator angleIntervallCalculator)
         {
             m_AngleIntervallCalculator = angleIntervallCalculator;
-            FromAngle = Angle.Unknown;
-            ToAngle = Angle.Unknown;
             TurnDirection = Constants.TurnDirection.Clockwise;
+            MaxAngleInRadians = BaseAngle.RadiansFor360Degrees; // todo testing
         }
 
         private readonly IAngleIntervallCalculator m_AngleIntervallCalculator;
 
         public Constants.TurnDirection TurnDirection { get; set; }
 
-        public Angle FromAngle { get; set; }
-        public Angle ToAngle { get; set; }
-        public Angle Intervall { get; private set; }
-        public IEnumerable <Angle> Angles { get; private set; }
+        public double FromAngleInRadians { get; set; }
+        public double ToAngleInRadians { get; set; }
+        public double IntervallInRadians { get; private set; }
+        public IEnumerable <double> AnglesInRadians { get; private set; }
         public int Steps { get; set; }
+        public double MaxAngleInRadians { get; set; }
 
         public void Calculate()
         {
             ValidateSteps();
 
-            Intervall = CalculateIntervallAngle();
-            Angles = CalculateIntervallAngles();
+            IntervallInRadians = CalculateIntervallAngle();
+            AnglesInRadians = CalculateIntervallAngles();
         }
 
-        private Angle CalculateIntervallAngle()
+        private double CalculateIntervallAngle()
         {
-            m_AngleIntervallCalculator.FromAngle = FromAngle;
-            m_AngleIntervallCalculator.ToAngle = ToAngle;
+            m_AngleIntervallCalculator.FromAngleInRadians = FromAngleInRadians;
+            m_AngleIntervallCalculator.ToAngleInRadians = ToAngleInRadians;
             m_AngleIntervallCalculator.Steps = Steps;
             m_AngleIntervallCalculator.TurnDirection = TurnDirection;
+            m_AngleIntervallCalculator.MaxAngleInRadians = MaxAngleInRadians;
             m_AngleIntervallCalculator.Calculate();
 
             return m_AngleIntervallCalculator.Intervall;
         }
 
-        private IEnumerable <Angle> CalculateIntervallAngles()
+        private IEnumerable <double> CalculateIntervallAngles()
         {
-            var angles = new List <Angle>
+            var angles = new List <double>
                          {
-                             FromAngle
+                             FromAngleInRadians
                          };
 
-            IEnumerable <Angle> intervallAngels =
+            IEnumerable <double> intervallAngels =
                 TurnDirection == Constants.TurnDirection.Clockwise
                     ? Clockwise()
                     : CounterClockwise();
 
             angles.AddRange(intervallAngels);
 
-            angles.Add(ToAngle);
+            angles.Add(ToAngleInRadians);
 
             return angles;
         }
 
-        private IEnumerable <Angle> Clockwise()
+        private IEnumerable <double> Clockwise()
         {
-            var angles = new List <Angle>();
+            var angles = new List <double>();
 
-            Angle intervallAngle = FromAngle + Intervall;
+            double intervallAngle = FromAngleInRadians + IntervallInRadians;
 
-            for ( var i = 1 ; i < Steps - 1 ; i++, intervallAngle += Intervall )
-            {
+            for ( var i = 1 ; i < Steps - 1 ; i++, intervallAngle += IntervallInRadians )
                 angles.Add(intervallAngle);
-            }
 
             return angles;
         }
 
-        private IEnumerable <Angle> CounterClockwise()
+        private IEnumerable <double> CounterClockwise()
         {
-            var angles = new List <Angle>();
+            var angles = new List <double>();
 
-            Angle intervallAngle = FromAngle - Intervall;
+            double intervallAngle = FromAngleInRadians - IntervallInRadians;
 
-            for ( var i = 1 ; i < Steps - 1 ; i++, intervallAngle -= Intervall )
+            for ( var i = 1 ; i < Steps - 1 ; i++, intervallAngle -= IntervallInRadians )
             {
+                if ( intervallAngle < 0.0 )
+                {
+                    intervallAngle += MaxAngleInRadians;
+                }
+
                 angles.Add(intervallAngle);
             }
 

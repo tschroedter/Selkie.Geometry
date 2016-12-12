@@ -125,7 +125,12 @@ namespace Selkie.Geometry.Primitives
             {
                 return true;
             }
-            return obj.GetType() == typeof( Distance ) && Equals(( Distance ) obj);
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if ( obj.GetType() != typeof( Distance ) )
+            {
+                return false;
+            }
+            return Equals(( Distance ) obj);
         }
 
         public override int GetHashCode()

@@ -257,7 +257,7 @@ namespace Selkie.Geometry.Tests.Shapes
         public void Move180DegreesTest()
         {
             const double distance = 10.0;
-            const double radians = Angle.RadiansFor180Degrees;
+            const double radians = BaseAngle.RadiansFor180Degrees;
 
             Point moved = m_Point.Move(distance,
                                        radians);
@@ -274,7 +274,7 @@ namespace Selkie.Geometry.Tests.Shapes
         public void Move225DegreesTest()
         {
             const double distance = 10.0;
-            const double radians = Angle.RadiansFor225Degrees;
+            const double radians = BaseAngle.RadiansFor225Degrees;
 
             Point moved = m_Point.Move(distance,
                                        radians);
@@ -291,7 +291,7 @@ namespace Selkie.Geometry.Tests.Shapes
         public void Move45DegreesTest()
         {
             const double distance = 10.0;
-            const double radians = Angle.RadiansFor45Degrees;
+            const double radians = BaseAngle.RadiansFor45Degrees;
 
             Point moved = m_Point.Move(distance,
                                        radians);
@@ -308,7 +308,7 @@ namespace Selkie.Geometry.Tests.Shapes
         public void Move90DegreesTest()
         {
             const double distance = 10.0;
-            const double radians = Angle.RadiansFor90Degrees;
+            const double radians = BaseAngle.RadiansFor90Degrees;
 
             Point moved = m_Point.Move(distance,
                                        radians);

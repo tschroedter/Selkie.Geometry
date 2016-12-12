@@ -97,7 +97,12 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            return obj.GetType() == typeof( Circle ) && Equals(( Circle ) obj);
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if ( obj.GetType() != typeof( Circle ) )
+            {
+                return false;
+            }
+            return Equals(( Circle ) obj);
         }
 
         public override int GetHashCode()
@@ -111,8 +116,8 @@ namespace Selkie.Geometry.Shapes
         private static bool IsInsideEpsilonForPoints(double deltaY,
                                                      double deltaX)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy;
+            return ( Math.Abs(deltaX) < SelkieConstants.EpsilonPointXy ) ||
+                   ( Math.Abs(deltaY) < SelkieConstants.EpsilonPointXy );
         }
 
         #region ICircle Members
@@ -147,7 +152,7 @@ namespace Selkie.Geometry.Shapes
             double distance = Distance(finishPointStarboard);
             double delta = distance - Radius;
 
-            return delta < 0 || Math.Abs(delta) <= SelkieConstants.EpsilonDistance;
+            return ( delta < 0 ) || ( Math.Abs(delta) <= SelkieConstants.EpsilonDistance );
         }
 
         public Point CentrePoint
@@ -210,14 +215,14 @@ namespace Selkie.Geometry.Shapes
                 if ( Math.Abs(deltaX) < SelkieConstants.EpsilonRadians )
                 {
                     radians = CentrePoint.Y < point.Y
-                                  ? Angle.RadiansFor90Degrees
-                                  : Angle.RadiansFor270Degrees;
+                                  ? BaseAngle.RadiansFor90Degrees
+                                  : BaseAngle.RadiansFor270Degrees;
                 }
                 else
                 {
                     radians = CentrePoint.X < point.X
-                                  ? Angle.RadiansForZeroDegrees
-                                  : Angle.RadiansFor180Degrees;
+                                  ? BaseAngle.RadiansForZeroDegrees
+                                  : BaseAngle.RadiansFor180Degrees;
                 }
             }
             else

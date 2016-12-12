@@ -35,9 +35,7 @@ namespace Selkie.Geometry.Shapes
             EndPoint = Point.Unknown;
             StartPoint = Point.Unknown;
             foreach ( IPolylineSegment segment in segments )
-            {
                 AddSegment(segment);
-            }
         }
 
         public const int UnknownId = int.MinValue;

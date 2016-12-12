@@ -80,7 +80,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(550.0,
                                      1420.0);
 
-            const double expected = Angle.RadiansFor180Degrees;
+            const double expected = BaseAngle.RadiansFor180Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Forward);
@@ -97,7 +97,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(-1.0,
                                      1.0);
 
-            const double expected = Angle.RadiansFor135Degrees;
+            const double expected = BaseAngle.RadiansFor135Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Forward);
@@ -114,7 +114,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(100.0,
                                      10.0);
 
-            const double expected = Angle.RadiansFor180Degrees;
+            const double expected = BaseAngle.RadiansFor180Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Reverse);
@@ -131,7 +131,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(-1.0,
                                      -1.0);
 
-            const double expected = Angle.RadiansFor225Degrees;
+            const double expected = BaseAngle.RadiansFor225Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Forward);
@@ -148,7 +148,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(1.0,
                                      -1.0);
 
-            const double expected = Angle.RadiansFor315Degrees;
+            const double expected = BaseAngle.RadiansFor315Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Forward);
@@ -165,7 +165,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(1.0,
                                      1.0);
 
-            const double expected = Angle.RadiansFor45Degrees;
+            const double expected = BaseAngle.RadiansFor45Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Forward);
@@ -182,7 +182,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(100.0,
                                      10.0);
 
-            const double expected = Angle.RadiansFor180Degrees;
+            const double expected = BaseAngle.RadiansFor180Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Reverse);
@@ -199,7 +199,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(0.0,
                                      10.0);
 
-            const double expected = Angle.RadiansForZeroDegrees;
+            const double expected = BaseAngle.RadiansForZeroDegrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Reverse);
@@ -216,7 +216,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var endPoint = new Point(0.0,
                                      1.0);
 
-            const double expected = Angle.RadiansFor90Degrees;
+            const double expected = BaseAngle.RadiansFor90Degrees;
             Angle actual = m_Line.CalculateAngleInRadiansRelativeToXAxis(startPoint,
                                                                          endPoint,
                                                                          Constants.LineDirection.Forward);
@@ -291,7 +291,7 @@ namespace Selkie.Geometry.Tests.Shapes
             var line = new Line(startPoint,
                                 endPoint);
 
-            const double expected = Angle.RadiansForZeroDegrees;
+            const double expected = BaseAngle.RadiansForZeroDegrees;
             double actual = line.AngleToXAxis.Radians;
 
             NUnitHelper.AssertRadians(expected,

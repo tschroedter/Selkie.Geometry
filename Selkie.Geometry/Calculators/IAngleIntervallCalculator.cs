@@ -1,15 +1,13 @@
-using Selkie.Geometry.Primitives;
-using Selkie.Geometry.ThreeD.Interfaces.Calculators;
-
 namespace Selkie.Geometry.Calculators
 {
     public interface IAngleIntervallCalculator
         : ICalculator
     {
-        Angle FromAngle { get; set; }
-        Angle ToAngle { get; set; }
+        double FromAngleInRadians { get; set; }
+        double ToAngleInRadians { get; set; }
         int Steps { get; set; }
         Constants.TurnDirection TurnDirection { get; set; }
-        Angle Intervall { get; }
+        double Intervall { get; }
+        double MaxAngleInRadians { get; set; }
     }
 }

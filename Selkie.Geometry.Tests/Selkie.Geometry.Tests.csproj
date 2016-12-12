@@ -48,20 +48,20 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="JetBrains.Annotations, Version=10.1.5.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.10.1.5\lib\net\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.3.6\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.3.11\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.46.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
@@ -76,16 +76,16 @@
       <HintPath>..\packages\AutoFixture.NUnit3.3.46.0\lib\net40\Ploeh.AutoFixture.NUnit3.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Selkie.Common, Version=0.7.29.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selkie.Common.0.7.29\lib\net45\Selkie.Common.dll</HintPath>
+    <Reference Include="Selkie.Common, Version=0.7.31.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selkie.Common.0.7.31.0\lib\net45\Selkie.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Selkie.NUnit.Extensions, Version=0.6.142.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selkie.NUnit.Extensions.0.6.142\lib\net45\Selkie.NUnit.Extensions.dll</HintPath>
+    <Reference Include="Selkie.NUnit.Extensions, Version=0.7.57.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selkie.NUnit.Extensions.0.7.57.0\lib\net45\Selkie.NUnit.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Selkie.Windsor, Version=0.7.41.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selkie.Windsor.0.7.41\lib\net45\Selkie.Windsor.dll</HintPath>
+    <Reference Include="Selkie.Windsor, Version=0.7.43.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selkie.Windsor.0.7.43.0\lib\net45\Selkie.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculators\AngelInterpolationCalculatorTests.cs" />
+    <Compile Include="Calculators\AngleIntervallCalculatorTests.cs" />
     <Compile Include="Calculators\CirclePairTangentLinesCalculatorTests.cs" />
     <Compile Include="Calculators\CirclesIntersectionPointsCalculatorTests.cs" />
     <Compile Include="Calculators\CoordinatePairCalculatorTests.cs" />
@@ -126,21 +128,11 @@
     <Compile Include="Surveying\SurveyGeoJsonFeatureTests.cs" />
     <Compile Include="Surveying\SurveyLineTests.cs" />
     <Compile Include="Surveying\SurveyPolylineTests.cs" />
-    <Compile Include="Calculators\AngelInterpolationCalculatorTests.cs" />
-    <Compile Include="Calculators\AngleIntervallCalculatorTests.cs" />
-    <Compile Include="ThreeD\Calculators\CartesianSphericalArcCalculatorIntegrationTests.cs" />
-    <Compile Include="ThreeD\Primitives\CartesianCoordinatesHelper.cs" />
-    <Compile Include="ThreeD\Calculators\CartesianToSphericalCalculatorTests.cs" />
-    <Compile Include="ThreeD\Calculators\SphericalArcCalculatorIntegrationTests.cs" />
-    <Compile Include="ThreeD\Calculators\SphericalArcCalculatorTests.cs" />
-    <Compile Include="ThreeD\Calculators\SphericalCoordinatesIntervallCalculatorTests.cs" />
-    <Compile Include="ThreeD\Calculators\SphericalToCartesianCalculatorTests.cs" />
-    <Compile Include="ThreeD\Converters\CartesianCoordinatesToStringConverterTests.cs" />
-    <Compile Include="ThreeD\Calculators\PointDistanceCalculatorTests.cs" />
-    <Compile Include="ThreeD\Converters\RadiusPhiThetaToSphericalCoordinatesConverterTests.cs" />
-    <Compile Include="ThreeD\Primitives\SphericalCoordinatesHelper.cs" />
-    <Compile Include="ThreeD\Converters\SphericalCoordinatesToStringConverterTests.cs" />
-    <Compile Include="ThreeD\Shapes\PointTests.cs" />
+    <Compile Include="ThreeD\Primitives\AzimuthAngleTests.cs" />
+    <Compile Include="ThreeD\Primitives\BaseAngleTests.cs" />
+    <Compile Include="ThreeD\Primitives\CartesianCoordinatesTests.cs" />
+    <Compile Include="ThreeD\Primitives\PolarAngleTests.cs" />
+    <Compile Include="ThreeD\Primitives\SphericalCoordinatesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selkie.Geometry\Selkie.Geometry.csproj">
@@ -152,6 +144,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -38,9 +38,9 @@ namespace Selkie.Geometry.Shapes
             EndPoint = endPoint;
             TurnDirection = arcTurnDirection;
             ICircleCentrePointToPointCalculator calculator = new CircleCentrePointToPointCalculator(
-                m_Circle.CentrePoint,
-                StartPoint,
-                EndPoint);
+                                                                                                    m_Circle.CentrePoint,
+                                                                                                    StartPoint,
+                                                                                                    EndPoint);
 
             AngleClockwise = calculator.AngleRelativeToYAxisCounterClockwise;
             AngleCounterClockwise = calculator.AngleRelativeToYAxisClockwise;

@@ -14,12 +14,10 @@ namespace Selkie.Geometry.Shapes.Calculators
         public bool IsOnLine(Point point)
         {
             foreach ( IPolylineSegment segment in m_Segments )
-            {
                 if ( segment.IsOnLine(point) )
                 {
                     return true;
                 }
-            }
 
             return false;
         }

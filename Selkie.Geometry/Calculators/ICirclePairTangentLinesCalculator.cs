@@ -5,6 +5,7 @@ using Selkie.Geometry.Shapes;
 namespace Selkie.Geometry.Calculators
 {
     public interface ICirclePairTangentLinesCalculator
+        : ICalculator // todo change other calculators to support ICalculator
     {
         [NotNull]
         IEnumerable <ILine> OuterTangents { get; }
@@ -17,7 +18,5 @@ namespace Selkie.Geometry.Calculators
 
         [NotNull]
         ICirclePair CirclePair { get; set; }
-
-        void Calculate();
     }
 }

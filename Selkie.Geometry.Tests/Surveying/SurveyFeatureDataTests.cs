@@ -20,14 +20,14 @@ namespace Selkie.Geometry.Tests.Surveying
                                    4.0);
 
             m_Sut = new SurveyFeatureData(
-                1,
-                m_StartPoint,
-                m_EndPoint,
-                Angle.For45Degrees,
-                Angle.For90Degrees,
-                Constants.LineDirection.Forward,
-                12.34,
-                true);
+                                          1,
+                                          m_StartPoint,
+                                          m_EndPoint,
+                                          Angle.For45Degrees,
+                                          Angle.For90Degrees,
+                                          Constants.LineDirection.Forward,
+                                          12.34,
+                                          true);
         }
 
         private Point m_StartPoint;

@@ -13,9 +13,9 @@ namespace Selkie.Geometry.Shapes.Calculators
             m_StartPoint = startPoint;
             m_EndPoint = endPoint;
 
-            if ( m_CentrePoint == Point.Unknown ||
-                 m_StartPoint == Point.Unknown ||
-                 m_EndPoint == Point.Unknown )
+            if ( ( m_CentrePoint == Point.Unknown ) ||
+                 ( m_StartPoint == Point.Unknown ) ||
+                 ( m_EndPoint == Point.Unknown ) )
             {
                 return;
             }

@@ -1,3 +1,4 @@
+using System;
 using Selkie.Geometry.Primitives;
 using Selkie.Windsor;
 
@@ -9,23 +10,25 @@ namespace Selkie.Geometry.Calculators
     {
         public AngleIntervallCalculator()
         {
-            FromAngle = Angle.Unknown;
-            ToAngle = Angle.Unknown;
-            Intervall = Angle.Unknown;
             TurnDirection = Constants.TurnDirection.Clockwise;
             Steps = 3;
+            MaxAngleInRadians = BaseAngle.RadiansFor360Degrees;
         }
 
-        public Angle FromAngle { get; set; }
-        public Angle ToAngle { get; set; }
+        public double FromAngleInRadians { get; set; }
+        public double ToAngleInRadians { get; set; }
+        public double MaxAngleInRadians { get; set; }
         public int Steps { get; set; }
         public Constants.TurnDirection TurnDirection { get; set; }
 
         public void Calculate()
         {
-            if ( FromAngle == ToAngle )
+            double abs = Math.Abs(FromAngleInRadians - ToAngleInRadians);
+
+            if ( ( abs < Constants.EpsilonRadians ) ||
+                 ( Math.Abs(abs - MaxAngleInRadians) < Constants.EpsilonRadians ) )
             {
-                Intervall = Angle.ForZeroDegrees;
+                Intervall = Angle.ForZeroDegrees.Radians;
             }
             else
             {
@@ -35,41 +38,41 @@ namespace Selkie.Geometry.Calculators
             }
         }
 
-        public Angle Intervall { get; private set; }
+        public double Intervall { get; private set; }
 
-        private Angle CalculateIntervallClockwise()
+        private double CalculateIntervallClockwise()
         {
             double intervallInRadians;
 
-            if ( FromAngle < ToAngle )
+            if ( FromAngleInRadians < ToAngleInRadians )
             {
-                intervallInRadians = ( ToAngle - FromAngle ).Radians / ( Steps - 1 );
+                intervallInRadians = ( ToAngleInRadians - FromAngleInRadians ) / ( Steps - 1 );
             }
             else
             {
-                intervallInRadians = Angle.RadiansFor360Degrees - ( FromAngle - ToAngle ).Radians;
+                intervallInRadians = MaxAngleInRadians - ( FromAngleInRadians - ToAngleInRadians );
                 intervallInRadians /= Steps - 1;
             }
 
-            return Angle.FromRadians(intervallInRadians);
+            return intervallInRadians;
         }
 
-        private Angle CalculateIntervallCounterClockwise()
+        private double CalculateIntervallCounterClockwise()
         {
             double intervallInRadians;
 
-            if ( FromAngle < ToAngle )
+            if ( FromAngleInRadians < ToAngleInRadians )
             {
-                intervallInRadians = ( FromAngle - ToAngle ).Radians;
+                intervallInRadians = MaxAngleInRadians - Math.Abs(FromAngleInRadians - ToAngleInRadians);
                 intervallInRadians /= Steps - 1;
             }
             else
             {
-                intervallInRadians = Angle.RadiansFor360Degrees - ( ToAngle - FromAngle ).Radians;
+                intervallInRadians = Math.Abs(FromAngleInRadians - ToAngleInRadians);
                 intervallInRadians /= Steps - 1;
             }
 
-            return Angle.FromRadians(intervallInRadians);
+            return intervallInRadians;
         }
     }
 }

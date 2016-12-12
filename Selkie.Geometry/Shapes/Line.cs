@@ -172,8 +172,8 @@ namespace Selkie.Geometry.Shapes
 
         public bool IsOnLine(Point point)
         {
-            if ( StartPoint == point ||
-                 EndPoint == point )
+            if ( ( StartPoint == point ) ||
+                 ( EndPoint == point ) )
             {
                 return true;
             }
@@ -225,7 +225,12 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            return obj.GetType() == typeof( Line ) && Equals(( Line ) obj);
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if ( obj.GetType() != typeof( Line ) )
+            {
+                return false;
+            }
+            return Equals(( Line ) obj);
         }
 
         public override int GetHashCode()
@@ -268,12 +273,12 @@ namespace Selkie.Geometry.Shapes
             // todo use always forward and don't use reverse here
             if ( lineDirection == Constants.LineDirection.Reverse )
             {
-                radians += Angle.RadiansFor180Degrees;
+                radians += BaseAngle.RadiansFor180Degrees;
             }
 
-            if ( Math.Abs(Angle.RadiansFor360Degrees - radians) < SelkieConstants.EpsilonRadians )
+            if ( Math.Abs(BaseAngle.RadiansFor360Degrees - radians) < SelkieConstants.EpsilonRadians )
             {
-                radians = Angle.RadiansForZeroDegrees;
+                radians = BaseAngle.RadiansForZeroDegrees;
             }
 
             return Angle.FromRadians(radians);
@@ -300,14 +305,14 @@ namespace Selkie.Geometry.Shapes
             if ( Math.Abs(deltaX) < SelkieConstants.EpsilonRadians )
             {
                 radians = one.Y < two.Y
-                              ? Angle.RadiansFor90Degrees
-                              : Angle.RadiansFor270Degrees;
+                              ? BaseAngle.RadiansFor90Degrees
+                              : BaseAngle.RadiansFor270Degrees;
             }
             else
             {
                 radians = one.X < two.X
-                              ? Angle.RadiansForZeroDegrees
-                              : Angle.RadiansFor180Degrees;
+                              ? BaseAngle.RadiansForZeroDegrees
+                              : BaseAngle.RadiansFor180Degrees;
             }
             return radians;
         }
@@ -315,8 +320,8 @@ namespace Selkie.Geometry.Shapes
         private static bool IsDeltaXOrDeltaYLessThanEpsilon(double deltaX,
                                                             double deltaY)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonRadians ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonRadians;
+            return ( Math.Abs(deltaX) < SelkieConstants.EpsilonRadians ) ||
+                   ( Math.Abs(deltaY) < SelkieConstants.EpsilonRadians );
         }
 
         private double CalculateLength()

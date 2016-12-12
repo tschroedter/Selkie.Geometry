@@ -69,8 +69,8 @@ namespace Selkie.Geometry.Shapes
                 return true;
             }
 
-            return Math.Abs(X - other.X) < SelkieConstants.EpsilonPointXy &&
-                   Math.Abs(Y - other.Y) < SelkieConstants.EpsilonPointXy;
+            return ( Math.Abs(X - other.X) < SelkieConstants.EpsilonPointXy ) &&
+                   ( Math.Abs(Y - other.Y) < SelkieConstants.EpsilonPointXy );
         }
 
         #endregion
@@ -134,7 +134,12 @@ namespace Selkie.Geometry.Shapes
             {
                 return true;
             }
-            return obj.GetType() == typeof( Point ) && Equals(( Point ) obj);
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if ( obj.GetType() != typeof( Point ) )
+            {
+                return false;
+            }
+            return Equals(( Point ) obj);
         }
 
         public override int GetHashCode()

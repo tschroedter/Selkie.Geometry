@@ -65,8 +65,8 @@ namespace Selkie.Geometry.Shapes.Calculators
             {
                 return false;
             }
-            return anglePoint >= angleStart &&
-                   anglePoint <= angleEnd;
+            return ( anglePoint >= angleStart ) &&
+                   ( anglePoint <= angleEnd );
         }
 
         private bool IsDistanceToPointGreaterThanRadius(IArcSegment segment,

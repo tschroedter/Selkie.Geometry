@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 using Selkie.Geometry.Calculators;
@@ -44,16 +45,68 @@ namespace Selkie.Geometry.Tests.Calculators
             Constants.TurnDirection turnDirection,
             double expectedIntervallInDegrees)
         {
+            Console.WriteLine(
+                              "fromAngleInDegrees: {0} toAngleInDegrees: {1} steps: {2} turnDirection: {3} expectedIntervallInDegrees: {4}",
+                              fromAngleInDegrees,
+                              toAngleInDegrees,
+                              steps,
+                              turnDirection,
+                              expectedIntervallInDegrees);
+
             // Arrange
-            Angle fromAngle = Angle.FromDegrees(fromAngleInDegrees);
-            Angle toAngle = Angle.FromDegrees(toAngleInDegrees);
-            Angle expectedIntervall = Angle.FromDegrees(expectedIntervallInDegrees);
+            double fromAngle = Angle.FromDegrees(fromAngleInDegrees).Radians;
+            double toAngle = Angle.FromDegrees(toAngleInDegrees).Radians;
+            double expectedIntervall = Angle.FromDegrees(expectedIntervallInDegrees).Radians;
             AngleIntervallCalculator sut = CreateSut();
 
-            sut.FromAngle = fromAngle;
-            sut.ToAngle = toAngle;
+            sut.FromAngleInRadians = fromAngle;
+            sut.ToAngleInRadians = toAngle;
             sut.TurnDirection = turnDirection;
             sut.Steps = steps;
+
+            // Act
+            sut.Calculate();
+
+            // Assert
+            Assert.AreEqual(expectedIntervall,
+                            sut.Intervall);
+        }
+
+        [Theory]
+        [TestCase(0.0, 180.0, 3, Constants.TurnDirection.Clockwise, Math.PI, 0.0)]
+        [TestCase(0.0, 180.0, 3, Constants.TurnDirection.Counterclockwise, Math.PI, 0.0)]
+        [TestCase(0.0, 90.0, 3, Constants.TurnDirection.Clockwise, Math.PI, 45.0)]
+        [TestCase(0.0, 90.0, 3, Constants.TurnDirection.Counterclockwise, Math.PI, 45.0)]
+        [TestCase(0.0, 45.0, 3, Constants.TurnDirection.Clockwise, Math.PI, 22.5)]
+        [TestCase(0.0, 45.0, 3, Constants.TurnDirection.Counterclockwise, Math.PI, 67.5)]
+        public void CalculateIntervall_ReturnsIntervallAngle_ForMaxAngleRadians(
+            double fromAngleInDegrees,
+            double toAngleInDegrees,
+            int steps,
+            Constants.TurnDirection turnDirection,
+            double maxAngleInRadians,
+            double expectedIntervallInDegrees)
+        {
+            Console.WriteLine("fromAngleInDegrees: {0} toAngleInDegrees: {1} steps: {2} turnDirection: " +
+                              "{3} maxAngleInRadians: {4} expectedIntervallInDegrees: {5}",
+                              fromAngleInDegrees,
+                              toAngleInDegrees,
+                              steps,
+                              turnDirection,
+                              maxAngleInRadians,
+                              expectedIntervallInDegrees);
+
+            // Arrange
+            double fromAngle = Angle.FromDegrees(fromAngleInDegrees).Radians;
+            double toAngle = Angle.FromDegrees(toAngleInDegrees).Radians;
+            double expectedIntervall = Angle.FromDegrees(expectedIntervallInDegrees).Radians;
+            AngleIntervallCalculator sut = CreateSut();
+
+            sut.FromAngleInRadians = fromAngle;
+            sut.ToAngleInRadians = toAngle;
+            sut.TurnDirection = turnDirection;
+            sut.Steps = steps;
+            sut.MaxAngleInRadians = maxAngleInRadians;
 
             // Act
             sut.Calculate();
@@ -71,8 +124,8 @@ namespace Selkie.Geometry.Tests.Calculators
 
             // Act
             // Assert
-            Assert.AreEqual(Angle.Unknown,
-                            sut.FromAngle);
+            Assert.AreEqual(0.0,
+                            sut.FromAngleInRadians);
         }
 
         [Test]
@@ -83,8 +136,20 @@ namespace Selkie.Geometry.Tests.Calculators
 
             // Act
             // Assert
-            Assert.AreEqual(Angle.Unknown,
+            Assert.AreEqual(0.0,
                             sut.Intervall);
+        }
+
+        [Test]
+        public void MaxAngleInRadians_ReturnsDefault_WhenCalled()
+        {
+            // Arrange
+            AngleIntervallCalculator sut = CreateSut();
+
+            // Act
+            // Assert
+            Assert.AreEqual(BaseAngle.RadiansFor360Degrees,
+                            sut.MaxAngleInRadians);
         }
 
         [Test]
@@ -107,8 +172,8 @@ namespace Selkie.Geometry.Tests.Calculators
 
             // Act
             // Assert
-            Assert.AreEqual(Angle.Unknown,
-                            sut.ToAngle);
+            Assert.AreEqual(0.0,
+                            sut.ToAngleInRadians);
         }
 
         [Test]

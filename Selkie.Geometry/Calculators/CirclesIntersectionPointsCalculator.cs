@@ -20,8 +20,8 @@ namespace Selkie.Geometry.Calculators
                 m_IsCirclesAreSame = true;
                 m_HasIntersectionPoints = false;
             }
-            else if ( r0PlusR1 >= d &&
-                      d >= r0MinusR1Abs )
+            else if ( ( r0PlusR1 >= d ) &&
+                      ( d >= r0MinusR1Abs ) )
             {
                 Tuple <Point, Point> points = CalculateIntersectionPoints(circlePair);
 
@@ -158,9 +158,10 @@ namespace Selkie.Geometry.Calculators
                                           double d,
                                           double r0MinusR1Abs)
         {
-            return Math.Abs(d) < SelkieConstants.EpsilonDistance && r0MinusR1Abs < SelkieConstants.EpsilonDistance &&
-                   Math.Abs(circlePair.Zero.X - circlePair.One.X) < SelkieConstants.EpsilonDistance &&
-                   Math.Abs(circlePair.Zero.Y - circlePair.One.Y) < SelkieConstants.EpsilonDistance;
+            return ( Math.Abs(d) < SelkieConstants.EpsilonDistance ) &&
+                   ( r0MinusR1Abs < SelkieConstants.EpsilonDistance ) &&
+                   ( Math.Abs(circlePair.Zero.X - circlePair.One.X) < SelkieConstants.EpsilonDistance ) &&
+                   ( Math.Abs(circlePair.Zero.Y - circlePair.One.Y) < SelkieConstants.EpsilonDistance );
         }
 
         [NotNull]
@@ -198,8 +199,8 @@ namespace Selkie.Geometry.Calculators
 
         private int DetermineNumberOfIntersectionPoints([NotNull] Tuple <Point, Point> points)
         {
-            if ( points.Item1 == Point.Unknown ||
-                 points.Item2 == Point.Unknown )
+            if ( ( points.Item1 == Point.Unknown ) ||
+                 ( points.Item2 == Point.Unknown ) )
             {
                 return 1;
             }
@@ -207,8 +208,8 @@ namespace Selkie.Geometry.Calculators
             double deltaX = Math.Abs(points.Item1.X - points.Item2.X);
             double deltaY = Math.Abs(points.Item1.Y - points.Item2.Y);
 
-            if ( deltaX < SelkieConstants.EpsilonDistance &&
-                 deltaY < SelkieConstants.EpsilonDistance )
+            if ( ( deltaX < SelkieConstants.EpsilonDistance ) &&
+                 ( deltaY < SelkieConstants.EpsilonDistance ) )
             {
                 return 1;
             }

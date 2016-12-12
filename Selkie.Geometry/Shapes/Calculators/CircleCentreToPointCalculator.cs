@@ -132,7 +132,7 @@ namespace Selkie.Geometry.Shapes.Calculators
 
                 if ( radians < 0.0 )
                 {
-                    radians = Angle.RadiansFor360Degrees + radians;
+                    radians = BaseAngle.RadiansFor360Degrees + radians;
                 }
             }
 
@@ -149,19 +149,19 @@ namespace Selkie.Geometry.Shapes.Calculators
             if ( IsDeltaXAndDeltaYLessThanEpsilon(deltaX,
                                                   deltaY) )
             {
-                radians = Angle.RadiansForZeroDegrees;
+                radians = BaseAngle.RadiansForZeroDegrees;
             }
             else if ( Math.Abs(deltaX) < SelkieConstants.EpsilonDistance )
             {
                 radians = centre.Y < point.Y
-                              ? Angle.RadiansFor90Degrees
-                              : Angle.RadiansFor270Degrees;
+                              ? BaseAngle.RadiansFor90Degrees
+                              : BaseAngle.RadiansFor270Degrees;
             }
             else
             {
                 radians = centre.X < point.X
-                              ? Angle.RadiansForZeroDegrees
-                              : Angle.RadiansFor180Degrees;
+                              ? BaseAngle.RadiansForZeroDegrees
+                              : BaseAngle.RadiansFor180Degrees;
             }
             return radians;
         }
@@ -169,15 +169,15 @@ namespace Selkie.Geometry.Shapes.Calculators
         private static bool IsDeltaXAndDeltaYLessThanEpsilon(double deltaX,
                                                              double deltaY)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonDistance &&
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonDistance;
+            return ( Math.Abs(deltaX) < SelkieConstants.EpsilonDistance ) &&
+                   ( Math.Abs(deltaY) < SelkieConstants.EpsilonDistance );
         }
 
         private static bool IsDeltaXOrDeltaYLessThanEpsilon(double deltaX,
                                                             double deltaY)
         {
-            return Math.Abs(deltaX) < SelkieConstants.EpsilonDistance ||
-                   Math.Abs(deltaY) < SelkieConstants.EpsilonDistance;
+            return ( Math.Abs(deltaX) < SelkieConstants.EpsilonDistance ) ||
+                   ( Math.Abs(deltaY) < SelkieConstants.EpsilonDistance );
         }
 
         #endregion
